@@ -11,5 +11,8 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  public click():void{
+    console.log("hej");
+  }
 
 }
