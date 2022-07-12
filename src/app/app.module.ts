@@ -13,6 +13,7 @@ import { SidebarComponent } from './modules/commons/components/sidebar/sidebar.c
 import { CandidatesComponent } from './modules/candidates/components/candidates/candidates.component';
 import { LoginPageComponent } from './modules/loginpage/components/login-page/login-page.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     CandidatesComponent,
     LoginPageComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, NoopAnimationsModule,MatIconModule],
+  imports: [BrowserModule, AppRoutingModule, NoopAnimationsModule,MatIconModule, MatButtonModule],
+  exports: [MatButtonModule],
   providers: [],
   bootstrap: [AppComponent,],
 })
