@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import {MatIconModule} from '@angular/material/icon'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +12,7 @@ import { NavbarComponent } from './modules/commons/components/navbar/navbar.comp
 import { SidebarComponent } from './modules/commons/components/sidebar/sidebar.component';
 import { CandidatesComponent } from './modules/candidates/components/candidates/candidates.component';
 import { LoginPageComponent } from './modules/loginpage/components/login-page/login-page.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -24,8 +26,8 @@ import { LoginPageComponent } from './modules/loginpage/components/login-page/lo
     CandidatesComponent,
     LoginPageComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, AppRoutingModule, NoopAnimationsModule,MatIconModule],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent,],
 })
 export class AppModule {}
