@@ -1,3 +1,20 @@
-
 <app-navbar></app-navbar>
-<app-sidebar></app-sidebar>
+<!-- <div class="container">
+  <app-sidebar class="container2__sidebar"></app-sidebar>
+  <app-calendar class="container__calendar"></app-calendar>
+</div> -->
+<div class="container">
+  <div class="container container__row">
+    <app-sidebar></app-sidebar>
+    <div class="container_column">
+      <div class="container container__row container__row--center">
+        <button style="width: 200px; height: 200px">testb</button>
+        <button style="width: 200px; height: 200px">testb</button>
+        <button style="width: 200px; height: 200px">testb</button>
+      </div>
+      <app-calendar
+        class="container container__row container__row--center"
+      ></app-calendar>
+    </div>
+  </div>
+</div>
