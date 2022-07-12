@@ -1,0 +1,10 @@
+
+
+.sidebar-box{
+    width:5vw;
+    height: 100vh;
+    &__flex-buttons{
+        display: flex;
+        flex-flow: column;
+    }
+}
