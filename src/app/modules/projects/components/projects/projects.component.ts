@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./projects.component.scss']
 })
 export class ProjectsComponent implements OnInit {
+  public checked: boolean = true;
+  public tasks: Array<object> = [{name: 'Open', completed: true, color: 'primary'}];
 
   constructor() { }
 

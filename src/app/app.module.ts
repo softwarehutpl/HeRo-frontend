@@ -14,6 +14,9 @@ import { CandidatesComponent } from './modules/candidates/components/candidates/
 import { LoginPageComponent } from './modules/loginpage/components/login-page/login-page.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider'
+import { MatCheckboxModule } from '@angular/material/checkbox'
+
 
 @NgModule({
   declarations: [
@@ -27,7 +30,7 @@ import {MatButtonModule} from '@angular/material/button';
     CandidatesComponent,
     LoginPageComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, NoopAnimationsModule,MatIconModule, MatButtonModule],
+  imports: [BrowserModule, AppRoutingModule, NoopAnimationsModule,MatIconModule, MatButtonModule, MatDividerModule, MatCheckboxModule],
   exports: [MatButtonModule],
   providers: [],
   bootstrap: [AppComponent,],
