@@ -4,24 +4,25 @@
     <div class="container container__row">
         <app-sidebar></app-sidebar>
         <div class="container container__row">
-            <div class=" container container__column main">
-                <ul>
+            <div class=" container container__column filterComponet">
+                <app-filter></app-filter>
+                <!-- <ul>
                     <li *ngFor="let iet of tasks">
                         <mat-checkbox></mat-checkbox>
                     </li>
-                </ul>
-                <mat-checkbox>Open</mat-checkbox>
-                <mat-checkbox [checked]="checked">Closed</mat-checkbox>
+                </ul> -->
+                <!-- <mat-checkbox>Open</mat-checkbox>
+                <mat-checkbox [checked]="checked">Closed</mat-checkbox> -->
                             </div>
             <mat-divider [vertical]="true" ></mat-divider>
          
-            <div class="container__column main">
-                <div class="container container__row main">
+            <div class="container__column filterComponet">
+                <div class="container container__row filterComponet">
                     <button style="width: 200px; height: 200px">testb</button>
                     <button style="width: 200px; height: 200px">testb</button> 
                 </div>
                 <mat-divider></mat-divider>
-                   <div class=" main">
+                   <div class=" filterComponet">
                     <button style="width: 200px; height: 200px">testb</button>
                    </div>  
                     

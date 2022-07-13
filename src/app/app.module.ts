@@ -16,6 +16,9 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider'
 import { MatCheckboxModule } from '@angular/material/checkbox'
+import { FilterComponent } from './modules/commons/components/filter/filter.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -29,8 +32,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox'
     SidebarComponent,
     CandidatesComponent,
     LoginPageComponent,
+    FilterComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, NoopAnimationsModule,MatIconModule, MatButtonModule, MatDividerModule, MatCheckboxModule],
+  imports: [BrowserModule, AppRoutingModule, NoopAnimationsModule,MatIconModule, MatButtonModule, MatDividerModule, MatCheckboxModule, MatFormFieldModule, MatSelectModule],
   exports: [MatButtonModule],
   providers: [],
   bootstrap: [AppComponent,],

@@ -4,18 +4,22 @@
   <div class="container container__row">
     <app-sidebar></app-sidebar>
 
-    <div class="container container__column">
+    <div class="container container__column filterComponet">
+      <app-filter></app-filter>
       <!-- Filters column -->
-      <button style="width: 150px; height: 180px">Filters1</button>
-      <button style="width: 150px; height: 230px">Filters2</button>
+      
+      <!-- <button style="width: 150px; height: 180px">Filters1</button>
+      <button style="width: 150px; height: 230px">Filters2</button> -->
     </div>
 
     <div class="container container__column">
       <!-- Main candidates container -->
+   
       <div class="container container__row--center header">
         <!-- title and buttons here -->
         <div>Candidates</div>
         <div>
+          
           <button mat-icon-button class="button" (click)="testFunc()">
             <mat-icon>list</mat-icon>
           </button>

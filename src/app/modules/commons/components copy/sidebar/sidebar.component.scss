@@ -1,0 +1,11 @@
+.sidebar-box{
+    border-right: solid bisque 2px;
+    width:5vw;
+    height: 90%;
+
+    &__flex-buttons{
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+    }
+}
