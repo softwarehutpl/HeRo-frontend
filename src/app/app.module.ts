@@ -16,6 +16,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider'
 import { MatCheckboxModule } from '@angular/material/checkbox'
+import { InfoBoxComponent } from './modules/commons/components/info-box/info-box.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox'
     SidebarComponent,
     CandidatesComponent,
     LoginPageComponent,
+    InfoBoxComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, NoopAnimationsModule,MatIconModule, MatButtonModule, MatDividerModule, MatCheckboxModule],
   exports: [MatButtonModule],
