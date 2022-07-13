@@ -1,7 +1,7 @@
 <div class="sidebar-box">
     <div class="sidebar-box__flex-buttons">
-        <button mat-icon-button routerLink="/home"><mat-icon>home</mat-icon></button>
-        <button mat-icon-button routerLink="/candidates"><mat-icon>people</mat-icon></button>
-        <button mat-icon-button routerLink="/projects"><mat-icon>list</mat-icon></button>
+        <button mat-icon-button routerLink="/{{sidebarButton1}}" (click)="componentName(sidebarButton1)"><mat-icon>home</mat-icon></button>
+        <button mat-icon-button routerLink="/{{sidebarButton2}}" (click)="componentName(sidebarButton2)"><mat-icon>people</mat-icon></button>
+        <button mat-icon-button routerLink="/{{sidebarButton3}}" (click)="componentName(sidebarButton3)"><mat-icon>list</mat-icon></button>
     </div>
 </div>

@@ -7,7 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjectsComponent implements OnInit {
   public checked: boolean = true;
-  public tasks: Array<object> = [{name: 'Open', completed: true, color: 'primary'}];
 
   constructor() { }
 

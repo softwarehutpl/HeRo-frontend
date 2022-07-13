@@ -29,3 +29,8 @@ This is our main styling container:
 .container__row--center {
   justify-content: space-evenly;
 }
+
+.filterComponet {
+  padding: 5%;
+  width: 22vw;
+}
