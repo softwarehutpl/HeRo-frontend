@@ -16,6 +16,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider'
 import { MatCheckboxModule } from '@angular/material/checkbox'
+import { InfoBoxComponent } from './modules/commons/components/info-box/info-box.component';
 import { FilterComponent } from './modules/commons/components/filter/filter.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -32,6 +33,7 @@ import { MatSelectModule } from '@angular/material/select';
     SidebarComponent,
     CandidatesComponent,
     LoginPageComponent,
+    InfoBoxComponent,
     FilterComponent
   ],
   imports: [BrowserModule, AppRoutingModule, NoopAnimationsModule,MatIconModule, MatButtonModule, MatDividerModule, MatCheckboxModule, MatFormFieldModule, MatSelectModule],
