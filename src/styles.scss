@@ -16,7 +16,7 @@ This is our main styling container:
   display: flex;
   flex-wrap: nowrap;
   align-items: stretch;
-  // width: calc(100vw - 100px);
+
   &__column {
     flex-direction: column;
   }
