@@ -1,32 +1,40 @@
 <app-navbar></app-navbar>
 <div class="container">
+  <div class="container container__row">
+    <app-sidebar></app-sidebar>
     <div class="container container__row">
-        <app-sidebar></app-sidebar>
-        <div class="container container__row">
-            <div class=" container container__column filterComponet intrnalComponent">
-                <app-filter></app-filter>
-                <!-- <ul>
+      <div class="container container__column filterComponet intrnalComponent">
+        <app-filter></app-filter>
+        <!-- <ul>
                     <li *ngFor="let iet of tasks">
                         <mat-checkbox></mat-checkbox>
                     </li>
                 </ul> -->
-                <!-- <mat-checkbox>Open</mat-checkbox>
+        <!-- <mat-checkbox>Open</mat-checkbox>
                 <mat-checkbox [checked]="checked">Closed</mat-checkbox> -->
-            </div>
-            <mat-divider [vertical]="true"></mat-divider>
+      </div>
+      <mat-divider [vertical]="true"></mat-divider>
 
-            <div class="container__column filterComponet">
-                <div class="container container__row filterComponet">
-                    <button style="width: 200px; height: 200px">testb</button>
-                    <button style="width: 200px; height: 200px">testb</button>
-                </div>
-                <mat-divider></mat-divider>
-                <div class=" filterComponet">
-                    <button style="width: 200px; height: 200px">testb</button>
-                </div>
+      <div class="container container__column">
+        <!-- Main projects container -->
 
-            </div>
+        <div class="container container__row header">
+          <!-- title and buttons -> two separate divs that will be spaced at start and end of the bar -->
+          <div>Projects</div>
+          <div>
+            <button mat-icon-button class="button" (click)="testFunc()">
+              <mat-icon>add_box</mat-icon>
+            </button>
+          </div>
         </div>
+        <!-- title bar ends here -->
 
+        <div class="container container__row container__row--center">
+          <!-- candidates list displays here -->
+          component list of projects here
+        </div>
+      </div>
+      <!-- Main candidates container ends here -->
     </div>
+  </div>
 </div>
