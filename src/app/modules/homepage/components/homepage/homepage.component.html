@@ -9,9 +9,20 @@
     <app-sidebar></app-sidebar>
     <div class="container_column">
       <div class="container container__row container__row--center">
-        <button style="width: 200px; height: 200px">testb</button>
-        <button style="width: 200px; height: 200px">testb</button>
-        <button style="width: 200px; height: 200px">testb</button>
+        <div class="action-box">
+          <div class="action-box__margines action-box__title">New candidates</div>
+          <div class="action-box__margines action-box__number">{{numberNewCandiates}}</div>
+          <div class="action-box__margines action-box__button">
+            <button mat-stroked-button color="primary">Show</button>
+          </div>
+        </div>
+        <div class="action-box">
+          <div class=" action-box__margines action-box__title">Interviews this week</div>
+          <div class=" action-box__margines action-box__number">{{numberInterviews}}</div>
+          <div class="action-box__margines action-box__button">
+            <button mat-stroked-button color="primary">Show</button>
+          </div>
+        </div>
       </div>
       <app-calendar
         class="container container__row container__row--center"
