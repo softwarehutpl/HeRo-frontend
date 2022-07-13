@@ -1,4 +1,3 @@
-
 <app-navbar></app-navbar>
 <!-- <div class="container">
   <app-sidebar class="container2__sidebar"></app-sidebar>
@@ -9,25 +8,10 @@
     <app-sidebar></app-sidebar>
     <div class="container_column">
       <div class="container container__row container__row--center">
-        <div class="action-box">
-          <div class="action-box__margines action-box__title">New candidates</div>
-          <div class="action-box__margines action-box__number">{{numberNewCandiates}}</div>
-          <div class="action-box__margines action-box__button">
-            <button mat-stroked-button color="primary">Show</button>
-          </div>
-        </div>
-        <div class="action-box">
-          <div class=" action-box__margines action-box__title">Interviews this week</div>
-          <div class=" action-box__margines action-box__number">{{numberInterviews}}</div>
-          <div class="action-box__margines action-box__button">
-            <button mat-stroked-button color="primary">Show</button>
-          </div>
-        </div>
+        <app-info-box text="New candidates" [number]="numberNewCandiates" link="/candidates"></app-info-box>
+        <app-info-box text="Interviews this week" [number]="numberInterviews" link="/candidates"></app-info-box>
       </div>
-      <app-calendar
-        class="container container__row container__row--center"
-      ></app-calendar>
+      <app-calendar class="container container__row container__row--center"></app-calendar>
     </div>
   </div>
 </div>
-
