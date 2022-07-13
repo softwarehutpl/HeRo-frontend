@@ -14,6 +14,10 @@ import { CandidatesComponent } from './modules/candidates/components/candidates/
 import { LoginPageComponent } from './modules/loginpage/components/login-page/login-page.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider'
+import { MatCheckboxModule } from '@angular/material/checkbox'
+import { InfoBoxComponent } from './modules/commons/components/info-box/info-box.component';
+
 
 @NgModule({
   declarations: [
@@ -26,8 +30,9 @@ import {MatButtonModule} from '@angular/material/button';
     SidebarComponent,
     CandidatesComponent,
     LoginPageComponent,
+    InfoBoxComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, NoopAnimationsModule,MatIconModule, MatButtonModule],
+  imports: [BrowserModule, AppRoutingModule, NoopAnimationsModule,MatIconModule, MatButtonModule, MatDividerModule, MatCheckboxModule],
   exports: [MatButtonModule],
   providers: [],
   bootstrap: [AppComponent,],

@@ -8,13 +8,10 @@
     <app-sidebar></app-sidebar>
     <div class="container_column">
       <div class="container container__row container__row--center">
-        <button style="width: 200px; height: 200px">testb</button>
-        <button style="width: 200px; height: 200px">testb</button>
-        <button style="width: 200px; height: 200px">testb</button>
+        <app-info-box text="New candidates" [number]="numberNewCandiates" link="/candidates"></app-info-box>
+        <app-info-box text="Interviews this week" [number]="numberInterviews" link="/candidates"></app-info-box>
       </div>
-      <app-calendar
-        class="container container__row container__row--center"
-      ></app-calendar>
+      <app-calendar class="container container__row container__row--center"></app-calendar>
     </div>
   </div>
 </div>

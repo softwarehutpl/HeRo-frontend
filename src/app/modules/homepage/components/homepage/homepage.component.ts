@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomepageComponent implements OnInit {
 
+  numberNewCandiates = 5;
+  numberInterviews = 8;
+
   constructor() { }
 
   ngOnInit(): void {

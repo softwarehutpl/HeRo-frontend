@@ -1,2 +1,33 @@
+
 <app-navbar></app-navbar>
-<app-sidebar></app-sidebar>
+<div class="container">
+    <div class="container container__row">
+        <app-sidebar></app-sidebar>
+        <div class="container container__row">
+            <div class=" container container__column main">
+                <ul>
+                    <li *ngFor="let iet of tasks">
+                        <mat-checkbox></mat-checkbox>
+                    </li>
+                </ul>
+                <mat-checkbox>Open</mat-checkbox>
+                <mat-checkbox [checked]="checked">Closed</mat-checkbox>
+                            </div>
+            <mat-divider [vertical]="true" ></mat-divider>
+         
+            <div class="container__column main">
+                <div class="container container__row main">
+                    <button style="width: 200px; height: 200px">testb</button>
+                    <button style="width: 200px; height: 200px">testb</button> 
+                </div>
+                <mat-divider></mat-divider>
+                   <div class=" main">
+                    <button style="width: 200px; height: 200px">testb</button>
+                   </div>  
+                    
+            </div> 
+        </div> 
+        
+    </div>
+</div>
+
