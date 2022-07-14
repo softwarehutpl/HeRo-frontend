@@ -27,5 +27,5 @@ export interface ProjectListForTable {
     To: string,
     Resume: number,
     Hired: number,
-    any: any
+    actions: any
 }

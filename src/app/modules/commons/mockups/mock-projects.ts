@@ -10,7 +10,7 @@ export const ProjectsList: Array<ProjectListForTable> = [
         To: "2022-07-14",
         Resume: 3,
         Hired: 15,
-        any:  true
+        actions:  true
 },
 {
     Name: "Jan Kowalski",
@@ -20,7 +20,7 @@ export const ProjectsList: Array<ProjectListForTable> = [
     To: "2022-07-14",
     Resume: 3,
     Hired: 15, 
-    any:  true
+    actions:  true
 },
 {
 
@@ -31,7 +31,7 @@ export const ProjectsList: Array<ProjectListForTable> = [
     To: "2022-07-14",
     Resume: 3,
     Hired: 15, 
-    any: true
+    actions: true
 },
 {
     Name: "project 1",
@@ -41,7 +41,7 @@ export const ProjectsList: Array<ProjectListForTable> = [
     To: "2022-07-14",
     Resume: 3,
     Hired: 15, // add to data from serwer from candidates list
-    any:  true
+    actions:  true
 }
 ];
 
@@ -52,5 +52,5 @@ export const ProjectColumnLable = [
     "To",
     "Resume",
     "Hired",
-    "any"
+    "actions"
 ];
