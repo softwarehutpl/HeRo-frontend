@@ -1,3 +1,4 @@
+
 .list{
     list-style: none;
     list-style-position: inside;
@@ -9,3 +10,31 @@
     margin-bottom: 30px;
     margin-left: -40px;
 }
+
+#idstatus {
+    accent-color: blue
+}
+
+#idEvaluation {
+    accent-color: rgb(70, 245, 248);
+}
+#idInterview {
+    accent-color: orange
+}
+#idPhoneInterview {
+    accent-color: rgb(241, 54, 54);
+}
+#idTechInterview {
+    accent-color: rgb(156, 9, 156);
+}
+#idOffer {
+    accent-color: rgb(84, 189, 234);
+}
+#id5 {
+    accent-color: red;
+}
+
+// ::ng-deep .a .mat-checkbox-checked .mat-checkbox-background
+//  {
+//   background-color: blue !important;
+// }
