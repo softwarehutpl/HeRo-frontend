@@ -9,3 +9,12 @@ export interface Candidate {
     assignee:string;
     profile:string;
 }
+
+export interface Projects {
+    	id: number,
+        beginningDate: string,
+        endingDate: string,
+        name: string,
+        description: string,
+        recruiterId: number
+}
