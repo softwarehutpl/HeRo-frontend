@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {MatIconModule} from '@angular/material/icon'
+import { MatIconModule } from '@angular/material/icon';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,15 +13,15 @@ import { SidebarComponent } from './modules/commons/components/sidebar/sidebar.c
 import { CandidatesComponent } from './modules/candidates/components/candidates/candidates.component';
 import { LoginPageComponent } from './modules/loginpage/components/login-page/login-page.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import {MatButtonModule} from '@angular/material/button';
-import { MatDividerModule } from '@angular/material/divider'
-import { MatCheckboxModule } from '@angular/material/checkbox'
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { InfoBoxComponent } from './modules/commons/components/info-box/info-box.component';
 import { FilterComponent } from './modules/commons/components/filter/filter.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-
-
+import { CandidatesListComponent } from './modules/candidates/components/candidates-list/candidates-list.component';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -35,11 +35,23 @@ import { MatSelectModule } from '@angular/material/select';
     CandidatesComponent,
     LoginPageComponent,
     InfoBoxComponent,
-    FilterComponent
+    FilterComponent,
+    CandidatesListComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, NoopAnimationsModule,MatIconModule, MatButtonModule, MatDividerModule, MatCheckboxModule, MatFormFieldModule, MatSelectModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    NoopAnimationsModule,
+    MatIconModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatTableModule,
+  ],
   exports: [MatButtonModule],
   providers: [],
-  bootstrap: [AppComponent,],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
