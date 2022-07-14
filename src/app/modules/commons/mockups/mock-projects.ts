@@ -1,36 +1,56 @@
-import { Projects } from "../interfaces/candidate";
+import { ProjectListForTable } from "../interfaces/candidate";
 
-export const ProjectsList: Array<Projects> = [
+export const ProjectsList: Array<ProjectListForTable> = [
     {
-    	id: 1,
-        beginningDate: "2022-07-14T10:53:29.974Z",
-        endingDate: "2022-07-14T10:53:29.974Z",
-        name: "project 1",
-        description: "description 1",
-        recruiterId: 1
+    	
+        Name: "project 1",
+        // description: "description 1",
+        Creator: "Jan Kowalski",
+        From: "2022-07-14",
+        To: "2022-07-14",
+        Resume: 3,
+        Hired: 15,
+        any:  true
 },
 {
-    id: 2,
-    beginningDate: "2022-07-14T10:53:29.974Z",
-    endingDate: "2022-07-14T10:53:29.974Z",
-    name: "project 2",
-    description: "description 2",
-    recruiterId: 23
+    Name: "Jan Kowalski",
+    // description: "description 1",
+    Creator: "Jan Kowalski",
+    From: "2022-07-14",
+    To: "2022-07-14",
+    Resume: 3,
+    Hired: 15, 
+    any:  true
 },
 {
-    id: 3,
-    beginningDate: "2022-07-14T10:53:29.974Z",
-    endingDate: "2022-07-14T10:53:29.974Z",
-    name: "project 3",
-    description: "description 3",
-    recruiterId: 34
+
+    Name: "project 1",
+    // description: "description 1",
+    Creator: "Jan Kowalski",
+    From: "2022-07-14",
+    To: "2022-07-14",
+    Resume: 3,
+    Hired: 15, 
+    any: true
 },
 {
-    id: 4,
-    beginningDate: "2022-07-14T10:53:29.974Z",
-    endingDate: "2022-07-14T10:53:29.974Z",
-    name: "project 4",
-    description: "description 4",
-    recruiterId: 43
+    Name: "project 1",
+    // description: "description 1",
+    Creator: "Jan Kowalski",
+    From: "2022-07-14",
+    To: "2022-07-14",
+    Resume: 3,
+    Hired: 15, // add to data from serwer from candidates list
+    any:  true
 }
+];
+
+export const ProjectColumnLable = [
+    "Name",
+    "Creator",
+    "From",
+    "To",
+    "Resume",
+    "Hired",
+    "any"
 ];

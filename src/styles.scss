@@ -54,11 +54,14 @@ This is our main styling container:
 }
 
 .header {
-  width: 100%;
+  width: 80vw;
   min-width: 500px;
   background-color: beige;
   font-size: 20px;
   line-height: 30px;
   align-items: center;
   justify-content: space-between;
+    &--color {
+      background-color: white;
+    }
 }

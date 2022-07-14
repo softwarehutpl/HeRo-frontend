@@ -18,3 +18,14 @@ export interface Projects {
         description: string,
         recruiterId: number
 }
+
+export interface ProjectListForTable {
+    Name: string,
+    // description: "description 1",
+    Creator: string,
+    From: string,
+    To: string,
+    Resume: number,
+    Hired: number,
+    any: any
+}
