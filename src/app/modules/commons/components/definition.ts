@@ -16,6 +16,6 @@ export class Data {
     static filtersSidebarButton2: Array<Filter> = [{filterName: "Status", subfilter: [{name: "Open1"}, {name: "Close1"}, {name: "Open1"}]},
     {filterName: "Stage", subfilter: [{name: "Open2"}, {name: "Close2"}, {name: "Open2"}]}];
     static filtersSidebarButton3: Array<Filter> = [{filterName: "Status", subfilter: [{name: "Open1"}, {name: "Close1"}, {name: "Open1"}]}]
-
+   
 } 
 
