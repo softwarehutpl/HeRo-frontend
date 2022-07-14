@@ -31,23 +31,6 @@ This is our main styling container:
   }
 }
 
-::ng-deep .mat-checkbox-checked .mat-checkbox-background, 
-.mat-checkbox-indeterminate .mat-checkbox-background {
-  background-color: black !important;
-}
-
-// ::ng-deep .mat-checkbox-ripple .mat-ripple-element {
-//   background-color: black !important;
-// }
-
-// ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background {
-//   background-color: black !important;
-// }
-
-// ::ng-deep .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
-//   background-color: black !important;
-// }
-
 .filterComponet {
   padding: 5px;
   width: 200px;
@@ -61,4 +44,10 @@ This is our main styling container:
   line-height: 30px;
   align-items: center;
   justify-content: space-between;
+  div {
+    padding-left: 2vw;
+  }
+  button {
+    padding: 0 1vw 0 1vw;
+  }
 }
