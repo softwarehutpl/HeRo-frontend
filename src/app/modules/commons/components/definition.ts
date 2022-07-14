@@ -1,21 +1,24 @@
 
 export interface Filter {
     filterName: string,
+    color: string,
     subfilter: Array<Subfilter>,
 
 }
 
-interface Subfilter {
-    name: string
+export interface Subfilter {
+    name: string,
+    checked: boolean,
+    color: string
 }
 
 export class Data {
     static sidebarButton1: string = "home";
     static sidebarButton2: string = "candidates";
     static sidebarButton3: string = "projects";
-    static filtersSidebarButton2: Array<Filter> = [{filterName: "Status", subfilter: [{name: "Open1"}, {name: "Close1"}, {name: "Open1"}]},
-    {filterName: "Stage", subfilter: [{name: "Open2"}, {name: "Close2"}, {name: "Open2"}]}];
-    static filtersSidebarButton3: Array<Filter> = [{filterName: "Status", subfilter: [{name: "Open1"}, {name: "Close1"}, {name: "Open1"}]}]
+    static filtersSidebarButton2: Array<Filter> = [{filterName: "Status", color: "primary", subfilter: [{name: "Open1", checked: true, color: "red"}, {name: "Close1", checked: true, color: "primary"}, {name: "Open1", checked: true, color: "primary"}]},
+    {filterName: "Stage", color: "primary", subfilter: [{name: "Open2", checked: true, color: "primary"}, {name: "Close2", checked: true, color: "primary"}, {name: "Open2", checked: true, color: "primary"}]}];
+    static filtersSidebarButton3: Array<Filter> = [{filterName: "Status", color: "primary", subfilter: [{name: "Open1", checked: true, color: "primary"}, {name: "Close1", checked: true, color: "primary"}, {name: "Open1", checked: true, color: "primary"}]}]
    
 } 
 
