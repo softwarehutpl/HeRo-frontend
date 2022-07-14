@@ -53,3 +53,31 @@ This is our main styling container:
     gap: 1vw;
   }
 }
+
+table {
+  width: 100%;
+  // flex: 1;
+}
+
+.mat-cell {
+  padding: 1px 5px;
+}
+
+.mat-column-profile .mat-column-edit {
+  color: blue;
+}
+
+.mat-header-cell {
+  color: black;
+  font-size: 15px;
+}
+
+.mat-row .mat-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}
+
+.mat-row:hover .mat-cell {
+  border-color: currentColor;
+}
