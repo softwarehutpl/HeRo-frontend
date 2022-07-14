@@ -1,25 +1,24 @@
-
 <app-navbar></app-navbar>
 <div class="container">
   <div class="container container__row">
     <app-sidebar></app-sidebar>
-
+    <mat-divider [vertical]="true"></mat-divider>
     <div class="container container__column filterComponet">
       <app-filter></app-filter>
       <!-- Filters column -->
-      
+
       <!-- <button style="width: 150px; height: 180px">Filters1</button>
       <button style="width: 150px; height: 230px">Filters2</button> -->
     </div>
+    <mat-divider [vertical]="true"></mat-divider>
 
     <div class="container container__column">
       <!-- Main candidates container -->
-   
-      <div class="container container__row--center header">
-        <!-- title and buttons here -->
+
+      <div class="container container__row header">
+        <!-- title and buttons -> two separate divs that will be spaced at start and end of the bar -->
         <div>Candidates</div>
         <div>
-          
           <button mat-icon-button class="button" (click)="testFunc()">
             <mat-icon>list</mat-icon>
           </button>
@@ -30,16 +29,15 @@
             <mat-icon>view_module</mat-icon>
           </button>
         </div>
-
-        <!-- title bar ends here -->
       </div>
+      <!-- title bar ends here -->
+
       <div class="container container__row container__row--center">
         <!-- candidates list displays here -->
-        list of candidates here
+        component list of candidates here
       </div>
     </div>
     <!-- Main candidates container ends here -->
   </div>
   <!-- main container with sidebar ends here -->
 </div>
-
