@@ -12,30 +12,24 @@
     </div>
     <mat-divider [vertical]="true"></mat-divider>
 
+    <!-- Main candidates container -->
     <div class="container container__column">
-      <!-- Main candidates container -->
-
+      <!-- title and buttons -> two separate divs that will be spaced at start and end of the bar -->
       <div class="container container__row header">
-        <!-- title and buttons -> two separate divs that will be spaced at start and end of the bar -->
         <div>Candidates</div>
         <div>
-          <button mat-icon-button class="button" (click)="testFunc()">
+          <button mat-icon-button (click)="testFunc()">
             <mat-icon>list</mat-icon>
           </button>
-          <button mat-icon-button class="button" (click)="testFunc()">
+          <button mat-icon-button (click)="testFunc()">
             <mat-icon>view_column</mat-icon>
-          </button>
-          <button mat-icon-button class="button" (click)="testFunc()">
-            <mat-icon>view_module</mat-icon>
           </button>
         </div>
       </div>
       <!-- title bar ends here -->
 
-      <div class="container container__row container__row--center">
-        <!-- candidates list displays here -->
-        <app-candidates-list></app-candidates-list>
-      </div>
+      <!-- candidates list displays here -->
+      <app-candidates-list></app-candidates-list>
     </div>
     <!-- Main candidates container ends here -->
   </div>

@@ -22,6 +22,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { CandidatesListComponent } from './modules/candidates/components/candidates-list/candidates-list.component';
 import { MatTableModule } from '@angular/material/table';
+import { ProjectsListComponent } from './modules/projects/components/projects-list/projects-list.component';
 import { TableComponent } from './modules/commons/components/table/table.component';
 
 @NgModule({
@@ -38,6 +39,7 @@ import { TableComponent } from './modules/commons/components/table/table.compone
     InfoBoxComponent,
     FilterComponent,
     CandidatesListComponent,
+    ProjectsListComponent,
     TableComponent
   ],
   imports: [
