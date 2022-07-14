@@ -1,17 +1,24 @@
-<div class="container container__column" >
-<ul class="container container__column list">
-    <li *ngFor="let filter of filters">
-        {{filter.filterName}}
-        <ul class="list" class="container container__column muiMargin">
-            <mat-checkbox *ngFor="let name of filter.subfilter"> {{name.name}}</mat-checkbox>
-        </ul>
-    </li>
-</ul>
+<div class="container container__column">
+    <ul class="container container__column list">
+        <li *ngFor="let filter of filters ">
+            {{filter.filterName}}
+            <ul class="list" class="container container__column muiMargin">
+                <div *ngFor="let name of filter.subfilter; let i = index">
+                    <label >
+                        <input type="checkbox" id="id{{name.color}}" checked="{{name.checked}}">
+                        {{name.name}}
+                    </label>
+                </div>
 
-<mat-form-field *ngIf="isDropdow">
-    <mat-label>Project</mat-label>
-    <mat-select [(value)]="selected">
-        <mat-option>all</mat-option>
-    </mat-select>
-</mat-form-field>
+                <!-- <mat-checkbox *ngFor="let name of filter.subfilter" [checked]="name.checked" color="primary"> {{name.name}}</mat-checkbox> -->
+            </ul>
+        </li>
+    </ul>
+
+    <mat-form-field *ngIf="isDropdow">
+        <mat-label>Project</mat-label>
+        <mat-select [(value)]="selected">
+            <mat-option>all</mat-option>
+        </mat-select>
+    </mat-form-field>
 </div>
