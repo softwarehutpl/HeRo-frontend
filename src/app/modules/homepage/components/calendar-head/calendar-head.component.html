@@ -1,0 +1,38 @@
+<!-- <link href="https://unpkg.com/bootstrap-css-only@4.4.1/css/bootstrap.min.css" rel="stylesheet"> -->
+<div class="row ">
+    <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+        <mat-button-toggle value="Previous" color="primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
+            (viewDateChange)="viewDateChange.next(viewDate)">
+            Previous
+        </mat-button-toggle>
+        <mat-button-toggle value="Today" mwlCalendarToday [(viewDate)]="viewDate"
+            (viewDateChange)="viewDateChange.next(viewDate)">
+            Today
+        </mat-button-toggle>
+        <mat-button-toggle value="Next" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
+            (viewDateChange)="viewDateChange.next(viewDate)">
+            Next
+        </mat-button-toggle>
+
+    </mat-button-toggle-group>
+
+    <div class="col-md-4">
+        <h3>{{ viewDate | calendarDate: view + 'ViewTitle':locale }}</h3>
+    </div>
+
+    <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+            <mat-button-toggle value="Month" (click)="viewChange.emit(CalendarView.Month)"
+                [class.active]="view === CalendarView.Month">
+                Month
+            </mat-button-toggle>
+            <mat-button-toggle value="Week" (click)="viewChange.emit(CalendarView.Week)"
+                [class.active]="view === CalendarView.Week">
+                Week
+            </mat-button-toggle>
+            <mat-button-toggle value="Day" (click)="viewChange.emit(CalendarView.Day)"
+                [class.active]="view === CalendarView.Day">
+                Day
+            </mat-button-toggle>
+        </mat-button-toggle-group>
+</div>
+<br />
