@@ -1,4 +1,32 @@
-.table {
-  width: calc(100vw - 262px);
-  //   temp value - 262px = (sidebar width + filters width + 2x material divider)
+:host {
+  width: 100%;
+}
+
+table {
+  width: 100%;
+  // flex: 1;
+}
+
+.mat-cell {
+  // background-color: blue;
+  padding: 1px 5px;
+}
+
+.mat-column-profile {
+  color: blue;
+}
+
+.mat-header-cell {
+  color: black;
+  font-size: 15px;
+}
+
+.mat-row .mat-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}
+
+.mat-row:hover .mat-cell {
+  border-color: currentColor;
 }

@@ -22,9 +22,11 @@ This is our main styling container:
 
   &__column {
     flex-direction: column;
+    width: 100%;
   }
   &__row {
     flex-direction: row;
+    width: 100%;
     &--center {
       justify-content: space-evenly;
     }
@@ -48,6 +50,6 @@ This is our main styling container:
     padding-left: 2vw;
   }
   button {
-    padding: 0 1vw 0 1vw;
+    gap: 1vw;
   }
 }
