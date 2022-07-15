@@ -5,6 +5,10 @@
 .intrnalComponent {
     align-content: space-around;
 }
+
+.input {
+  align-content: space-between;
+}
 .main {
     padding: 5%;
     min-width: 250px;
@@ -15,3 +19,13 @@
     
   }
   
+  .project {
+    // overflow: hidden;
+    // position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    // justify-content: center; 
+    // align-items: sta; 
+}
