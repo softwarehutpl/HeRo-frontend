@@ -1,0 +1,25 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 header header--color host">
+
+  <ng-container [matColumnDef]="column" *ngFor="let column of columnLable">
+    <th mat-header-cell *matHeaderCellDef>
+      <ng-container *ngIf="column !== 'actions'">
+        {{column}}
+      </ng-container>
+    </th>
+
+    <td mat-cell *matCellDef="let element">
+      <ng-container *ngIf="column === 'actions' && element[column] === true; then actionTemplate; else cellTemplate">
+      </ng-container>
+      <ng-template #actionTemplate>
+        <button mat-icon-button>
+          <mat-icon>edit</mat-icon>
+        </button>
+      </ng-template>
+      <ng-template #cellTemplate>
+        {{element[column]}}
+      </ng-template>
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="columnLable"></tr>
+  <tr mat-row *matRowDef="let row; columns: columnLable;"></tr>
+</table>
