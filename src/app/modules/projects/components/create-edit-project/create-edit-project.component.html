@@ -4,9 +4,32 @@
     <app-sidebar></app-sidebar>
     <div class="container container__row">
       <mat-divider [vertical]="true"></mat-divider>
-      <div class="container container__row">
+      <div class="container container__column">
         <h2 class='header-edit'>{{editHeader}}</h2>
+        <form [formGroup]="projectForm" class="project input" >
+
+          <mat-form-field appearance="fill" >
+              <mat-label>Project Name</mat-label>
+              <input matInput placeholder="Project Name" >
+          </mat-form-field>
+          <mat-form-field appearance="fill" >
+              <mat-label>Seniority</mat-label>
+              <input matInput placeholder="Seniority">
+          </mat-form-field>
+      </form>
       </div>
+
+      <!-- <form [formGroup]="projectForm" class="project" >
+
+        <mat-form-field appearance="fill" >
+            <mat-label>Project Name</mat-label>
+            <input matInput placeholder="Project Name" >
+        </mat-form-field>
+        <mat-form-field appearance="fill" >
+            <mat-label>Seniority</mat-label>
+            <input matInput placeholder="Seniority">
+        </mat-form-field>
+    </form> -->
     </div>
     <!-- <router-outlet ></router-outlet> -->
   </div>
