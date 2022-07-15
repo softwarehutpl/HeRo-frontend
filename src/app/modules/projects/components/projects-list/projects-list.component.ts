@@ -91,8 +91,14 @@ export class ProjectsListComponent implements AfterViewInit {
     // }
     this._router.navigate(
       ['/candidates'], 
-      {queryParams: {project: projectName, status: status}}
-    )
+      {queryParams: {
+        project: projectName, 
+        ...status===undefined ? {} : {status: status}
+      }})
+    // this._router.navigate(
+    //   ['/candidates'], 
+    //   {queryParams: {project: projectName, status: status}}
+    // )
   }
 
   moveToEditProject(projectName: string) {
