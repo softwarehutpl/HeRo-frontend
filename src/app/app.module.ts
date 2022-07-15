@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatIconModule } from '@angular/material/icon';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,8 +30,7 @@ import { MatSortModule } from '@angular/material/sort';
 import {  MatInputModule } from '@angular/material/input';
 
 import { CreateEditProjectComponent } from './modules/projects/components/create-edit-project/create-edit-project.component';
-
-
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
@@ -55,7 +54,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     CalendarHeadComponent,
     ProjectsListComponent,
     TableComponent,
-
     CreateEditProjectComponent,
 
   ],
@@ -78,11 +76,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     }),
     MatButtonToggleModule,
     MatSortModule,
+    MatPaginatorModule,
     MatInputModule
-   
+
   ],
   exports: [MatButtonModule],
   providers: [],
-  bootstrap: [AppComponent,CalendarHeadComponent],
+  bootstrap: [AppComponent, CalendarHeadComponent],
 })
 export class AppModule {}
