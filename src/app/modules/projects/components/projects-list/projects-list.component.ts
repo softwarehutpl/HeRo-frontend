@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router'
 
 export interface Projects {
   name: string;
@@ -41,7 +42,9 @@ const DATA: Array<Projects> = [
   styleUrls: ['./projects-list.component.scss'],
 })
 export class ProjectsListComponent implements OnInit {
-  constructor() {}
+  public status: string = '';
+
+  constructor(private _router: Router, private _route: ActivatedRoute) {}
 
   ngOnInit(): void {}
   displayedColumns: string[] = [
@@ -55,7 +58,26 @@ export class ProjectsListComponent implements OnInit {
   ];
   public dataSource = DATA;
 
-  testFunc() {
-    alert('edit button clicked');
+  moveToCandidates(projectName: string , status?: string) {
+
+    if (status === 'undefined') {
+      this._router.navigate(
+        ['/candidates'],
+        {queryParams: {project: projectName, status:"hired"}}
+      )
+    }
+    this._router.navigate(
+      ['/candidates'], 
+      {queryParams: {project: projectName}}
+    )
   }
+
+  moveToEditProject(projectName: string) {
+    this._router.navigate(
+      ['edit'], 
+      {queryParams: {project: projectName}}
+    )
+  }
+
+
 }
