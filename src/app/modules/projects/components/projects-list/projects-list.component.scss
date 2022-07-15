@@ -1,9 +1,12 @@
+$color_dark: black;
+$color_light: white;
+$color_link: blue;
+
 :host {
   width: 100%;
 }
 
-/**
-// Styling moved to the top -> styles.scss //
+// Update: Styling each table by it's own //
 table {
   width: 100%;
   // flex: 1;
@@ -13,22 +16,26 @@ table {
   padding: 1px 5px;
 }
 
-.mat-column-profile {
-  color: blue;
+.mat-column-resume,
+.mat-column-hired {
+  color: $color_link;
+  cursor: pointer;
 }
 
 .mat-header-cell {
-  color: black;
+  color: $color_dark;
   font-size: 15px;
 }
 
 .mat-row .mat-cell {
   border-bottom: 1px solid transparent;
   border-top: 1px solid transparent;
-  cursor: pointer;
 }
 
 .mat-row:hover .mat-cell {
-  border-color: currentColor;
+  border-color: $color_dark;
 }
-*/
+
+th.mat-sort-header-sorted {
+  color: $color_dark;
+}
