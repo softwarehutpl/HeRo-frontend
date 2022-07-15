@@ -77,18 +77,21 @@ export class ProjectsListComponent implements AfterViewInit {
   }
   testFunc() {
     alert('edit button clicked');
-
+  }
   moveToCandidates(projectName: string , status?: string) {
 
-    if (status === 'undefined') {
-      this._router.navigate(
-        ['/candidates'],
-        {queryParams: {project: projectName, status:"hired"}}
-      )
-    }
+    // console.log(status)
+    // if (status === undefined) {
+    //   console.log("hello")
+    //   this._router.navigate(
+    //     ['/candidates'],
+    //     {queryParams: {project: projectName}}
+    //   )
+    //   return;
+    // }
     this._router.navigate(
       ['/candidates'], 
-      {queryParams: {project: projectName}}
+      {queryParams: {project: projectName, status: status}}
     )
   }
 
