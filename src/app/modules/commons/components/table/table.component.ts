@@ -6,16 +6,16 @@ const columnLabels = ProjectColumnLable;
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+  styleUrls: ['./table.component.scss'],
 })
 export class TableComponent implements OnInit {
   public dataSource: Array<ProjectListForTable> = ProjectsList;
   public columnLable: Array<string> = ProjectColumnLable;
 
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
+  ngOnInit(): void {}
+  testButton() {
+    alert('clicked');
   }
-
 }

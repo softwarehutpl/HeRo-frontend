@@ -39,7 +39,7 @@ This is our main styling container:
 }
 
 .header {
-  // width: 60vw;
+  width: 100%;
   min-width: 500px;
   background-color: beige;
   font-size: 20px;
@@ -52,35 +52,7 @@ This is our main styling container:
   button {
     gap: 1vw;
   }
-    &--color {
-      background-color: white;
-    }
-}
-
-table {
-  width: 100%;
-  // flex: 1;
-}
-
-.mat-cell {
-  padding: 1px 5px;
-}
-
-.mat-column-profile .mat-column-edit {
-  color: blue;
-}
-
-.mat-header-cell {
-  color: black;
-  font-size: 15px;
-}
-
-.mat-row .mat-cell {
-  border-bottom: 1px solid transparent;
-  border-top: 1px solid transparent;
-  cursor: pointer;
-}
-
-.mat-row:hover .mat-cell {
-  border-color: currentColor;
+  &--color {
+    background-color: white;
+  }
 }

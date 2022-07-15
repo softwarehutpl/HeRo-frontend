@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatIconModule } from '@angular/material/icon';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './modules/homepage/components/homepage/homepage.component';
@@ -24,6 +23,7 @@ import { CandidatesListComponent } from './modules/candidates/components/candida
 import { MatTableModule } from '@angular/material/table';
 import { ProjectsListComponent } from './modules/projects/components/projects-list/projects-list.component';
 import { TableComponent } from './modules/commons/components/table/table.component';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -40,7 +40,7 @@ import { TableComponent } from './modules/commons/components/table/table.compone
     FilterComponent,
     CandidatesListComponent,
     ProjectsListComponent,
-    TableComponent
+    TableComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,6 +53,7 @@ import { TableComponent } from './modules/commons/components/table/table.compone
     MatFormFieldModule,
     MatSelectModule,
     MatTableModule,
+    MatSortModule,
   ],
   exports: [MatButtonModule],
   providers: [],
