@@ -26,6 +26,7 @@ import { MatTableModule } from '@angular/material/table';
 import { ProjectsListComponent } from './modules/projects/components/projects-list/projects-list.component';
 import { TableComponent } from './modules/commons/components/table/table.component';
 import { MatSortModule } from '@angular/material/sort';
+import { CreateEditProjectComponent } from './modules/projects/components/create-edit-project/create-edit-project.component';
 
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -50,6 +51,7 @@ import { CalendarHeadComponent } from './modules/homepage/components/calendar-he
     CalendarHeadComponent,
     ProjectsListComponent,
     TableComponent,
+    CreateEditProjectComponent
   ],
   imports: [
     BrowserModule,
