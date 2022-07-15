@@ -5,6 +5,7 @@ import { ProfileComponent } from './modules/profile/components/profile/profile.c
 import { ProjectsComponent } from './modules/projects/components/projects/projects.component';
 import { CandidatesComponent } from './modules/candidates/components/candidates/candidates.component';
 import { LoginPageComponent } from './modules/loginpage/components/login-page/login-page.component';
+import { CreateEditProjectComponent } from './modules/projects/components/create-edit-project/create-edit-project.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,16 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
+    // canActivate: [PlayerDataGuardService],
+  },
+  {
+    path: 'login',
+    component: LoginPageComponent,
+    // canActivate: [PlayerDataGuardService],
+  },
+  {
+    path: 'edit',
+    component: CreateEditProjectComponent,
     // canActivate: [PlayerDataGuardService],
   },
   {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  constructor() {}
+  constructor(private _router: Router) {}
 
   public title: string = 'SoftwareHut Hiring';
 
@@ -16,6 +17,9 @@ export class NavbarComponent implements OnInit {
     console.log('bell button pressed');
   }
   public userButton(): void {
-    alert('user button pressed');
+    this._router.navigate(
+      ['/login']
+    )
+ 
   }
 }
