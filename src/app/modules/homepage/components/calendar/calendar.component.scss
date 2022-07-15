@@ -1,0 +1,7 @@
+.conteiner{
+    display: flex;
+    flex-direction: column;
+    &--center {
+        justify-content: space-evenly;
+      }
+}
