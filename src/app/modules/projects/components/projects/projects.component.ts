@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Route, Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-projects',
@@ -7,11 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjectsComponent implements OnInit {
   public checked: boolean = true;
+  public isEditCreateProject: boolean = false;
 
-  constructor() {}
+  constructor(private _router: Router) {}
 
   ngOnInit(): void {}
   testFunc() {
     alert('button pressed');
+  }
+
+  moveToCreateProject() {
+    this._router.navigate(
+      ['edit']
+    )
   }
 }

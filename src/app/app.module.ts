@@ -23,6 +23,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { CandidatesListComponent } from './modules/candidates/components/candidates-list/candidates-list.component';
 import { MatTableModule } from '@angular/material/table';
+import { ProjectsListComponent } from './modules/projects/components/projects-list/projects-list.component';
+import { TableComponent } from './modules/commons/components/table/table.component';
+import { MatSortModule } from '@angular/material/sort';
 
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -45,6 +48,8 @@ import { CalendarHeadComponent } from './modules/homepage/components/calendar-he
     FilterComponent,
     CandidatesListComponent,
     CalendarHeadComponent,
+    ProjectsListComponent,
+    TableComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,8 +66,9 @@ import { CalendarHeadComponent } from './modules/homepage/components/calendar-he
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,
-    }),MatButtonToggleModule
-
+    }),
+    MatButtonToggleModule,
+    MatSortModule,
   ],
   exports: [MatButtonModule],
   providers: [],

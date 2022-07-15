@@ -16,15 +16,15 @@ table {
   padding: 1px 5px;
 }
 
-.mat-column-profile {
+.mat-column-resume,
+.mat-column-hired {
   color: $color_link;
   cursor: pointer;
 }
 
 .mat-header-cell {
-  color: black;
+  color: $color_dark;
   font-size: 15px;
-  cursor: pointer;
 }
 
 .mat-row .mat-cell {
@@ -35,6 +35,7 @@ table {
 .mat-row:hover .mat-cell {
   border-color: $color_dark;
 }
+
 th.mat-sort-header-sorted {
   color: $color_dark;
 }
