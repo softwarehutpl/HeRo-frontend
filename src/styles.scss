@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+
+
 $color_light: white;
 $color_dark: black;
 
@@ -6,6 +10,8 @@ html,
 body {
   height: 100%;
   width: 100%;
+  margin:0;
+  padding: 0;
 }
 body {
   margin: 0;
@@ -39,7 +45,7 @@ This is our main styling container:
 }
 
 .header {
-  // width: 60vw;
+  width: 100%;
   min-width: 500px;
   background-color: beige;
   font-size: 20px;
@@ -52,35 +58,7 @@ This is our main styling container:
   button {
     gap: 1vw;
   }
-    &--color {
-      background-color: white;
-    }
-}
-
-table {
-  width: 100%;
-  // flex: 1;
-}
-
-.mat-cell {
-  padding: 1px 5px;
-}
-
-.mat-column-profile .mat-column-edit {
-  color: blue;
-}
-
-.mat-header-cell {
-  color: black;
-  font-size: 15px;
-}
-
-.mat-row .mat-cell {
-  border-bottom: 1px solid transparent;
-  border-top: 1px solid transparent;
-  cursor: pointer;
-}
-
-.mat-row:hover .mat-cell {
-  border-color: currentColor;
+  &--color {
+    background-color: white;
+  }
 }

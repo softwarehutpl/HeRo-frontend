@@ -5,6 +5,7 @@ import { Component, OnInit,Input } from '@angular/core';
   templateUrl: './info-box.component.html',
   styleUrls: ['./info-box.component.scss']
 })
+
 export class InfoBoxComponent implements OnInit {
 
   @Input() number!: number ;

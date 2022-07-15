@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatIconModule } from '@angular/material/icon';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +25,13 @@ import { CandidatesListComponent } from './modules/candidates/components/candida
 import { MatTableModule } from '@angular/material/table';
 import { ProjectsListComponent } from './modules/projects/components/projects-list/projects-list.component';
 import { TableComponent } from './modules/commons/components/table/table.component';
+import { MatSortModule } from '@angular/material/sort';
+
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { CalendarHeadComponent } from './modules/homepage/components/calendar-head/calendar-head.component';
 
 @NgModule({
   declarations: [
@@ -39,8 +47,9 @@ import { TableComponent } from './modules/commons/components/table/table.compone
     InfoBoxComponent,
     FilterComponent,
     CandidatesListComponent,
+    CalendarHeadComponent,
     ProjectsListComponent,
-    TableComponent
+    TableComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,9 +62,16 @@ import { TableComponent } from './modules/commons/components/table/table.compone
     MatFormFieldModule,
     MatSelectModule,
     MatTableModule,
+    BrowserAnimationsModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
+    MatButtonToggleModule,
+    MatSortModule,
   ],
   exports: [MatButtonModule],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent,CalendarHeadComponent],
 })
 export class AppModule {}
