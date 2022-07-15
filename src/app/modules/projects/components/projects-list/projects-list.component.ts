@@ -77,10 +77,10 @@ export class ProjectsListComponent implements AfterViewInit {
   }
   testFunc() {
     alert('edit button clicked');
-
+  }
   moveToCandidates(projectName: string , status?: string) {
 
-    console.log(status)
+    // console.log(status)
     // if (status === undefined) {
     //   console.log("hello")
     //   this._router.navigate(
