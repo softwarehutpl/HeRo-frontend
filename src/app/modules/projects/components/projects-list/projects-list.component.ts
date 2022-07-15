@@ -2,6 +2,8 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute, Router } from '@angular/router'
+
 export interface Projects {
   name: string;
   creator: string;
@@ -42,7 +44,12 @@ const DATA: Array<Projects> = [
   templateUrl: './projects-list.component.html',
   styleUrls: ['./projects-list.component.scss'],
 })
+
 export class ProjectsListComponent implements AfterViewInit {
+  public status: string = '';
+
+  constructor(private _router: Router, private _route: ActivatedRoute, private _liveAnnouncer: LiveAnnouncer) {}
+
   displayedColumns: string[] = [
     'name',
     'creator',
@@ -54,7 +61,7 @@ export class ProjectsListComponent implements AfterViewInit {
   ];
   dataSource = new MatTableDataSource(DATA);
 
-  constructor(private _liveAnnouncer: LiveAnnouncer) {}
+
 
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -70,5 +77,28 @@ export class ProjectsListComponent implements AfterViewInit {
   }
   testFunc() {
     alert('edit button clicked');
+
+  moveToCandidates(projectName: string , status?: string) {
+
+    if (status === 'undefined') {
+      this._router.navigate(
+        ['/candidates'],
+        {queryParams: {project: projectName, status:"hired"}}
+      )
+    }
+    this._router.navigate(
+      ['/candidates'], 
+      {queryParams: {project: projectName}}
+    )
   }
+
+  moveToEditProject(projectName: string) {
+    this._router.navigate(
+      ['edit'], 
+      {queryParams: {project: projectName}}
+    )
+
+  }
+
+
 }
