@@ -9,6 +9,7 @@ import { Route, Router } from '@angular/router';
 })
 export class ProjectsComponent implements OnInit {
   public checked: boolean = true;
+  public componentName: string = "projects";
   public isEditCreateProject: boolean = false;
 
   constructor(private _router: Router) {}

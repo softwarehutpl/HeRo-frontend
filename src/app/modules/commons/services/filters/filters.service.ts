@@ -1,20 +1,18 @@
-import { RepositionScrollStrategy } from '@angular/cdk/overlay';
 import { Injectable } from '@angular/core';
-import { Filter, Data, Subfilter } from '../../components/definition';
+import { Router } from '@angular/router';
+import { Data} from '../../components/definition';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FiltersService {
-  public sideBarComponentName: string = Data.sidebarButton1;
-  // public dataFilter: string =
-  //   '{"label":{"new":"New","inProcessing":"In processing","droppedOut":"Dropped out","hired":"Hired"},"stage":{"evaluation":"Evaluation","interView":"Interview","phoneInterview":"Phone interview","techInterview":"Tech interview","offer":"Offer"},"checked":"true"}';
-  // public dataFilter2: string =
-  //   '{"status":{"open":"Open","closed":"Closed"},"checked":"true"}';
-  constructor() {}
+  public sideBarComponentName: string = Data.sidebarButton2;
+  public renderedComponentName?: string;
+  constructor(private _router: Router) {}
 
-  filtersForComponent() {
-    if (this.sideBarComponentName === Data.sidebarButton2) {
+  filtersForComponent(renderedComponent: string) {
+    this.renderedComponentName = renderedComponent;
+    if (this.sideBarComponentName === renderedComponent) {
       // this.JSONToFilterData(this.dataFilter);
       return Data.filtersSidebarButton2;
     } else {
@@ -23,36 +21,10 @@ export class FiltersService {
     }
   }
 
-  // JSONToFilterData(JSONdata: string) {
-  //   let data = JSON.parse(JSONdata);
-  //   this.mapData(data);
-  // }
-
-  // mapData(data: Object) {
-  //   let dataTomapForFilterUsage: object = data;
-  //   let mappedFilters = [];
-  //   let isChecked = true;
-
-  //   for (const [key, value] of Object.entries(dataTomapForFilterUsage)) {
-  //     let obj: Filter = { filterName: '', subfilter: [] };
-  //     obj.filterName = key;
-  //     if (typeof value === 'object') {
-  //       for (const [keyElement, val] of Object.entries(value)) {
-  //         obj.subfilter.push({ name: val, checked: true });
-  //       }
-  //     }
-  //   }
-    
-  // }
-
   isdropdown() {
-    if (this.sideBarComponentName === Data.sidebarButton2) {
+    if (this.renderedComponentName === Data.sidebarButton3) {
       return false;
     }
     return true;
-  }
-
-  componentNameBeingRendered(sideBarComponentName: string) {
-    this.sideBarComponentName = sideBarComponentName;
   }
 }
