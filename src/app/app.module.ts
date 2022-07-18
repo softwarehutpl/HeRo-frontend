@@ -27,8 +27,8 @@ import { MatTableModule } from '@angular/material/table';
 import { ProjectsListComponent } from './modules/projects/components/projects-list/projects-list.component';
 import { TableComponent } from './modules/commons/components/table/table.component';
 import { MatSortModule } from '@angular/material/sort';
-import {  MatInputModule } from '@angular/material/input';
-import { CreateEditProjectComponent } from './modules/projects/components/create-edit-project/create-edit-project.component';
+// import { MatInputModule } from '@angular/material/input';
+// import { CreateEditProjectComponent } from './modules/projects/components/create-edit-project/create-edit-project.component';
 
 import { MatInputModule } from '@angular/material/input';
 
@@ -61,8 +61,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     ProjectsListComponent,
     TableComponent,
     CreateEditProjectComponent,
-
-
     CalendarItemsComponent
 
   ],
@@ -85,10 +83,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     }),
     MatButtonToggleModule,
     MatSortModule,
-
-    MatInputModule
-   
-
+    MatInputModule,
     MatListModule,
     MatPaginatorModule,
     MatInputModule,
