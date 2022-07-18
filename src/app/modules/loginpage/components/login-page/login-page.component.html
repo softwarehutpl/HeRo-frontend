@@ -1,15 +1,17 @@
-<p>login-page works!</p>
+
 
 <div class="login">
-    <form [formGroup]="loginForm" class="login" >
+    <form [formGroup]="loginForm" class="login" (submit)="onSubmit(loginForm)">
         <mat-form-field appearance="fill" >
-            <mat-label>Login</mat-label>
-            <input matInput placeholder="Login" >
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Email" formControlName="email">
         </mat-form-field>
         <mat-form-field appearance="fill" >
             <mat-label>Password</mat-label>
-            <input matInput placeholder="Password">
+            <input matInput placeholder="Password" formControleName="password">
         </mat-form-field>
+
+        <button [disabled]="!loginForm.valid" mat-button (click)="signIn()">Signin</button>
     </form>
 
 </div>
