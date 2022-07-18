@@ -1,7 +1,8 @@
 .row{
+    margin-top: 2%;
     display: flex;
-    flex-flow: column;
-    justify-content: center;
+    flex-flow: row;
+    justify-content: space-around;
 }
 .col-md-4{
     max-width: 100%;

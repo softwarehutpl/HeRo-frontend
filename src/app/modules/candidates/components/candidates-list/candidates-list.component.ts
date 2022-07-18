@@ -4,6 +4,7 @@ import { CANDIDATES } from '../../../commons/mockups/mock-candidates';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 
 const DATA: Array<Candidate> = CANDIDATES;
 @Component({
@@ -28,9 +29,15 @@ export class CandidatesListComponent implements AfterViewInit {
   constructor(private _liveAnnouncer: LiveAnnouncer) {}
 
   @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  }
+  onChangePage(pe: PageEvent) {
+    console.log(pe.pageIndex);
+    console.log(pe.pageSize);
   }
   announceSortChange(sortState: Sort) {
     if (sortState.direction) {

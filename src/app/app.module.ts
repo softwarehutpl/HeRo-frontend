@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatIconModule } from '@angular/material/icon';
+import {MatListModule} from '@angular/material/list';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -29,11 +30,17 @@ import { MatSortModule } from '@angular/material/sort';
 import {  MatInputModule } from '@angular/material/input';
 import { CreateEditProjectComponent } from './modules/projects/components/create-edit-project/create-edit-project.component';
 
+import { MatInputModule } from '@angular/material/input';
 
+import { CreateEditProjectComponent } from './modules/projects/components/create-edit-project/create-edit-project.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { CalendarHeadComponent } from './modules/homepage/components/calendar-head/calendar-head.component';
+
+import { CalendarItemsComponent } from './modules/homepage/components/calendar-items/calendar-items.component';
+
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -54,6 +61,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     ProjectsListComponent,
     TableComponent,
     CreateEditProjectComponent,
+
+
+    CalendarItemsComponent
+
   ],
   imports: [
     BrowserModule,
@@ -74,11 +85,17 @@ import { ReactiveFormsModule } from '@angular/forms';
     }),
     MatButtonToggleModule,
     MatSortModule,
+
     MatInputModule
    
+
+    MatListModule,
+    MatPaginatorModule,
+    MatInputModule,
+
   ],
   exports: [MatButtonModule],
   providers: [],
-  bootstrap: [AppComponent,CalendarHeadComponent],
+  bootstrap: [AppComponent, CalendarHeadComponent],
 })
 export class AppModule {}
