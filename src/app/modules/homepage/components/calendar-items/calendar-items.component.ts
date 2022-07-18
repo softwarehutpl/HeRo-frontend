@@ -12,7 +12,7 @@ import { CalendarEvent } from 'angular-calendar';
 export class CalendarItemsComponent implements OnInit {
 
   @Input() events: CalendarEvent[] = [];
-
+  hovered:any;
   listOfevents: CalendarEvent[]=[];
   nameOfButton = "show more";
   max = 2;
