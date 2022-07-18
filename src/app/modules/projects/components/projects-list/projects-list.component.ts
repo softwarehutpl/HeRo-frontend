@@ -2,7 +2,8 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute, Router } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 
 export interface Projects {
   name: string;
@@ -44,11 +45,14 @@ const DATA: Array<Projects> = [
   templateUrl: './projects-list.component.html',
   styleUrls: ['./projects-list.component.scss'],
 })
-
 export class ProjectsListComponent implements AfterViewInit {
   public status: string = '';
 
-  constructor(private _router: Router, private _route: ActivatedRoute, private _liveAnnouncer: LiveAnnouncer) {}
+  constructor(
+    private _router: Router,
+    private _route: ActivatedRoute,
+    private _liveAnnouncer: LiveAnnouncer
+  ) {}
 
   displayedColumns: string[] = [
     'name',
@@ -61,12 +65,16 @@ export class ProjectsListComponent implements AfterViewInit {
   ];
   dataSource = new MatTableDataSource(DATA);
 
-
-
   @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  }
+  onChangePage(pe: PageEvent) {
+    console.log(pe.pageIndex);
+    console.log(pe.pageSize);
   }
   announceSortChange(sortState: Sort) {
     if (sortState.direction) {
@@ -78,8 +86,7 @@ export class ProjectsListComponent implements AfterViewInit {
   testFunc() {
     alert('edit button clicked');
   }
-  moveToCandidates(projectName: string , status?: string) {
-
+  moveToCandidates(projectName: string, status?: string) {
     // console.log(status)
     // if (status === undefined) {
     //   console.log("hello")
@@ -89,25 +96,19 @@ export class ProjectsListComponent implements AfterViewInit {
     //   )
     //   return;
     // }
-    this._router.navigate(
-      ['/candidates'], 
-      {queryParams: {
-        project: projectName, 
-        ...status===undefined ? {} : {status: status}
-      }})
+    this._router.navigate(['/candidates'], {
+      queryParams: {
+        project: projectName,
+        ...(status === undefined ? {} : { status: status }),
+      },
+    });
     // this._router.navigate(
-    //   ['/candidates'], 
+    //   ['/candidates'],
     //   {queryParams: {project: projectName, status: status}}
     // )
   }
 
   moveToEditProject(projectName: string) {
-    this._router.navigate(
-      ['edit'], 
-      {queryParams: {project: projectName}}
-    )
-
+    this._router.navigate(['edit'], { queryParams: { project: projectName } });
   }
-
-
 }

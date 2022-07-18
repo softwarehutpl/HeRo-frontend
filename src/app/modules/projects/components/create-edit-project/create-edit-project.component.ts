@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-create-edit-project',
@@ -8,7 +9,12 @@ import { Component, OnInit } from '@angular/core';
 export class CreateEditProjectComponent implements OnInit {
   public editHeader: string = 'Create/Edit project';
 
-  constructor() { }
+  constructor(private fb: FormBuilder) { }
+  public projectForm = this.fb.group({
+    login: [''],
+    password: ['']
+  })
+
 
   ngOnInit(): void {
   }

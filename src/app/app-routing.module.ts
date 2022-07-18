@@ -28,6 +28,13 @@ const routes: Routes = [
     // canActivate: [PlayerDataGuardService],
   },
   {
+
+    path: 'login',
+    component: LoginPageComponent,
+    // canActivate: [PlayerDataGuardService],
+  },
+  {
+
     path: 'edit',
     component: CreateEditProjectComponent,
     // canActivate: [PlayerDataGuardService],
