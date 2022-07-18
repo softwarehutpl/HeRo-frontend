@@ -11,13 +11,16 @@
 </div> -->
   <div>
     <ng-template #customCellTemplate let-day="day" let-locale="locale">
-      <div class="cal-cell-top">
-        <!-- <span class="cal-day-badge" *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span> -->
-        <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
+      <div class="day">
+        <div class="cal-cell-top">
+
+          <!-- <span class="cal-day-badge" *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span> -->
+          <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
+        </div>
+        <app-calendar-items [events]="day.events"></app-calendar-items>
+
+        <!-- <small style="margin: 2px">There are {{ day.events.length }} events on this day</small> -->
       </div>
-      <app-calendar-items [intervieDate]="day.date" ></app-calendar-items>
-      
-      <!-- <small style="margin: 2px">There are {{ day.events.length }} events on this day</small> -->
     </ng-template>
 
     <div [ngSwitch]="view">

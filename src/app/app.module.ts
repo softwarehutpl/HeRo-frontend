@@ -35,6 +35,7 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { CalendarHeadComponent } from './modules/homepage/components/calendar-head/calendar-head.component';
 import { CalendarItemsComponent } from './modules/homepage/components/calendar-items/calendar-items.component';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { CalendarItemsComponent } from './modules/homepage/components/calendar-i
     }),
     MatButtonToggleModule,
     MatSortModule,
-    MatListModule
+    MatListModule,
+    MatCardModule
   ],
   exports: [MatButtonModule],
   providers: [],
