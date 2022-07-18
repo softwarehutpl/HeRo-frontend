@@ -1,5 +1,16 @@
 <mat-list>
-    <mat-list-item *ngFor="let inter of interviews">
-      {{inter.candidateName}}
-    </mat-list-item>
+  <div class="list" *ngFor="let event of listOfevents">
+    <div class="border" [ngStyle]="{backgroundColor:event.color!.primary}">
+      <div class="cut-text" >
+        {{event.title}}
+      </div>
+    </div>
+  </div>
+  <div *ngIf="events.length>2" >
+    <a class="show-link" (click)="show()" >
+      <mat-icon *ngIf='nameOfButton==="show less"'>expand_less</mat-icon>
+      <mat-icon *ngIf='nameOfButton==="show more"'>expand_more</mat-icon>
+      {{nameOfButton}}
+    </a>
+  </div>
 </mat-list>
