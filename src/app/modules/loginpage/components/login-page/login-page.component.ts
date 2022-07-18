@@ -2,12 +2,7 @@
 import { Component, OnChanges, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/modules/commons/services/auth/auth.service';
-
-
-
-
 import { AxiosService } from '../../../commons/services/axios/axios.service';
-
 
 
 
@@ -30,19 +25,15 @@ export class LoginPageComponent implements OnChanges, OnInit {
     ]),
   });
 
-
   ngOnChanges(): void { }
 
   ngOnInit(): void {}
 
-  signIn() {
+  async signIn() {
     this.email = this.loginForm.value.email;
     this.password = this.loginForm.value.password;
-    console.log(this.email);
-    console.log(this.password);
     this._auth.isAuth(this.password, this.email);
   }
-
 
   public onSubmit(form: any) {}
 
