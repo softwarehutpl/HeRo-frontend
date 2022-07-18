@@ -1,5 +1,9 @@
+
 import { assertPlatform, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+
+import { Injectable } from '@angular/core';
+
 import axios from 'axios';
 
 @Injectable({
@@ -12,9 +16,11 @@ export class AuthService {
 
   constructor(private _router: Router) {} 
 
+
   public async isAuth(password: string, email: string) {
     console.log(email)
     console.log(password)
+
       // const headers = {
       //   'Access-Control-Allow-Origin': '*',
       //   // 'accept': 'text/plain'
@@ -41,4 +47,5 @@ export class AuthService {
     axios.get('https://swh-t-praktyki2022-app.azurewebsites.net/Candidate/Get/1')
     .then(res => console.log(res))
   }
+
 }

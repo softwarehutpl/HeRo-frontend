@@ -1,6 +1,10 @@
+
 import { Component, OnChanges, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/modules/commons/services/auth/auth.service';
+import { AxiosService } from '../../../commons/services/axios/axios.service';
+
+
 
 @Component({
   selector: 'app-login-page',
@@ -10,6 +14,7 @@ import { AuthService } from 'src/app/modules/commons/services/auth/auth.service'
 export class LoginPageComponent implements OnChanges, OnInit {
   public password: string = 'password';
   public email: string = '0';
+
 
   constructor(private _fb: FormBuilder, private _auth: AuthService) {}
   public loginForm = this._fb.group({
@@ -31,4 +36,5 @@ export class LoginPageComponent implements OnChanges, OnInit {
   }
 
   public onSubmit(form: any) {}
+
 }
