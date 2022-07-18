@@ -27,7 +27,6 @@ import { MatTableModule } from '@angular/material/table';
 import { ProjectsListComponent } from './modules/projects/components/projects-list/projects-list.component';
 import { TableComponent } from './modules/commons/components/table/table.component';
 import { MatSortModule } from '@angular/material/sort';
-
 import { MatInputModule } from '@angular/material/input';
 
 import { CreateEditProjectComponent } from './modules/projects/components/create-edit-project/create-edit-project.component';
@@ -37,8 +36,8 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { CalendarHeadComponent } from './modules/homepage/components/calendar-head/calendar-head.component';
 import { CalendarItemsComponent } from './modules/homepage/components/calendar-items/calendar-items.component';
-
 import {MatCardModule} from '@angular/material/card';
+
 
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -61,6 +60,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     TableComponent,
     CreateEditProjectComponent,
     CalendarItemsComponent
+
   ],
   imports: [
     BrowserModule,
@@ -81,10 +81,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     }),
     MatButtonToggleModule,
     MatSortModule,
-    MatListModule,
     MatCardModule,
+    MatInputModule,
+    MatListModule,
     MatPaginatorModule,
     MatInputModule,
+
   ],
   exports: [MatButtonModule],
   providers: [],

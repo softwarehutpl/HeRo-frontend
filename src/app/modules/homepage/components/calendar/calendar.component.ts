@@ -15,6 +15,7 @@ import { reduce } from 'rxjs';
 })
 export class CalendarComponent implements OnInit {
 
+
   colors: any = {
     red: {
       primary: '#ad2121',
@@ -74,10 +75,12 @@ events: CalendarEvent[] = [
   }
 ];
 
+
   public interviews: Interview[] = INTERVIEW
 
 constructor() { }
 
 ngOnInit(): void {
 }
+
 }

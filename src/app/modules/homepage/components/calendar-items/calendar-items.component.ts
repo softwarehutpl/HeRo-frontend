@@ -1,11 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CalendarEvent } from 'angular-calendar';
 
+
 @Component({
   selector: 'app-calendar-items',
   templateUrl: './calendar-items.component.html',
   styleUrls: ['./calendar-items.component.scss']
 })
+
 
 export class CalendarItemsComponent implements OnInit {
 
