@@ -8,7 +8,8 @@
         </mat-form-field>
         <mat-form-field appearance="fill" >
             <mat-label>Password</mat-label>
-            <input matInput placeholder="Password" formControlName="password">
+            <!-- <input matInput placeholder="Password" formControlName="password"> -->
+            <input type="password" matInput placeholder="Password" formControlName="password">
         </mat-form-field>
 
         <button [disabled]="!loginForm.valid" mat-button (click)="signIn()">Signin</button>

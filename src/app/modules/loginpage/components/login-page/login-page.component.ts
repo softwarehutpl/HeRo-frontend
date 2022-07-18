@@ -24,11 +24,9 @@ export class LoginPageComponent implements OnChanges, OnInit {
 
   ngOnInit(): void {}
 
-  signIn() {
+  async signIn() {
     this.email = this.loginForm.value.email;
     this.password = this.loginForm.value.password;
-    console.log(this.email);
-    console.log(this.password);
     this._auth.isAuth(this.password, this.email);
   }
 
