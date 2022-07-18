@@ -14,12 +14,12 @@ export class AxiosService {
 
   public async isAuth() {
     
-      const headers = {
-        'Access-Control-Allow-Origin': '*',
-        'accept': 'text/plain'
-      };
+      // const headers = {
+      //   // 'Access-Control-Allow-Origin': '*',
+      //   // 'accept': 'text/plain'
+      // };
   
-      await axios.post(this.urlAuth, null, {params: {password: this.password, email: this.email}, headers})
+      await axios.post(this.urlAuth, null, {params: {password: this.password, email: this.email}})
       .then( res => console.log(res))
   
   
