@@ -1,6 +1,15 @@
+
 import { Component, OnChanges, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/modules/commons/services/auth/auth.service';
+
+
+
+
+import { AxiosService } from '../../../commons/services/axios/axios.service';
+
+
+
 
 @Component({
   selector: 'app-login-page',
@@ -11,6 +20,7 @@ export class LoginPageComponent implements OnChanges, OnInit {
   public password: string = 'password';
   public email: string = '0';
 
+
   constructor(private _fb: FormBuilder, private _auth: AuthService) {}
   public loginForm = this._fb.group({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -19,6 +29,7 @@ export class LoginPageComponent implements OnChanges, OnInit {
       Validators.minLength(8),
     ]),
   });
+
 
   ngOnChanges(): void { }
 
@@ -32,5 +43,7 @@ export class LoginPageComponent implements OnChanges, OnInit {
     this._auth.isAuth(this.password, this.email);
   }
 
+
   public onSubmit(form: any) {}
+
 }
