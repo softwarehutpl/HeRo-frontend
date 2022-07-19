@@ -53,7 +53,9 @@ events: CalendarEvent[] = [
   },
   {
     start: new Date("2022-07-16T13:44:00"),
+
     // end:new Date("2022-07-18T13:44:00"),
+
     title: 'An event2',
     draggable: true,
     color: this.colors.yellow,
@@ -69,7 +71,7 @@ events: CalendarEvent[] = [
     color: this.colors.blue,
   }, {
     start: new Date("2022-07-15T03:24:00"),
-    title: 'An event5 show more than needed',
+    title: 'An event5showmore than needed',
     draggable: true,
     color: this.colors.red,
   }
@@ -82,5 +84,12 @@ constructor() { }
 
 ngOnInit(): void {
 }
+
+ public genereteListOfEvents():void{
+
+  this.events=[];
+
+
+ }
 
 }

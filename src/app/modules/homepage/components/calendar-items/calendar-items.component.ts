@@ -8,10 +8,10 @@ import { CalendarEvent } from 'angular-calendar';
   styleUrls: ['./calendar-items.component.scss']
 })
 
-
 export class CalendarItemsComponent implements OnInit {
 
   @Input() events: CalendarEvent[] = [];
+  hovered:any;
 
   listOfevents: CalendarEvent[]=[];
   nameOfButton = "show more";
@@ -29,6 +29,7 @@ export class CalendarItemsComponent implements OnInit {
       this.nameOfButton = "show less";
       this.max=this.events.length;
 
+
     }
     else {
       this.nameOfButton = "show more";
@@ -41,5 +42,6 @@ export class CalendarItemsComponent implements OnInit {
   changeListOfEvents() {
     this.listOfevents = this.events.slice(0, this.max);
   }
+
 
 }
