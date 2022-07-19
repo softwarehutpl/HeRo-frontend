@@ -6,6 +6,8 @@ import { ProjectsComponent } from './modules/projects/components/projects/projec
 import { CandidatesComponent } from './modules/candidates/components/candidates/candidates.component';
 import { LoginPageComponent } from './modules/loginpage/components/login-page/login-page.component';
 import { CreateEditProjectComponent } from './modules/projects/components/create-edit-project/create-edit-project.component';
+import { CandidatesListComponent } from './modules/candidates/components/candidates-list/candidates-list.component';
+import { CandidatesKanbanComponent } from './modules/candidates/components/candidates-kanban/candidates-kanban.component';
 
 const routes: Routes = [
   {
@@ -15,6 +17,16 @@ const routes: Routes = [
   {
     path: 'candidates',
     component: CandidatesComponent,
+    children: [
+      {
+        path: '',
+        component: CandidatesListComponent,
+      },
+      {
+        path: 'kanban',
+        component: CandidatesKanbanComponent,
+      },
+    ],
     // canActivate: [PlayerDataGuardService],
   },
   {
@@ -28,13 +40,11 @@ const routes: Routes = [
     // canActivate: [PlayerDataGuardService],
   },
   {
-
     path: 'login',
     component: LoginPageComponent,
     // canActivate: [PlayerDataGuardService],
   },
   {
-
     path: 'edit',
     component: CreateEditProjectComponent,
     // canActivate: [PlayerDataGuardService],

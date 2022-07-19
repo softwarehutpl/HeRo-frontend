@@ -1,12 +1,11 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { Candidate } from '../../../commons/interfaces/candidate';
-import { CANDIDATES } from '../../../commons/mockups/mock-candidates';
+
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { DATA } from '../candidates/candidates.component';
 
-const DATA: Array<Candidate> = CANDIDATES;
 @Component({
   selector: 'app-candidates-list',
   templateUrl: './candidates-list.component.html',
