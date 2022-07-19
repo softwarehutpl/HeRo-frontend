@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatIconModule } from '@angular/material/icon';
-import {MatListModule} from '@angular/material/list';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
-
+import { MatListModule } from '@angular/material/list';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './modules/homepage/components/homepage/homepage.component';
@@ -37,11 +36,13 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { CalendarHeadComponent } from './modules/homepage/components/calendar-head/calendar-head.component';
 import { CalendarItemsComponent } from './modules/homepage/components/calendar-items/calendar-items.component';
-import {MatCardModule} from '@angular/material/card';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle'
-
-
+import { MatCardModule } from '@angular/material/card';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CandidatesKanbanComponent } from './modules/candidates/components/candidates-kanban/candidates-kanban.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import {MatDialogModule} from "@angular/material/dialog";
+import {InterviewDialogComponent} from './modules/homepage/components/calendar-items/dialog-interview/interview-dialog.component';
 
 @NgModule({
   declarations: [
@@ -61,8 +62,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     ProjectsListComponent,
     TableComponent,
     CreateEditProjectComponent,
-    CalendarItemsComponent
-
+    CalendarItemsComponent,
+    CandidatesKanbanComponent,
+    InterviewDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -90,10 +92,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatInputModule,
     MatSlideToggleModule,
     MatAutocompleteModule
-
+    DragDropModule,
+    MatDialogModule,
+    
   ],
   exports: [MatButtonModule],
   providers: [],
   bootstrap: [AppComponent, CalendarHeadComponent],
+  entryComponents: [InterviewDialogComponent]
 })
 export class AppModule {}
