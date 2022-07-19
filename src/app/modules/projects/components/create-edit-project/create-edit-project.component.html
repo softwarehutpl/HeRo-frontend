@@ -2,34 +2,53 @@
 <div class="container">
   <div class="container container__row">
     <app-sidebar></app-sidebar>
-    <div class="container container__row">
+    <div class="container container__row internal">
       <mat-divider [vertical]="true"></mat-divider>
       <div class="container container__column">
-        <h2 class='header-edit'>{{editHeader}}</h2>
-        <form [formGroup]="projectForm" class="project input" >
+        <h2 class='header-edit'>{{textHeader}}</h2>
+        <form [formGroup]="projectForm" class="project input">
 
-          <mat-form-field appearance="fill" >
-              <mat-label>Project Name</mat-label>
-              <input matInput placeholder="Project Name" >
-          </mat-form-field>
-          <mat-form-field appearance="fill" >
-              <mat-label>Seniority</mat-label>
-              <input matInput placeholder="Seniority">
-          </mat-form-field>
-      </form>
-      </div>
-
-      <!-- <form [formGroup]="projectForm" class="project" >
-
-        <mat-form-field appearance="fill" >
+          <mat-form-field appearance="outline">
             <mat-label>Project Name</mat-label>
-            <input matInput placeholder="Project Name" >
-        </mat-form-field>
-        <mat-form-field appearance="fill" >
+            <input matInput placeholder="Project Name" class="intrnalComponent">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
             <mat-label>Seniority</mat-label>
             <input matInput placeholder="Seniority">
-        </mat-form-field>
-    </form> -->
+          </mat-form-field>
+          <div class="container container_row">
+            <mat-form-field appearance="outline">
+              <mat-label>From</mat-label>
+              <input matInput placeholder="From" style="height: 5px">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>To</mat-label>
+              <input matInput placeholder="To">
+            </mat-form-field>
+          </div>
+          <mat-form-field appearance="outline">
+            <mat-label>Location</mat-label>
+            <input matInput placeholder="Location">
+          </mat-form-field>
+          <mat-slide-toggle>Is public</mat-slide-toggle>
+        </form>
+        <h2 class='header-edit'>{{textBody}}</h2>
+        <div class="container">
+          <div *ngFor="let skill of listOfSkills" class="container container_row">
+          {{skill}}
+            <button mat-icon-button color="accent" 
+
+            *ngFor="let ratingId of ratingArray; index as i" [id]="'star_'+i" (click)="calculateRating(i+1)">  
+            <mat-icon>
+                   {{ iconStatus(i) }}
+               </mat-icon>
+           </button>
+          </div>
+           <p>
+               Your rated <span>{{ rating }}</span>/<span>{{ totalStar }}</span>
+           </p>
+       </div>
+      </div>
     </div>
     <!-- <router-outlet ></router-outlet> -->
   </div>

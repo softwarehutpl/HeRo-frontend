@@ -10,7 +10,8 @@ import axios from 'axios';
 })
 export class AuthService {
 
-  public urlAuth: string = `https://swh-t-praktyki2022-app.azurewebsites.net/Auth/SignIn`;
+  public urlAuth: string = "https://swh-t-praktyki2022-app.azurewebsites.net/Auth/SignIn";
+  public urlRecoveryPassword: string = "https://swh-t-praktyki2022-app.azurewebsites.net/Auth/PasswordRecoveryMail";
   
 
   constructor(private _router: Router) {} 
@@ -20,25 +21,27 @@ export class AuthService {
     console.log(email)
     console.log(password)
 
-      // const headers = {
-      //   'Access-Control-Allow-Origin': '*',
-      //   // 'accept': 'text/plain'
-      // };
+      const headers = {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': true,
+        // 'credentials': "include"
+        // 'accept': 'text/plain',
+      withCredentials: true
+      };
   
-      await axios.post(this.urlAuth, {password: password, email: email})
+      await axios.post(this.urlAuth, {password: password, email: email}, {
+        headers: headers
+        // withCredentials: true
+      })
       .then( res => {
         if (res.statusText === 'OK') {
-          console.log('ok')
-          console.log(res.headers)
           console.log(res)
-          // this.getCandidates() 
+          this.getCandidates() 
           return this._router.navigate(['/home'])
         } 
         this.getCandidates() 
         console.log(res)
         return 
-        // console.log(res.status)
-        // console.log(res)})
       })
   }
 
@@ -47,4 +50,16 @@ export class AuthService {
     .then(res => console.log(res))
   }
 
+  isUserExist(userEmail: string) {
+    axios.post(this.urlRecoveryPassword, null, {params: {email: userEmail}})
+      .then(res => { 
+        if(res.status === 200) {
+
+        }
+      console.log(res.status)})
+  }
+
+
+
 }
+
