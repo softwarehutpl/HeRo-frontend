@@ -5,7 +5,7 @@
       {backgroundColor:event.color!.primary}:
       {backgroundColor:event.color!.secondary}" (mouseover)="hovered = i" (mouseout)="hovered = -1">
 
-      <div class="cut-text">
+      <div class="cut-text" (click)="openDialog(event)">
         {{event.title}}
 
       </div>
