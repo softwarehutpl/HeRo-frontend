@@ -28,6 +28,7 @@ import { ProjectsListComponent } from './modules/projects/components/projects-li
 import { TableComponent } from './modules/commons/components/table/table.component';
 import { MatSortModule } from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
+import { MatAutocompleteModule } from '@angular/material/autocomplete'
 
 import { CreateEditProjectComponent } from './modules/projects/components/create-edit-project/create-edit-project.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -87,7 +88,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatListModule,
     MatPaginatorModule,
     MatInputModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatAutocompleteModule
 
   ],
   exports: [MatButtonModule],
