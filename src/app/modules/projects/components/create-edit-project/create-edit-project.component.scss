@@ -24,10 +24,18 @@
   .project {
     // overflow: hidden;
     // position: absolute;
-    width: 300px;
+    width: 400px;
     // height: 40px;
     display: flex;
     flex-direction: column;
     // justify-content: center; 
     // align-items: sta; 
+}
+.skills{
+  // display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  // justify-items: stretch;
+  align-items: center;
+  
 }

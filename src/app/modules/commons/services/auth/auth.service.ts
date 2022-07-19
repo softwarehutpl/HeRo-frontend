@@ -30,8 +30,8 @@ export class AuthService {
       };
   
       await axios.post(this.urlAuth, {password: password, email: email}, {
-        headers: headers
-        // withCredentials: true
+        
+        withCredentials: true
       })
       .then( res => {
         if (res.statusText === 'OK') {
@@ -46,7 +46,7 @@ export class AuthService {
   }
 
   getCandidates() {
-    axios.get('https://swh-t-praktyki2022-app.azurewebsites.net/Candidate/Get/1', {withCredentials: true})
+    axios.get('https://swh-t-praktyki2022-app.azurewebsites.net/Candidate/Get/0', {withCredentials: true})
     .then(res => console.log(res))
   }
 
