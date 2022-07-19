@@ -26,11 +26,13 @@ export class AuthService {
       //   // 'accept': 'text/plain'
       // };
   
-      await axios.post(this.urlAuth, {password: password, email: email})
+      await axios.post(this.urlAuth, {password: password, email: email}, { 
+        withCredentials: true
+      })
       .then( res => {
         if (res.statusText === 'OK') {
           console.log(res)
-          // this.getCandidates() 
+          this.getCandidates() 
           return this._router.navigate(['/home'])
         } 
         this.getCandidates() 
