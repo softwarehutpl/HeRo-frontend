@@ -21,16 +21,22 @@ export class AuthService {
     console.log(email)
     console.log(password)
 
-      // const headers = {
-      //   'Access-Control-Allow-Origin': '*',
-      //   // 'accept': 'text/plain'
-      // };
+      const headers = {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': true,
+        // 'credentials': "include"
+        // 'accept': 'text/plain',
+      withCredentials: true
+      };
   
-      await axios.post(this.urlAuth, {password: password, email: email})
+      await axios.post(this.urlAuth, {password: password, email: email}, {
+        headers: headers
+        // withCredentials: true
+      })
       .then( res => {
         if (res.statusText === 'OK') {
           console.log(res)
-          // this.getCandidates() 
+          this.getCandidates() 
           return this._router.navigate(['/home'])
         } 
         this.getCandidates() 
