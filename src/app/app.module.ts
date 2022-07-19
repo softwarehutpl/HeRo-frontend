@@ -37,6 +37,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { CalendarHeadComponent } from './modules/homepage/components/calendar-head/calendar-head.component';
 import { CalendarItemsComponent } from './modules/homepage/components/calendar-items/calendar-items.component';
 import {MatCardModule} from '@angular/material/card';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 
 
 import { ReactiveFormsModule } from '@angular/forms';
@@ -86,6 +87,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatListModule,
     MatPaginatorModule,
     MatInputModule,
+    MatSlideToggleModule
 
   ],
   exports: [MatButtonModule],

@@ -27,11 +27,10 @@ export class ProjectsService {
 
   constructor() { }
 
-// public async getProjectList(pageNumber: number): Array<Projects> {
+  // public async getProjectList(pageNumber: number): Array<Projects> {
+public async getProjectList(pageNumber: number) {
 // let res = await axios.get(this.urlGetProjectList, {data: getProjectBody})
 // .then(res => {
 // return 
-// })
-// }
-
+}
 }
