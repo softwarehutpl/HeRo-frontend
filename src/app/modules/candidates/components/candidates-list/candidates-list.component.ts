@@ -5,6 +5,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { DATA } from '../candidates/candidates.component';
+import { CandidatesService } from '../../../commons/services/candidates/candidates.service';
 
 @Component({
   selector: 'app-candidates-list',
@@ -23,9 +24,13 @@ export class CandidatesListComponent implements AfterViewInit {
     'assignee',
     'profile',
   ];
+  // DATA = this._candidates.getAllCandidates();
   dataSource = new MatTableDataSource(DATA);
 
-  constructor(private _liveAnnouncer: LiveAnnouncer) {}
+  constructor(
+    private _liveAnnouncer: LiveAnnouncer,
+    private _candidates: CandidatesService
+  ) {}
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
