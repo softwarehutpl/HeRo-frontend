@@ -39,6 +39,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CandidatesKanbanComponent } from './modules/candidates/components/candidates-kanban/candidates-kanban.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import {MatDialogModule} from "@angular/material/dialog";
+import {InterviewDialogComponent} from './modules/homepage/components/calendar-items/dialog-interview/interview-dialog.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +62,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     CreateEditProjectComponent,
     CalendarItemsComponent,
     CandidatesKanbanComponent,
+    InterviewDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -87,9 +90,12 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatInputModule,
     MatSlideToggleModule,
     DragDropModule,
+    MatDialogModule,
+    
   ],
   exports: [MatButtonModule],
   providers: [],
   bootstrap: [AppComponent, CalendarHeadComponent],
+  entryComponents: [InterviewDialogComponent]
 })
 export class AppModule {}

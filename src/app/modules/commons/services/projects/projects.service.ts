@@ -33,4 +33,8 @@ public async getProjectList(pageNumber: number) {
 // .then(res => {
 // return 
 }
+
+public async getProject(id: number) {
+  // return 
+  }
 }
