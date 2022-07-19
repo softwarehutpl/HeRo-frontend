@@ -26,9 +26,7 @@ import { MatTableModule } from '@angular/material/table';
 import { ProjectsListComponent } from './modules/projects/components/projects-list/projects-list.component';
 import { TableComponent } from './modules/commons/components/table/table.component';
 import { MatSortModule } from '@angular/material/sort';
-
 import { MatInputModule } from '@angular/material/input';
-
 import { CreateEditProjectComponent } from './modules/projects/components/create-edit-project/create-edit-project.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -36,6 +34,8 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { CalendarHeadComponent } from './modules/homepage/components/calendar-head/calendar-head.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CandidatesKanbanComponent } from './modules/candidates/components/candidates-kanban/candidates-kanban.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -55,6 +55,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ProjectsListComponent,
     TableComponent,
     CreateEditProjectComponent,
+    CandidatesKanbanComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,6 +78,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatSortModule,
     MatPaginatorModule,
     MatInputModule,
+    DragDropModule,
   ],
   exports: [MatButtonModule],
   providers: [],
