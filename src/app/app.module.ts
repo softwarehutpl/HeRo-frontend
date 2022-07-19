@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './modules/homepage/components/homepage/homepage.component';
@@ -33,6 +33,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { CalendarHeadComponent } from './modules/homepage/components/calendar-head/calendar-head.component';
+import { CalendarItemsComponent } from './modules/homepage/components/calendar-items/calendar-items.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CandidatesKanbanComponent } from './modules/candidates/components/candidates-kanban/candidates-kanban.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -55,6 +58,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     ProjectsListComponent,
     TableComponent,
     CreateEditProjectComponent,
+    CalendarItemsComponent,
     CandidatesKanbanComponent,
   ],
   imports: [
@@ -76,8 +80,12 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     }),
     MatButtonToggleModule,
     MatSortModule,
+    MatCardModule,
+    MatInputModule,
+    MatListModule,
     MatPaginatorModule,
     MatInputModule,
+    MatSlideToggleModule,
     DragDropModule,
   ],
   exports: [MatButtonModule],
