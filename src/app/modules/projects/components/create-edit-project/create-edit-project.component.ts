@@ -7,7 +7,12 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./create-edit-project.component.scss']
 })
 export class CreateEditProjectComponent implements OnInit {
-  public editHeader: string = 'Create/Edit project';
+  public textHeader: string = 'Create/Edit project';
+  public textBody: string = 'Skills';
+  public ratingArray: Array<number> = [];
+  public totalStar: number = 5;
+  public rating: number = 2;
+  public listOfSkills: Array<string> = ['JavaScript', 'C#'];
 
   constructor(private fb: FormBuilder) { }
   public projectForm = this.fb.group({
@@ -15,8 +20,23 @@ export class CreateEditProjectComponent implements OnInit {
     password: ['']
   })
 
+  ngOnInit() {
+    for (let index = 0; index < this.totalStar; index++) {
+      this.ratingArray.push(index);
+    }
+  }
+  
 
-  ngOnInit(): void {
+  calculateRating(newRating: number) {
+    this.rating = (newRating);
+  }
+
+  iconStatus(index: number) {
+    if (this.rating >= index + 1) {
+      return 'star';
+    } else {
+      return 'star_border';
+    }
   }
 
 }

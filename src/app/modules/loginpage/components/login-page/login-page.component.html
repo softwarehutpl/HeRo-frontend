@@ -1,12 +1,10 @@
-
-
 <div class="login">
     <form [formGroup]="loginForm" class="login" (submit)="onSubmit(loginForm)">
-        <mat-form-field appearance="fill" >
+        <mat-form-field appearance="outline">
             <mat-label>Email</mat-label>
             <input matInput placeholder="Email" formControlName="email">
         </mat-form-field>
-        <mat-form-field appearance="fill" >
+        <mat-form-field appearance="outline">
             <mat-label>Password</mat-label>
 
             <!-- <input matInput placeholder="Password" formControlName="password"> -->
@@ -18,4 +16,5 @@
 
     </form>
 
+    <button (click)="getNewPassword()">Forgot password?</button>
 </div>

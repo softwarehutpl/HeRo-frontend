@@ -55,6 +55,9 @@ events: CalendarEvent[] = [
   },
   {
     start: new Date("2022-07-16T13:44:00"),
+
+    // end:new Date("2022-07-18T13:44:00"),
+
     title: 'An event2',
     draggable: true,
     color: this.colors.yellow,
