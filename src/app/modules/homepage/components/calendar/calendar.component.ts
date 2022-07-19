@@ -5,6 +5,7 @@ import { INTERVIEW } from 'src/app/modules/commons/mockups/mock-interview';
 import { Interview } from 'src/app/modules/commons/interfaces/interview';
 import { getCurrencySymbol } from '@angular/common';
 import { reduce } from 'rxjs';
+import { InterviewDTO } from 'src/app/modules/commons/interfaces/interview';
 
 @Component({
   selector: 'app-calendar',
@@ -15,7 +16,8 @@ import { reduce } from 'rxjs';
 })
 export class CalendarComponent implements OnInit {
 
-
+  calEv!: CalendarEvent;
+  intervieListFromBacend!:InterviewDTO[];
   colors: any = {
     red: {
       primary: '#ad2121',
@@ -89,6 +91,13 @@ ngOnInit(): void {
 
   this.events=[];
 
+  this.intervieListFromBacend.forEach(el => {
+
+    this.calEv.start=el.date;
+    this.calEv.title=el.candidateName +" "+ el.candidateLastName;
+    this.events.push(this.calEv);
+    
+  });
 
  }
 
