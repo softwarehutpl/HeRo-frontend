@@ -34,17 +34,8 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { CalendarHeadComponent } from './modules/homepage/components/calendar-head/calendar-head.component';
 import { CalendarItemsComponent } from './modules/homepage/components/calendar-items/calendar-items.component';
-<<<<<<< HEAD
-import {MatCardModule} from '@angular/material/card';
-
-import { MatSlideToggleModule } from '@angular/material/slide-toggle'
-
-
-
-=======
 import { MatCardModule } from '@angular/material/card';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
->>>>>>> origin/main
 import { ReactiveFormsModule } from '@angular/forms';
 import { CandidatesKanbanComponent } from './modules/candidates/components/candidates-kanban/candidates-kanban.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
