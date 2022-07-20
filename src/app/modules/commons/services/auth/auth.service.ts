@@ -1,9 +1,8 @@
 
 import { Router } from '@angular/router';
-
 import { Injectable } from '@angular/core';
-
 import axios from 'axios';
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +11,7 @@ export class AuthService {
 
   public urlAuth: string = "https://swh-t-praktyki2022-app.azurewebsites.net/Auth/SignIn";
   public urlRecoveryPassword: string = "https://swh-t-praktyki2022-app.azurewebsites.net/Auth/PasswordRecoveryMail";
+ 
   
 
   constructor(private _router: Router) {} 
@@ -46,8 +46,10 @@ export class AuthService {
   }
 
   getCandidates() {
-    axios.get('https://swh-t-praktyki2022-app.azurewebsites.net/Skill/GetList', {withCredentials: true})
-    .then(res => console.log(res))
+    let skills  = axios.get('https://swh-t-praktyki2022-app.azurewebsites.net/Skill/GetList', {withCredentials: true})
+    .then(res => {return console.log(res)})
+
+    return skills;
   }
 
   isUserExist(userEmail: string) {
