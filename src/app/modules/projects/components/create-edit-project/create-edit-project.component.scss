@@ -4,7 +4,7 @@
 // }
 .intrnalComponent {
     align-content: space-around;
-    height: 10px;
+    height: 100%;
 }
 
 .input {
@@ -22,14 +22,12 @@
   }
   
   .project {
-    // overflow: hidden;
-    // position: absolute;
+   
     width: 400px;
     // height: 40px;
     display: flex;
     flex-direction: column;
-    // justify-content: center; 
-    // align-items: sta; 
+  
 }
 .skills{
   // display: flex;

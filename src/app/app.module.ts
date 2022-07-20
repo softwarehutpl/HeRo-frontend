@@ -42,6 +42,8 @@ import { CandidatesKanbanComponent } from './modules/candidates/components/candi
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import {MatDialogModule} from "@angular/material/dialog";
 import {InterviewDialogComponent} from './modules/homepage/components/calendar-items/dialog-interview/interview-dialog.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -93,6 +95,9 @@ import {InterviewDialogComponent} from './modules/homepage/components/calendar-i
     MatAutocompleteModule,
     DragDropModule,
     MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+
   ],
   exports: [MatButtonModule],
   providers: [],

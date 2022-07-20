@@ -1,7 +1,5 @@
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-
-import { FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Observable, startWith } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Skill } from 'src/app/modules/commons/interfaces/Skill';
@@ -19,7 +17,6 @@ export interface User {
 
 export class CreateEditProjectComponent implements OnChanges, OnInit {
   public myControl = new FormControl('');
-
   public textHeader: string = 'Create/Edit project';
   public textBody: string = 'Skills';
   public ratingArray: Array<number> = [];
@@ -62,6 +59,7 @@ export class CreateEditProjectComponent implements OnChanges, OnInit {
 
 
   public projectForm = this.fb.group({
+    projectName: new FormControl('', [Validators.required]),
     login: [''],
     password: [''],
   });
