@@ -42,16 +42,16 @@
               [formControl]="myControl">
 
             <mat-autocomplete #auto="matAutocomplete">
-              <mat-option *ngFor="let skill of filteredOptions | async" [value]="skill" (click)="onSelection(skill)">
-                {{skill}}
-              </mat-option>ss
+              <mat-option *ngFor="let skill of filteredOptions | async" [value]="skill.name" (click)="onSelection(skill)">
+                {{skill.name}}
+              </mat-option>
             </mat-autocomplete>
           </mat-form-field>
 
-          <div *ngFor="let skillForProject of listOfSkillsForProject"
+          <div *ngFor="let skillForProject of listOfSkillsForProject" 
             class="container container__row project skills input">
 
-            <div>{{skillForProject}}</div>
+            <div>{{skillForProject.name}}</div>
 
             <div><button mat-icon-button color="accent" *ngFor="let ratingId of ratingArray; index as i"
                 [id]="'star_'+i" (click)="calculateRating(i+1)">
@@ -63,8 +63,6 @@
                 <mat-icon>delete</mat-icon>
               </button>
             </div>
-
-
           </div>
 
 
