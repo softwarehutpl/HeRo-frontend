@@ -1,9 +1,8 @@
 
 import { Router } from '@angular/router';
-
 import { Injectable } from '@angular/core';
-
 import axios from 'axios';
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +11,7 @@ export class AuthService {
 
   public urlAuth: string = "https://swh-t-praktyki2022-app.azurewebsites.net/Auth/SignIn";
   public urlRecoveryPassword: string = "https://swh-t-praktyki2022-app.azurewebsites.net/Auth/PasswordRecoveryMail";
+ 
   
 
   constructor(private _router: Router) {} 
@@ -21,17 +21,16 @@ export class AuthService {
     console.log(email)
     console.log(password)
 
-      const headers = {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Credentials': true,
-        // 'credentials': "include"
-        // 'accept': 'text/plain',
-      withCredentials: true
-      };
+      // const headers = {
+      //   'Access-Control-Allow-Origin': '*',
+      //   'Access-Control-Allow-Credentials': true,
+      //   // 'credentials': "include"
+      //   // 'accept': 'text/plain',
+      // withCredentials: true
+      // };
   
       await axios.post(this.urlAuth, {password: password, email: email}, {
-        headers: headers
-        // withCredentials: true
+        withCredentials: true
       })
       .then( res => {
         if (res.statusText === 'OK') {
@@ -46,8 +45,11 @@ export class AuthService {
   }
 
   getCandidates() {
-    axios.get('https://swh-t-praktyki2022-app.azurewebsites.net/Candidate/Get/1')
+
+
+    axios.get('https://swh-t-praktyki2022-app.azurewebsites.net/Skill/GetList', {withCredentials: true})
     .then(res => console.log(res))
+
   }
 
   isUserExist(userEmail: string) {

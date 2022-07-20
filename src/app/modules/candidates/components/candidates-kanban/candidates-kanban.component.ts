@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CandidatesService } from '../../../commons/services/candidates/candidates.service';
+
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -44,6 +45,7 @@ export class CandidatesKanbanComponent implements OnInit {
     console.log('fetched:', this.candidates);
     // console.log(this.candidates2);
   }
+
   drop(event: CdkDragDrop<KanbanDisplay[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(

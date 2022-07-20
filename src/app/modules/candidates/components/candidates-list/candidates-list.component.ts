@@ -1,5 +1,7 @@
+
 import { AfterViewInit, Component, ViewChild, OnInit } from '@angular/core';
 import { Candidate } from '../../../commons/interfaces/candidate';
+
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';

@@ -1,19 +1,18 @@
 <mat-list>
   <div class="list" *ngFor="let event of listOfevents; let i = index">
-    <div class="border" 
-      [ngStyle]="hovered === i ?
-      {backgroundColor:event.color!.primary}:
-      {backgroundColor:event.color!.secondary}" 
-      (mouseover)="hovered = i"
-      (mouseout)="hovered = -1">
 
-      <div class="cut-text" >
+    <div class="border" [ngStyle]="hovered === i ?
+      {backgroundColor:event.color!.primary}:
+      {backgroundColor:event.color!.secondary}" (mouseover)="hovered = i" (mouseout)="hovered = -1">
+
+      <div class="cut-text" (click)="openDialog(event)">
         {{event.title}}
+
       </div>
     </div>
   </div>
-  <div *ngIf="events.length>2" >
-    <a class="show-link" (click)="show()" >
+  <div *ngIf="events.length>2">
+    <a class="show-link" (click)="show()">
       <mat-icon *ngIf='nameOfButton==="show less"'>expand_less</mat-icon>
       <mat-icon *ngIf='nameOfButton==="show more"'>expand_more</mat-icon>
       {{nameOfButton}}
