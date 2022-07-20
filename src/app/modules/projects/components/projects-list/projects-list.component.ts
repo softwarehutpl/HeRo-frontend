@@ -130,7 +130,7 @@ export class ProjectsListComponent implements AfterViewInit {
     private _liveAnnouncer: LiveAnnouncer,
     private _projectService: ProjectsService
   ) {
-    this.data = _projectService.getProjectList(this.pageIndex)
+    // this.data = _projectService.getProjectList(this.pageIndex)
   }
 
   displayedColumns: string[] = [
@@ -177,9 +177,6 @@ export class ProjectsListComponent implements AfterViewInit {
     }
   }
 
-  testFunc() {
-    alert('edit button clicked');
-  }
 
   moveToCandidates(projectName: string, status?: string) {
    

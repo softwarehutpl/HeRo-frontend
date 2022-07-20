@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
-import { Projects } from '../../interfaces/candidate';
+
 import { Skill } from '../../interfaces/Skill';
-import { GetRecruitmentListBodyRequest, RecruitmentList } from '../../interfaces/recruitment';
+import {
+  RecruitmentList,
+  GetRecruitmentListBodyRequest,
+} from '../../interfaces/recruitment';
+
 import { Observable } from 'rxjs';
 
 const getProjectBody = {
@@ -30,11 +34,11 @@ const getProjectBody = {
   providedIn: 'root',
 })
 export class ProjectsService {
-  public urlGetProjectList: string =
-    'https://swh-t-praktyki2022-app.azurewebsites.net/Recruitment/GetList';
 
-  public urlGetSkillsList: string =
-    'https://swh-t-praktyki2022-app.azurewebsites.net/Skill/GetList';
+  public urlGetProjectList: string = 'https://swh-t-praktyki2022-app.azurewebsites.net/Recruitment/GetList';
+  public urlGetSkillsList: string = 'https://swh-t-praktyki2022-app.azurewebsites.net/Skill/GetList';
+  public urlSkillsList: string = 'https://swh-t-praktyki2022-app.azurewebsites.net/Skill/GetList';
+
   public skills: Array<Skill> = [
     { id: 1, name: 'C_Sharp' },
     { id: 2, name: 'C_PlusPlus' },
@@ -49,7 +53,6 @@ export class ProjectsService {
     { id: 11, name: 'SQL' },
     { id: 12, name: 'Git' },
   ];
-  public skill2: any;
 
   public data: GetRecruitmentListBodyRequest = {
     name: '',
@@ -69,54 +72,41 @@ export class ProjectsService {
       ],
     },
   };
-  public projectList$ = new Observable<GetRecruitmentListBodyRequest>((observer) => {
-    axios.post(this.urlGetProjectList, { body: this.data }, {withCredentials: true})
-    .then((response) => {
-      observer.next(response.data);
-      
-    })
-    .catch((error) => {
-      observer.error(error);
-    });
-  })
-      
-  public subscription = this.projectList$.subscribe( {
-    next: data => console.log(data)
-  })
+
+  public projectList$ = new Observable<GetRecruitmentListBodyRequest>(
+    (observer) => {
+      axios
+        .post(
+          this.urlGetProjectList,
+          { body: this.data },
+          { withCredentials: true }
+        )
+        .then((response) => {
+          observer.next(response.data);
+        })
+        .catch((error) => {
+          observer.error(error);
+        });
+    }
+  );
+
+  public subscription = this.projectList$.subscribe({
+    next: (data) => console.log(data),
+  });
+
+  public projectSkills$ = new Observable<Array<Skill>>((observer) => {
+    axios
+      .get(this.urlSkillsList, { withCredentials: true })
+      .then((response) => {
+        observer.next(response.data);
+      })
+      .catch((error) => {
+        observer.error(error);
+      });
+  });
 
 
   constructor() {}
 
-  // public async getProjectList(pageNumber: number): Array<Projects> {
-  public async getProjectList(pageNumber: number) {
-
-    // let res = await axios.get(this.urlGetProjectList, {data: getProjectBody})
-    // .then(res => {
-    // return
-  }
-
-  public async getProject(id: number) {
-    // return
-  }
-
-  async getSkillList() {
-    let skill  = await axios.get(this.urlGetSkillsList, { withCredentials: true })
-      .then((res) => {
-        console.log(res);
-        return res.data
-      });
-this.skill2 = skill;
-    
-  }
-
-
-  // public async getProjectList(pageNumber?: number) Observable<RecruitmentList> {
-  //   let res = await axios
-  //     .post(this.urlGetProjectList, { body: this.data }, {withCredentials: true})
-  //     .then((res) => {
-  //       console.log(res);
-  //       return res
-  //     });
-  //   return res;
-  // }
+  public async getProjectList(pageNumber: number) {  }
 }
