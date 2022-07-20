@@ -26,7 +26,7 @@ export interface Skill {
 
 export interface RecruitmentList {
     totalCount:             number;
-    recruitmentDTOs:        RecruitmentDTO[];
+    readRecruitmentDTOs:        RecruitmentDTO[];
     recruitmentFiltringDTO: RecruitmentFiltringDTO;
     sortOrder:              SortOrder;
     paging:                 Paging;
@@ -68,6 +68,25 @@ export interface SortOrder {
 export interface Sort {
     key:   string;
     value: string;
+}
+
+export interface GetRecruitmentListBodyRequest {
+    name: string,
+    description: string,
+    beginningDate: string,
+    endingDate: string,
+    paging: {
+      pageSize: number,
+      pageNumber: number,
+    },
+    sortOrder: {
+      sort: [
+        {
+          key: string,
+          value: string
+        }
+      ]
+    }
 }
 
 

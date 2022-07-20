@@ -146,6 +146,7 @@ export class ProjectsListComponent implements AfterViewInit {
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
@@ -163,8 +164,8 @@ export class ProjectsListComponent implements AfterViewInit {
   }
 
   public getNextPage() {
-    const list = this._projectService.getProjectList(this.pageIndex);
-    this.data = list;
+    // const list = this._projectService.getProjectList(this.pageIndex);
+    // this.data = list;
 
   }
 
