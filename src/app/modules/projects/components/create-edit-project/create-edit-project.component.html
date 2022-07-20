@@ -42,6 +42,7 @@
               [formControl]="myControl">
 
             <mat-autocomplete #auto="matAutocomplete">
+
               <mat-option *ngFor="let skill of filteredOptions | async" [value]="skill.name" (click)="onSelection(skill)">
                 {{skill.name}}
               </mat-option>
@@ -53,6 +54,7 @@
 
             <div>{{skillForProject.name}}</div>
 
+
             <div><button mat-icon-button color="accent" *ngFor="let ratingId of ratingArray; index as i"
                 [id]="'star_'+i" (click)="calculateRating(i+1)">
                 <mat-icon>
@@ -63,6 +65,7 @@
                 <mat-icon>delete</mat-icon>
               </button>
             </div>
+
           </div>
 
 
