@@ -24,10 +24,32 @@
   .project {
     // overflow: hidden;
     // position: absolute;
-    width: 300px;
+    width: 400px;
     // height: 40px;
     display: flex;
     flex-direction: column;
     // justify-content: center; 
     // align-items: sta; 
+}
+.skills{
+  // display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  // justify-items: stretch;
+  align-items: center;
+  
+}
+
+.example-form {
+  min-width: 250px;
+  max-width: 400px;
+  // min-height: 200px;
+
+  width: 100%;
+  margin-top: 50px;
+}
+
+.example-full-width {
+  width: 100%;
+  min-height: 200px;
 }
