@@ -91,7 +91,7 @@ import {InterviewDialogComponent} from './modules/homepage/components/calendar-i
     MatPaginatorModule,
     MatInputModule,
     MatSlideToggleModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
     DragDropModule,
     MatDialogModule,
     

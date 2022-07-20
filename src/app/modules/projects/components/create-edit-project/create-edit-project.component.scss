@@ -39,3 +39,17 @@
   align-items: center;
   
 }
+
+.example-form {
+  min-width: 250px;
+  max-width: 400px;
+  // min-height: 200px;
+
+  width: 100%;
+  margin-top: 50px;
+}
+
+.example-full-width {
+  width: 100%;
+  min-height: 200px;;
+}

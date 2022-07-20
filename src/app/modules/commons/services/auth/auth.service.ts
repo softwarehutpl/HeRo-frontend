@@ -46,7 +46,7 @@ export class AuthService {
   }
 
   getCandidates() {
-    axios.get('https://swh-t-praktyki2022-app.azurewebsites.net/Candidate/Get/0', {withCredentials: true})
+    axios.get('https://swh-t-praktyki2022-app.azurewebsites.net/Skill/GetList', {withCredentials: true})
     .then(res => console.log(res))
   }
 

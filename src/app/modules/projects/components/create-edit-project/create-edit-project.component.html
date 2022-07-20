@@ -34,11 +34,12 @@
         </form>
         <h2 class='header-edit'>{{textBody}}</h2>
         <div>
-          <mat-form-field class="example-full-width" appearance="fill"
+          <mat-form-field class="example-full-width" appearance="outline"
             class="container container__column project input">
             <mat-label>Skill</mat-label>
 
-            <input type="text" placeholder="Pick one" matInput [matAutocomplete]="auto" aria-label="Number" [formControl]="myControl">
+            <input type="text" placeholder="Pick one" matInput [matAutocomplete]="auto" aria-label="Number"
+              [formControl]="myControl">
 
             <mat-autocomplete #auto="matAutocomplete">
               <mat-option *ngFor="let skill of filteredOptions | async" [value]="skill" (click)="onSelection(skill)">
@@ -47,25 +48,33 @@
             </mat-autocomplete>
           </mat-form-field>
 
-          <div *ngFor="let skillForProject of listOfSkillsForProject" class="container container__row project skills input">
-<!-- <div class="skills"> -->
+          <div *ngFor="let skillForProject of listOfSkillsForProject"
+            class="container container__row project skills input">
+
             <div>{{skillForProject}}</div>
 
-            <div><button mat-icon-button color="accent" *ngFor="let ratingId of ratingArray; index as i" [id]="'star_'+i"
-              (click)="calculateRating(i+1)">
-              <mat-icon>
-                {{ iconStatus(i) }}
-              </mat-icon>
-            </button>
-            <button mat-icon-button color="accent" (click)="removeSkillFromProject(skillForProject)">
-              <mat-icon>delete</mat-icon>
-            </button></div>
-            
-<!-- </div> -->
+            <div><button mat-icon-button color="accent" *ngFor="let ratingId of ratingArray; index as i"
+                [id]="'star_'+i" (click)="calculateRating(i+1)">
+                <mat-icon>
+                  {{ iconStatus(i) }}
+                </mat-icon>
+              </button>
+              <button mat-icon-button color="accent" (click)="removeSkillFromProject(skillForProject)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+
+
           </div>
 
 
         </div>
+        <form class="example-form">
+          <mat-form-field class="example-full-width input " appearance="outline">
+            <mat-label>Leave a comment</mat-label>
+            <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+          </mat-form-field>
+        </form>
       </div>
 
     </div>
