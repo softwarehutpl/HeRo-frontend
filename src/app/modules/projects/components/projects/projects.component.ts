@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Route, Router } from '@angular/router';
+// import { }
 
 
 @Component({
@@ -12,7 +13,9 @@ export class ProjectsComponent implements OnInit {
   public componentName: string = "projects";
   public isEditCreateProject: boolean = false;
 
-  constructor(private _router: Router) {}
+  constructor(private _router: Router) {
+
+  }
 
   ngOnInit(): void {}
   testFunc() {

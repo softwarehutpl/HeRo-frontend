@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { Projects } from '../../interfaces/candidate';
 import { Skill } from '../../interfaces/Skill';
+import { GetRecruitmentListBodyRequest, RecruitmentList } from '../../interfaces/recruitment';
+import { Observable } from 'rxjs';
 
 const getProjectBody = {
   name: '',
@@ -22,12 +24,15 @@ const getProjectBody = {
   },
 };
 
+
+
 @Injectable({
   providedIn: 'root',
 })
 export class ProjectsService {
   public urlGetProjectList: string =
     'https://swh-t-praktyki2022-app.azurewebsites.net/Recruitment/GetList';
+
   public urlGetSkillsList: string =
     'https://swh-t-praktyki2022-app.azurewebsites.net/Skill/GetList';
   public skills: Array<Skill> = [
@@ -46,10 +51,45 @@ export class ProjectsService {
   ];
   public skill2: any;
 
+  public data: GetRecruitmentListBodyRequest = {
+    name: '',
+    description: '',
+    beginningDate: '',
+    endingDate: '',
+    paging: {
+      pageSize: 0,
+      pageNumber: 0,
+    },
+    sortOrder: {
+      sort: [
+        {
+          key: "'",
+          value: '',
+        },
+      ],
+    },
+  };
+  public projectList$ = new Observable<GetRecruitmentListBodyRequest>((observer) => {
+    axios.post(this.urlGetProjectList, { body: this.data }, {withCredentials: true})
+    .then((response) => {
+      observer.next(response.data);
+      
+    })
+    .catch((error) => {
+      observer.error(error);
+    });
+  })
+      
+  public subscription = this.projectList$.subscribe( {
+    next: data => console.log(data)
+  })
+
+
   constructor() {}
 
   // public async getProjectList(pageNumber: number): Array<Projects> {
   public async getProjectList(pageNumber: number) {
+
     // let res = await axios.get(this.urlGetProjectList, {data: getProjectBody})
     // .then(res => {
     // return
@@ -68,4 +108,15 @@ export class ProjectsService {
 this.skill2 = skill;
     
   }
+
+
+  // public async getProjectList(pageNumber?: number) Observable<RecruitmentList> {
+  //   let res = await axios
+  //     .post(this.urlGetProjectList, { body: this.data }, {withCredentials: true})
+  //     .then((res) => {
+  //       console.log(res);
+  //       return res
+  //     });
+  //   return res;
+  // }
 }

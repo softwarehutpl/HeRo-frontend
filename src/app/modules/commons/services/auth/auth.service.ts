@@ -30,7 +30,6 @@ export class AuthService {
       };
   
       await axios.post(this.urlAuth, {password: password, email: email}, {
-        
         withCredentials: true
       })
       .then( res => {
@@ -46,10 +45,11 @@ export class AuthService {
   }
 
   getCandidates() {
-    let skills  = axios.get('https://swh-t-praktyki2022-app.azurewebsites.net/Skill/GetList', {withCredentials: true})
-    .then(res => {return console.log(res)})
 
-    return skills;
+
+    axios.get('https://swh-t-praktyki2022-app.azurewebsites.net/Skill/GetList', {withCredentials: true})
+    .then(res => console.log(res))
+
   }
 
   isUserExist(userEmail: string) {

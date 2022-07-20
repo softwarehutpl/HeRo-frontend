@@ -1,6 +1,9 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Filter, Data } from '../definition';
 import { FiltersService } from '../../services/filters/filters.service';
+import { FormControl } from '@angular/forms';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 
 @Component({
   selector: 'app-filter',
@@ -17,6 +20,8 @@ public filters?: Array<Filter> ;
 public sidebarButton1: string = Data.sidebarButton1;
 public sidebarButton2: string = Data.sidebarButton2;
 public sidebarButton3: string = Data.sidebarButton3;
+// public myControl!: new FormControl<srting | Project>('');
+// public projectsList: Arrat<
 
   constructor(private _filterService: FiltersService) {
     this.isDropdow = _filterService.isdropdown();
