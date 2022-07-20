@@ -28,7 +28,6 @@ import { TableComponent } from './modules/commons/components/table/table.compone
 import { MatSortModule } from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete'
-
 import { CreateEditProjectComponent } from './modules/projects/components/create-edit-project/create-edit-project.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -94,7 +93,6 @@ import {InterviewDialogComponent} from './modules/homepage/components/calendar-i
     MatAutocompleteModule,
     DragDropModule,
     MatDialogModule,
-    
   ],
   exports: [MatButtonModule],
   providers: [],
