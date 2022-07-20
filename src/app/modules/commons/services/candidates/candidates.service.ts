@@ -1,40 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Candidate } from '../../interfaces/candidate';
+import { useMocks } from '../../mockups/useMocks';
+
 @Injectable({
   providedIn: 'root',
 })
 export class CandidatesService {
   constructor() {}
+  allCandidates = this.getAllCandidates();
 
-  // @UseMock(true, 'candidates.json') //
-
+  @useMocks(true, import(`@mocks/candidates.json`))
+  // if true -> overrides function and returns data from path.
   public async getAllCandidates() {
-    let useMock = true;
-    let mockFile = 'candidates.json';
-
-    let result;
-    if (useMock) {
-      const Path: Array<Candidate> = require('../../mockups/' + mockFile);
-      // require(this.mocksDirectory + mockParam);
-      let array = [];
-      result = Path.forEach((element) => {
-        array.push(element);
-      });
-    } else {
-      //this.axiosInstance.get('...');
-    }
-
+    console.log('Hello from CandidatesService');
+    // this.axiosInstance.get('...')
+    let result: any = [];
     return result;
   }
 }
-
-
-/**
- * does require() work in Angular? 
- * 
- * axios + RxJS?
- * 
- * Custom decorators - how to create, use, read params
- * 
- * 
- */
