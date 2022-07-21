@@ -101,7 +101,7 @@ import { MatNativeDateModule } from '@angular/material/core';
   ],
   exports: [MatButtonModule],
   providers: [],
-  bootstrap: [AppComponent, CalendarHeadComponent],
+  bootstrap: [AppComponent],
   entryComponents: [InterviewDialogComponent]
 })
 export class AppModule {}
