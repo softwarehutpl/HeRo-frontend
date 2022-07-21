@@ -17,7 +17,7 @@ public sidebarButton3: string = Data.sidebarButton3;
 
   ngOnInit(): void {}
   public click(): void {
-    console.log('hej');
+    console.log('hej'); // DO some cleanup
   }
 
 }

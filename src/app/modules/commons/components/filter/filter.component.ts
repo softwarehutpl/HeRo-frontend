@@ -23,6 +23,7 @@ public sidebarButton3: string = Data.sidebarButton3;
 // public myControl!: new FormControl<srting | Project>('');
 // public projectsList: Arrat<
 
+  // I don't get the purspose of this service
   constructor(private _filterService: FiltersService) {
     this.isDropdow = _filterService.isdropdown();
    }

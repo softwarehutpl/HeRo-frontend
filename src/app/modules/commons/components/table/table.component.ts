@@ -9,8 +9,8 @@ const columnLabels = ProjectColumnLable;
   styleUrls: ['./table.component.scss'],
 })
 export class TableComponent implements OnInit {
-  public dataSource: Array<ProjectListForTable> = ProjectsList;
-  public columnLable: Array<string> = ProjectColumnLable;
+  public dataSource: Array<ProjectListForTable> = ProjectsList;  // Use shorthand  ProjectListForTable[]
+  public columnLable: Array<string> = ProjectColumnLable; // Typo
 
   constructor() {}
 

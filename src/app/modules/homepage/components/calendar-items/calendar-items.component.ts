@@ -13,7 +13,7 @@ import { ProjectsService } from 'src/app/modules/commons/services/projects/proje
 })
 
 export class CalendarItemsComponent implements OnInit {
-
+// keep mocks outside
   intervie:InterviewDTO={
     interviewId: 1,
     date:new Date("2022-07-19T12:03:24.895Z"),
@@ -31,7 +31,7 @@ export class CalendarItemsComponent implements OnInit {
   hovered: any;
   listOfevents: CalendarEvent[] = [];
   nameOfButton = "show more";
-  max = 2;
+  max = 2; // use static property for such.
 
   constructor(private dialog: MatDialog) {
   }
