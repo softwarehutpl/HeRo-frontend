@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
 
-import { Skill } from '../../interfaces/Skill';
-import {
-  RecruitmentList,
-  GetRecruitmentListBodyRequest,
+import { Skill, } from '../../interfaces/Skill';
+import { Recruitment, RecruitmentList, GetRecruitmentListBodyRequest,
 } from '../../interfaces/recruitment';
 
 import { Observable } from 'rxjs';
@@ -38,22 +36,7 @@ export class ProjectsService {
   public urlGetProjectList: string = 'https://swh-t-praktyki2022-app.azurewebsites.net/Recruitment/GetList';
   public urlGetSkillsList: string = 'https://swh-t-praktyki2022-app.azurewebsites.net/Skill/GetList';
   public urlSkillsList: string = 'https://swh-t-praktyki2022-app.azurewebsites.net/Skill/GetList';
-
-  public skills: Array<Skill> = [
-    { id: 1, name: 'C_Sharp' },
-    { id: 2, name: 'C_PlusPlus' },
-    { id: 3, name: 'Java' },
-    { id: 4, name: 'JavaScript' },
-    { id: 5, name: 'React' },
-    { id: 6, name: 'Angular' },
-    { id: 7, name: 'Vue' },
-    { id: 8, name: 'DotNET' },
-    { id: 9, name: 'HTML' },
-    { id: 10, name: 'CSS' },
-    { id: 11, name: 'SQL' },
-    { id: 12, name: 'Git' },
-  ];
-
+  public urlSaveProject: string = 'https://swh-t-praktyki2022-app.azurewebsites.net/Recruitment/Create';
   public data: GetRecruitmentListBodyRequest = {
     name: '',
     description: '',
@@ -72,6 +55,7 @@ export class ProjectsService {
       ],
     },
   };
+  public isSaved!: boolean
 
   public projectList$ = new Observable<GetRecruitmentListBodyRequest>(
     (observer) => {
@@ -106,7 +90,21 @@ export class ProjectsService {
   });
 
 
-  constructor() {}
+  
+
+  public async saveProject(body: Recruitment): Promise<boolean> {
+   
+      let saveProject = await axios.post(this.urlSaveProject, {body: body}, {withCredentials: true})
+      .then(res => {
+        if(res.status === 200) {
+          return this.isSaved = true;
+        } else { 
+          return this.isSaved = false}
+      })
+      .catch (error => {return false} )
+
+      return saveProject
+  }
 
   public async getProjectList(pageNumber: number) {  }
 }

@@ -6,7 +6,7 @@
       <mat-divider [vertical]="true"></mat-divider>
       <div class="container container__column">
         <h2 class='header-edit'>{{textHeader}}</h2>
-        <form [formGroup]="projectForm" class="project input">
+        <form [formGroup]="projectForm" class="project input" (submit)="onSubmit(projectForm)">
 
           <mat-form-field appearance="outline">
             <mat-label>Project Name</mat-label>
@@ -31,57 +31,56 @@
             <input matInput placeholder="Location" formControlName="location">
           </mat-form-field>
           <mat-slide-toggle>Is public</mat-slide-toggle>
-        </form>
-        <h2 class='header-edit'>{{textBody}}</h2>
-        <div>
-          <mat-form-field class="example-full-width" appearance="outline"
-            class="container container__column project input">
-            <mat-label>Skill</mat-label>
+          <!-- </form> -->
+          
+          <div>
+            <h2 class='header-edit'>{{textBody}}</h2>
+            <mat-form-field class="example-full-width" appearance="outline"
+              class="container container__column project">
+              <mat-label>Skill</mat-label>
 
-            <input type="text" placeholder="Pick one" matInput [matAutocomplete]="auto" aria-label="Number"
-              [formControl]="myControl">
+              <input type="text" placeholder="Pick one" matInput [matAutocomplete]="auto" aria-label="Number"
+                [formControl]="myControl">
 
-            <mat-autocomplete #auto="matAutocomplete">
+              <mat-autocomplete #auto="matAutocomplete">
 
-              <mat-option *ngFor="let skill of filteredOptions | async" [value]="skill.name" (click)="onSelection(skill)">
-                {{skill.name}}
-              </mat-option>
-            </mat-autocomplete>
-          </mat-form-field>
+                <mat-option *ngFor="let skill of filteredOptions | async" [value]="skill.name"
+                  (click)="onSelection(skill)">
+                  {{skill.name}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
 
-          <div *ngFor="let skillForProject of listOfSkillsForProject" 
-            class="container container__row project skills input">
+            <div *ngFor="let skillForProject of listOfSkillsForProject"
+              class="container container__row project skills">
 
-            <div>{{skillForProject.name}}</div>
+              <div>{{skillForProject.name}}</div>
 
-
-            <div><button mat-icon-button color="accent" *ngFor="let ratingId of ratingArray; index as i"
-                [id]="'star_'+i" (click)="calculateRating(i+1)">
-                <mat-icon>
-                  {{ iconStatus(i) }}
-                </mat-icon>
-              </button>
-              <button mat-icon-button color="accent" (click)="removeSkillFromProject(skillForProject)">
-                <mat-icon>delete</mat-icon>
-              </button>
+              <div><button mat-icon-button color="accent" *ngFor="let ratingId of ratingArray; index as i"
+                  [id]="'star_'+i" (click)="calculateRating(i+1)">
+                  <mat-icon>
+                    {{ iconStatus(i) }}
+                  </mat-icon>
+                </button>
+                <button mat-icon-button color="accent" (click)="removeSkillFromProject(skillForProject)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+          <form class="example-form" [formGroup]="textareaForm">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Leave a comment</mat-label>
+              <textarea matInput placeholder="Ex. It makes me feel..." [value]="textareaValue"
+                formControlName="textarea" class="textarea"></textarea>
+            </mat-form-field>
+            <div class="buttonWidth input">
+              <button mat-raised-button color="primary"  [disabled]="!projectForm.valid" (click)="saveProject()">Save</button>
             </div>
 
-          </div>
-
-
-
-        </div>
-        <form class="example-form" [formGroup]="textareaForm">
-          <mat-form-field class="example-full-width input " appearance="outline">
-            <mat-label>Leave a comment</mat-label>
-            <textarea matInput placeholder="Ex. It makes me feel..." [value]="textareaValue" formControlName="textarea" class="textarea"></textarea>
-          </mat-form-field>
+          </form>
         </form>
-        
-        <div class="buttonWidth input">
-          <button  mat-raised-button color="primary" (click)="saveProjectChanges()">Save</button>
-        </div>
-        
+
       </div>
 
     </div>
