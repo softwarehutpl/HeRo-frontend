@@ -1,10 +1,17 @@
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+
 
 import { Observable, startWith } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Skill } from 'src/app/modules/commons/interfaces/Skill';
+import {
+  Skill,
+  SkillsForProjectId,
+} from 'src/app/modules/commons/interfaces/Skill';
 import { ProjectsService } from 'src/app/modules/commons/services/projects/projects.service';
+import { Recruitment } from '../../../commons/interfaces/recruitment';
+
 
 export interface User {
   name: string;
@@ -30,9 +37,11 @@ export class CreateEditProjectComponent implements OnChanges, OnInit {
   //   { id: 2, name: 'string2' },
   // ];
 
+
   ngOnChanges(): void {}
 
   constructor(private fb: FormBuilder, private _projectService: ProjectsService
+
   ) {
     this._projectService.projectSkills$.subscribe({
       next: (data) => {
@@ -44,15 +53,16 @@ export class CreateEditProjectComponent implements OnChanges, OnInit {
   public projectForm = this.fb.group({
 
     projectName: new FormControl('', [Validators.required]),
-    login: [''],
-    password: [''],
-
+    seniority: new FormControl('', [Validators.required]),
+    from: new FormControl('', [Validators.required]), //do we need to put the end date??
+    to: new FormControl('', [Validators.required]),
+    location: new FormControl('', [Validators.required]),
   });
 
   public textareaForm = this.fb.group({
-    textarea: new FormControl(''),
+    textarea: new FormControl('', [Validators.required]),
   });
-  
+
 
   ngOnInit() {
     for (let index = 0; index < this.totalStar; index++) {
@@ -86,12 +96,10 @@ export class CreateEditProjectComponent implements OnChanges, OnInit {
   }
 
   onSelection(choosenSkill: Skill) {
-   
     if (this.listOfSkillsForProject.length !== 0) {
       let nameListOfSkillProject = this.listOfSkillsForProject.map((el) => {
         return el.name;
       });
-     
       if (!nameListOfSkillProject.includes(choosenSkill.name)) {
         this.listOfSkillsForProject.push(choosenSkill);
       } else {
@@ -109,8 +117,25 @@ export class CreateEditProjectComponent implements OnChanges, OnInit {
     this.listOfSkillsForProject = updatedProjectSkils;
   }
 
-  saveProjectChanges() {
 
-console.log(this.textareaForm.value.textarea)
+  onSubmit(form: any) {}
+  public async saveProject() {
+    let skilsForProject = this.preparingFormatSkillsForProject();
+    // let body: Recruitment = {
+    //   beginningDate: this.projectForm.value.from,
+    //   endingDate: this.projectForm.value.to,
+    //   name: this.projectForm.value.name,
+    //   description: this.projectForm.value.description,
+    //   recruiterId: 1,
+    //   recruitmentPosition: 'jaka?? skad??',
+    //   localization: this.projectForm.value.localization,
+    //   seniority: this.projectForm.value.seniority,
+    //   skills: skilsForProject,
+    // };
+    // let save = await this._projectService.saveProject(body)
+  }
+
+  public preparingFormatSkillsForProject(): Skill[] {
+    return this.listOfSkillsForProject;
   }
 }

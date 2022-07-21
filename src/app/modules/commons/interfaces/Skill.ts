@@ -7,6 +7,6 @@ export interface Skill {
 
 export interface SkillsForProjectId {
   skillId: number;
-  name: string;
+  // name: string;
   skillLevel: number;
 }
