@@ -91,7 +91,7 @@ export class ProjectsService {
   
 
   public async saveProject(body: Recruitment): Promise<boolean> {
-   
+   console.log('servis save project')
       let saveProject = await axios.post(this.urlSaveProject, {body: body}, {withCredentials: true})
       .then(res => {
         if(res.status === 200) {
