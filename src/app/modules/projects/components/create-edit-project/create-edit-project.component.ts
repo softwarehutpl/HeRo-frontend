@@ -1,7 +1,6 @@
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 
-import { FormControl } from '@angular/forms';
 import { Observable, startWith } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Skill } from 'src/app/modules/commons/interfaces/Skill';
@@ -43,13 +42,11 @@ export class CreateEditProjectComponent implements OnChanges, OnInit {
   }
 
   public projectForm = this.fb.group({
-    projectName: [''],
-    seniority: [''],
-    from: [''],
-    to: [''],
-    location: [''],
-    // login: [''],
-    // password: [''],
+
+    projectName: new FormControl('', [Validators.required]),
+    login: [''],
+    password: [''],
+
   });
 
   public textareaForm = this.fb.group({
