@@ -28,7 +28,6 @@ import { TableComponent } from './modules/commons/components/table/table.compone
 import { MatSortModule } from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete'
-
 import { CreateEditProjectComponent } from './modules/projects/components/create-edit-project/create-edit-project.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -43,6 +42,8 @@ import { CandidatesKanbanComponent } from './modules/candidates/components/candi
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import {MatDialogModule} from "@angular/material/dialog";
 import {InterviewDialogComponent} from './modules/homepage/components/calendar-items/dialog-interview/interview-dialog.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -94,7 +95,9 @@ import {InterviewDialogComponent} from './modules/homepage/components/calendar-i
     MatAutocompleteModule,
     DragDropModule,
     MatDialogModule,
-    
+    MatDatepickerModule,
+    MatNativeDateModule,
+
   ],
   exports: [MatButtonModule],
   providers: [],

@@ -1,7 +1,8 @@
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+
+
 import { Observable, startWith } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
@@ -10,6 +11,7 @@ import {
 } from 'src/app/modules/commons/interfaces/Skill';
 import { ProjectsService } from 'src/app/modules/commons/services/projects/projects.service';
 import { Recruitment } from '../../../commons/interfaces/recruitment';
+
 
 export interface User {
   name: string;
@@ -20,6 +22,7 @@ export interface User {
   styleUrls: ['./create-edit-project.component.scss'],
 })
 export class CreateEditProjectComponent implements OnChanges, OnInit {
+  
   public myControl = new FormControl('');
   public textHeader: string = 'Create/Edit project';
   public textBody: string = 'Skills';
@@ -34,11 +37,11 @@ export class CreateEditProjectComponent implements OnChanges, OnInit {
   //   { id: 2, name: 'string2' },
   // ];
 
+
   ngOnChanges(): void {}
 
-  constructor(
-    private fb: FormBuilder,
-    private _projectService: ProjectsService
+  constructor(private fb: FormBuilder, private _projectService: ProjectsService
+
   ) {
     this._projectService.projectSkills$.subscribe({
       next: (data) => {
@@ -48,6 +51,7 @@ export class CreateEditProjectComponent implements OnChanges, OnInit {
   }
 
   public projectForm = this.fb.group({
+
     projectName: new FormControl('', [Validators.required]),
     seniority: new FormControl('', [Validators.required]),
     from: new FormControl('', [Validators.required]), //do we need to put the end date??
@@ -58,6 +62,7 @@ export class CreateEditProjectComponent implements OnChanges, OnInit {
   public textareaForm = this.fb.group({
     textarea: new FormControl('', [Validators.required]),
   });
+
 
   ngOnInit() {
     for (let index = 0; index < this.totalStar; index++) {
@@ -95,7 +100,6 @@ export class CreateEditProjectComponent implements OnChanges, OnInit {
       let nameListOfSkillProject = this.listOfSkillsForProject.map((el) => {
         return el.name;
       });
-
       if (!nameListOfSkillProject.includes(choosenSkill.name)) {
         this.listOfSkillsForProject.push(choosenSkill);
       } else {
@@ -113,6 +117,7 @@ export class CreateEditProjectComponent implements OnChanges, OnInit {
     this.listOfSkillsForProject = updatedProjectSkils;
   }
 
+
   onSubmit(form: any) {}
   public async saveProject() {
     let skilsForProject = this.preparingFormatSkillsForProject();
@@ -127,8 +132,7 @@ export class CreateEditProjectComponent implements OnChanges, OnInit {
     //   seniority: this.projectForm.value.seniority,
     //   skills: skilsForProject,
     // };
-    // let save = await this._projectService.saveProject(body);
-   
+    // let save = await this._projectService.saveProject(body)
   }
 
   public preparingFormatSkillsForProject(): Skill[] {

@@ -19,11 +19,22 @@
           <div class="container container_row">
             <mat-form-field appearance="outline">
               <mat-label>From</mat-label>
-              <input matInput placeholder="From" style="height: 5px" formControlName="from">
+              <input matInput placeholder="From" [matDatepicker]="picker" >
+             
+              <mat-datepicker-toggle matSuffix [for]="picker">
+                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+              </mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
             <mat-form-field appearance="outline">
               <mat-label>To</mat-label>
-              <input matInput placeholder="To" formControlName="to">
+              <input matInput placeholder="To" [matDatepicker]="pickerTo" class="">
+              <mat-datepicker-toggle matSuffix [for]="pickerTo">
+                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+              </mat-datepicker-toggle>
+              <mat-datepicker #pickerTo></mat-datepicker>
+
+
             </mat-form-field>
           </div>
           <mat-form-field appearance="outline">
@@ -77,13 +88,9 @@
             <div class="buttonWidth input">
               <button mat-raised-button color="primary"  [disabled]="!projectForm.valid" (click)="saveProject()">Save</button>
             </div>
-
           </form>
         </form>
-
       </div>
-
     </div>
-    <!-- <router-outlet ></router-outlet> -->
   </div>
 </div>

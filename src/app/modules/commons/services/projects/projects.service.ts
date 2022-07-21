@@ -26,8 +26,6 @@ const getProjectBody = {
   },
 };
 
-
-
 @Injectable({
   providedIn: 'root',
 })
@@ -107,4 +105,5 @@ export class ProjectsService {
   }
 
   public async getProjectList(pageNumber: number) {  }
+
 }
