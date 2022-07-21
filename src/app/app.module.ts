@@ -27,7 +27,7 @@ import { ProjectsListComponent } from './modules/projects/components/projects-li
 import { TableComponent } from './modules/commons/components/table/table.component';
 import { MatSortModule } from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
-import { MatAutocompleteModule } from '@angular/material/autocomplete'
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { CreateEditProjectComponent } from './modules/projects/components/create-edit-project/create-edit-project.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -40,10 +40,11 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CandidatesKanbanComponent } from './modules/candidates/components/candidates-kanban/candidates-kanban.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import {MatDialogModule} from "@angular/material/dialog";
-import {InterviewDialogComponent} from './modules/homepage/components/calendar-items/dialog-interview/interview-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { InterviewDialogComponent } from './modules/homepage/components/calendar-items/dialog-interview/interview-dialog.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     CreateEditProjectComponent,
     CalendarItemsComponent,
     CandidatesKanbanComponent,
-    InterviewDialogComponent
+    InterviewDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -97,11 +98,11 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule,
-
+    HttpClientModule,
   ],
   exports: [MatButtonModule],
   providers: [],
   bootstrap: [AppComponent, CalendarHeadComponent],
-  entryComponents: [InterviewDialogComponent]
+  entryComponents: [InterviewDialogComponent],
 })
 export class AppModule {}
