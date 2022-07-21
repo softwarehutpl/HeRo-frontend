@@ -25,7 +25,8 @@ export class CreateEditProjectComponent implements OnChanges, OnInit {
   
   public myControl = new FormControl('');
   public textHeader: string = 'Create/Edit project';
-  public textBody: string = 'Skills';
+  public textBody: string = 'Skills'; // Sometimes its worth to organize properties int groups. How about 
+  // labels = { body: 'Skills', header: 'Create/Edit project' }
   public ratingArray: Array<number> = [];
   public totalStar: number = 5;
   public rating: number = 2;
