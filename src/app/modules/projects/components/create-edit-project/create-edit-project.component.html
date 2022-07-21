@@ -10,25 +10,25 @@
 
           <mat-form-field appearance="outline">
             <mat-label>Project Name</mat-label>
-            <input matInput placeholder="Project Name" class="intrnalComponent">
+            <input matInput placeholder="Project Name" formControlName="projectName" class="intrnalComponent">
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Seniority</mat-label>
-            <input matInput placeholder="Seniority">
+            <input matInput placeholder="Seniority" formControlName="seniority">
           </mat-form-field>
           <div class="container container_row">
             <mat-form-field appearance="outline">
               <mat-label>From</mat-label>
-              <input matInput placeholder="From" style="height: 5px">
+              <input matInput placeholder="From" style="height: 5px" formControlName="from">
             </mat-form-field>
             <mat-form-field appearance="outline">
               <mat-label>To</mat-label>
-              <input matInput placeholder="To">
+              <input matInput placeholder="To" formControlName="to">
             </mat-form-field>
           </div>
           <mat-form-field appearance="outline">
             <mat-label>Location</mat-label>
-            <input matInput placeholder="Location">
+            <input matInput placeholder="Location" formControlName="location">
           </mat-form-field>
           <mat-slide-toggle>Is public</mat-slide-toggle>
         </form>
@@ -69,13 +69,19 @@
           </div>
 
 
+
         </div>
-        <form class="example-form">
+        <form class="example-form" [formGroup]="textareaForm">
           <mat-form-field class="example-full-width input " appearance="outline">
             <mat-label>Leave a comment</mat-label>
-            <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+            <textarea matInput placeholder="Ex. It makes me feel..." [value]="textareaValue" formControlName="textarea" class="textarea"></textarea>
           </mat-form-field>
         </form>
+        
+        <div class="buttonWidth input">
+          <button  mat-raised-button color="primary" (click)="saveProjectChanges()">Save</button>
+        </div>
+        
       </div>
 
     </div>
