@@ -1,4 +1,3 @@
-
 import { AfterViewInit, Component, ViewChild, OnInit } from '@angular/core';
 import { Candidate } from '../../../commons/interfaces/candidate';
 
@@ -28,8 +27,14 @@ export class CandidatesListComponent implements AfterViewInit, OnInit {
     'techAssignee',
     'profile',
   ];
+  //variables:
   private candidates!: Array<Candidate>;
-  public dataSource: any;
+  public dataSource!: any;
+
+  //paginator settings:
+  public pageIndex: number = 0;
+  public pageSize: number = 5;
+  public pageSizeOptions: Array<number> = [5, 10, 15, 20, 25];
 
   constructor(
     private _liveAnnouncer: LiveAnnouncer,
@@ -38,26 +43,35 @@ export class CandidatesListComponent implements AfterViewInit, OnInit {
 
   async ngOnInit(): Promise<void> {
     this.candidates = await this.cs.getAllCandidates();
-    // this.dataSource = new MatTableDataSource(DATA);
     this.dataSource = new MatTableDataSource(this.candidates);
+
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
   logData() {
     console.log('local_JSON:', DATA);
     console.log('fetched:', this.candidates);
-    // console.log(this.candidates2);
-  }
+  } // debugging function, delete later
+
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+    /* moved to ngOnInit() to bring back Paginator*/
+    // this.dataSource.sort = this.sort;
+    // this.dataSource.paginator = this.paginator;
   }
   onChangePage(pe: PageEvent) {
     console.log(pe.pageIndex);
     console.log(pe.pageSize);
-  }
+  } // this seems to be dead
+
+  public getPaginatorData(e: PageEvent) {
+    console.log('paginator ' + e.pageIndex);
+    this.pageIndex = e.pageIndex;
+  } //this might be where i'll put API call to get next page
+
   announceSortChange(sortState: Sort) {
     if (sortState.direction) {
       this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);

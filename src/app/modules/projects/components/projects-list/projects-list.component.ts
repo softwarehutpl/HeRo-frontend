@@ -146,27 +146,25 @@ export class ProjectsListComponent implements AfterViewInit {
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }
-  // onChangePage() {
-  //   console.log(this.pageIndex);
-  //   console.log(this.pageSize);
-  // }
+  onChangePage() {
+    console.log(this.pageIndex);
+    console.log(this.pageSize);
+  }
 
   public getPaginatorData(e: PageEvent) {
-    console.log('paginator ' + e.pageIndex)
+    console.log('paginator ' + e.pageIndex);
     this.pageIndex = e.pageIndex;
-    this.getNextPage
+    this.getNextPage;
   }
 
   public getNextPage() {
     // const list = this._projectService.getProjectList(this.pageIndex);
     // this.data = list;
-
   }
 
   announceSortChange(sortState: Sort) {
@@ -177,16 +175,13 @@ export class ProjectsListComponent implements AfterViewInit {
     }
   }
 
-
   moveToCandidates(projectName: string, status?: string) {
-   
     this._router.navigate(['/candidates'], {
       queryParams: {
         project: projectName,
         ...(status === undefined ? {} : { status: status }),
       },
     });
-
   }
 
   moveToEditProject(projectName: string) {
