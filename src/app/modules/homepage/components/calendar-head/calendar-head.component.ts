@@ -6,7 +6,7 @@ import { CalendarView } from 'angular-calendar';
   templateUrl: './calendar-head.component.html',
   styleUrls: ['./calendar-head.component.scss']
 })
-export class CalendarHeadComponent implements OnInit {
+export class CalendarHeadComponent  {
 
   @Input() view!: CalendarView ;
 
@@ -19,9 +19,6 @@ export class CalendarHeadComponent implements OnInit {
   @Output() viewDateChange = new EventEmitter<Date>();
 
   CalendarView = CalendarView;
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  
 
 }

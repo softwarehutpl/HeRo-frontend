@@ -98,7 +98,7 @@ import {InterviewDialogComponent} from './modules/homepage/components/calendar-i
   ],
   exports: [MatButtonModule],
   providers: [],
-  bootstrap: [AppComponent, CalendarHeadComponent],
+  bootstrap: [AppComponent],
   entryComponents: [InterviewDialogComponent]
 })
 export class AppModule {}
