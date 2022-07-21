@@ -1,0 +1,123 @@
+[
+  {
+    "id": 1,
+    "name": "John Doe",
+    "source": "Internal",
+    "recruitmentName": "React Developer",
+    "position": "React dev",
+    "status": "In processing",
+    "stage": "Phone interview",
+    "techAssignee": "Piter Ditter",
+    "profile": "See profile"
+  },
+  {
+    "id": 2,
+    "name": "Jane Doe",
+    "source": "External",
+    "recruitmentName": "React Developer",
+    "position": "React dev",
+    "status": "In processing",
+    "stage": "Interview",
+    "techAssignee": "Piter Ditter",
+    "profile": "See profile"
+  },
+  {
+    "id": 3,
+    "name": "Aaron Baron",
+    "source": "Internal",
+    "recruitmentName": "Angular Developer",
+    "position": "Angular Developer",
+    "status": "In processing",
+    "stage": "Interview",
+    "techAssignee": "Piter Ditter",
+    "profile": "See profile"
+  },
+  {
+    "id": 4,
+    "name": "Jerry Cerry",
+    "source": "External",
+    "recruitmentName": "Javascript Developer",
+    "position": "SCRUM Master",
+    "status": "Dropped out",
+    "stage": "",
+    "techAssignee": "Piter Ditter",
+    "profile": "See profile"
+  },
+  {
+    "id": 5,
+    "name": "Annie Areyou Okay",
+    "source": "Internal",
+    "recruitmentName": "Angular Developer",
+    "position": "CTO",
+    "status": "Hired",
+    "stage": "",
+    "techAssignee": "Johnny Bravo",
+    "profile": "See profile"
+  },
+  {
+    "id": 6,
+    "name": "Jack Shepard",
+    "source": "Internal",
+    "recruitmentName": "React Developer",
+    "position": "React dev",
+    "status": "In processing",
+    "stage": "Tech interview",
+    "techAssignee": "Johnny Bravo",
+    "profile": "See profile"
+  },
+  {
+    "id": 7,
+    "name": "Harry Drugadict",
+    "source": "External",
+    "recruitmentName": "Javascript Developer",
+    "position": "Wizard",
+    "status": "In processing",
+    "stage": "Evaluation",
+    "techAssignee": "Piter Ditter",
+    "profile": "See profile"
+  },
+  {
+    "id": 8,
+    "name": "Sir Thanos Snapsalot",
+    "source": "Internal",
+    "recruitmentName": "Angular Developer",
+    "position": "Intern",
+    "status": "In processing",
+    "stage": "Offer",
+    "techAssignee": "Piter Ditter",
+    "profile": "See profile"
+  },
+  {
+    "id": 9,
+    "name": "Geralt",
+    "source": "Internal",
+    "recruitmentName": "React Developer",
+    "position": "Tester",
+    "status": "Hired",
+    "stage": "",
+    "techAssignee": "Piter Ditter",
+    "profile": "See profile"
+  },
+  {
+    "id": 10,
+    "name": "Annoying Namethattakestoomuchspace",
+    "source": "Internal",
+    "recruitmentName": "React Developer",
+    "position": "React dev",
+    "status": "In processing",
+    "stage": "Tech interview",
+    "techAssignee": "Piter Ditter",
+    "profile": "See profile"
+  },
+  {
+    "id": 11,
+    "name": "Winotu Winotam",
+    "source": "External",
+    "recruitmentName": "Angular Developer",
+    "position": "Angular dev",
+    "status": "New",
+    "stage": "",
+    "techAssignee": "Piter Ditter",
+    "profile": "See profile"
+  }
+]

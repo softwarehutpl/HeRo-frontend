@@ -4,6 +4,12 @@
 // }
 .intrnalComponent {
     align-content: space-around;
+    height: 100%;
+}
+
+.input {
+  align-content: space-between;
+  margin-left: 20px;
 }
 .main {
     padding: 5%;
@@ -15,3 +21,37 @@
     
   }
   
+  .project {
+   
+    width: 400px;
+    // height: 40px;
+    display: flex;
+    flex-direction: column;
+  
+}
+.skills{
+  // display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  // justify-items: stretch;
+  align-items: center;
+  
+}
+
+.example-form {
+  min-width: 250px;
+  max-width: 400px;
+  // min-height: 200px;
+
+  width: 100%;
+  margin-top: 50px;
+}
+
+.example-full-width {
+  width: 100%;
+  min-height: 200px;
+}
+
+.buttonWidth{
+  width: 30px;
+}

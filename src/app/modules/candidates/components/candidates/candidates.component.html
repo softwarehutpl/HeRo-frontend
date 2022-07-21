@@ -4,7 +4,7 @@
     <app-sidebar></app-sidebar>
     <mat-divider [vertical]="true"></mat-divider>
     <div class="container container__column filterComponet">
-      <app-filter></app-filter>
+      <app-filter [whichComponentRender]="componentName"></app-filter>
       <!-- Filters column -->
 
       <!-- <button style="width: 150px; height: 180px">Filters1</button>
@@ -18,18 +18,19 @@
       <div class="container container__row header">
         <div>Candidates</div>
         <div>
-          <button mat-icon-button (click)="testFunc()">
+          <a mat-icon-button routerLink="/candidates">
             <mat-icon>list</mat-icon>
-          </button>
-          <button mat-icon-button (click)="testFunc()">
+          </a>
+          <a mat-icon-button routerLink="/candidates/kanban">
             <mat-icon>view_column</mat-icon>
-          </button>
+          </a>
         </div>
       </div>
       <!-- title bar ends here -->
 
       <!-- candidates list displays here -->
-      <app-candidates-list></app-candidates-list>
+      <!-- <app-candidates-list></app-candidates-list> -->
+      <router-outlet></router-outlet>
     </div>
     <!-- Main candidates container ends here -->
   </div>
