@@ -33,7 +33,6 @@ export class ProjectsService {
 
   public urlGetProjectList: string = 'https://swh-t-praktyki2022-app.azurewebsites.net/Recruitment/GetList';
   public urlGetSkillsList: string = 'https://swh-t-praktyki2022-app.azurewebsites.net/Skill/GetList';
-  public urlSkillsList: string = 'https://swh-t-praktyki2022-app.azurewebsites.net/Skill/GetList';
   public urlSaveProject: string = 'https://swh-t-praktyki2022-app.azurewebsites.net/Recruitment/Create';
   public data: GetRecruitmentListBodyRequest = {
     name: '',
@@ -55,30 +54,30 @@ export class ProjectsService {
   };
   public isSaved!: boolean
 
-  public projectList$ = new Observable<GetRecruitmentListBodyRequest>(
-    (observer) => {
-      axios
-        .post(
-          this.urlGetProjectList,
-          { body: this.data },
-          { withCredentials: true }
-        )
-        .then((response) => {
-          observer.next(response.data);
-        })
-        .catch((error) => {
-          observer.error(error);
-        });
-    }
-  );
+  // public projectList$ = new Observable<GetRecruitmentListBodyRequest>(
+  //   (observer) => {
+  //     axios
+  //       .post(
+  //         this.urlGetProjectList,
+  //         { body: this.data },
+  //         { withCredentials: true }
+  //       )
+  //       .then((response) => {
+  //         observer.next(response.data);
+  //       })
+  //       .catch((error) => {
+  //         observer.error(error);
+  //       });
+  //   }
+  // );
 
-  public subscription = this.projectList$.subscribe({
-    next: (data) => console.log(data),
-  });
+  // public subscription = this.projectList$.subscribe({
+  //   next: (data) => console.log(data),
+  // });
 
   public projectSkills$ = new Observable<Array<Skill>>((observer) => {
     axios
-      .get(this.urlSkillsList, { withCredentials: true })
+      .get(this.urlGetSkillsList, { withCredentials: true })
       .then((response) => {
         observer.next(response.data);
       })
@@ -91,7 +90,8 @@ export class ProjectsService {
   
 
   public async saveProject(body: Recruitment): Promise<boolean> {
-   
+   console.log('servis save project')
+   console.log(body)
       let saveProject = await axios.post(this.urlSaveProject, {body: body}, {withCredentials: true})
       .then(res => {
         if(res.status === 200) {
