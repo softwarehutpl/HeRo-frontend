@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { ProjectsService } from 'src/app/modules/commons/services/projects/projects.service';
+import { DATA } from 'src/app/modules/commons/mockups/mock-projects';
 
 export interface Projects {
   name: string;
@@ -14,104 +15,7 @@ export interface Projects {
   resume: number;
   hired: number;
 }
-const DATA: Array<Projects> = [
-  {
-    name: 'JavaScript Developer',
-    creator: 'John Doe',
-    from: new Date('2022-01-01'),
-    to: new Date('2022-04-31'),
-    resume: 30,
-    hired: 3,
-  },
-  {
-    name: 'Angular Developer',
-    creator: 'John Doe',
-    from: new Date('2022-05-01'),
-    to: new Date('2022-08-31'),
-    resume: 99,
-    hired: 1,
-  },
-  {
-    name: 'React Developer',
-    creator: 'John Doe',
-    from: new Date('2022-09-01'),
-    to: new Date('2022-12-31'),
-    resume: 150,
-    hired: 190,
-  },
-  {
-    name: 'JavaScript Developer',
-    creator: 'John Doe',
-    from: new Date('2022-01-01'),
-    to: new Date('2022-04-31'),
-    resume: 30,
-    hired: 3,
-  },
-  {
-    name: 'Angular Developer',
-    creator: 'John Doe',
-    from: new Date('2022-05-01'),
-    to: new Date('2022-08-31'),
-    resume: 99,
-    hired: 1,
-  },
-  {
-    name: 'React Developer',
-    creator: 'John Doe',
-    from: new Date('2022-09-01'),
-    to: new Date('2022-12-31'),
-    resume: 150,
-    hired: 190,
-  },
-  {
-    name: 'JavaScript Developer',
-    creator: 'John Doe',
-    from: new Date('2022-01-01'),
-    to: new Date('2022-04-31'),
-    resume: 30,
-    hired: 3,
-  },
-  {
-    name: 'Angular Developer',
-    creator: 'John Doe',
-    from: new Date('2022-05-01'),
-    to: new Date('2022-08-31'),
-    resume: 99,
-    hired: 1,
-  },
-  {
-    name: 'React Developer',
-    creator: 'John Doe',
-    from: new Date('2022-09-01'),
-    to: new Date('2022-12-31'),
-    resume: 150,
-    hired: 190,
-  },
-  {
-    name: 'JavaScript Developer',
-    creator: 'John Doe',
-    from: new Date('2022-01-01'),
-    to: new Date('2022-04-31'),
-    resume: 30,
-    hired: 3,
-  },
-  {
-    name: 'Angular Developer',
-    creator: 'John Doe',
-    from: new Date('2022-05-01'),
-    to: new Date('2022-08-31'),
-    resume: 99,
-    hired: 1,
-  },
-  {
-    name: 'React Developer',
-    creator: 'John Doe',
-    from: new Date('2022-09-01'),
-    to: new Date('2022-12-31'),
-    resume: 150,
-    hired: 190,
-  },
-];
+// 
 
 @Component({
   selector: 'app-projects-list',
@@ -158,15 +62,12 @@ export class ProjectsListComponent implements AfterViewInit {
   // }
 
   public getPaginatorData(e: PageEvent) {
-    console.log('paginator ' + e.pageIndex)
     this.pageIndex = e.pageIndex;
     this.getNextPage
   }
 
   public getNextPage() {
     // const list = this._projectService.getProjectList(this.pageIndex);
-    // this.data = list;
-
   }
 
   announceSortChange(sortState: Sort) {
@@ -179,7 +80,6 @@ export class ProjectsListComponent implements AfterViewInit {
 
 
   moveToCandidates(projectName: string, status?: string) {
-   
     this._router.navigate(['/candidates'], {
       queryParams: {
         project: projectName,
