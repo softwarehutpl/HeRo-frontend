@@ -10,6 +10,7 @@ import { CandidatesDataService } from '../../services/candidates-data.service';
 import CANDIDATES from '../../../commons/mockups/candidates.json';
 import { Subscription, timer } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+// import { Router } from '@angular/router';
 
 const DATA = CANDIDATES; //This if brute-force import from JSON, i will use this to adapt local mockups to backend.
 
@@ -22,17 +23,19 @@ export class CandidatesListComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = [
     'id',
     'name',
+    'recruiterEmail',
+    'recruiterId',
+    'recruitmentName',
     'source',
-    'project',
-    'position',
     'status',
     'stage',
-    'techAssignee',
+    'techEmail',
+    'techId',
     'profile',
   ];
   //variables:
-  private candidates!: any;
-  // private candidates!: Array<Candidate>;
+  // private candidates!: any;
+  private candidates!: Array<Candidate>;
   public dataSource!: any;
   public apidata: any;
   private sub$!: Subscription;
@@ -45,7 +48,7 @@ export class CandidatesListComponent implements AfterViewInit, OnInit {
   constructor(
     private _liveAnnouncer: LiveAnnouncer,
     private cs: CandidatesService,
-    private service: CandidatesDataService
+    private service: CandidatesDataService // private router: Router
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -73,6 +76,26 @@ export class CandidatesListComponent implements AfterViewInit, OnInit {
     console.log('sub:', this.sub$);
   } // debugging function, delete later
 
+  public createInititals(name: string): string {
+    let initials = '';
+    for (let i = 0; i < name.length; i++) {
+      if (name.charAt(i) === ' ') {
+        continue;
+      }
+      if (name.charAt(i) === name.charAt(i).toUpperCase()) {
+        initials += name.charAt(i);
+        if (initials.length == 3) {
+          break;
+        }
+      }
+    }
+    return initials;
+  }
+
+  // goToProfile(id: number) {
+  //   const string: string = '/profile/' + id;
+  //   this.router.navigate([string]);
+  // }
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 

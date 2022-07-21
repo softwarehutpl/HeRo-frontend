@@ -3,6 +3,7 @@ import { Candidate } from '../../commons/interfaces/candidate';
 import { useMocks } from '../../commons/mockups/useMocks';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import axios from 'axios';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +21,7 @@ export class CandidatesDataService {
   }
 
   @useMocks(false, import(`@mocks/candidates.json`)) // if true -> overrides function and returns data from path.
-  public async getAllCandidates() {
+  public async getAllCandidates(): Promise<Array<Candidate>> {
     console.log('Fetching Candidates from API');
 
     const URL =
@@ -28,17 +29,17 @@ export class CandidatesDataService {
     const headers = new HttpHeaders({ accept: 'application/json' });
     const body = {
       paging: {
-        pageSize: 10,
+        pageSize: 1000,
         pageNumber: 1,
       },
     };
     const Options = {
-      headers,
+      header: headers,
       withCredentials: true,
     };
 
     // return this._http.post<Array<Candidate>>(URL, Options); // this will be default
-    return this._http.post<any>(URL, body, Options);
+    // return this._http.post<any>(URL, body, Options);
     // return this.axios
     //   .post(URL, body)
     //   .then((res) => {
@@ -51,5 +52,17 @@ export class CandidatesDataService {
     //     }
     //   })
     //   .catch((err) => console.log(err));
+
+    return await axios
+      .post(URL, body, Options)
+      .then((res) => {
+        if (res.statusText === 'OK') {
+          console.log(res.data.candidateInfoForListDTOs);
+          return res.data.candidateInfoForListDTOs;
+        } else {
+          console.log('Error, status not OK');
+        }
+      })
+      .catch((err) => console.log(err));
   }
 }
