@@ -5,6 +5,7 @@ import {
   Validators,
   FormControl,
 } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Observable, startWith } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ProjectsService } from 'src/app/modules/commons/services/projects/projects.service';
@@ -19,7 +20,6 @@ import {
   templateUrl: './create-edit-project.component.html',
   styleUrls: ['./create-edit-project.component.scss'],
 })
-// export class CreateEditProjectComponent implements OnChanges, OnInit {
 export class CreateEditProjectComponent implements OnInit {
   public myControl = new FormControl('');
   public textHeader = 'Create/Edit project';
@@ -32,21 +32,27 @@ export class CreateEditProjectComponent implements OnInit {
   public textareaValue = '';
   public listOfSkills: Array<Skill> = [];
   public projectId!: number;
+  public queryIdParam: string | null;
+  public queryParamNumber: number;
 
   constructor(
     private fb: FormBuilder,
     private _projectService: ProjectsService,
-    // private _router: Route
+    private _route: ActivatedRoute
   ) {
+    this.queryIdParam = this._route.snapshot.queryParamMap.get('projectId');
+    console.log(this.queryIdParam);
+    this.queryParamNumber = Number(this.queryIdParam);
+    this._projectService.getProjectById(this.queryParamNumber);
     this._projectService.projectSkills$.subscribe({
       next: (data) => {
         this.listOfSkills = data;
       },
     });
     this.projectId = this._projectService.readingProjectIdFromQueryParam();
-    console.log(
-      (this.projectId = this._projectService.readingProjectIdFromQueryParam())
-    );
+    // console.log(
+    //   (this.projectId = this._projectService.readingProjectIdFromQueryParam())
+    // );
   }
 
   public projectForm = this.fb.group({
@@ -63,7 +69,7 @@ export class CreateEditProjectComponent implements OnInit {
     for (let index = 0; index < this.totalStar; index++) {
       this.ratingArray.push(index);
 
-      console.log(this.projectId);
+      // console.log(this.projectId);
     }
 
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -136,7 +142,7 @@ export class CreateEditProjectComponent implements OnInit {
       skills: skilsForProject,
     };
 
-    const isSaved = await this._projectService.saveProject(body);
+    // const isSaved = await this._projectService.saveProject(body);
 
     // if (isSaved) {
     //   alert("Project saved")

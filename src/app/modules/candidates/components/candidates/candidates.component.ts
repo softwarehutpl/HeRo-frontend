@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Candidate } from '../../../commons/interfaces/candidate';
-import { CANDIDATES } from '../../../commons/mockups/mock-candidates';
+// import { Candidate } from '../../CandidatesInterface';
 
-export interface KanbanDisplay {
-  name: string;
-  project: string;
-  position: string;
-}
-export const DATA: Array<Candidate> = CANDIDATES; //CANDIDATES will be imported from common/services
+// export interface KanbanDisplay {
+//   name: string;
+//   project: string;
+//   position: string;
+// }
 
 @Component({
   selector: 'app-candidates',
@@ -15,7 +13,8 @@ export const DATA: Array<Candidate> = CANDIDATES; //CANDIDATES will be imported 
   styleUrls: ['./candidates.component.scss'],
 })
 export class CandidatesComponent implements OnInit {
-  public componentName: string = 'candidates';
+  public componentName = 'candidates';
+  public isAutocomplete = false;
   constructor() {}
 
   ngOnInit(): void {}

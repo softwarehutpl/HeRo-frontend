@@ -10,20 +10,38 @@ import { CandidatesService } from 'src/app/modules/commons/services/candidates/c
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute,private candidateServer:CandidatesService) {  }
-  dataLoadet:boolean=false;
-  public candidate!:Candidate;
+  // id!: any;
+  res!: any;
+
+  constructor(private route: ActivatedRoute, private candidateServer: CandidatesService) { }
+  dataLoadet: boolean = false;
+  public candidate!: Candidate;
   async ngOnInit(): Promise<void> {
 
     await this.getData()
   }
 
-  async getData(){ 
+  async getData() {
     const id = this.route.snapshot.paramMap.get('id');
-    const res = await this.candidateServer.getCandidate(id);
-    this.candidate = res;
-    console.log(this.candidate);
-    this.dataLoadet=true;
+    this.res = await this.candidateServer.getCandidate(id);
+    this.candidate = this.res;
+    this.dataLoadet = true;
+  }
+
+  public createInititals(name: string): string {
+    let initials = '';
+    for (let i = 0; i < name.length; i++) {
+      if (name.charAt(i) === ' ') {
+        continue;
+      }
+      if (name.charAt(i) === name.charAt(i).toUpperCase()) {
+        initials += name.charAt(i);
+        if (initials.length == 3) {
+          break;
+        }
+      }
+    }
+    return initials;
   }
 
 }
