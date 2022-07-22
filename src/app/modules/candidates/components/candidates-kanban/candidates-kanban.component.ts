@@ -7,6 +7,7 @@ import {
 } from '@angular/cdk/drag-drop';
 import CANDIDATES from '../../../commons/mockups/candidates.json';
 import { Candidate } from '../../../commons/interfaces/candidate';
+import { Observable } from 'rxjs';
 
 const DATA = CANDIDATES; //This if brute-force import from JSON, i will use this to adapt local mockups to backend.
 
@@ -64,29 +65,26 @@ export class CandidatesKanbanComponent implements OnInit {
     }
   }
   confirmationRequired(): boolean {
-    let userConfirmed: boolean = false;
-
-    // add magic here
-
-    if (userConfirmed) {
-      return true;
-    } else {
-      return false;
-    }
+    // let userConfirmed: boolean = false;
+    // // add magic here
+    // if (userConfirmed) {
+    return true;
+    // } else {
+    //   return false;
+    // }
   }
   warning() {
-    //some kind of modal should display here
-    alert("You're about to change user status");
-    let userConfirmed: boolean = this.confirmationRequired();
-
-    if (userConfirmed) {
-      alert('axios post -> change status');
-      //axios.post ...
-      // +force refresh
-      return true;
-    } else {
-      alert('user denied');
-      return false;
-    }
+    //   //some kind of modal should display here
+    //   alert("You're about to change user status");
+    //   let userConfirmed: boolean = this.confirmationRequired();
+    //   if (userConfirmed) {
+    //     alert('axios post -> change status');
+    //     //axios.post ...
+    //     // +force refresh
+    return true;
+    //   } else {
+    //     alert('user denied');
+    //     return false;
+    //   }
   }
 }
