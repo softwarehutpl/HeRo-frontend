@@ -14,15 +14,18 @@ import { DATA } from 'src/app/modules/commons/mockups/mock-projects';
 })
 export class ProjectsListComponent implements AfterViewInit {
   public status = '';
-  public pageIndex = 0;
-  public pageSize = 0;
-  public data?: any;
+  public pageIndex = 1;
+  public pageSize = 5;
+  public data = DATA;
+
 
   constructor(
     private _router: Router,
     private _liveAnnouncer: LiveAnnouncer,
-    // private _projectService: ProjectsService
+    public projectService: ProjectsService
   ) {
+  
+    this.projectService.getPublicProjectList(this.pageIndex, )
     // this.data = _projectService.getProjectList(this.pageIndex)
   }
 
@@ -40,6 +43,10 @@ export class ProjectsListComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
+get projectsData() {
+  return this.projectService.projects
+}
+
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
@@ -50,9 +57,12 @@ export class ProjectsListComponent implements AfterViewInit {
   }
 
   public getPaginatorData(e: PageEvent) {
-    console.log('paginator ' + e.pageIndex);
+    console.log(this.pageIndex, this.pageSize )
     this.pageIndex = e.pageIndex;
-    this.getNextPage;
+    this.pageSize = e.pageSize;
+    console.log(this.pageIndex, this.pageSize )
+    this.getNextPage
+
   }
 
   public getNextPage() {

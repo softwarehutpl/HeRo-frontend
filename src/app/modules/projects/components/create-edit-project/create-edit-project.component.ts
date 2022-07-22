@@ -5,7 +5,6 @@ import {
   Validators,
   FormControl,
 } from '@angular/forms';
-import { Route } from '@angular/router';
 import { Observable, startWith } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ProjectsService } from 'src/app/modules/commons/services/projects/projects.service';

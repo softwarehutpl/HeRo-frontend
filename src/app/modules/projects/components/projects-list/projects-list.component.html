@@ -52,7 +52,7 @@
     <td
       mat-cell
       *matCellDef="let element"
-      (click)="moveToCandidates(element.name, 'hired')"
+      (click)="moveToCandidates(element.id, 'hired')"
     >
       {{ element.hired }}
     </td>
@@ -80,3 +80,12 @@
   aria-label="Select page"
   [pageIndex]="pageIndex"
 ></mat-paginator>
+
+<div class="'container">
+  adassafsf
+  <ul *ngFor=" let project of projectService.projects | async">
+    <li>
+      {{project.name}}
+    </li>
+  </ul>
+</div>
