@@ -1,11 +1,10 @@
 <app-navbar></app-navbar>
 <div class="container">
-  <div class="container container__row">
-    <app-sidebar></app-sidebar>
-      <div class="container container__column">
-        <app-info-box text="New candidates" [number]="numberNewCandiates" link="/candidates"></app-info-box>
-        <app-info-box text="Interviews this week" [number]="numberInterviews" link="/candidates"></app-info-box>
-      </div>
-      <app-calendar class="container container__row container__row--center"></app-calendar>
+    <app-sidebar class="container__sidebar"></app-sidebar>
+    <div class="container__box-info ">
+      <app-info-box text="New candidates" [number]="numberNewCandiates" link="/candidates"></app-info-box>
+      <app-info-box text="Interviews this week" [number]="numberInterviews" link="/candidates"></app-info-box>
     </div>
+    <app-calendar class="container__calendar"></app-calendar>
+  
 </div>

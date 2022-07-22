@@ -1,12 +1,21 @@
 import { Component, OnInit } from '@angular/core';
+import { CandidatesService } from '../../../commons/services/candidates/candidates.service';
+
 import {
   CdkDragDrop,
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { KanbanDisplay } from '../candidates/candidates.component';
-import { DATA } from '../candidates/candidates.component';
+import CANDIDATES from '../../../commons/mockups/candidates.json';
 import { Candidate } from '../../../commons/interfaces/candidate';
+
+const DATA = CANDIDATES; //This if brute-force import from JSON, i will use this to adapt local mockups to backend.
+
+export interface KanbanDisplay {
+  name: string;
+  project: string;
+  position: string;
+}
 
 @Component({
   selector: 'app-candidates-kanban',
@@ -23,9 +32,20 @@ export class CandidatesKanbanComponent implements OnInit {
   hired: Array<KanbanDisplay> = [];
   dropped: Array<KanbanDisplay> = [];
 
-  constructor() {}
+  private candidates!: Array<Candidate>;
 
-  ngOnInit(): void {}
+  constructor(private cs: CandidatesService) {}
+
+  async ngOnInit(): Promise<void> {
+    this.candidates = await this.cs.getAllCandidates();
+  }
+
+  logData() {
+    console.log('local_JSON:', DATA);
+    console.log('fetched:', this.candidates);
+    // console.log(this.candidates2);
+  }
+
   drop(event: CdkDragDrop<KanbanDisplay[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(

@@ -1,16 +1,18 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { Component, } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
+// import { ConnectableObservable } from 'rxjs';
 import { AuthService } from 'src/app/modules/commons/services/auth/auth.service';
-import { AxiosService } from '../../../commons/services/axios/axios.service';
+// import { AxiosService } from '../../../commons/services/axios/axios.service';
 
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.scss'],
 })
-export class LoginPageComponent implements OnChanges, OnInit {
-  public password: string = 'password';
-  public email: string = '0';
+// export class LoginPageComponent implements OnChanges, OnInit {
+  export class LoginPageComponent {
+  public password = 'password';
+  public email = '0';
 
   constructor(private _fb: FormBuilder, private _auth: AuthService) {}
   public loginForm = this._fb.group({
@@ -21,18 +23,15 @@ export class LoginPageComponent implements OnChanges, OnInit {
     ]),
   });
 
-  ngOnChanges(): void {}
-
-  ngOnInit(): void {
-  }
-
   async signIn() {
     this.email = this.loginForm.value.email;
     this.password = this.loginForm.value.password;
     this._auth.isAuth(this.password, this.email);
   }
 
-  public onSubmit(form: any) {}
+  public onSubmit(form: any) {
+    console.log(form)
+  }
 
   public getNewPassword() {
     this.email = this.loginForm.value.email;

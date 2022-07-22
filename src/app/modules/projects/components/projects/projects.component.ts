@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Route, Router } from '@angular/router';
-
+import { Router } from '@angular/router';
+import { ProjectsService } from 'src/app/modules/commons/services/projects/projects.service';
 
 @Component({
   selector: 'app-projects',
@@ -8,11 +8,11 @@ import { Route, Router } from '@angular/router';
   styleUrls: ['./projects.component.scss'],
 })
 export class ProjectsComponent implements OnInit {
-  public checked: boolean = true;
-  public componentName: string = "projects";
-  public isEditCreateProject: boolean = false;
+  public checked = true;
+  public componentName = "projects";
+  public isEditCreateProject = false;
 
-  constructor(private _router: Router) {}
+  constructor(private _router: Router, private _projectService: ProjectsService) {}
 
   ngOnInit(): void {}
   testFunc() {
