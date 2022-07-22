@@ -13,13 +13,9 @@ import { ProjectsService } from 'src/app/modules/commons/services/projects/proje
 })
 
 export class CalendarItemsComponent implements OnInit {
-<<<<<<< HEAD
 
   @Input() events: CalendarEvent[] = [];
 
-=======
-// keep mocks outside
->>>>>>> 5ff99538352a71e2f1d02bf71b1f6acb054cc13b
   intervie:InterviewDTO={
     interviewId: 1,
     date:new Date("2022-07-19T12:03:24.895Z"),
