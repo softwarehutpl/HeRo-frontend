@@ -2,20 +2,10 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { ProjectsService } from 'src/app/modules/commons/services/projects/projects.service';
+// import { ProjectsService } from 'src/app/modules/commons/services/projects/projects.service';
 import { DATA } from 'src/app/modules/commons/mockups/mock-projects';
-
-export interface Projects {
-  name: string;
-  creator: string;
-  from: Date;
-  to: Date;
-  resume: number;
-  hired: number;
-}
-// 
 
 @Component({
   selector: 'app-projects-list',
@@ -23,16 +13,15 @@ export interface Projects {
   styleUrls: ['./projects-list.component.scss'],
 })
 export class ProjectsListComponent implements AfterViewInit {
-  public status: string = '';
-  public pageIndex: number = 0;
-  public pageSize: number = 0;
+  public status = '';
+  public pageIndex = 0;
+  public pageSize = 0;
   public data?: any;
 
   constructor(
     private _router: Router,
-    private _route: ActivatedRoute,
     private _liveAnnouncer: LiveAnnouncer,
-    private _projectService: ProjectsService
+    // private _projectService: ProjectsService
   ) {
     // this.data = _projectService.getProjectList(this.pageIndex)
   }
@@ -50,24 +39,26 @@ export class ProjectsListComponent implements AfterViewInit {
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }
-  // onChangePage() {
-  //   console.log(this.pageIndex);
-  //   console.log(this.pageSize);
-  // }
+  onChangePage() {
+    console.log(this.pageIndex);
+    console.log(this.pageSize);
+  }
 
   public getPaginatorData(e: PageEvent) {
+    console.log('paginator ' + e.pageIndex);
     this.pageIndex = e.pageIndex;
-    this.getNextPage
+    this.getNextPage;
   }
 
   public getNextPage() {
     // const list = this._projectService.getProjectList(this.pageIndex);
+    // this.data = list;
+
   }
 
   announceSortChange(sortState: Sort) {
@@ -78,7 +69,6 @@ export class ProjectsListComponent implements AfterViewInit {
     }
   }
 
-
   moveToCandidates(projectName: string, status?: string) {
     this._router.navigate(['/candidates'], {
       queryParams: {
@@ -86,10 +76,9 @@ export class ProjectsListComponent implements AfterViewInit {
         ...(status === undefined ? {} : { status: status }),
       },
     });
-
   }
 
-  moveToEditProject(projectName: string) {
-    this._router.navigate(['edit'], { queryParams: { project: projectName } });
+  moveToEditProject(projectId: string) {
+    this._router.navigate(['edit'], { queryParams: { projectId: projectId } });
   }
 }

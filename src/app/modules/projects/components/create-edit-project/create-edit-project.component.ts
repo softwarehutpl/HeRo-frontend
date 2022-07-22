@@ -1,56 +1,70 @@
-import { Component, OnInit, OnChanges, } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { ConnectableObservable, Observable, startWith } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  FormControl,
+} from '@angular/forms';
+import { Route } from '@angular/router';
+import { Observable, startWith } from 'rxjs';
 import { map } from 'rxjs/operators';
-// import { Skill } from 'src/app/modules/commons/interfaces/Skill';
 import { ProjectsService } from 'src/app/modules/commons/services/projects/projects.service';
-import { Recruitment, SkillsForProjectId, Skill } from '../../../commons/interfaces/recruitment';
-
+import {
+  Recruitment,
+  SkillsForProjectId,
+  Skill,
+} from '../../../commons/interfaces/recruitment';
 
 @Component({
   selector: 'app-create-edit-project',
   templateUrl: './create-edit-project.component.html',
   styleUrls: ['./create-edit-project.component.scss'],
 })
-export class CreateEditProjectComponent implements OnChanges, OnInit {
-  
+// export class CreateEditProjectComponent implements OnChanges, OnInit {
+export class CreateEditProjectComponent implements OnInit {
   public myControl = new FormControl('');
-  public textHeader: string = 'Create/Edit project';
-  public textBody: string = 'Skills';
+  public textHeader = 'Create/Edit project';
+  public textBody = 'Skills';
   public ratingArray: Array<number> = [];
-  public totalStar: number = 5;
-  public rating: number = 2;
+  public totalStar = 5;
+  public rating = 2;
   public filteredOptions!: Observable<Array<Skill>>;
   public listOfSkillsForProject: Array<Skill> = [];
-  public textareaValue: string = '';
+  public textareaValue = '';
   public listOfSkills: Array<Skill> = [];
-  //   { id: 1, name: 'string1' },
-  //   { id: 2, name: 'string2' },
-  // ];
+  public projectId!: number;
 
-
-  ngOnChanges(): void {}
-
-  constructor(private fb: FormBuilder, private _projectService: ProjectsService) {
+  constructor(
+    private fb: FormBuilder,
+    private _projectService: ProjectsService,
+    // private _router: Route
+  ) {
     this._projectService.projectSkills$.subscribe({
       next: (data) => {
         this.listOfSkills = data;
       },
     });
+    this.projectId = this._projectService.readingProjectIdFromQueryParam();
+    console.log(
+      (this.projectId = this._projectService.readingProjectIdFromQueryParam())
+    );
   }
 
   public projectForm = this.fb.group({
     projectName: new FormControl('', [Validators.required]),
     seniority: new FormControl('', [Validators.required]),
-    from: new FormControl('', [Validators.required]), //do we need to put the end date??
+    from: new FormControl('', [Validators.required]),
     to: new FormControl('', [Validators.required]),
-    location: new FormControl('', [Validators.required]),
+    localion: new FormControl('', [Validators.required]),
     textarea: new FormControl('', [Validators.required]),
+    isPublic: new FormControl(false),
   });
 
   ngOnInit() {
     for (let index = 0; index < this.totalStar; index++) {
       this.ratingArray.push(index);
+
+      console.log(this.projectId);
     }
 
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -67,18 +81,18 @@ export class CreateEditProjectComponent implements OnChanges, OnInit {
   }
 
   calculateRating(newRating: number, skillName: string) {
-    this.listOfSkillsForProject.map(el => {
-      if(el.name === skillName) {
-        el.skillLevel = newRating
+    this.listOfSkillsForProject.map((el) => {
+      if (el.name === skillName) {
+        el.skillLevel = newRating;
       }
-    })
-    console.log(this.listOfSkillsForProject, newRating)
-    // this.rating = newRating;
+    });
   }
 
   iconStatus(index: number, indexOfSkillListForProject: number) {
-    
-    if (this.listOfSkillsForProject[indexOfSkillListForProject].skillLevel >= index + 1) {
+    if (
+      this.listOfSkillsForProject[indexOfSkillListForProject].skillLevel >=
+      index + 1
+    ) {
       return 'star';
     } else {
       return 'star_border';
@@ -87,7 +101,7 @@ export class CreateEditProjectComponent implements OnChanges, OnInit {
 
   onSelection(choosenSkill: Skill) {
     if (this.listOfSkillsForProject.length !== 0) {
-      let nameListOfSkillProject = this.listOfSkillsForProject.map((el) => {
+      const nameListOfSkillProject = this.listOfSkillsForProject.map((el) => {
         return el.name;
       });
       if (!nameListOfSkillProject.includes(choosenSkill.name)) {
@@ -107,36 +121,43 @@ export class CreateEditProjectComponent implements OnChanges, OnInit {
     this.listOfSkillsForProject = updatedProjectSkils;
   }
 
-  onSubmit(form: any) {}
-
   public async saveProject() {
-    console.log('save project')
-    let skilsForProject = await this.preparingFormatSkillsForProject();
-    let body: Recruitment = {
-      beginningDate: this.projectForm.value.from,
-      endingDate: this.projectForm.value.to,
+    const skilsForProject = this.preparingFormatSkillsForProject();
+
+    const body: Recruitment = {
+      beginningDate: '2022-07-21T10:28:24.254Z',
+      endingDate: '2022-07-29T10:28:24.254Z',
       name: this.projectForm.value.projectName,
-      description: this.projectForm.value.description || 's',
+      description: this.projectForm.value.textarea,
       recruiterId: 1,
       recruitmentPosition: 'jaka?? skad??',
-      localization: this.projectForm.value.localization || "g",
+      localization: this.projectForm.value.localion,
       seniority: this.projectForm.value.seniority,
+      isPublic: this.projectForm.value.isPublic,
       skills: skilsForProject,
     };
-    let save = await this._projectService.saveProject(body)
+
+    const isSaved = await this._projectService.saveProject(body);
+
+    // if (isSaved) {
+    //   alert("Project saved")
+    //   // this._router.navigate()
+    // }
   }
 
   public preparingFormatSkillsForProject(): SkillsForProjectId[] {
-    // public preparingFormatSkillsForProject(): any {
-    let skills = this.listOfSkillsForProject.map(el => {
-      let oneSkill = {
+    const skills = this.listOfSkillsForProject.map((el) => {
+      const oneSkill = {
         skillId: el.id,
-        skillLevel: el.skillLevel
+        skillLevel: el.skillLevel,
       };
-      console.log('preparing skills ' + oneSkill)
-      return oneSkill
-    })
-    console.log(skills)
-    return skills
+
+      return oneSkill;
+    });
+    return skills;
+  }
+
+  onSubmit(form: FormGroup) {
+    console.log(form);
   }
 }

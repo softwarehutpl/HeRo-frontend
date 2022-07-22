@@ -1,11 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import axios from 'axios';
 
-import { Skill, } from '../../interfaces/Skill';
-import { Recruitment, RecruitmentList, GetRecruitmentListBodyRequest,
+import { Skill } from '../../interfaces/Skill';
+import {
+  Recruitment,
+  GetRecruitmentListBodyRequest,
 } from '../../interfaces/recruitment';
 
 import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 const getProjectBody = {
   name: '',
@@ -29,11 +32,14 @@ const getProjectBody = {
 @Injectable({
   providedIn: 'root',
 })
-export class ProjectsService {
-
-  public urlGetProjectList: string = 'https://swh-t-praktyki2022-app.azurewebsites.net/Recruitment/GetList';
-  public urlGetSkillsList: string = 'https://swh-t-praktyki2022-app.azurewebsites.net/Skill/GetList';
-  public urlSaveProject: string = 'https://swh-t-praktyki2022-app.azurewebsites.net/Recruitment/Create';
+export class ProjectsService implements OnInit {
+  public urlGetProjectList =
+    'https://swh-t-praktyki2022-app.azurewebsites.net/Recruitment/GetList';
+  public urlGetSkillsList =
+    'https://swh-t-praktyki2022-app.azurewebsites.net/Skill/GetList';
+  public urlSaveProject =
+    'https://swh-t-praktyki2022-app.azurewebsites.net/Recruitment/Create';
+  public projectId = 0;
   public data: GetRecruitmentListBodyRequest = {
     name: '',
     description: '',
@@ -52,7 +58,15 @@ export class ProjectsService {
       ],
     },
   };
-  public isSaved!: boolean
+  public isSaved!: boolean;
+
+  constructor(private _activatedRoute: ActivatedRoute) {}
+
+  ngOnInit() {
+    this._activatedRoute.queryParams.subscribe((params) => {
+      this.projectId = params['projectId'];
+    });
+  }
 
   // public projectList$ = new Observable<GetRecruitmentListBodyRequest>(
   //   (observer) => {
@@ -86,24 +100,34 @@ export class ProjectsService {
       });
   });
 
-
-  
-
-  public async saveProject(body: Recruitment): Promise<boolean> {
-   console.log('servis save project')
-   console.log(body)
-      let saveProject = await axios.post(this.urlSaveProject, {body: body}, {withCredentials: true})
-      .then(res => {
-        if(res.status === 200) {
-          return this.isSaved = true;
-        } else { 
-          return this.isSaved = false}
+  public async saveProject(body: Recruitment): Promise<boolean> {    
+    const saveProject = await axios
+      .post(this.urlSaveProject, body, { withCredentials: true })
+      .then((res) => {
+        console.log("response " + res.status)
+        if (res.status === 200) {
+          return (this.isSaved = true);
+        } else {
+          return (this.isSaved = false);
+        }
       })
-      .catch (error => {return false} )
+      .catch((error) => {
+        console.log(error);
+        return false;
+      });
 
-      return saveProject
+      if(saveProject) {
+        alert("project saved")
+        // this._router.navigate(['projects'])
+      }
+    return saveProject;
   }
 
-  public async getProjectList(pageNumber: number) {  }
+  public readingProjectIdFromQueryParam() {
+    return this.projectId;
+  }
 
+  public async getProjectList(pageNumber: number) {
+    console.log(pageNumber);
+  }
 }

@@ -6,8 +6,8 @@ import axios from 'axios';
   providedIn: 'root',
 })
 export class AuthService {
-  public urlAuth: string = 'https://swh-t-praktyki2022-app.azurewebsites.net/Auth/SignIn';
-  public urlRecoveryPassword: string = 'https://swh-t-praktyki2022-app.azurewebsites.net/Auth/PasswordRecoveryMail';
+  public urlAuth = 'https://swh-t-praktyki2022-app.azurewebsites.net/Auth/SignIn';
+  public urlRecoveryPassword = 'https://swh-t-praktyki2022-app.azurewebsites.net/Auth/PasswordRecoveryMail';
 
   constructor(private _router: Router) {}
 
@@ -33,6 +33,7 @@ export class AuthService {
       .post(this.urlRecoveryPassword, null, { params: { email: userEmail } })
       .then((res) => {
         if (res.status === 200) {
+          console.log(res)
         }
         console.log(res.status);
       });
