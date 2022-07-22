@@ -1,1 +1,17 @@
-<p>profile works!</p>
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="container container__row">
+    <app-sidebar></app-sidebar>
+    <div class="profile-informations" *ngIf="dataLoadet">
+        <div>fullName: {{candidate.fullName}}</div>
+        <div>email: {{candidate.email}}</div>
+        <div>phoneNumber: {{candidate.phoneNumber}}</div>
+        <div>availableFrom: {{candidate.availableFrom.getFullYear()}}:{{candidate.availableFrom.getMonth()}}:{{candidate.availableFrom.getDate()}}</div>
+        <div>expectedMonthlySalary: {{candidate.expectedMonthlySalary}}</div>
+        <div>otherExpectations: {{candidate.otherExpectations}}</div>
+        <div>cvPath: {{candidate.cvPath}}</div>
+        <div>fullName: {{candidate.fullName}}</div>
+
+    </div>
+  </div>
+</div>

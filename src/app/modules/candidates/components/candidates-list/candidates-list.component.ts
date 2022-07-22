@@ -52,7 +52,7 @@ export class CandidatesListComponent implements AfterViewInit, OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
-    this.candidates = await this.service.getAllCandidates();
+    // this.candidates = await this.service.getAllCandidates();
     // const myObserver = {
     //   next: (result: any) => {
     //     this.apidata = result;
