@@ -148,7 +148,7 @@ export class ProjectsService implements OnInit {
           beginningDate: '',
           endingDate: '',
           paging: {
-            pageSize: 10,
+            pageSize: 5,
             pageNumber: pageNumber,
           },
           sortOrder: {
