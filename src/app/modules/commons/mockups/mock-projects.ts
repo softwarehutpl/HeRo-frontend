@@ -7,6 +7,7 @@ export interface Projects {
     to: Date;
     resume: number;
     hired: number;
+    id: number;
   }
 
 export const DATA: Array<Projects> = [
@@ -17,6 +18,7 @@ export const DATA: Array<Projects> = [
       to: new Date('2022-04-31'),
       resume: 30,
       hired: 3,
+      id: 1
     },
     {
       name: 'Angular Developer',
@@ -25,6 +27,7 @@ export const DATA: Array<Projects> = [
       to: new Date('2022-08-31'),
       resume: 99,
       hired: 1,
+      id: 2
     },
     {
       name: 'React Developer',
@@ -33,6 +36,7 @@ export const DATA: Array<Projects> = [
       to: new Date('2022-12-31'),
       resume: 150,
       hired: 190,
+      id: 3,
     },
     {
       name: 'JavaScript Developer',
@@ -41,6 +45,7 @@ export const DATA: Array<Projects> = [
       to: new Date('2022-04-31'),
       resume: 30,
       hired: 3,
+      id:4,
     },
     {
       name: 'Angular Developer',
@@ -49,6 +54,7 @@ export const DATA: Array<Projects> = [
       to: new Date('2022-08-31'),
       resume: 99,
       hired: 1,
+      id:5,
     },
     {
       name: 'React Developer',
@@ -57,6 +63,7 @@ export const DATA: Array<Projects> = [
       to: new Date('2022-12-31'),
       resume: 150,
       hired: 190,
+      id: 6,
     },
     {
       name: 'JavaScript Developer',
@@ -65,6 +72,7 @@ export const DATA: Array<Projects> = [
       to: new Date('2022-04-31'),
       resume: 30,
       hired: 3,
+      id: 7,
     },
     {
       name: 'Angular Developer',
@@ -73,6 +81,7 @@ export const DATA: Array<Projects> = [
       to: new Date('2022-08-31'),
       resume: 99,
       hired: 1,
+      id: 8
     },
     {
       name: 'React Developer',
@@ -81,6 +90,7 @@ export const DATA: Array<Projects> = [
       to: new Date('2022-12-31'),
       resume: 150,
       hired: 190,
+      id: 9,
     },
     {
       name: 'JavaScript Developer',
@@ -89,6 +99,7 @@ export const DATA: Array<Projects> = [
       to: new Date('2022-04-31'),
       resume: 30,
       hired: 3,
+      id: 10,
     },
     {
       name: 'Angular Developer',
@@ -97,6 +108,7 @@ export const DATA: Array<Projects> = [
       to: new Date('2022-08-31'),
       resume: 99,
       hired: 1,
+      id: 11
     },
     {
       name: 'React Developer',
@@ -105,6 +117,7 @@ export const DATA: Array<Projects> = [
       to: new Date('2022-12-31'),
       resume: 150,
       hired: 190,
+      id: 12
     },
   ];
 

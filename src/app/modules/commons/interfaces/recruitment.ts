@@ -10,6 +10,7 @@ export interface Recruitment {
     recruitmentPosition: string;
     localization:        string;
     seniority:           string;
+    isPublic:            boolean;
     skills:              SkillsForProjectId[];
 }
 
