@@ -20,7 +20,6 @@ export class NavbarComponent implements OnInit {
 
   public bellButton(): void {
     console.log('bell button pressed');
-    this._authService.getCandidates();
   }
   public userButton(): void {
     axios

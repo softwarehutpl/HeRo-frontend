@@ -14,6 +14,8 @@ import { ProjectsService } from 'src/app/modules/commons/services/projects/proje
 
 export class CalendarItemsComponent implements OnInit {
 
+  @Input() events: CalendarEvent[] = [];
+
   intervie:InterviewDTO={
     interviewId: 1,
     date:new Date("2022-07-19T12:03:24.895Z"),
@@ -21,12 +23,12 @@ export class CalendarItemsComponent implements OnInit {
     candidateName: "Mike",
     candidateLastName: "Mike",
     candidateEmail: "mike@gmail.com",
+    candidateStatus: "NEW",
     workerId: 3,
     workerEmail: "string",
     type: "string"
-  }
+  };
 
-  @Input() events: CalendarEvent[] = [];
 
   hovered: any;
   listOfevents: CalendarEvent[] = [];
