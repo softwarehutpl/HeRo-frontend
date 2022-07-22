@@ -15,7 +15,7 @@
       <div class="informations__value">{{candidate.fullName}}</div>
 
       <div class="informations__option">Email:</div>
-      <div class="informations__value"><a>{{candidate.email}}</a></div>
+      <a class="informations__value">{{candidate.email}}</a>
 
       <div class="informations__option">PhoneNumber:</div>
       <div class="informations__value">{{candidate.phoneNumber}}</div>
@@ -33,7 +33,32 @@
       <div class="informations__value">{{candidate.otherExpectations}}</div>
 
       <div class="informations__option">CV:</div>
-      <div class="informations__value"><a>{{candidate.cvPath}}</a></div>
+      <a class="informations__value">{{candidate.cvPath}}</a>
+
+
+      <!-- Note opinions -->
+      <div class="informations__title">Evaluation Result</div>
+
+      <div class="informations__option">Evaluation Author:</div>
+      <div class="informations__value">{{candidate.hrName}} -> HR</div>
+
+      <div class="informations__option">Rate:</div>
+      <div class="informations__rating">{{candidate.hrOpinionScore}}/5</div>
+
+      <div class="informations__option">Note:</div>
+      <div class="informations__value">{{candidate.hrOpinionText}}</div>
+
+
+      <div class="informations__title">Evaluation Result</div>
+
+      <div class="informations__option">Evaluation Author:</div>
+      <div class="informations__value">{{candidate.interviewName}} -> techlead</div>
+
+      <div class="informations__option">Rate:</div>
+      <div class="informations__rating">{{candidate.interviewOpinionScore}}/5</div>
+
+      <div class="informations__option">Note:</div>
+      <div class="informations__value">{{candidate.interviewOpinionText}}</div>
     </div>
 
 
