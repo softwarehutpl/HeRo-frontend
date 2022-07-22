@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 // import { ProjectsService } from 'src/app/modules/commons/services/projects/projects.service';
 import { DATA } from 'src/app/modules/commons/mockups/mock-projects';
+import { ProjectsService } from 'src/app/modules/commons/services/projects/projects.service';
 
 @Component({
   selector: 'app-projects-list',
