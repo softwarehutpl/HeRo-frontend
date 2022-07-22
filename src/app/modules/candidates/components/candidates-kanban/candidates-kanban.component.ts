@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CandidatesService } from '../../../commons/services/candidates/candidates.service';
-
+import { CandidatesDataService } from '../../services/candidates-data.service';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -23,21 +22,21 @@ export interface KanbanDisplay {
   styleUrls: ['./candidates-kanban.component.scss'],
 })
 export class CandidatesKanbanComponent implements OnInit {
-  new: Array<KanbanDisplay> = [];
-  evaluation: Array<KanbanDisplay> = [];
-  interview: Array<KanbanDisplay> = [];
-  phoneInterview: Array<KanbanDisplay> = [];
-  techInterview: Array<KanbanDisplay> = [];
-  offer: Array<KanbanDisplay> = [];
-  hired: Array<KanbanDisplay> = [];
-  dropped: Array<KanbanDisplay> = [];
+  newCand: Candidate[] = [];
+  evaluation: Candidate[] = [];
+  interview: Candidate[] = [];
+  phoneInterview: Candidate[] = [];
+  techInterview: Candidate[] = [];
+  offer: Candidate[] = [];
+  hired: Candidate[] = [];
+  dropped: Candidate[] = [];
 
   private candidates!: Array<Candidate>;
 
-  constructor(private cs: CandidatesService) {}
+  constructor(private service: CandidatesDataService) {}
 
   async ngOnInit(): Promise<void> {
-    this.candidates = await this.cs.getAllCandidates();
+    // this.candidates = await this.service.getAllCandidates();
   }
 
   logData() {
@@ -46,7 +45,7 @@ export class CandidatesKanbanComponent implements OnInit {
     // console.log(this.candidates2);
   }
 
-  drop(event: CdkDragDrop<KanbanDisplay[]>) {
+  drop(event: CdkDragDrop<Candidate[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
