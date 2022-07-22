@@ -10,6 +10,11 @@ export interface Project {
     id: number;
   }
 
+  export interface Recruiter {
+    item1: number;
+    item2: string;
+  }
+
 export const DATA: Array<Project> = [
     {
       name: 'JavaScript Developer',

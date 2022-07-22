@@ -7,7 +7,8 @@ import {
 } from '../../interfaces/recruitment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { DATA, Project } from '../../mockups/mock-projects';
+import { DATA, Project, Recruiter } from '../../mockups/mock-projects';
+import { RecruitmentDTO } from '../../interfaces/recruitment'
 
 const getProjectBody = {
   name: '',
@@ -40,6 +41,7 @@ export class ProjectsService implements OnInit {
     'https://swh-t-praktyki2022-app.azurewebsites.net/Skill/GetList';
   public urlSaveProject =
     'https://swh-t-praktyki2022-app.azurewebsites.net/Recruitment/Create';
+  public urlRecruiterId = 'https://swh-t-praktyki2022-app.azurewebsites.net/User/GetRecruiters';
   public projectId = 0;
   public data: GetRecruitmentListBodyRequest = {
     name: '',
@@ -164,7 +166,39 @@ export class ProjectsService implements OnInit {
       )
       .then((res) => {
         console.log(res.data.recruitmentDTOs);
+         const dataFromRequest: RecruitmentDTO[] = res.data.recruitmentDTOs;
+        
+         const dataReadyToRender = dataFromRequest.map(el => {
+          const recruiterName =  this.getRecruiterName(el.recruiterId)
+          console.log(recruiterName)
+          const readyProject = {
+              name: el.name,
+              creator: 'John Doe',
+              from: el.beginningDate,
+              to: el.endingDate,
+              resume: 30,
+              hired: 3,
+              id: el.id
+          }
+          return readyProject
+        });
+
         this._projects$.next(res.data.recruitmentDTOs);
       });
+  }
+
+  public  async getRecruiterName(recruiterId: number) {
+    let recruiterName;
+    axios.post(this.urlRecruiterId, null,{withCredentials: true} )
+    .then(res => {
+      const recruitmentList: Recruiter[]= res.data;
+      const recruiterEmail = recruitmentList.find(el => {
+        if (el.item1 === recruiterId) {
+          return recruiterName = el.item2
+        }
+        return
+      })
+    })
+    return recruiterName
   }
 }
