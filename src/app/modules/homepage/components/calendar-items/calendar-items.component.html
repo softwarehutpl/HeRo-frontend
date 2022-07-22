@@ -1,11 +1,11 @@
 <mat-list>
   <div class="list" *ngFor="let event of listOfevents; let i = index">
 
-    <div class="border" [ngStyle]="hovered === i ?
+    <div class="border" (click)="openDialog(event)" [ngStyle]="hovered === i ?
       {backgroundColor:event.color!.primary}:
       {backgroundColor:event.color!.secondary}" (mouseover)="hovered = i" (mouseout)="hovered = -1">
 
-      <div class="cut-text" (click)="openDialog(event)">
+      <div class="cut-text" >
         {{event.title}}
 
       </div>

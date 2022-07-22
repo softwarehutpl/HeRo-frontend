@@ -75,13 +75,15 @@ export interface Sort {
 }
 
 export interface GetRecruitmentListBodyRequest {
-    name: string,
-    description: string,
-    beginningDate: string,
-    endingDate: string,
-    paging: {
-      pageSize: number,
-      pageNumber: number,
+  name: string,
+  description: string,
+  showOpen: boolean,
+  showClosed: boolean,
+  beginningDate: string,
+  endingDate: string,
+  paging: {
+    pageSize: number,
+    pageNumber: number,
     },
     sortOrder: {
       sort: [

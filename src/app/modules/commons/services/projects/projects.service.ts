@@ -7,8 +7,10 @@ import {
   GetRecruitmentListBodyRequest,
 } from '../../interfaces/recruitment';
 
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { DATA, Project } from '../../mockups/mock-projects';
+
 
 const getProjectBody = {
   name: '',
@@ -35,6 +37,8 @@ const getProjectBody = {
 export class ProjectsService implements OnInit {
   public urlGetProjectList =
     'https://swh-t-praktyki2022-app.azurewebsites.net/Recruitment/GetList';
+  public urlGetPublicProjecList =
+    'https://swh-t-praktyki2022-app.azurewebsites.net/Recruitment/GetPublicList';
   public urlGetSkillsList =
     'https://swh-t-praktyki2022-app.azurewebsites.net/Skill/GetList';
   public urlSaveProject =
@@ -43,6 +47,8 @@ export class ProjectsService implements OnInit {
   public data: GetRecruitmentListBodyRequest = {
     name: '',
     description: '',
+    showOpen: true,
+    showClosed: true,
     beginningDate: '',
     endingDate: '',
     paging: {
@@ -59,8 +65,13 @@ export class ProjectsService implements OnInit {
     },
   };
   public isSaved!: boolean;
+  private _projects$: BehaviorSubject<Project[]> = new BehaviorSubject(DATA);
 
   constructor(private _activatedRoute: ActivatedRoute) {}
+
+  get projects() {
+    return this._projects$.asObservable();
+  }
 
   ngOnInit() {
     this._activatedRoute.queryParams.subscribe((params) => {
@@ -100,11 +111,12 @@ export class ProjectsService implements OnInit {
       });
   });
 
-  public async saveProject(body: Recruitment): Promise<boolean> {    
+
+  public async saveProject(body: Recruitment): Promise<boolean> {
     const saveProject = await axios
       .post(this.urlSaveProject, body, { withCredentials: true })
       .then((res) => {
-        console.log("response " + res.status)
+        console.log('response ' + res.status);
         if (res.status === 200) {
           return (this.isSaved = true);
         } else {
@@ -116,10 +128,12 @@ export class ProjectsService implements OnInit {
         return false;
       });
 
-      if(saveProject) {
-        alert("project saved")
-        // this._router.navigate(['projects'])
-      }
+
+    if (saveProject) {
+      alert('project saved');
+      // this._router.navigate(['projects'])
+    }
+
     return saveProject;
   }
 
@@ -127,7 +141,36 @@ export class ProjectsService implements OnInit {
     return this.projectId;
   }
 
-  public async getProjectList(pageNumber: number) {
-    console.log(pageNumber);
+  public async getPublicProjectList(pageNumber: number) {
+    console.log('getPublicProjectList');
+    axios
+      .post(
+        this.urlGetPublicProjecList,
+        {
+          name: '',
+          description: '',
+          showOpen: true,
+          showClosed: true,
+          beginningDate: '',
+          endingDate: '',
+          paging: {
+            pageSize: 5,
+            pageNumber: pageNumber,
+          },
+          sortOrder: {
+            sort: [
+              {
+                key: "'",
+                value: '',
+              },
+            ],
+          },
+        },
+        { withCredentials: true }
+      )
+      .then((res) => {
+        console.log(res.data.recruitmentDTOs);
+        this._projects$.next(res.data.recruitmentDTOs);
+      });
   }
 }

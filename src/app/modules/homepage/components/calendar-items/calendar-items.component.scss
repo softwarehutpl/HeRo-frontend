@@ -3,6 +3,9 @@
   border-radius: 10px ;
   padding: 2px;
   margin: 2px;
+  
+}:hover{
+  cursor: pointer;
 }
 
 .cut-text {
@@ -33,5 +36,5 @@
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
-}
 
+}
