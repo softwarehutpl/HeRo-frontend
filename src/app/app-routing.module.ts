@@ -13,6 +13,9 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomepageComponent,
+  },{
+    path: 'profile/:id',
+    component: ProfileComponent,
   },
   {
     path: 'candidates',
