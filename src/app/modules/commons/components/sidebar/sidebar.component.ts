@@ -16,8 +16,5 @@ public sidebarButton3: string = Data.sidebarButton3;
   constructor() {}
 
   ngOnInit(): void {}
-  public click(): void {
-    console.log('hej');
-  }
 
 }

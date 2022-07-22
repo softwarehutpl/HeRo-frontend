@@ -33,9 +33,10 @@ export class CalendarItemsComponent implements OnInit {
   hovered: any;
   listOfevents: CalendarEvent[] = [];
   nameOfButton = "show more";
-  max = 2;
+  showNumberOfEvents:number;
 
   constructor(private dialog: MatDialog) {
+    this.showNumberOfEvents = 2;
   }
 
   ngOnInit(): void {
@@ -53,20 +54,17 @@ export class CalendarItemsComponent implements OnInit {
   show() {
     if (this.nameOfButton === "show more") {
       this.nameOfButton = "show less";
-      this.max = this.events.length;
-
-
+      this.showNumberOfEvents = this.events.length;
     }
     else {
       this.nameOfButton = "show more";
-      this.max = 2;
-
+      this.showNumberOfEvents = 2;
     }
     this.changeListOfEvents();
   }
 
   changeListOfEvents() {
-    this.listOfevents = this.events.slice(0, this.max);
+    this.listOfevents = this.events.slice(0, this.showNumberOfEvents);
   }
 
 
