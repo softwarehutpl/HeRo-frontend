@@ -1,6 +1,6 @@
 import { ProjectListForTable } from "../interfaces/candidate";
 
-export interface Projects {
+export interface Project {
     name: string;
     creator: string;
     from: Date;
@@ -10,7 +10,7 @@ export interface Projects {
     id: number;
   }
 
-export const DATA: Array<Projects> = [
+export const DATA: Array<Project> = [
     {
       name: 'JavaScript Developer',
       creator: 'John Doe',

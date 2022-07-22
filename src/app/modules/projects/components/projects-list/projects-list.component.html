@@ -80,3 +80,12 @@
   aria-label="Select page"
   [pageIndex]="pageIndex"
 ></mat-paginator>
+
+<div class="'container">
+  adassafsf
+  <ul *ngFor=" let project of projectService.projects | async">
+    <li>
+      {{project.name}}
+    </li>
+  </ul>
+</div>

@@ -4,7 +4,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-// import { ProjectsService } from 'src/app/modules/commons/services/projects/projects.service';
+import { ProjectsService } from 'src/app/modules/commons/services/projects/projects.service';
 import { DATA } from 'src/app/modules/commons/mockups/mock-projects';
 
 @Component({
@@ -14,15 +14,17 @@ import { DATA } from 'src/app/modules/commons/mockups/mock-projects';
 })
 export class ProjectsListComponent implements AfterViewInit {
   public status = '';
-  public pageIndex = 0;
-  public pageSize = 0;
-  public data?: any;
+  public pageIndex = 1;
+  public pageSize = 5;
+  public data = DATA;
 
   constructor(
     private _router: Router,
     private _liveAnnouncer: LiveAnnouncer,
-    // private _projectService: ProjectsService
+    public projectService: ProjectsService
   ) {
+  
+    this.projectService.getPublicProjectList(this.pageIndex, )
     // this.data = _projectService.getProjectList(this.pageIndex)
   }
 
@@ -51,7 +53,10 @@ export class ProjectsListComponent implements AfterViewInit {
   // }
 
   public getPaginatorData(e: PageEvent) {
+    console.log(this.pageIndex, this.pageSize )
     this.pageIndex = e.pageIndex;
+    this.pageSize = e.pageSize;
+    console.log(this.pageIndex, this.pageSize )
     this.getNextPage
   }
 
