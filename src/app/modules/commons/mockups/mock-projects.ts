@@ -191,3 +191,19 @@ export const ProjectColumnLable = [
     "Hired",
     "actions"
 ];
+
+// Convert plain dictionaries into enums 
+export enum EProjectColumnLabel {
+    Name = "Name",
+    Creator = "Creator",
+    From = "From",
+    To = "To",
+    Resume = "Resume",
+    Hired = "Hired",
+    actions = "actions",
+};
+type ProjectColumnLabelType = keyof typeof EProjectColumnLabel;
+
+const example = EProjectColumnLabel.Name;
+const onlyValues = Object.values(EProjectColumnLabel);
+

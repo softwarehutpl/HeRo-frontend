@@ -24,6 +24,8 @@ export interface KanbanDisplay {
 })
 export class CandidatesKanbanComponent implements OnInit {
   new: Array<KanbanDisplay> = [];
+  // Dont use "new" as property. This wors is preserved. See preserved names list for JavaScript
+  // Its more convenient to use KanbanDisplay[] as type there.
   evaluation: Array<KanbanDisplay> = [];
   interview: Array<KanbanDisplay> = [];
   phoneInterview: Array<KanbanDisplay> = [];

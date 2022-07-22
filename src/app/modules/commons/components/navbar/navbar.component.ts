@@ -20,8 +20,12 @@ export class NavbarComponent implements OnInit {
 
   public bellButton(): void {
     console.log('bell button pressed');
+    // This dooes nothing
+    // this._authService.getCandidates();
   }
   public userButton(): void {
+
+    // !! Controlller should not call API directly. It should go through the service.
     axios
       .get(this.urlLogout, { withCredentials: true })
       .then((res) => console.log(res));

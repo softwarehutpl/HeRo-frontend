@@ -17,6 +17,7 @@ export class FilterComponent implements OnChanges, OnInit {
   public sidebarButton2: string = Data.sidebarButton2;
   public sidebarButton3: string = Data.sidebarButton3;
 
+  // I don't get the purspose of this service
   constructor(private _filterService: FiltersService) {
     this.isDropdow = _filterService.isdropdown();
   }

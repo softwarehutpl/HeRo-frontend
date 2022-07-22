@@ -7,7 +7,9 @@ import { useMocks } from '../../mockups/useMocks';
 })
 export class CandidatesService {
   constructor() {}
+  // Don't call methods in class body. Move that to consturctor.
   // allCandidates = this.getAllCandidates();
+
 
   @useMocks(true, import(`@mocks/candidates.json`))
   // if true -> overrides function and returns data from path.
