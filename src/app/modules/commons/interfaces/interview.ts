@@ -27,7 +27,7 @@ export interface InterviewDTO {
     candidateId:       number;
     candidateName:     string;
     candidateLastName: string;
-    candidateStatus:   "NEW" | "IN_PROCESSING"| "DROPPED_OUT"| "HIRED";
+    candidateStatus:   string;//"NEW" | "IN_PROCESSING"| "DROPPED_OUT"| "HIRED";
     candidateEmail:    string;
     workerId:          number;
     workerEmail:       string;

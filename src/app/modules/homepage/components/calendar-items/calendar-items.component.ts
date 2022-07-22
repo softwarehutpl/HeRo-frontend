@@ -1,10 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CalendarEvent } from 'angular-calendar';
-import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
+import { MatDialog } from "@angular/material/dialog";
 import { InterviewDialogComponent } from './dialog-interview/interview-dialog.component';
 import { InterviewDTO } from 'src/app/modules/commons/interfaces/interview';
-import { ProjectsService } from 'src/app/modules/commons/services/projects/projects.service';
-
+import { INTERVIEW } from '@mocks/mock-interview';
 
 @Component({
   selector: 'app-calendar-items',
@@ -16,18 +15,7 @@ export class CalendarItemsComponent implements OnInit {
 
   @Input() events: CalendarEvent[] = [];
 
-  intervie:InterviewDTO={
-    interviewId: 1,
-    date:new Date("2022-07-19T12:03:24.895Z"),
-    candidateId: 0,
-    candidateName: "Mike",
-    candidateLastName: "Mike",
-    candidateEmail: "mike@gmail.com",
-    candidateStatus: "NEW",
-    workerId: 3,
-    workerEmail: "string",
-    type: "string"
-  };
+  intervie:InterviewDTO;
 
 
   hovered: any;
@@ -37,6 +25,7 @@ export class CalendarItemsComponent implements OnInit {
 
   constructor(private dialog: MatDialog) {
     this.showNumberOfEvents = 2;
+    this.intervie = INTERVIEW;
   }
 
   ngOnInit(): void {

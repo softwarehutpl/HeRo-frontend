@@ -2,7 +2,7 @@ import { DragDropRegistry } from '@angular/cdk/drag-drop';
 import { CalendarEvent } from 'angular-calendar';
 import {Interview} from '../interfaces/interview';
 
-export const INTERVIEW: Interview[]=[
+export const INTERVIEWS: Interview[]=[
 {
     interviewId:       1,
     date:              new Date('2022-07-15'),
@@ -111,4 +111,16 @@ export const CALENDAR_EVENTS: CalendarEvent[] = [
     }
   ];
 
-  
+  export const INTERVIEW={
+    interviewId: 1,
+    date:new Date("2022-07-19T12:03:24.895Z"),
+    candidateId: 0,
+    candidateName: "Mike",
+    candidateLastName: "Mike",
+    candidateEmail: "mike@gmail.com",
+    candidateStatus: "NEW",
+    workerId: 3,
+    workerEmail: "string",
+    type: "string"
+
+  }
