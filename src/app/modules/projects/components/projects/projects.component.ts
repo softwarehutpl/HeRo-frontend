@@ -7,6 +7,7 @@ import { ProjectsService } from 'src/app/modules/commons/services/projects/proje
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.scss'],
 })
+
 export class ProjectsComponent  {
   public checked = true;
   public componentName = "projects";

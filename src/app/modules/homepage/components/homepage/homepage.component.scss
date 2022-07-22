@@ -1,3 +1,20 @@
 .container__column{
     width: auto;
 }
+.container{
+    display: grid;
+    grid-template-columns: fit-content(5%) fit-content(30%) 1fr;
+
+    &__sidebar{
+        grid-column: 1/ span 1;
+    }
+    &__box-info{
+        grid-column: 2/span 1;
+    }
+    &__calendar{
+        height: 100%;
+        grid-column: 3/span 1;
+        margin-right:20px;
+        margin-left:10px;
+    }
+}

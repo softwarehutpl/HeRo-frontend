@@ -4,7 +4,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { ProjectsService } from 'src/app/modules/commons/services/projects/projects.service';
+// import { ProjectsService } from 'src/app/modules/commons/services/projects/projects.service';
 import { DATA } from 'src/app/modules/commons/mockups/mock-projects';
 
 @Component({
@@ -17,6 +17,7 @@ export class ProjectsListComponent implements AfterViewInit {
   public pageIndex = 1;
   public pageSize = 5;
   public data = DATA;
+
 
   constructor(
     private _router: Router,
@@ -41,7 +42,6 @@ export class ProjectsListComponent implements AfterViewInit {
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  
 
 get projectsData() {
   return this.projectService.projects
@@ -51,10 +51,10 @@ get projectsData() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }
-  // onChangePage() {
-  //   console.log(this.pageIndex);
-  //   console.log(this.pageSize);
-  // }
+  onChangePage() {
+    console.log(this.pageIndex);
+    console.log(this.pageSize);
+  }
 
   public getPaginatorData(e: PageEvent) {
     console.log(this.pageIndex, this.pageSize )
@@ -62,10 +62,13 @@ get projectsData() {
     this.pageSize = e.pageSize;
     console.log(this.pageIndex, this.pageSize )
     this.getNextPage
+
   }
 
   public getNextPage() {
     // const list = this._projectService.getProjectList(this.pageIndex);
+    // this.data = list;
+
   }
 
   announceSortChange(sortState: Sort) {
@@ -76,7 +79,6 @@ get projectsData() {
     }
   }
 
-
   moveToCandidates(projectName: string, status?: string) {
     this._router.navigate(['/candidates'], {
       queryParams: {
@@ -84,7 +86,6 @@ get projectsData() {
         ...(status === undefined ? {} : { status: status }),
       },
     });
-
   }
 
   moveToEditProject(projectId: string) {

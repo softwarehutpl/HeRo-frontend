@@ -1,13 +1,16 @@
 import { Injectable, OnInit } from '@angular/core';
 import axios from 'axios';
+
 import { Skill } from '../../interfaces/Skill';
 import {
   Recruitment,
   GetRecruitmentListBodyRequest,
 } from '../../interfaces/recruitment';
+
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { DATA, Project } from '../../mockups/mock-projects';
+
 
 const getProjectBody = {
   name: '',
@@ -108,6 +111,7 @@ export class ProjectsService implements OnInit {
       });
   });
 
+
   public async saveProject(body: Recruitment): Promise<boolean> {
     const saveProject = await axios
       .post(this.urlSaveProject, body, { withCredentials: true })
@@ -124,10 +128,12 @@ export class ProjectsService implements OnInit {
         return false;
       });
 
+
     if (saveProject) {
       alert('project saved');
       // this._router.navigate(['projects'])
     }
+
     return saveProject;
   }
 
