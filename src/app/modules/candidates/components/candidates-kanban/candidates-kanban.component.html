@@ -4,11 +4,11 @@
     <h2>new</h2>
     <div
       cdkDropList
-      [cdkDropListData]="new"
+      [cdkDropListData]="newCand"
       class="example-list"
       (cdkDropListDropped)="drop($event)"
     >
-      <div class="example-box" *ngFor="let candidate of new" cdkDrag>
+      <div class="example-box" *ngFor="let candidate of newCand" cdkDrag>
         {{ candidate.name }}
       </div>
     </div>

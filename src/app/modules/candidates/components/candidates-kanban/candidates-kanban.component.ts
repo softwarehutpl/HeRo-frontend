@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CandidatesService } from '../../../commons/services/candidates/candidates.service';
-
+import { CandidatesDataService } from '../../services/candidates-data.service';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -8,6 +7,7 @@ import {
 } from '@angular/cdk/drag-drop';
 import CANDIDATES from '../../../commons/mockups/candidates.json';
 import { Candidate } from '../../../commons/interfaces/candidate';
+import { Observable } from 'rxjs';
 
 const DATA = CANDIDATES; //This if brute-force import from JSON, i will use this to adapt local mockups to backend.
 
@@ -23,21 +23,21 @@ export interface KanbanDisplay {
   styleUrls: ['./candidates-kanban.component.scss'],
 })
 export class CandidatesKanbanComponent implements OnInit {
-  new: Array<KanbanDisplay> = [];
-  evaluation: Array<KanbanDisplay> = [];
-  interview: Array<KanbanDisplay> = [];
-  phoneInterview: Array<KanbanDisplay> = [];
-  techInterview: Array<KanbanDisplay> = [];
-  offer: Array<KanbanDisplay> = [];
-  hired: Array<KanbanDisplay> = [];
-  dropped: Array<KanbanDisplay> = [];
+  newCand: Candidate[] = [];
+  evaluation: Candidate[] = [];
+  interview: Candidate[] = [];
+  phoneInterview: Candidate[] = [];
+  techInterview: Candidate[] = [];
+  offer: Candidate[] = [];
+  hired: Candidate[] = [];
+  dropped: Candidate[] = [];
 
   private candidates!: Array<Candidate>;
 
-  constructor(private cs: CandidatesService) {}
+  constructor(private service: CandidatesDataService) {}
 
   async ngOnInit(): Promise<void> {
-    this.candidates = await this.cs.getAllCandidates();
+    // this.candidates = await this.service.getAllCandidates();
   }
 
   logData() {
@@ -46,7 +46,7 @@ export class CandidatesKanbanComponent implements OnInit {
     // console.log(this.candidates2);
   }
 
-  drop(event: CdkDragDrop<KanbanDisplay[]>) {
+  drop(event: CdkDragDrop<Candidate[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -65,29 +65,26 @@ export class CandidatesKanbanComponent implements OnInit {
     }
   }
   confirmationRequired(): boolean {
-    let userConfirmed: boolean = false;
-
-    // add magic here
-
-    if (userConfirmed) {
-      return true;
-    } else {
-      return false;
-    }
+    // let userConfirmed: boolean = false;
+    // // add magic here
+    // if (userConfirmed) {
+    return true;
+    // } else {
+    //   return false;
+    // }
   }
   warning() {
-    //some kind of modal should display here
-    alert("You're about to change user status");
-    let userConfirmed: boolean = this.confirmationRequired();
-
-    if (userConfirmed) {
-      alert('axios post -> change status');
-      //axios.post ...
-      // +force refresh
-      return true;
-    } else {
-      alert('user denied');
-      return false;
-    }
+    //   //some kind of modal should display here
+    //   alert("You're about to change user status");
+    //   let userConfirmed: boolean = this.confirmationRequired();
+    //   if (userConfirmed) {
+    //     alert('axios post -> change status');
+    //     //axios.post ...
+    //     // +force refresh
+    return true;
+    //   } else {
+    //     alert('user denied');
+    //     return false;
+    //   }
   }
 }
