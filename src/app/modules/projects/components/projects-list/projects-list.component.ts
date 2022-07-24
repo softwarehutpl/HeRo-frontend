@@ -1,11 +1,10 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { ProjectsService } from 'src/app/modules/commons/services/projects/projects.service';
-import { DATA } from 'src/app/modules/commons/mockups/mock-projects';
+import { ProjectListDataSource } from './ProjectListDataSource';
 
 @Component({
   selector: 'app-projects-list',
@@ -16,16 +15,14 @@ export class ProjectsListComponent implements AfterViewInit {
   public status = '';
   public pageIndex = 1;
   public pageSize = 5;
-  public data = DATA;
-
+  dataSource = new ProjectListDataSource(this.projectService.projects);
   constructor(
     private _router: Router,
     private _liveAnnouncer: LiveAnnouncer,
     public projectService: ProjectsService
   ) {
   
-    this.projectService.getPublicProjectList(this.pageIndex, )
-    // this.data = _projectService.getProjectList(this.pageIndex)
+    this.projectService.getPublicProjectList(this.pageIndex);
   }
 
   displayedColumns: string[] = [
@@ -37,7 +34,6 @@ export class ProjectsListComponent implements AfterViewInit {
     'hired',
     'edit',
   ];
-  dataSource = new MatTableDataSource(DATA);
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;

@@ -4,11 +4,13 @@ import { Skill } from '../../interfaces/Skill';
 import {
   Recruitment,
   GetRecruitmentListBodyRequest,
+  RecruitmentList,
 } from '../../interfaces/recruitment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { DATA, Project, Recruiter } from '../../mockups/mock-projects';
-import { RecruitmentDTO } from '../../interfaces/recruitment'
+import { RecruitmentDTO } from '../../interfaces/recruitment';
+
 
 const getProjectBody = {
   name: '',
@@ -29,10 +31,22 @@ const getProjectBody = {
   },
 };
 
+interface GetRecruitersItem{
+  item1: number;
+  item2: string;
+}
+
+interface GetRecruitersBodyResponse {
+  data: GetRecruitersItem[]
+}
+
+
 @Injectable({
   providedIn: 'root',
 })
 export class ProjectsService implements OnInit {
+  private recruitListIsLoaded = false;
+
   public urlGetProjectList =
     'https://swh-t-praktyki2022-app.azurewebsites.net/Recruitment/GetList';
   public urlGetPublicProjecList =
@@ -41,7 +55,8 @@ export class ProjectsService implements OnInit {
     'https://swh-t-praktyki2022-app.azurewebsites.net/Skill/GetList';
   public urlSaveProject =
     'https://swh-t-praktyki2022-app.azurewebsites.net/Recruitment/Create';
-  public urlRecruiterId = 'https://swh-t-praktyki2022-app.azurewebsites.net/User/GetRecruiters';
+  public urlRecruiterId =
+    'https://swh-t-praktyki2022-app.azurewebsites.net/User/GetRecruiters';
   public projectId = 0;
   public data: GetRecruitmentListBodyRequest = {
     name: '',
@@ -64,9 +79,14 @@ export class ProjectsService implements OnInit {
     },
   };
   public isSaved!: boolean;
-  private _projects$: BehaviorSubject<Project[]> = new BehaviorSubject(DATA);
-
-  constructor(private _activatedRoute: ActivatedRoute) {}
+  private _projects$: BehaviorSubject<Project[]> = new BehaviorSubject(
+    [] as Project[]
+  );
+  public recruiterList: Recruiter[] = [
+    { item1: 1, item2: 'admin@softwarehut.com' },
+  ];
+  constructor(private _activatedRoute: ActivatedRoute) {    
+  }
 
   get projects() {
     return this._projects$.asObservable();
@@ -138,67 +158,79 @@ export class ProjectsService implements OnInit {
   }
 
   public async getPublicProjectList(pageNumber: number) {
-    console.log('getPublicProjectList');
-    axios
-      .post(
-        this.urlGetPublicProjecList,
-        {
-          name: '',
-          description: '',
-          showOpen: true,
-          showClosed: true,
-          beginningDate: '',
-          endingDate: '',
-          paging: {
-            pageSize: 5,
-            pageNumber: pageNumber,
-          },
-          sortOrder: {
-            sort: [
-              {
-                key: "'",
-                value: '',
-              },
-            ],
-          },
-        },
-        { withCredentials: true }
-      )
-      .then((res) => {
-        console.log(res.data.recruitmentDTOs);
-         const dataFromRequest: RecruitmentDTO[] = res.data.recruitmentDTOs;
-        
-         const dataReadyToRender = dataFromRequest.map(el => {
-          const recruiterName =  this.getRecruiterName(el.recruiterId)
-          console.log(recruiterName)
-          const readyProject = {
-              name: el.name,
-              creator: 'John Doe',
-              from: el.beginningDate,
-              to: el.endingDate,
-              resume: 30,
-              hired: 3,
-              id: el.id
-          }
-          return readyProject
-        });
-
-        this._projects$.next(res.data.recruitmentDTOs);
-      });
+    await this.getRecruiterList();
+    const res = await this.getProjectList(pageNumber);
+    return this.prepareProjectLis(res.data);
   }
 
-  public  async getRecruiterName(recruiterId: number) {
-    let recruiterName;
-    axios.post(this.urlRecruiterId, null,{withCredentials: true} )
-    .then(res => {
-      const recruitmentList: Recruiter[]= res.data;
-      const recruiterEmail = recruitmentList.find(el => {
-        if (el.item1 === recruiterId) {
-          return recruiterName = el.item2
-        }
-        return
-      })
-    })
-    return recruiterName
+  public async getRecruiterList() {
+    if (this.recruitListIsLoaded) {
+      return;
+    }
+    const res: GetRecruitersBodyResponse = await axios.post(this.urlRecruiterId, {}, {
+      withCredentials: true,
+    });
+    const data: Recruiter[] = res.data;
+    data.forEach((element) => {
+      this.recruiterList.push(element);
+      console.log(element);
+    });
+    this.recruitListIsLoaded = true;
+
+    // this.recruiterList.push(res.data)
+    // console.log(this.recruiterList)
+  }
+
+  private async getProjectList(pageNumber: number) {
+    const res: {
+      data: RecruitmentList
+    } = await axios.post(
+      this.urlGetPublicProjecList,
+      {
+        name: '',
+        description: '',
+        showOpen: true,
+        showClosed: true,
+        beginningDate: '',
+        endingDate: '',
+        paging: {
+          pageSize: 20,
+          pageNumber: pageNumber,
+        },
+        sortOrder: {
+          sort: [
+            {
+              key: "'",
+              value: '',
+            },
+          ],
+        },
+      },
+      { withCredentials: true }
+    );
+    return res;
+  }
+
+  private prepareProjectLis(recruitmentList: RecruitmentList) {    
+    const projectListReadyForTable: Project[] = [];
+    recruitmentList.recruitmentDTOs.map((el: RecruitmentDTO) => {
+      console.log(el);
+      const recruiterData = this.recruiterList.filter(
+        (elRescruiterList) => elRescruiterList.item1 === el.recruiterId
+      );
+      const readyProject: Project = {
+        name: el.name,
+        creator: recruiterData[0].item2,
+        from: new Date(el.beginningDate),
+        to: new Date(el.endingDate),
+        resume: el.candidateCount,
+        hired: el.hiredCount,
+        id: el.id,
+      };
+      // console.log(readyProject)
+      projectListReadyForTable.push(readyProject);
+    });
+    this._projects$.next(projectListReadyForTable);
+    return projectListReadyForTable;
   }
 }
