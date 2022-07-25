@@ -52,19 +52,10 @@ export class CandidatesListComponent implements AfterViewInit, OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
-    this.candidates = await this.service.getAllCandidates();
-    // const myObserver = {
-    //   next: (result: any) => {
-    //     this.apidata = result;
-    //   },
-    //   error: (err: Error) => console.error(err),
-    //   complete: () => console.log('Finished'),
-    // };
-    // this.sub$ = timer(0, 3000)
-    //   .pipe(switchMap(() => this.candidates))
-    //   .subscribe(myObserver);
-    // this.candidates = await this.cs.getAllCandidates();
-    this.dataSource = new MatTableDataSource(this.candidates);
+
+    this.dataSource = this.service.candidates;
+    // this.dataSource = new MatTableDataSource(DATA);
+
 
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;

@@ -102,7 +102,7 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   exports: [MatButtonModule],
   providers: [],
-  bootstrap: [AppComponent, CalendarHeadComponent],
+  bootstrap: [AppComponent],
   entryComponents: [InterviewDialogComponent],
 })
 export class AppModule {}
