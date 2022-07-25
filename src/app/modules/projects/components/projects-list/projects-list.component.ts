@@ -7,7 +7,6 @@ import { ProjectsService } from 'src/app/modules/commons/services/projects/proje
 import { ProjectListDataSource } from './ProjectListDataSource';
 import { MatTableDataSource } from '@angular/material/table';
 
-
 @Component({
   selector: 'app-projects-list',
   templateUrl: './projects-list.component.html',
@@ -24,10 +23,7 @@ export class ProjectsListComponent implements AfterViewInit {
     private _liveAnnouncer: LiveAnnouncer,
     public projectService: ProjectsService
   ) {
-  
-
     this.projectService.getPublicProjectList(this.pageIndex);
-
   }
 
   displayedColumns: string[] = [
@@ -43,9 +39,11 @@ export class ProjectsListComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-get projectsData() {
-  return this.projectService.projects
-}
+
+  get projectsData() {
+    return this.projectService.projects;
+  }
+
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
@@ -57,18 +55,16 @@ get projectsData() {
   }
 
   public getPaginatorData(e: PageEvent) {
-    console.log(this.pageIndex, this.pageSize )
+    console.log(this.pageIndex, this.pageSize);
     this.pageIndex = e.pageIndex;
     this.pageSize = e.pageSize;
-    console.log(this.pageIndex, this.pageSize )
-    this.getNextPage
-
+    console.log(this.pageIndex, this.pageSize);
+    this.getNextPage;
   }
 
   public getNextPage() {
     // const list = this._projectService.getProjectList(this.pageIndex);
     // this.data = list;
-
   }
 
   announceSortChange(sortState: Sort) {
