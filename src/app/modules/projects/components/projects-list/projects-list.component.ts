@@ -47,10 +47,6 @@ get projectsData() {
   return this.projectService.projects
 }
 
-get projectsData() {
-  return this.projectService.projects
-}
-
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
