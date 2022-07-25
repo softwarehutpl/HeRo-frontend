@@ -1,4 +1,4 @@
-<table
+<table #table 
   mat-table
   [dataSource]="dataSource"
   matSort
@@ -75,7 +75,7 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
 <mat-paginator (page)="getPaginatorData($event)"
-  [pageSize]="10"
+  [pageSize]="20"
   [pageSizeOptions]="[5, 10, 25, 100]"
   aria-label="Select page"
   [pageIndex]="pageIndex"

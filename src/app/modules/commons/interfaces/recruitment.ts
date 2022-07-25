@@ -30,7 +30,7 @@ export interface SkillsForProjectId {
 
 export interface RecruitmentList {
     totalCount:             number;
-    readRecruitmentDTOs:        RecruitmentDTO[];
+    recruitmentDTOs:        RecruitmentDTO[];
     recruitmentFiltringDTO: RecruitmentFiltringDTO;
     sortOrder:              SortOrder;
     paging:                 Paging;
