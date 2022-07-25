@@ -11,7 +11,6 @@ import { ActivatedRoute } from '@angular/router';
 import { DATA, Project, Recruiter } from '../../mockups/mock-projects';
 import { RecruitmentDTO } from '../../interfaces/recruitment';
 
-
 const getProjectBody = {
   name: '',
   description: '',
@@ -46,7 +45,6 @@ interface GetRecruitersBodyResponse {
 })
 export class ProjectsService implements OnInit {
   private recruitListIsLoaded = false;
-
   public urlGetProjectList =
     'https://swh-t-praktyki2022-app.azurewebsites.net/Recruitment/GetList';
   public urlGetPublicProjecList =
@@ -57,6 +55,7 @@ export class ProjectsService implements OnInit {
     'https://swh-t-praktyki2022-app.azurewebsites.net/Recruitment/Create';
   public urlRecruiterId =
     'https://swh-t-praktyki2022-app.azurewebsites.net/User/GetRecruiters';
+
   public projectId = 0;
   public data: GetRecruitmentListBodyRequest = {
     name: '',
@@ -87,6 +86,7 @@ export class ProjectsService implements OnInit {
   ];
   constructor(private _activatedRoute: ActivatedRoute) {    
   }
+
 
   get projects() {
     return this._projects$.asObservable();
@@ -149,7 +149,6 @@ export class ProjectsService implements OnInit {
     if (saveProject) {
       alert('project saved');
       // this._router.navigate(['projects'])
-    }
     return saveProject;
   }
 
@@ -232,5 +231,6 @@ export class ProjectsService implements OnInit {
     });
     this._projects$.next(projectListReadyForTable);
     return projectListReadyForTable;
+
   }
 }

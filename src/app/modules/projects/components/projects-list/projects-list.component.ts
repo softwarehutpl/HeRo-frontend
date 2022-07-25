@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { ProjectsService } from 'src/app/modules/commons/services/projects/projects.service';
 import { ProjectListDataSource } from './ProjectListDataSource';
+import { MatTableDataSource } from '@angular/material/table';
+
 
 @Component({
   selector: 'app-projects-list',
@@ -16,13 +18,16 @@ export class ProjectsListComponent implements AfterViewInit {
   public pageIndex = 1;
   public pageSize = 5;
   dataSource = new ProjectListDataSource(this.projectService.projects);
+
   constructor(
     private _router: Router,
     private _liveAnnouncer: LiveAnnouncer,
     public projectService: ProjectsService
   ) {
   
+
     this.projectService.getPublicProjectList(this.pageIndex);
+
   }
 
   displayedColumns: string[] = [
@@ -37,7 +42,10 @@ export class ProjectsListComponent implements AfterViewInit {
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  
+
+get projectsData() {
+  return this.projectService.projects
+}
 
 get projectsData() {
   return this.projectService.projects
@@ -47,10 +55,10 @@ get projectsData() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }
-  // onChangePage() {
-  //   console.log(this.pageIndex);
-  //   console.log(this.pageSize);
-  // }
+  onChangePage() {
+    console.log(this.pageIndex);
+    console.log(this.pageSize);
+  }
 
   public getPaginatorData(e: PageEvent) {
     console.log(this.pageIndex, this.pageSize )
@@ -58,10 +66,13 @@ get projectsData() {
     this.pageSize = e.pageSize;
     console.log(this.pageIndex, this.pageSize )
     this.getNextPage
+
   }
 
   public getNextPage() {
     // const list = this._projectService.getProjectList(this.pageIndex);
+    // this.data = list;
+
   }
 
   announceSortChange(sortState: Sort) {
@@ -72,7 +83,6 @@ get projectsData() {
     }
   }
 
-
   moveToCandidates(projectName: string, status?: string) {
     this._router.navigate(['/candidates'], {
       queryParams: {
@@ -80,7 +90,6 @@ get projectsData() {
         ...(status === undefined ? {} : { status: status }),
       },
     });
-
   }
 
   moveToEditProject(projectId: string) {
