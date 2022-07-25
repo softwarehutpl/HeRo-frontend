@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CandidatesDataService } from '../../services/candidates-data.service';
+import { CandidatesService } from '../../../commons/services/candidates/candidates.service';
+
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -23,21 +24,21 @@ export interface KanbanDisplay {
   styleUrls: ['./candidates-kanban.component.scss'],
 })
 export class CandidatesKanbanComponent implements OnInit {
-  newCand: Candidate[] = [];
-  evaluation: Candidate[] = [];
-  interview: Candidate[] = [];
-  phoneInterview: Candidate[] = [];
-  techInterview: Candidate[] = [];
-  offer: Candidate[] = [];
-  hired: Candidate[] = [];
-  dropped: Candidate[] = [];
+  new: Array<KanbanDisplay> = [];
+  evaluation: Array<KanbanDisplay> = [];
+  interview: Array<KanbanDisplay> = [];
+  phoneInterview: Array<KanbanDisplay> = [];
+  techInterview: Array<KanbanDisplay> = [];
+  offer: Array<KanbanDisplay> = [];
+  hired: Array<KanbanDisplay> = [];
+  dropped: Array<KanbanDisplay> = [];
 
   private candidates!: Array<Candidate>;
 
-  constructor(private service: CandidatesDataService) {}
+  constructor(private cs: CandidatesService) {}
 
   async ngOnInit(): Promise<void> {
-    // this.candidates = await this.service.getAllCandidates();
+    this.candidates = await this.cs.getAllCandidates();
   }
 
   logData() {
@@ -65,26 +66,29 @@ export class CandidatesKanbanComponent implements OnInit {
     }
   }
   confirmationRequired(): boolean {
-    // let userConfirmed: boolean = false;
-    // // add magic here
-    // if (userConfirmed) {
-    return true;
-    // } else {
-    //   return false;
-    // }
+    let userConfirmed: boolean = false;
+
+    // add magic here
+
+    if (userConfirmed) {
+      return true;
+    } else {
+      return false;
+    }
   }
   warning() {
-    //   //some kind of modal should display here
-    //   alert("You're about to change user status");
-    //   let userConfirmed: boolean = this.confirmationRequired();
-    //   if (userConfirmed) {
-    //     alert('axios post -> change status');
-    //     //axios.post ...
-    //     // +force refresh
-    return true;
-    //   } else {
-    //     alert('user denied');
-    //     return false;
-    //   }
+    //some kind of modal should display here
+    alert("You're about to change user status");
+    let userConfirmed: boolean = this.confirmationRequired();
+
+    if (userConfirmed) {
+      alert('axios post -> change status');
+      //axios.post ...
+      // +force refresh
+      return true;
+    } else {
+      alert('user denied');
+      return false;
+    }
   }
 }

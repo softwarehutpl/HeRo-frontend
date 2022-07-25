@@ -81,10 +81,9 @@
 </table>
 <mat-paginator
   (page)="getPaginatorData($event)"
-  [pageSize]="service.pageSize"
-  [pageIndex]="service.pageIndex"
-  [pageSizeOptions]="service.pageSizeOptions"
-  [length]="service.listLength"
+  [pageSize]="pageSize"
+  [pageIndex]="pageIndex"
+  [pageSizeOptions]="pageSizeOptions"
   aria-label="Select page"
 >
 </mat-paginator>
