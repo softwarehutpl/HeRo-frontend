@@ -31,6 +31,7 @@ const getProjectBody = {
 };
 
 interface GetRecruitersItem {
+
   id: number;
   fullName: string;
 }
@@ -84,6 +85,7 @@ export class ProjectsService implements OnInit {
   public recruiterList: Recruiter[] = [
     { id: 1, fullName: 'admin@softwarehut.com' },
   ];
+
   public pageIndex = 0;
   public pageSize = 5;
   public pageSizeOptions = [5, 10, 25, 100];
@@ -133,9 +135,11 @@ export class ProjectsService implements OnInit {
       });
   });
 
+
   public async saveProject(body: Recruitment) {
     const saveProject = await axios
       .post(this.urlSaveProject, body, { withCredentials: true })
+
       .then((res) => {
         if (res.status === 200) {
           return (this.isSaved = true);
@@ -147,12 +151,12 @@ export class ProjectsService implements OnInit {
         console.log(error);
         return false;
       });
-
     // if (saveProject) {
     //   alert('project saved');
     //   // this._router.navigate(['projects'])
     // return saveProject;
   }
+
 
   public async getProjectById(proejctId: number) {
 
@@ -227,6 +231,7 @@ export class ProjectsService implements OnInit {
   }
 
   private prepareProjectLis(recruitmentList: RecruitmentList) {
+
     this.listLength = recruitmentList.totalCount;
     this.pageSize = recruitmentList.paging.pageSize;
     this.pageIndex = recruitmentList.paging.pageNumber - 1;

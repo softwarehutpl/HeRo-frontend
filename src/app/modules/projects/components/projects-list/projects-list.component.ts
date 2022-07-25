@@ -58,6 +58,7 @@ export class ProjectsListComponent implements AfterViewInit, OnInit {
   // }
 
   public getPaginatorData(e: PageEvent) {
+
     this.projectService.pageIndex = e.pageIndex;
     this.projectService.pageSize = e.pageSize;
     this.projectService.getPublicProjectList();
@@ -68,6 +69,7 @@ export class ProjectsListComponent implements AfterViewInit, OnInit {
   //   // this.data = list;
 
   // }
+
 
   announceSortChange(sortState: Sort) {
     if (sortState.direction) {
