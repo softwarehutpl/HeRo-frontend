@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CandidatesService } from '../../../commons/services/candidates/candidates.service';
-
+import { CandidatesDataService } from '../../services/candidates-data.service';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -14,7 +13,6 @@ import { Candidate } from '../../CandidatesInterface';
   styleUrls: ['./candidates-kanban.component.scss'],
 })
 export class CandidatesKanbanComponent implements OnInit {
-
   newCand!: Candidate[];
   evaluation!: Candidate[];
   interview!: Candidate[];
@@ -24,8 +22,7 @@ export class CandidatesKanbanComponent implements OnInit {
   hired!: Candidate[];
   dropped!: Candidate[];
 
-
-  constructor(private cs: CandidatesService) {}
+  constructor(private service: CandidatesDataService) {}
 
   async ngOnInit() {
     this.service.newCandidates.subscribe((result) => (this.newCand = result));
@@ -40,7 +37,6 @@ export class CandidatesKanbanComponent implements OnInit {
     this.service.offer.subscribe((result) => (this.offer = result));
     this.service.hired.subscribe((result) => (this.hired = result));
     this.service.dropped.subscribe((result) => (this.dropped = result));
-
   }
 
   drop(event: CdkDragDrop<Candidate[]>) {
@@ -61,7 +57,6 @@ export class CandidatesKanbanComponent implements OnInit {
       }
     }
   }
-
   changeStatusAndStage(status: string[], stage: string[]): void {
     // API Call to update status/stage
   }
@@ -72,6 +67,5 @@ export class CandidatesKanbanComponent implements OnInit {
     alert('changing status');
     return true;
     // else return false;
-
   }
 }
