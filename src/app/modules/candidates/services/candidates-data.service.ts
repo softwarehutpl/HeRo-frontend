@@ -88,8 +88,8 @@ export class CandidatesDataService {
     const headers = new HttpHeaders({ accept: 'application/json' });
     const body = {
       paging: {
-        pageSize: 1000,
-        pageNumber: 1,
+        pageSize: this.pageSize,
+        pageNumber: this.pageIndex + 1,
       },
     };
     const Options = {
@@ -101,8 +101,11 @@ export class CandidatesDataService {
       .post(URL, body, Options)
       .then((res) => {
         if (res.statusText === 'OK') {
-          console.log(res.data.candidateInfoForListDTOs);
-          return res.data.candidateInfoForListDTOs;
+          // console.log(res);
+          this.listLength = res.data.totalCount;
+          this.pageSize = res.data.paging.pageSize;
+          this.pageIndex = res.data.paging.pageNumber - 1;
+          this._candidates.next(res.data.candidateInfoForListDTOs);
         } else {
           console.log('Error, status not OK');
         }

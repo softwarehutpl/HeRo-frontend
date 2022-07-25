@@ -5,6 +5,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 // import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { CandidatesDataService } from '../../services/candidates-data.service';
+import CANDIDATES from '../../../commons/mockups/candidates.json';
 import { Observable } from 'rxjs';
 
 @Component({

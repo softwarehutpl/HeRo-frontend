@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CandidatesDataService } from '../../services/candidates-data.service';
-
 import {
   CdkDragDrop,
   moveItemInArray,
