@@ -1,17 +1,61 @@
 <app-navbar></app-navbar>
 <div class="container">
-  <div class="container container__row">
-    <app-sidebar></app-sidebar>
-    <div class="profile-informations" *ngIf="dataLoadet">
-        <div>fullName: {{candidate.fullName}}</div>
-        <div>email: {{candidate.email}}</div>
-        <div>phoneNumber: {{candidate.phoneNumber}}</div>
-        <div>availableFrom: {{candidate.availableFrom}}</div>
-        <div>expectedMonthlySalary: {{candidate.expectedMonthlySalary}}</div>
-        <div>otherExpectations: {{candidate.otherExpectations}}</div>
-        <div>cvPath: {{candidate.cvPath}}</div>
-        <div>fullName: {{candidate.fullName}}</div>
+  <app-sidebar class="container__sidebar"></app-sidebar>
+  <div class="container__profile" *ngIf="dataLoadet">
 
+    <div class="container__profile__head">
+      <mat-icon mat-card-avatar>{{ createInititals(candidate.fullName) }}</mat-icon>
+      <div class="container__profile__head__title">Profile of {{candidate.fullName}}</div>
     </div>
+
+    <div class="informations">
+      <div class="informations__title">Summary</div>
+
+      <div class="informations__option">FullName:</div>
+      <div class="informations__value">{{candidate.fullName}}</div>
+
+      <div class="informations__option">Email:</div>
+      <div class="informations__value"><a>{{candidate.email}}</a></div>
+
+      <div class="informations__option">PhoneNumber:</div>
+      <div class="informations__value">{{candidate.phoneNumber}}</div>
+
+
+      <div class="informations__title">Notes</div>
+
+      <div class="informations__option">AvailableFrom:</div>
+      <div class="informations__value">{{candidate.availableFrom}}</div>
+
+      <div class="informations__option">ExpectedMonthlySalary:</div>
+      <div class="informations__value">{{candidate.expectedMonthlySalary}} PLN</div>
+
+      <div class="informations__option">OtherExpectations:</div>
+      <div class="informations__value">{{candidate.otherExpectations}}</div>
+
+      <div class="informations__option">CV:</div>
+      <div class="informations__value"><a>{{candidate.cvPath}}</a></div>
+    </div>
+
+
+  </div>
+
+  <div class="container__box-notes">
+    <div *ngFor="let x of [0,1,2,3,4,5,6,7]">
+      <div class="container__box-notes__note">
+        <div class="profile-informations" *ngIf="dataLoadet">
+          <div>fullName: {{candidate.fullName}}</div>
+          <div>email: {{candidate.email}}</div>
+          <div>phoneNumber: {{candidate.phoneNumber}}</div>
+          <div>availableFrom: {{candidate.availableFrom}}</div>
+          <div>expectedMonthlySalary: {{candidate.expectedMonthlySalary}}</div>
+          <div>otherExpectations: {{candidate.otherExpectations}}</div>
+          <div>cvPath: {{candidate.cvPath}}</div>
+          <div>fullName: {{candidate.fullName}}</div>
+        </div>
+      </div>
+    </div>
+
+
+
   </div>
 </div>
