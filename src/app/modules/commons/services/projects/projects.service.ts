@@ -30,15 +30,14 @@ const getProjectBody = {
   },
 };
 
-interface GetRecruitersItem{
+interface GetRecruitersItem {
   item1: number;
   item2: string;
 }
 
 interface GetRecruitersBodyResponse {
-  data: GetRecruitersItem[]
+  data: GetRecruitersItem[];
 }
-
 
 @Injectable({
   providedIn: 'root',
@@ -84,9 +83,7 @@ export class ProjectsService implements OnInit {
   public recruiterList: Recruiter[] = [
     { item1: 1, item2: 'admin@softwarehut.com' },
   ];
-  constructor(private _activatedRoute: ActivatedRoute) {    
-  }
-
+  constructor(private _activatedRoute: ActivatedRoute) {}
 
   get projects() {
     return this._projects$.asObservable();
@@ -130,7 +127,7 @@ export class ProjectsService implements OnInit {
       });
   });
 
-  public async saveProject(body: Recruitment): Promise<boolean> {
+  public async saveProject(body: Recruitment): Promise<any> {
     const saveProject = await axios
       .post(this.urlSaveProject, body, { withCredentials: true })
       .then((res) => {
@@ -149,9 +146,9 @@ export class ProjectsService implements OnInit {
     if (saveProject) {
       alert('project saved');
       // this._router.navigate(['projects'])
-    return saveProject;
+      return saveProject;
+    }
   }
-
   public readingProjectIdFromQueryParam() {
     return this.projectId;
   }
@@ -166,9 +163,13 @@ export class ProjectsService implements OnInit {
     if (this.recruitListIsLoaded) {
       return;
     }
-    const res: GetRecruitersBodyResponse = await axios.post(this.urlRecruiterId, {}, {
-      withCredentials: true,
-    });
+    const res: GetRecruitersBodyResponse = await axios.post(
+      this.urlRecruiterId,
+      {},
+      {
+        withCredentials: true,
+      }
+    );
     const data: Recruiter[] = res.data;
     data.forEach((element) => {
       this.recruiterList.push(element);
@@ -182,7 +183,7 @@ export class ProjectsService implements OnInit {
 
   private async getProjectList(pageNumber: number) {
     const res: {
-      data: RecruitmentList
+      data: RecruitmentList;
     } = await axios.post(
       this.urlGetPublicProjecList,
       {
@@ -210,7 +211,7 @@ export class ProjectsService implements OnInit {
     return res;
   }
 
-  private prepareProjectLis(recruitmentList: RecruitmentList) {    
+  private prepareProjectLis(recruitmentList: RecruitmentList) {
     const projectListReadyForTable: Project[] = [];
     recruitmentList.recruitmentDTOs.map((el: RecruitmentDTO) => {
       console.log(el);
@@ -231,6 +232,5 @@ export class ProjectsService implements OnInit {
     });
     this._projects$.next(projectListReadyForTable);
     return projectListReadyForTable;
-
   }
 }
