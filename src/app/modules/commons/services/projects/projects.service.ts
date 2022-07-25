@@ -127,9 +127,9 @@ export class ProjectsService implements OnInit {
       });
   });
 
+
   public async saveProject(body: Recruitment): Promise<any> {
-    const saveProject = await axios
-      .post(this.urlSaveProject, body, { withCredentials: true })
+    const saveProject = await axios.post(this.urlSaveProject, body, { withCredentials: true })
       .then((res) => {
         console.log('response ' + res.status);
         if (res.status === 200) {
@@ -142,13 +142,12 @@ export class ProjectsService implements OnInit {
         console.log(error);
         return false;
       });
-
-    if (saveProject) {
-      alert('project saved');
-      // this._router.navigate(['projects'])
-      return saveProject;
-    }
+    // if (saveProject) {
+    //   alert('project saved');
+    //   // this._router.navigate(['projects'])
+    // return saveProject;
   }
+
   public readingProjectIdFromQueryParam() {
     return this.projectId;
   }
