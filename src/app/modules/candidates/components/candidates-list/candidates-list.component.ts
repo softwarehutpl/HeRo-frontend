@@ -2,14 +2,11 @@ import { AfterViewInit, Component, ViewChild, OnInit } from '@angular/core';
 import { Candidate } from '../../CandidatesInterface';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+// import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { CandidatesService } from '../../../commons/services/candidates/candidates.service';
 import { CandidatesDataService } from '../../services/candidates-data.service';
 import CANDIDATES from '../../../commons/mockups/candidates.json';
-import { Subscription, timer } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
-// import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-candidates-list',
@@ -31,21 +28,12 @@ export class CandidatesListComponent implements AfterViewInit, OnInit {
     'profile',
   ];
   //variables:
-  // private candidates!: any;
-  private candidates!: Array<Candidate>;
+  // private candidates!: Array<Candidate>;
   public dataSource!: any;
-  public apidata: any;
-  private sub$!: Subscription;
-
-  //paginator settings:
-  public pageIndex: number = 0;
-  public pageSize: number = 5;
-  public pageSizeOptions: Array<number> = [5, 10, 15, 20, 25];
 
   constructor(
     private _liveAnnouncer: LiveAnnouncer,
-    private cs: CandidatesService,
-    private service: CandidatesDataService // private router: Router
+    public service: CandidatesDataService
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -72,10 +60,6 @@ export class CandidatesListComponent implements AfterViewInit, OnInit {
     return initials;
   }
 
-  // goToProfile(id: number) {
-  //   const string: string = '/profile/' + id;
-  //   this.router.navigate([string]);
-  // }
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -84,7 +68,8 @@ export class CandidatesListComponent implements AfterViewInit, OnInit {
     // this.dataSource.sort = this.sort;
     // this.dataSource.paginator = this.paginator;
   }
-  onChangePage(pe: PageEvent) {
+  public onChangePage(pe: PageEvent) {
+    console.log('onChangePare()');
     console.log(pe.pageIndex);
     console.log(pe.pageSize);
   } // this seems to be dead
@@ -94,7 +79,6 @@ export class CandidatesListComponent implements AfterViewInit, OnInit {
     this.service.pageSize = e.pageSize;
     this.service.getCandidatesForList();
   }
-
   announceSortChange(sortState: Sort) {
     if (sortState.direction) {
       this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
