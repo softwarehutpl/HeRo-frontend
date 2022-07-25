@@ -3,7 +3,6 @@ import { Candidate } from '../CandidatesInterface';
 import { useMocks } from '../../commons/mockups/useMocks';
 import { HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, from } from 'rxjs';
-
 import axios from 'axios';
 
 @Injectable({
@@ -97,21 +96,6 @@ export class CandidatesDataService {
       header: headers,
       withCredentials: true,
     };
-
-    // return this._http.post<Array<Candidate>>(URL, Options); // this will be default
-    // return this._http.post<any>(URL, body, Options);
-    // return this.axios
-    //   .post(URL, body)
-    //   .then((res) => {
-    //     if (res.statusText === 'OK') {
-    //       console.log(res);
-    //       return res;
-    //     } else {
-    //       console.log(res.statusText);
-    //       return;
-    //     }
-    //   })
-    //   .catch((err) => console.log(err));
 
     return await axios
       .post(URL, body, Options)
