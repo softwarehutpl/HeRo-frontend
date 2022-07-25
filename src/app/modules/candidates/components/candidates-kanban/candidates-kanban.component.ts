@@ -8,6 +8,7 @@ import {
 } from '@angular/cdk/drag-drop';
 import CANDIDATES from '../../../commons/mockups/candidates.json';
 import { Candidate } from '../../../commons/interfaces/candidate';
+// import { Observable } from 'rxjs';
 
 const DATA = CANDIDATES; //This if brute-force import from JSON, i will use this to adapt local mockups to backend.
 
@@ -46,7 +47,7 @@ export class CandidatesKanbanComponent implements OnInit {
     // console.log(this.candidates2);
   }
 
-  drop(event: CdkDragDrop<KanbanDisplay[]>) {
+  drop(event: CdkDragDrop<any>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
