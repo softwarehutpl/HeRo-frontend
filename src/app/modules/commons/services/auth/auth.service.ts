@@ -8,6 +8,7 @@ import axios from 'axios';
 export class AuthService {
   public urlAuth = 'https://swh-t-praktyki2022-app.azurewebsites.net/Auth/SignIn';
   public urlRecoveryPassword = 'https://swh-t-praktyki2022-app.azurewebsites.net/Auth/PasswordRecoveryMail';
+  public urlLogout = 'https://swh-t-praktyki2022-app.azurewebsites.net/Auth/LogOut';
 
   constructor(private _router: Router) {}
 
@@ -28,14 +29,14 @@ export class AuthService {
       });
   }
 
-  public isUserExist(userEmail: string) {
+  public requestForEmailToRecoverThePassword(userEmail: string) {
     axios
       .post(this.urlRecoveryPassword, null, { params: { email: userEmail } })
-      .then((res) => {
-        if (res.status === 200) {
-          console.log(res)
-        }
-        console.log(res.status);
-      });
+      .catch(error => console.log(error))
+  }
+
+  public async logout() {
+    await axios.get(this.urlLogout, {withCredentials: true})
+    this._router.navigate(['/login']);
   }
 }

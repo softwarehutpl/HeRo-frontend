@@ -15,7 +15,8 @@ export const DATA: Array<Candidate> = CANDIDATES; //CANDIDATES will be imported 
   styleUrls: ['./candidates.component.scss'],
 })
 export class CandidatesComponent implements OnInit {
-  public componentName: string = 'candidates';
+  public componentName = 'candidates';
+  public isAutocomplete = false;
   constructor() {}
 
   ngOnInit(): void {}

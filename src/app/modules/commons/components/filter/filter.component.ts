@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, } from '@angular/core';
 import { Filter, Data } from '../definition';
 import { FiltersService } from '../../services/filters/filters.service';
 
@@ -7,26 +7,21 @@ import { FiltersService } from '../../services/filters/filters.service';
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.scss'],
 })
-export class FilterComponent implements OnChanges, OnInit {
-  @Input() public whichComponentRender: string = '';
+export class FilterComponent implements OnChanges {
+  @Input() public whichComponentRender = '';
+  @Input() public isAutocomplete?: boolean;
 
-  public selected: string = 'all';
-  public isDropdow: boolean = false;
+  public selected = 'all';
   public filters?: Array<Filter>;
-  public sidebarButton1: string = Data.sidebarButton1;
-  public sidebarButton2: string = Data.sidebarButton2;
-  public sidebarButton3: string = Data.sidebarButton3;
+  public sidebarButton1 = Data.sidebarButton1;
+  public sidebarButton2 = Data.sidebarButton2;
+  public sidebarButton3 = Data.sidebarButton3;
 
-  constructor(private _filterService: FiltersService) {
-    this.isDropdow = _filterService.isdropdown();
-  }
+  constructor(private _filterService: FiltersService) {}
 
   ngOnChanges(): void {
     this.filters = this._filterService.filtersForComponent(
       this.whichComponentRender
     );
-    console.log(this.whichComponentRender);
   }
-
-  ngOnInit(): void {}
 }
