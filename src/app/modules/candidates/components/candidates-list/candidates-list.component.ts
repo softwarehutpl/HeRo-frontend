@@ -39,8 +39,10 @@ export class CandidatesListComponent implements AfterViewInit, OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
+
     this.dataSource = this.service.candidates;
     // this.dataSource = new MatTableDataSource(DATA);
+
 
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
