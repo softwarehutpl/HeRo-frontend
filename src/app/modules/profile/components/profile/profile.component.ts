@@ -22,7 +22,6 @@ export class ProfileComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     const res = await this.candidateServer.getCandidate(id);
     this.candidate = res;
-    console.log(this.candidate);
     this.dataLoadet=true;
   }
 
