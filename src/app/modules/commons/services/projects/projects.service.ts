@@ -8,7 +8,7 @@ import {
 } from '../../interfaces/recruitment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { DATA, Project, Recruiter } from '../../mockups/mock-projects';
+import { Project, Recruiter } from '../../mockups/mock-projects';
 import { RecruitmentDTO } from '../../interfaces/recruitment';
 
 const getProjectBody = {
@@ -30,15 +30,14 @@ const getProjectBody = {
   },
 };
 
-interface GetRecruitersItem{
-  item1: number;
-  item2: string;
+interface GetRecruitersItem {
+  id: number;
+  fullName: string;
 }
 
 interface GetRecruitersBodyResponse {
-  data: GetRecruitersItem[]
+  data: GetRecruitersItem[];
 }
-
 
 @Injectable({
   providedIn: 'root',
@@ -55,7 +54,8 @@ export class ProjectsService implements OnInit {
     'https://swh-t-praktyki2022-app.azurewebsites.net/Recruitment/Create';
   public urlRecruiterId =
     'https://swh-t-praktyki2022-app.azurewebsites.net/User/GetRecruiters';
-
+  public urlGetProjectId =
+    'https://swh-t-praktyki2022-app.azurewebsites.net/Recruitment/Get/1';
   public projectId = 0;
   public data: GetRecruitmentListBodyRequest = {
     name: '',
@@ -78,18 +78,21 @@ export class ProjectsService implements OnInit {
     },
   };
   public isSaved!: boolean;
-  private _projects$: BehaviorSubject<Project[]> = new BehaviorSubject(
+  public projects$: BehaviorSubject<Project[]> = new BehaviorSubject(
     [] as Project[]
   );
   public recruiterList: Recruiter[] = [
-    { item1: 1, item2: 'admin@softwarehut.com' },
+    { id: 1, fullName: 'admin@softwarehut.com' },
   ];
-  constructor(private _activatedRoute: ActivatedRoute) {    
-  }
+  public pageIndex = 0;
+  public pageSize = 5;
+  public pageSizeOptions = [5, 10, 25, 100];
+  public listLength!: number;
 
+  constructor(private _activatedRoute: ActivatedRoute) {}
 
   get projects() {
-    return this._projects$.asObservable();
+    return this.projects$.asObservable();
   }
 
   ngOnInit() {
@@ -131,9 +134,9 @@ export class ProjectsService implements OnInit {
   });
 
   public async saveProject(body: Recruitment) {
-    const saveProject = await axios.post(this.urlSaveProject, body, { withCredentials: true })
+    const saveProject = await axios
+      .post(this.urlSaveProject, body, { withCredentials: true })
       .then((res) => {
-        console.log('response ' + res.status);
         if (res.status === 200) {
           return (this.isSaved = true);
         } else {
@@ -151,14 +154,27 @@ export class ProjectsService implements OnInit {
     // return saveProject;
   }
 
- 
+  public async getProjectById(proejctId: number) {
+
+    const params = {
+      withCredentials: true,
+      recruitmentId: proejctId,
+    };
+    const projectById = await axios.get(this.urlGetProjectId, 
+      {
+      params: params,
+    });
+
+    return projectById
+  }
+
   public readingProjectIdFromQueryParam() {
     return this.projectId;
   }
 
-  public async getPublicProjectList(pageNumber: number) {
+  public async getPublicProjectList() {
     await this.getRecruiterList();
-    const res = await this.getProjectList(pageNumber);
+    const res = await this.getProjectList();
     return this.prepareProjectLis(res.data);
   }
 
@@ -166,23 +182,23 @@ export class ProjectsService implements OnInit {
     if (this.recruitListIsLoaded) {
       return;
     }
-    const res: GetRecruitersBodyResponse = await axios.post(this.urlRecruiterId, {}, {
-      withCredentials: true,
-    });
+    const res: GetRecruitersBodyResponse = await axios.post(
+      this.urlRecruiterId,
+      {},
+      {
+        withCredentials: true,
+      }
+    );
     const data: Recruiter[] = res.data;
     data.forEach((element) => {
       this.recruiterList.push(element);
-      console.log(element);
     });
     this.recruitListIsLoaded = true;
-
-    // this.recruiterList.push(res.data)
-    // console.log(this.recruiterList)
   }
 
-  private async getProjectList(pageNumber: number) {
+  private async getProjectList() {
     const res: {
-      data: RecruitmentList
+      data: RecruitmentList;
     } = await axios.post(
       this.urlGetPublicProjecList,
       {
@@ -193,8 +209,8 @@ export class ProjectsService implements OnInit {
         beginningDate: '',
         endingDate: '',
         paging: {
-          pageSize: 20,
-          pageNumber: pageNumber,
+          pageSize: this.pageSize,
+          pageNumber: this.pageIndex + 1,
         },
         sortOrder: {
           sort: [
@@ -210,27 +226,29 @@ export class ProjectsService implements OnInit {
     return res;
   }
 
-  private prepareProjectLis(recruitmentList: RecruitmentList) {    
+  private prepareProjectLis(recruitmentList: RecruitmentList) {
+    this.listLength = recruitmentList.totalCount;
+    this.pageSize = recruitmentList.paging.pageSize;
+    this.pageIndex = recruitmentList.paging.pageNumber - 1;
+
     const projectListReadyForTable: Project[] = [];
+
     recruitmentList.recruitmentDTOs.map((el: RecruitmentDTO) => {
-      console.log(el);
       const recruiterData = this.recruiterList.filter(
-        (elRescruiterList) => elRescruiterList.item1 === el.recruiterId
+        (elRescruiterList) => elRescruiterList.id === el.recruiterId
       );
       const readyProject: Project = {
         name: el.name,
-        creator: recruiterData[0].item2,
+        creator: recruiterData[0].fullName,
         from: new Date(el.beginningDate),
         to: new Date(el.endingDate),
         resume: el.candidateCount,
         hired: el.hiredCount,
         id: el.id,
       };
-      // console.log(readyProject)
       projectListReadyForTable.push(readyProject);
     });
-    this._projects$.next(projectListReadyForTable);
+    this.projects$.next(projectListReadyForTable);
     return projectListReadyForTable;
-
   }
 }

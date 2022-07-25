@@ -25,7 +25,6 @@ export class FilterComponent implements OnChanges, OnInit {
     this.filters = this._filterService.filtersForComponent(
       this.whichComponentRender
     );
-    console.log(this.whichComponentRender);
   }
 
   ngOnInit(): void {}

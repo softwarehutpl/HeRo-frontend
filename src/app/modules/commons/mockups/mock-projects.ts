@@ -12,8 +12,8 @@ export interface Project {
 
 
   export interface Recruiter {
-    item1: number;
-    item2: string;
+    id: number;
+    fullName: string;
   }
 
 export const DATA: Array<Project> = [
