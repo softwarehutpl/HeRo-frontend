@@ -5,17 +5,7 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import CANDIDATES from '../../../commons/mockups/candidates.json';
-import { Candidate } from '../../../commons/interfaces/candidate';
-// import { Observable } from 'rxjs';
-
-const DATA = CANDIDATES; //This if brute-force import from JSON, i will use this to adapt local mockups to backend.
-
-export interface KanbanDisplay {
-  name: string;
-  project: string;
-  position: string;
-}
+import { Candidate } from '../../CandidatesInterface';
 
 @Component({
   selector: 'app-candidates-kanban',
@@ -23,30 +13,33 @@ export interface KanbanDisplay {
   styleUrls: ['./candidates-kanban.component.scss'],
 })
 export class CandidatesKanbanComponent implements OnInit {
-  newCand: Candidate[] = [];
-  evaluation: Candidate[] = [];
-  interview: Candidate[] = [];
-  phoneInterview: Candidate[] = [];
-  techInterview: Candidate[] = [];
-  offer: Candidate[] = [];
-  hired: Candidate[] = [];
-  dropped: Candidate[] = [];
-
-  private candidates!: Array<Candidate>;
+  newCand!: Candidate[];
+  evaluation!: Candidate[];
+  interview!: Candidate[];
+  phoneInterview!: Candidate[];
+  techInterview!: Candidate[];
+  offer!: Candidate[];
+  hired!: Candidate[];
+  dropped!: Candidate[];
 
   constructor(private service: CandidatesDataService) {}
 
-  async ngOnInit(): Promise<void> {
-    // this.candidates = await this.service.getAllCandidates();
+  async ngOnInit() {
+    this.service.newCandidates.subscribe((result) => (this.newCand = result));
+    this.service.evaluation.subscribe((result) => (this.evaluation = result));
+    this.service.interview.subscribe((result) => (this.interview = result));
+    this.service.phoneInterview.subscribe(
+      (result) => (this.phoneInterview = result)
+    );
+    this.service.techInterview.subscribe(
+      (result) => (this.techInterview = result)
+    );
+    this.service.offer.subscribe((result) => (this.offer = result));
+    this.service.hired.subscribe((result) => (this.hired = result));
+    this.service.dropped.subscribe((result) => (this.dropped = result));
   }
 
-  logData() {
-    console.log('local_JSON:', DATA);
-    console.log('fetched:', this.candidates);
-    // console.log(this.candidates2);
-  }
-
-  drop(event: CdkDragDrop<any>) {
+  drop(event: CdkDragDrop<Candidate[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -64,27 +57,15 @@ export class CandidatesKanbanComponent implements OnInit {
       }
     }
   }
-  confirmationRequired(): boolean {
-    // let userConfirmed: boolean = false;
-    // // add magic here
-    // if (userConfirmed) {
-    return true;
-    // } else {
-    //   return false;
-    // }
+  changeStatusAndStage(status: string[], stage: string[]): void {
+    // API Call to update status/stage
   }
-  warning() {
+  warning(): boolean {
     //   //some kind of modal should display here
-    //   alert("You're about to change user status");
-    //   let userConfirmed: boolean = this.confirmationRequired();
-    //   if (userConfirmed) {
-    //     alert('axios post -> change status');
-    //     //axios.post ...
-    //     // +force refresh
+    // if true
+    // changeStatusAndStage(newStatus, newStage)
+    alert('changing status');
     return true;
-    //   } else {
-    //     alert('user denied');
-    //     return false;
-    //   }
+    // else return false;
   }
 }
