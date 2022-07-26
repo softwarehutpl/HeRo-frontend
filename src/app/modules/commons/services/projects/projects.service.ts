@@ -1,15 +1,15 @@
 import { Injectable, OnInit } from '@angular/core';
 import axios from 'axios';
-import { Skill } from '../../interfaces/Skill';
 import {
   Recruitment,
   GetRecruitmentListBodyRequest,
   RecruitmentList,
+  SkillById,
 } from '../../interfaces/recruitment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Project, Recruiter } from '../../mockups/mock-projects';
-import { RecruitmentDTO } from '../../interfaces/recruitment';
+import { RecruitmentDTO, GetRecruitersItem } from '../../interfaces/recruitment';
 
 const getProjectBody = {
   name: '',
@@ -29,11 +29,6 @@ const getProjectBody = {
     ],
   },
 };
-
-interface GetRecruitersItem {
-  id: number;
-  fullName: string;
-}
 
 interface GetRecruitersBodyResponse {
   data: GetRecruitersItem[];
@@ -55,7 +50,8 @@ export class ProjectsService implements OnInit {
   public urlRecruiterId =
     'https://swh-t-praktyki2022-app.azurewebsites.net/User/GetRecruiters';
   public urlGetProjectId =
-    'https://swh-t-praktyki2022-app.azurewebsites.net/Recruitment/Get/1';
+    `https://swh-t-praktyki2022-app.azurewebsites.net/Recruitment/Get/`;
+    public urlSaveEditedProject = 'https://swh-t-praktyki2022-app.azurewebsites.net/Recruitment/Edit/'
   public projectId = 0;
   public data: GetRecruitmentListBodyRequest = {
     name: '',
@@ -82,7 +78,7 @@ export class ProjectsService implements OnInit {
     [] as Project[]
   );
   public recruiterList: Recruiter[] = [
-    { id: 1, fullName: 'admin@softwarehut.com' },
+    { id: 1, fullName: 'admin admin' },
   ];
   public pageIndex = 0;
   public pageSize = 5;
@@ -96,9 +92,9 @@ export class ProjectsService implements OnInit {
   }
 
   ngOnInit() {
-    this._activatedRoute.queryParams.subscribe((params) => {
-      this.projectId = params['projectId'];
-    });
+    // this._activatedRoute.queryParams.subscribe((params) => {
+    //   this.projectId = params['projectId'];
+    // });
   }
 
   // public projectList$ = new Observable<GetRecruitmentListBodyRequest>(
@@ -122,10 +118,11 @@ export class ProjectsService implements OnInit {
   //   next: (data) => console.log(data),
   // });
 
-  public projectSkills$ = new Observable<Array<Skill>>((observer) => {
+  public projectSkills$ = new Observable<SkillById[]>((observer) => {
     axios
       .get(this.urlGetSkillsList, { withCredentials: true })
       .then((response) => {
+        console.log(response)
         observer.next(response.data);
       })
       .catch((error) => {
@@ -133,14 +130,22 @@ export class ProjectsService implements OnInit {
       });
   });
 
-  public async saveProject(body: Recruitment) {
+  public async saveProject(body: Recruitment, queryIdParam: number) {
+
+
+    if(queryIdParam) {
+
+      const updataProject = await axios.post(this.urlSaveEditedProject, body,{ withCredentials: true});
+      console.log(updataProject)
+    }
+    let isSaved = false;
     const saveProject = await axios
       .post(this.urlSaveProject, body, { withCredentials: true })
       .then((res) => {
         if (res.status === 200) {
-          return (this.isSaved = true);
+          return (isSaved = true);
         } else {
-          return (this.isSaved = false);
+          return (isSaved = false);
         }
       })
       .catch((error) => {
@@ -156,16 +161,10 @@ export class ProjectsService implements OnInit {
 
   public async getProjectById(proejctId: number) {
 
-    const params = {
-      withCredentials: true,
-      recruitmentId: proejctId,
-    };
-    const projectById = await axios.get(this.urlGetProjectId, 
-      {
-      params: params,
-    });
-
-    return projectById
+    const urlGetProjectIdWithIdis = this.urlGetProjectId + proejctId;
+    const projectById = await axios.get(urlGetProjectIdWithIdis , 
+      {withCredentials: true});
+    return projectById.data
   }
 
   public readingProjectIdFromQueryParam() {

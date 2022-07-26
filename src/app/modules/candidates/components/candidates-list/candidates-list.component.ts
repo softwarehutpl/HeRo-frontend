@@ -6,7 +6,6 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { CandidatesDataService } from '../../services/candidates-data.service';
 import CANDIDATES from '../../../commons/mockups/candidates.json';
-import { Observable } from 'rxjs';
 
 const DATA = CANDIDATES; //This if brute-force import from JSON, i will use this to adapt local mockups to backend.
 
@@ -42,7 +41,6 @@ export class CandidatesListComponent implements AfterViewInit, OnInit {
 
     this.dataSource = this.service.candidates;
     // this.dataSource = new MatTableDataSource(DATA);
-
 
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;

@@ -13,7 +13,8 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomepageComponent,
-  },{
+  },
+  {
     path: 'profile/:id',
     component: ProfileComponent,
   },
@@ -35,6 +36,10 @@ const routes: Routes = [
   {
     path: 'projects',
     component: ProjectsComponent,
+    children: [
+      { path: 'new', component: CreateEditProjectComponent },
+      // { path: 'edit/:id', component: CreateEditProjectComponent },
+    ],
     // canActivate: [PlayerDataGuardService],
   },
   {

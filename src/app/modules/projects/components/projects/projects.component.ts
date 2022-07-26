@@ -1,5 +1,5 @@
 import { Component, } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectsService } from 'src/app/modules/commons/services/projects/projects.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class ProjectsComponent  {
   public componentName = "projects";
   public isEditCreateProject = false;
 
-  constructor(private _router: Router, private _projectService: ProjectsService) {}
+  constructor(private _router: Router, private _projectService: ProjectsService, private _route: ActivatedRoute) {}
 
   
   testFunc() {
@@ -21,8 +21,8 @@ export class ProjectsComponent  {
   }
 
   moveToCreateProject() {
-    this._router.navigate(
-      ['edit']
-    )
+    this._router.navigate(['/new'], {
+      relativeTo: this._route
+    })
   }
 }
