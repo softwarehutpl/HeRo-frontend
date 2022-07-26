@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CandidatesService } from '../../../commons/services/candidates/candidates.service';
-
+import { CandidatesDataService } from '../../services/candidates-data.service';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -23,7 +22,7 @@ export class CandidatesKanbanComponent implements OnInit {
   hired!: Candidate[];
   dropped!: Candidate[];
 
-  constructor(private cs: CandidatesService) {}
+  constructor(private service: CandidatesDataService) {}
 
   async ngOnInit() {
     this.service.newCandidates.subscribe((result) => (this.newCand = result));
