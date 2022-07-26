@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Project, Recruiter } from '../../mockups/mock-projects';
 import { RecruitmentDTO, GetRecruitersItem } from '../../interfaces/recruitment';
 
+
 const getProjectBody = {
   name: '',
   description: '',
@@ -29,6 +30,12 @@ const getProjectBody = {
     ],
   },
 };
+
+
+interface GetRecruitersItem {
+  id: number;
+  fullName: string;
+}
 
 interface GetRecruitersBodyResponse {
   data: GetRecruitersItem[];
@@ -78,7 +85,7 @@ export class ProjectsService implements OnInit {
     [] as Project[]
   );
   public recruiterList: Recruiter[] = [
-    { id: 1, fullName: 'admin admin' },
+   { id: 1, fullName: 'admin admin' },
   ];
 
   public pageIndex = 0;
@@ -142,7 +149,6 @@ export class ProjectsService implements OnInit {
     let isSaved = false;
     const saveProject = await axios
       .post(this.urlSaveProject, body, { withCredentials: true })
-
       .then((res) => {
         if (res.status === 200) {
           return (isSaved = true);

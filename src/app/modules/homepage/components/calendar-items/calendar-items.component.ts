@@ -32,10 +32,11 @@ export class CalendarItemsComponent implements OnInit {
 
   hovered: any;
   listOfevents: CalendarEvent[] = [];
-  nameOfButton = "show more";
-  max = 2;
+  nameOfButton = "show more";  
+  showNumberOfEvents:number;
 
-  constructor(private dialog: MatDialog) {
+  constructor(private dialog: MatDialog) {    
+    this.showNumberOfEvents = 2;
   }
 
   ngOnInit(): void {
@@ -44,29 +45,26 @@ export class CalendarItemsComponent implements OnInit {
 
   openDialog(ev:CalendarEvent) {
     this.dialog.open(InterviewDialogComponent, {
-      data: this.intervie,
+      data: ev.id,
       // height:'40%',
-      // data: ProjectsService.getProject(ev.id),
     });
   }
 
   show() {
     if (this.nameOfButton === "show more") {
       this.nameOfButton = "show less";
-      this.max = this.events.length;
-
-
+      this.showNumberOfEvents = this.events.length;
     }
     else {
       this.nameOfButton = "show more";
-      this.max = 2;
+      this.showNumberOfEvents = 2;
 
     }
     this.changeListOfEvents();
   }
 
   changeListOfEvents() {
-    this.listOfevents = this.events.slice(0, this.max);
+    this.listOfevents = this.events.slice(0, this.showNumberOfEvents);
   }
 
 

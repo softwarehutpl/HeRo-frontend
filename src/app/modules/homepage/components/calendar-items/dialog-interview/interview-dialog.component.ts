@@ -1,7 +1,7 @@
-import {Component, Inject} from '@angular/core';
-import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { CalendarEvent } from 'angular-calendar';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { InterviewDTO } from 'src/app/modules/commons/interfaces/interview';
+import { CalendarService } from 'src/app/modules/commons/services/calendar/calendar.service';
 
 
 
@@ -10,10 +10,19 @@ import { InterviewDTO } from 'src/app/modules/commons/interfaces/interview';
   templateUrl: 'interview-dialog.component.html',
   styleUrls: ['./interview-dialog.component.scss']
 })
-export class InterviewDialogComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public event: InterviewDTO) {}
+export class InterviewDialogComponent implements OnInit {
 
-  log(dat:any){
-    console.log(dat)
+
+  interview !: InterviewDTO;
+  constructor(@Inject(MAT_DIALOG_DATA) private id: number,private service: CalendarService) { }
+  async ngOnInit(): Promise<void> {
+    await this.loadData();
   }
+
+  async loadData() {
+    console.log(this.interview)
+    this.interview = await this.service.getIntervie(this.id);
+    console.log(this.interview)
+  }
+
 }

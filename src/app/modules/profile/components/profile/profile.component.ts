@@ -10,7 +10,6 @@ import { CandidatesService } from 'src/app/modules/commons/services/candidates/c
 })
 export class ProfileComponent implements OnInit {
 
-  // id!: any;
   res!: any;
 
   constructor(private route: ActivatedRoute, private candidateServer: CandidatesService) { }
@@ -23,10 +22,8 @@ export class ProfileComponent implements OnInit {
 
   async getData() {
     const id = this.route.snapshot.paramMap.get('id');
-    console.log("id: ", this.route.snapshot.paramMap.get('id'));
     this.res = await this.candidateServer.getCandidate(id);
     this.candidate = this.res;
-    console.log(this.candidate);
     this.dataLoadet = true;
   }
 

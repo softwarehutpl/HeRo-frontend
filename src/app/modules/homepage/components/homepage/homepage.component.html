@@ -2,7 +2,9 @@
 <div class="container">
     <app-sidebar class="container__sidebar"></app-sidebar>
     <div class="container__box-info ">
+      <div *ngIf="numberNewCandiates!==0">
       <app-info-box text="New candidates" [number]="numberNewCandiates" link="/candidates"></app-info-box>
+      </div>
       <app-info-box text="Interviews this week" [number]="numberInterviews" link="/candidates"></app-info-box>
     </div>
     <app-calendar class="container__calendar"></app-calendar>
