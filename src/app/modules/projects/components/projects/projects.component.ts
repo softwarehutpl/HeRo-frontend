@@ -1,4 +1,6 @@
 import { Component, } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ProjectsService } from 'src/app/modules/commons/services/projects/projects.service';
 
 @Component({
   selector: 'app-projects',
@@ -12,9 +14,16 @@ export class ProjectsComponent  {
   public isEditCreateProject = false;
   public isAutocomplete = true;
 
-  constructor() {}
+  constructor(private _router: Router, private _projectService: ProjectsService, private _route: ActivatedRoute) {}
+
   
   testFunc() {
     alert('button pressed');
+  }
+
+  moveToCreateProject() {
+    this._router.navigate(['/new'], {
+      relativeTo: this._route
+    })
   }
 }
