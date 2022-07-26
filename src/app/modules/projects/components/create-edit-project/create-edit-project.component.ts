@@ -55,10 +55,6 @@ export class CreateEditProjectComponent implements OnInit {
   ) {
     this.queryIdParam = this._route.snapshot.queryParamMap.get('projectId');
 
-    //console.log(this.queryIdParam);
-    //this.queryParamNumber = Number(this.queryIdParam);
-    //this._projectService.getProjectById(this.queryParamNumber);
-
     this._projectService.projectSkills$.subscribe({
       next: (data) => {
         this.listOfSkills = data;
@@ -69,17 +65,11 @@ export class CreateEditProjectComponent implements OnInit {
 
   public projectForm = this.fb.group({
     projectName: new FormControl(this.formGroupData.projectName, [Validators.required]),
-    seniority: new FormControl(this.formGroupData.seniority, [
-      Validators.required,
-    ]),
+    seniority: new FormControl(this.formGroupData.seniority, [Validators.required,]),
     from: new FormControl(this.formGroupData.from, [Validators.required]),
     to: new FormControl(this.formGroupData.to, [Validators.required]),
-    localion: new FormControl(this.formGroupData.localion, [
-      Validators.required,
-    ]),
-    textarea: new FormControl(this.formGroupData.textarea, [
-      Validators.required,
-    ]),
+    localion: new FormControl(this.formGroupData.localion, [Validators.required, ]),
+    textarea: new FormControl(this.formGroupData.textarea, [Validators.required,]),
     isPublic: new FormControl(false),
   });
 
@@ -94,19 +84,21 @@ export class CreateEditProjectComponent implements OnInit {
           this.queryParamNumber
         );
         this.projectByIdData = projectByIdPromise;
-        this.listOfSkillsForProject = this.projectByIdData.skills
+        this.listOfSkillsForProject = this.projectByIdData.skills;
+
+        this.projectForm.patchValue({
+          projectName: this.projectByIdData.name,
+          seniority: this.projectByIdData.seniority,
+          from: this.projectByIdData.beginningDate,
+          to: this.projectByIdData.endingDate,
+          localion: this.projectByIdData.localization,
+          isPublic: true,
+          textarea: this.projectByIdData.description,
+        });
       }
      
   
-      this.projectForm.patchValue({
-        projectName: this.projectByIdData.name,
-        seniority: this.projectByIdData.seniority,
-        from: this.projectByIdData.beginningDate,
-        to: this.projectByIdData.endingDate,
-        localion: this.projectByIdData.localization,
-        isPublic: true,
-        textarea: this.projectByIdData.description,
-      });
+  
     }
 
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -185,10 +177,12 @@ export class CreateEditProjectComponent implements OnInit {
     const isSaved = await this._projectService.saveProject(body, paramToNumber);
 
 
-    // if (isSaved) {
-    //   alert("Project saved")
-    //   // this._router.navigate()
-    // }
+    if (isSaved) {
+      alert("Project saved")
+      // this._router.navigate()
+    } else {
+      alert("project not saved")
+    }
   }
 
   public preparingFormatSkillsForProject(): SkillsForProjectId[] {
