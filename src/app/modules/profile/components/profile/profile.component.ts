@@ -10,7 +10,6 @@ import { CandidatesService } from 'src/app/modules/commons/services/candidates/c
 })
 export class ProfileComponent implements OnInit {
 
-  // id!: any;
   res!: any;
 
   constructor(private route: ActivatedRoute, private candidateServer: CandidatesService) { }
