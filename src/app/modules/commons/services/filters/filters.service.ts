@@ -21,10 +21,4 @@ export class FiltersService {
     }
   }
 
-  isdropdown() {
-    if (this.renderedComponentName === Data.sidebarButton3) {
-      return false;
-    }
-    return true;
-  }
 }

@@ -1,8 +1,6 @@
 import { Component, } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-// import { ConnectableObservable } from 'rxjs';
 import { AuthService } from 'src/app/modules/commons/services/auth/auth.service';
-// import { AxiosService } from '../../../commons/services/axios/axios.service';
 
 @Component({
   selector: 'app-login-page',
@@ -35,6 +33,6 @@ import { AuthService } from 'src/app/modules/commons/services/auth/auth.service'
 
   public getNewPassword() {
     this.email = this.loginForm.value.email;
-    this._auth.isUserExist(this.email);
+    this._auth.requestForEmailToRecoverThePassword(this.email);
   }
 }

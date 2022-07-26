@@ -1,1 +1,86 @@
-<p>profile works!</p>
+<app-navbar></app-navbar>
+<div class="container">
+  <app-sidebar class="container__sidebar"></app-sidebar>
+  <div class="container__profile" *ngIf="dataLoadet">
+
+    <div class="container__profile__head">
+      <mat-icon mat-card-avatar>{{ createInititals(candidate.fullName) }}</mat-icon>
+      <div class="container__profile__head__title">Profile of {{candidate.fullName}}</div>
+    </div>
+
+    <div class="informations">
+      <div class="informations__title">Summary</div>
+
+      <div class="informations__option">FullName:</div>
+      <div class="informations__value">{{candidate.fullName}}</div>
+
+      <div class="informations__option">Email:</div>
+      <a class="informations__value">{{candidate.email}}</a>
+
+      <div class="informations__option">PhoneNumber:</div>
+      <div class="informations__value">{{candidate.phoneNumber}}</div>
+
+
+      <div class="informations__title">Notes</div>
+
+      <div class="informations__option">AvailableFrom:</div>
+      <div class="informations__value">{{candidate.availableFrom}}</div>
+
+      <div class="informations__option">ExpectedMonthlySalary:</div>
+      <div class="informations__value">{{candidate.expectedMonthlySalary}} PLN</div>
+
+      <div class="informations__option">OtherExpectations:</div>
+      <div class="informations__value">{{candidate.otherExpectations}}</div>
+
+      <div class="informations__option">CV:</div>
+      <a class="informations__value">{{candidate.cvPath}}</a>
+
+
+      <!-- Note opinions -->
+      <div class="informations__title">Evaluation Result</div>
+
+      <div class="informations__option">Evaluation Author:</div>
+      <div class="informations__value">{{candidate.hrName}} -> HR</div>
+
+      <div class="informations__option">Rate:</div>
+      <div class="informations__rating">{{candidate.hrOpinionScore}}/5</div>
+
+      <div class="informations__option">Note:</div>
+      <div class="informations__value">{{candidate.hrOpinionText}}</div>
+
+
+      <div class="informations__title">Evaluation Result</div>
+
+      <div class="informations__option">Evaluation Author:</div>
+      <div class="informations__value">{{candidate.interviewName}} -> techlead</div>
+
+      <div class="informations__option">Rate:</div>
+      <div class="informations__rating">{{candidate.interviewOpinionScore}}/5</div>
+
+      <div class="informations__option">Note:</div>
+      <div class="informations__value">{{candidate.interviewOpinionText}}</div>
+    </div>
+
+
+  </div>
+
+  <div class="container__box-notes">
+    <div *ngFor="let x of [0,1,2,3,4,5,6,7]">
+      <div class="container__box-notes__note">
+        <div class="profile-informations" *ngIf="dataLoadet">
+          <div>fullName: {{candidate.fullName}}</div>
+          <div>email: {{candidate.email}}</div>
+          <div>phoneNumber: {{candidate.phoneNumber}}</div>
+          <div>availableFrom: {{candidate.availableFrom}}</div>
+          <div>expectedMonthlySalary: {{candidate.expectedMonthlySalary}}</div>
+          <div>otherExpectations: {{candidate.otherExpectations}}</div>
+          <div>cvPath: {{candidate.cvPath}}</div>
+          <div>fullName: {{candidate.fullName}}</div>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+</div>

@@ -1,27 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ProjectsService } from 'src/app/modules/commons/services/projects/projects.service';
+import { Component, } from '@angular/core';
 
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.scss'],
 })
-export class ProjectsComponent implements OnInit {
+
+export class ProjectsComponent  {
   public checked = true;
   public componentName = "projects";
   public isEditCreateProject = false;
+  public isAutocomplete = true;
 
-  constructor(private _router: Router, private _projectService: ProjectsService) {}
-
-  ngOnInit(): void {}
+  constructor() {}
+  
   testFunc() {
     alert('button pressed');
-  }
-
-  moveToCreateProject() {
-    this._router.navigate(
-      ['edit']
-    )
   }
 }

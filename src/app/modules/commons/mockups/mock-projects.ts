@@ -1,6 +1,6 @@
 import { ProjectListForTable } from "../interfaces/candidate";
 
-export interface Projects {
+export interface Project {
     name: string;
     creator: string;
     from: Date;
@@ -10,7 +10,13 @@ export interface Projects {
     id: number;
   }
 
-export const DATA: Array<Projects> = [
+
+  export interface Recruiter {
+    id: number;
+    fullName: string;
+  }
+
+export const DATA: Array<Project> = [
     {
       name: 'JavaScript Developer',
       creator: 'John Doe',
@@ -121,6 +127,18 @@ export const DATA: Array<Projects> = [
     },
   ];
 
+export enum EProjectColumnTabel {
+  Name = "Name",
+  Creator = "Creator",
+  From = "From",
+  To = "To",
+  Resume = "Resume",
+  Hired = "Hired",
+  actions = "actions"
+}
+
+export type ProjectColumnTableType = keyof typeof EProjectColumnTabel
+
 export const ProjectsList: Array<ProjectListForTable> = [
     {
         name: 'React Developer',
@@ -182,7 +200,7 @@ export const ProjectsList: Array<ProjectListForTable> = [
 
 
 
-export const ProjectColumnLable = [
+export const ProjectColumnTable = [
     "Name",
     "Creator",
     "From",

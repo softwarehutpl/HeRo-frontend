@@ -1,5 +1,3 @@
-<button (click)="logData()">Log JSON and data from API</button>
-
 <table
   mat-table
   [dataSource]="dataSource"
@@ -22,14 +20,9 @@
     <td mat-cell *matCellDef="let element">{{ element.name }}</td>
   </ng-container>
 
-  <ng-container matColumnDef="recruiterEmail">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Recruiter email</th>
-    <td mat-cell *matCellDef="let element">{{ element.recruiterEmail }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="recruiterId">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Recruiter ID</th>
-    <td mat-cell *matCellDef="let element">{{ element.recruiterId }}</td>
+  <ng-container matColumnDef="source">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Source</th>
+    <td mat-cell *matCellDef="let element">{{ element.source }}</td>
   </ng-container>
 
   <ng-container matColumnDef="recruitmentName">
@@ -37,9 +30,9 @@
     <td mat-cell *matCellDef="let element">{{ element.recruitmentName }}</td>
   </ng-container>
 
-  <ng-container matColumnDef="source">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Source</th>
-    <td mat-cell *matCellDef="let element">{{ element.source }}</td>
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+    <td mat-cell *matCellDef="let element">{{ element.status }}</td>
   </ng-container>
 
   <ng-container matColumnDef="stage">
@@ -47,26 +40,26 @@
     <td mat-cell *matCellDef="let element">{{ element.stage }}</td>
   </ng-container>
 
-  <ng-container matColumnDef="status">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
-    <td mat-cell *matCellDef="let element">{{ element.status }}</td>
-  </ng-container>
-
-  <!-- 
-    NO ENDPOINT IN API (21.07.2022)
-    <ng-container matColumnDef="position">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Position</th>
-    <td mat-cell *matCellDef="let element">{{ element.position }}</td>
-  </ng-container> -->
-
-  <ng-container matColumnDef="techEmail">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Tech email</th>
-    <td mat-cell *matCellDef="let element">{{ element.techEmail }}</td>
-  </ng-container>
-
   <ng-container matColumnDef="techId">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Tech ID</th>
     <td mat-cell *matCellDef="let element">{{ element.techId }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="techAssignee">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Tech Assignee</th>
+    <td mat-cell *matCellDef="let element">{{ element.techAssignee }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="recruiterId">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Recruiter ID</th>
+    <td mat-cell *matCellDef="let element">{{ element.recruiterId }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="recruiterAssignee">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+      Recruiter Assignee
+    </th>
+    <td mat-cell *matCellDef="let element">{{ element.recruiterAssignee }}</td>
   </ng-container>
 
   <ng-container matColumnDef="profile">
@@ -81,9 +74,10 @@
 </table>
 <mat-paginator
   (page)="getPaginatorData($event)"
-  [pageSize]="pageSize"
-  [pageIndex]="pageIndex"
-  [pageSizeOptions]="pageSizeOptions"
+  [pageSize]="service.pageSize"
+  [pageIndex]="service.pageIndex"
+  [pageSizeOptions]="service.pageSizeOptions"
+  [length]="service.listLength"
   aria-label="Select page"
 >
 </mat-paginator>

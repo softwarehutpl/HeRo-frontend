@@ -1,13 +1,13 @@
 <div class="sidebar-box">
   <div class="sidebar-box__flex-buttons">
-    <a mat-icon-button routerLink="/{{ sidebarButton1 }}"
-      ><mat-icon>home</mat-icon></a
-    >
-    <a mat-icon-button routerLink="/{{ sidebarButton2 }}"
-      ><mat-icon>people</mat-icon></a
-    >
-    <a mat-icon-button routerLink="/{{ sidebarButton3 }}"
-      ><mat-icon>list</mat-icon></a
-    >
+    <a mat-icon-button [ngClass]="{'clicked-button':this.clicedButton === 'home'}" (click)="this.ckicked('home')" routerLink="/{{ sidebarButton1 }}">
+      <mat-icon >home</mat-icon>
+    </a>
+    <a mat-icon-button [ngClass]="{'clicked-button':this.clicedButton === 'candidates'}" (click)="this.ckicked('candidates')" routerLink="/{{ sidebarButton2 }}">
+      <mat-icon>people</mat-icon>
+    </a>
+    <a mat-icon-button [ngClass]="{'clicked-button':this.clicedButton === 'projects'}" (click)="this.ckicked('projects')" routerLink="/{{ sidebarButton3 }}">
+      <mat-icon>list</mat-icon>
+    </a>
   </div>
 </div>

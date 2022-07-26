@@ -1,29 +1,28 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-// import { ProjectsService } from 'src/app/modules/commons/services/projects/projects.service';
-import { DATA } from 'src/app/modules/commons/mockups/mock-projects';
+import { ProjectsService } from 'src/app/modules/commons/services/projects/projects.service';
+import { ProjectListDataSource } from './ProjectListDataSource';
 
 @Component({
   selector: 'app-projects-list',
   templateUrl: './projects-list.component.html',
   styleUrls: ['./projects-list.component.scss'],
 })
-export class ProjectsListComponent implements AfterViewInit {
+export class ProjectsListComponent implements AfterViewInit, OnInit {
   public status = '';
-  public pageIndex = 0;
-  public pageSize = 0;
-  public data?: any;
+  public pageIndex = 1;
+  public pageSize = 5;
+  dataSource = new ProjectListDataSource(this.projectService.projects);
 
   constructor(
     private _router: Router,
     private _liveAnnouncer: LiveAnnouncer,
-    // private _projectService: ProjectsService
+    public projectService: ProjectsService
   ) {
-    // this.data = _projectService.getProjectList(this.pageIndex)
+    this.projectService.getPublicProjectList();
   }
 
   displayedColumns: string[] = [
@@ -35,31 +34,42 @@ export class ProjectsListComponent implements AfterViewInit {
     'hired',
     'edit',
   ];
-  dataSource = new MatTableDataSource(DATA);
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  ngAfterViewInit() {
+  get projectsData() {
+    return this.projectService.projects;
+  }
+
+  ngOnInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }
-  onChangePage() {
-    console.log(this.pageIndex);
-    console.log(this.pageSize);
+
+  ngAfterViewInit() {
+    // this.dataSource.paginator = this.paginator;
+    // this.dataSource.sort = this.sort;
+   
   }
+  // onChangePage(pe: PageEvent) {
+  //   console.log(this.pageIndex);
+  //   console.log(this.pageSize);
+  // }
 
   public getPaginatorData(e: PageEvent) {
-    console.log('paginator ' + e.pageIndex);
-    this.pageIndex = e.pageIndex;
-    this.getNextPage;
+
+    this.projectService.pageIndex = e.pageIndex;
+    this.projectService.pageSize = e.pageSize;
+    this.projectService.getPublicProjectList();
   }
 
-  public getNextPage() {
-    // const list = this._projectService.getProjectList(this.pageIndex);
-    // this.data = list;
+  // public getNextPage() {
+  //   // const list = this._projectService.getProjectList(this.pageIndex);
+  //   // this.data = list;
 
-  }
+  // }
+
 
   announceSortChange(sortState: Sort) {
     if (sortState.direction) {
@@ -78,7 +88,9 @@ export class ProjectsListComponent implements AfterViewInit {
     });
   }
 
-  moveToEditProject(projectId: string) {
+  moveToEditProject(projectId: number) {
+    console.log(projectId)
+    this.projectService.getProjectById(projectId)
     this._router.navigate(['edit'], { queryParams: { projectId: projectId } });
   }
 }
