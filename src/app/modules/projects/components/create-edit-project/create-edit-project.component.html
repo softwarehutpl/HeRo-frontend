@@ -53,14 +53,14 @@
             </mat-form-field>
             <div *ngFor="let skillForProject of listOfSkillsForProject; index as j" class="container container__row project skills">
               <div>{{skillForProject.name}}</div>
-              <div><button mat-icon-button color="accent" *ngFor="let ratingId of ratingArray; index as i"
+              <div><button type="button" mat-icon-button color="accent" *ngFor="let ratingId of ratingArray; index as i"
                   [id]="'star_'+i" (click)="calculateRating(i+1, skillForProject.name)">
               
                   <mat-icon>
                     {{ iconStatus(i, j) }}
                   </mat-icon>
                 </button>
-                <button mat-icon-button color="accent" (click)="removeSkillFromProject(skillForProject)">
+                <button type="button" mat-icon-button color="accent" (click)="removeSkillFromProject(skillForProject)">
                   <mat-icon>delete</mat-icon>
                 </button>
               </div>

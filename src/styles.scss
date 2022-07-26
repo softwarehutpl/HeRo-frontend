@@ -62,3 +62,18 @@ This is our main styling container:
     background-color: white;
   }
 }
+
+mat-icon.mat-card-avatar {
+  border-radius: 50%;
+  background-color: orangered;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: $color_light;
+  font-size: 20px;
+  line-height: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+}
