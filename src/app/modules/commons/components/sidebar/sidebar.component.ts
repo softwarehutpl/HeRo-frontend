@@ -32,6 +32,5 @@ public sidebarButton3: string = Data.sidebarButton3;
 
   ckicked(val:string){
     this.clicedButton = val;
-    console.log("hej!! ",this.clicedButton);
   }
 }
