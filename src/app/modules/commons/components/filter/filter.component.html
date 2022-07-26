@@ -9,26 +9,11 @@
                         {{name.name}}
                     </label>
                 </div>
-
-                <!-- <mat-checkbox *ngFor="let name of filter.subfilter" [checked]="name.checked" color="primary"> {{name.name}}</mat-checkbox> -->
             </ul>
         </li>
     </ul>
-
-
-    <!-- <form class="example-form" *ngIf="isDropdow">
-        <mat-form-field class="example-full-width" appearance="fill">
-          <mat-label>Assignee</mat-label>
-          <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
-          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-              {{option.name}}
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
-      </form> -->
-      
-    <mat-form-field *ngIf="isDropdow">
+   
+    <mat-form-field *ngIf="isAutocomplete">
         <mat-label>Project</mat-label>
         <mat-select [(value)]="selected">
             <mat-option>all</mat-option>

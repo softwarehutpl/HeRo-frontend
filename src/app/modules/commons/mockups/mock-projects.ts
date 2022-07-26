@@ -127,6 +127,18 @@ export const DATA: Array<Project> = [
     },
   ];
 
+export enum EProjectColumnTabel {
+  Name = "Name",
+  Creator = "Creator",
+  From = "From",
+  To = "To",
+  Resume = "Resume",
+  Hired = "Hired",
+  actions = "actions"
+}
+
+export type ProjectColumnTableType = keyof typeof EProjectColumnTabel
+
 export const ProjectsList: Array<ProjectListForTable> = [
     {
         name: 'React Developer',
@@ -188,7 +200,7 @@ export const ProjectsList: Array<ProjectListForTable> = [
 
 
 
-export const ProjectColumnLable = [
+export const ProjectColumnTable = [
     "Name",
     "Creator",
     "From",
