@@ -26,8 +26,6 @@ export class CandidatesKanbanComponent implements OnInit {
 
   async ngOnInit() {
     this.service.allCandidates.subscribe((result) => {
-      console.log('Reading result:');
-      console.log(result[0]);
       for (let i = 0; i < result.length; i++) {
         if (result[i].status == 'NEW') {
           this.newCand.push(result[i]);
@@ -51,21 +49,10 @@ export class CandidatesKanbanComponent implements OnInit {
         }
       }
     });
-    // this.service.newCandidates.subscribe((result) => (this.newCand = result));
-    // this.service.evaluation.subscribe((result) => (this.evaluation = result));
-    // this.service.interview.subscribe((result) => (this.interview = result));
-    // this.service.phoneInterview.subscribe(
-    //   (result) => (this.phoneInterview = result)
-    // );
-    // this.service.techInterview.subscribe(
-    //   (result) => (this.techInterview = result)
-    // );
-    // this.service.offer.subscribe((result) => (this.offer = result));
-    // this.service.hired.subscribe((result) => (this.hired = result));
-    // this.service.dropped.subscribe((result) => (this.dropped = result));
   }
 
   drop(event: CdkDragDrop<Candidate[]>) {
+    console.log(event);
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
