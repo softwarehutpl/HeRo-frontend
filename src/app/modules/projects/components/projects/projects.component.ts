@@ -12,6 +12,7 @@ export class ProjectsComponent  {
   public checked = true;
   public componentName = "projects";
   public isEditCreateProject = false;
+  public isAutocomplete = true;
 
   constructor(private _router: Router, private _projectService: ProjectsService, private _route: ActivatedRoute) {}
 

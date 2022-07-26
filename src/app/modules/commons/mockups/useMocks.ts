@@ -5,7 +5,7 @@ export function useMocks(enabled: boolean, module: any) {
     descriptor: PropertyDescriptor
   ) {
     if (enabled) {
-      console.log('Decorator enabled - data is using Mock-ups.');
+      console.log('Decorator enabled - data is using Mock-ups.', target);
       descriptor.value = async () => {
         const data = (await module).default;
         // console.log('data from mock', data);

@@ -26,8 +26,9 @@ export class CandidatesService {
   public url = 'https://swh-t-praktyki2022-app.azurewebsites.net/Candidate';
 
   async getCandidate(id:any): Promise<Candidate> {
-    this.url += '/Get/'+ id;
-    return await axios.get(this.url ,  { withCredentials: true })
+    console.log("server: ", id)
+    const end = '/Get/'+ id;
+    return await axios.get(this.url + end,  { withCredentials: true })
       .then((response) => {
         return response.data;
       })

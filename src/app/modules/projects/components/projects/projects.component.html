@@ -6,7 +6,7 @@
       <mat-divider [vertical]="true"></mat-divider>
       <div class="container container__row">
         <div class="container container__column filterComponet intrnalComponent">
-          <app-filter [whichComponentRender]="componentName" ></app-filter>
+          <app-filter [whichComponentRender]="componentName" [isAutocomplete]="isAutocomplete"></app-filter>
         </div>
         <mat-divider [vertical]="true"></mat-divider>
 
@@ -27,11 +27,8 @@
 
           <app-projects-list></app-projects-list>
 
-     
         </div>
         <!-- Main candidates container ends here -->
       </div>
-    <!-- </div> -->
-    <!-- <router-outlet ></router-outlet> -->
   </div>
 </div>

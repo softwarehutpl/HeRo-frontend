@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import axios from 'axios';
 import { AuthService } from '../../services/auth/auth.service';
@@ -8,23 +8,16 @@ import { AuthService } from '../../services/auth/auth.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
 })
-export class NavbarComponent implements OnInit {
-  private urlLogout: string =
-    'https://swh-t-praktyki2022-app.azurewebsites.net/Auth/LogOut';
-
+export class NavbarComponent {
   constructor(private _router: Router, private _authService: AuthService) {}
 
-  public title: string = 'SoftwareHut Hiring';
-
-  ngOnInit(): void {}
+  public title = 'SoftwareHut Hiring';
 
   public bellButton(): void {
-    console.log('bell button pressed');
+    //na co dziala bellButton
   }
-  public userButton(): void {
-    axios
-      .get(this.urlLogout, { withCredentials: true })
-      .then((res) => console.log(res));
-    this._router.navigate(['/login']);
+
+  public async userButton() {
+    this._authService.logout();
   }
 }
