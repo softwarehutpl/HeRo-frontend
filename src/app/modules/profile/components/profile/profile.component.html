@@ -11,25 +11,25 @@
     <div class="informations">
       <div class="informations__title">Summary</div>
 
-      <div class="informations__option">FullName:</div>
+      <div class="informations__option">Full Name:</div>
       <div class="informations__value">{{candidate.fullName}}</div>
 
       <div class="informations__option">Email:</div>
       <a class="informations__value">{{candidate.email}}</a>
 
-      <div class="informations__option">PhoneNumber:</div>
-      <div class="informations__value">{{candidate.phoneNumber}}</div>
+      <div class="informations__option">Phone Number:</div>
+      <div class="informations__value">{{candidate.phoneNumber }}</div>
 
 
       <div class="informations__title">Notes</div>
 
-      <div class="informations__option">AvailableFrom:</div>
-      <div class="informations__value">{{candidate.availableFrom}}</div>
+      <div class="informations__option">Available From:</div>
+      <div class="informations__value">{{candidate.availableFrom |date:'dd.MM.YYYY' }}</div>
 
-      <div class="informations__option">ExpectedMonthlySalary:</div>
+      <div class="informations__option">Expected Monthly Salary:</div>
       <div class="informations__value">{{candidate.expectedMonthlySalary}} PLN</div>
 
-      <div class="informations__option">OtherExpectations:</div>
+      <div class="informations__option">Other Expectations:</div>
       <div class="informations__value">{{candidate.otherExpectations}}</div>
 
       <div class="informations__option">CV:</div>
