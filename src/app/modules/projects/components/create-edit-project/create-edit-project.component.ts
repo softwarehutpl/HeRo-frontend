@@ -20,7 +20,6 @@ import {
   templateUrl: './create-edit-project.component.html',
   styleUrls: ['./create-edit-project.component.scss'],
 })
-
 export class CreateEditProjectComponent implements OnInit {
   public myControl = new FormControl('');
   public textHeader = 'Create/Edit project';
@@ -43,8 +42,8 @@ export class CreateEditProjectComponent implements OnInit {
   ) {
     this.queryIdParam = this._route.snapshot.queryParamMap.get('projectId');
     console.log(this.queryIdParam);
-    this.queryParamNumber = Number(this.queryIdParam)
-    this._projectService.getProjectById(this.queryParamNumber)
+    this.queryParamNumber = Number(this.queryIdParam);
+    this._projectService.getProjectById(this.queryParamNumber);
     this._projectService.projectSkills$.subscribe({
       next: (data) => {
         this.listOfSkills = data;
@@ -145,10 +144,10 @@ export class CreateEditProjectComponent implements OnInit {
 
     // const isSaved = await this._projectService.saveProject(body);
 
-    if (isSaved) {
-      alert("Project saved")
-      // this._router.navigate()
-    }
+    // if (isSaved) {
+    //   alert("Project saved")
+    //   // this._router.navigate()
+    // }
   }
 
   public preparingFormatSkillsForProject(): SkillsForProjectId[] {
