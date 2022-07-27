@@ -15,6 +15,7 @@ import { Component, OnInit } from '@angular/core';
 export class CandidatesComponent implements OnInit {
   public componentName = 'candidates';
   public isAutocomplete = false;
+  public isStage = true;
   constructor() {}
 
   ngOnInit(): void {}

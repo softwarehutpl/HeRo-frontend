@@ -3,8 +3,7 @@ import { Router } from '@angular/router';
 import { Data } from '../../interfaces/filters';
 import { ProjectsService } from '../projects/projects.service';
 import { RecruitmentFiltringDTO, RecruitmentList } from '../../interfaces/recruitment';
-import { Filter } from '../../interfaces/filters';
-
+import { Subfilter } from '../../interfaces/filters';
 @Injectable({
   providedIn: 'root',
 })
@@ -13,7 +12,7 @@ export class FiltersService {
   public renderedComponentName?: string;
   public isOpenProject = true;
   public isClosedProjects = true;
-  public checkboxFieldsData: Filter[]  = JSON.parse(JSON.stringify(Data.filtersSidebarButton3))
+  public checkboxFieldsData: Subfilter[]  = JSON.parse(JSON.stringify(Data.filtersSidebarButton3))
 
   constructor(
     private _router: Router,
