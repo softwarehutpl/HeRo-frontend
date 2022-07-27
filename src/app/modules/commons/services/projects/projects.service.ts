@@ -31,6 +31,7 @@ const getProjectBody = {
   },
 };
 
+
 interface GetRecruitersBodyResponse {
   data: GetRecruitersItem[];
 }
