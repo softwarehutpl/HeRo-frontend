@@ -6,6 +6,8 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { Candidate } from '../../CandidatesInterface';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { WarningComponent } from '../warning/warning.component';
 
 @Component({
   selector: 'app-candidates-kanban',
@@ -24,35 +26,41 @@ export class CandidatesKanbanComponent implements OnInit {
   dropped: Candidate[] = [];
   incorrect: Candidate[] = [];
 
-  constructor(private service: CandidatesDataService) {}
+  constructor(
+    private service: CandidatesDataService,
+    public dialog: MatDialog
+  ) {}
   async ngOnInit() {
     this.service.allCandidates.subscribe((result) => {
-      for (let i = 0; i < result.length; i++) {
-        if (result[i].status == 'NEW') {
-          this.newCand.push(result[i]);
-        } else if (result[i].status == 'HIRED') {
-          this.hired.push(result[i]);
-        } else if (result[i].status == 'DROPPED_OUT') {
-          this.dropped.push(result[i]);
-        } else if (result[i].status == 'IN_PROCESSING') {
-          if (result[i].stage == 'EVALUATION') {
-            this.evaluation.push(result[i]);
-          } else if (result[i].stage == 'INTERVIEW') {
-            this.interview.push(result[i]);
-          } else if (result[i].stage == 'PHONE_INTERVIEW') {
-            this.phoneInterview.push(result[i]);
-          } else if (result[i].stage == 'TECH_INTERVIEW') {
-            this.techInterview.push(result[i]);
-          } else if (result[i].stage == 'OFFER') {
-            this.offer.push(result[i]);
-          } else {
-            this.incorrect.push(result[i]);
-          }
-        } else {
-          this.incorrect.push(result[i]);
-        }
-      }
+      this.sortCandidates(result);
     });
+  }
+  sortCandidates(data: Candidate[]) {
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].status == 'NEW') {
+        this.newCand.push(data[i]);
+      } else if (data[i].status == 'HIRED') {
+        this.hired.push(data[i]);
+      } else if (data[i].status == 'DROPPED_OUT') {
+        this.dropped.push(data[i]);
+      } else if (data[i].status == 'IN_PROCESSING') {
+        if (data[i].stage == 'EVALUATION') {
+          this.evaluation.push(data[i]);
+        } else if (data[i].stage == 'INTERVIEW') {
+          this.interview.push(data[i]);
+        } else if (data[i].stage == 'PHONE_INTERVIEW') {
+          this.phoneInterview.push(data[i]);
+        } else if (data[i].stage == 'TECH_INTERVIEW') {
+          this.techInterview.push(data[i]);
+        } else if (data[i].stage == 'OFFER') {
+          this.offer.push(data[i]);
+        } else {
+          this.incorrect.push(data[i]);
+        }
+      } else {
+        this.incorrect.push(data[i]);
+      }
+    }
   }
   drop(event: CdkDragDrop<Candidate[]>) {
     if (event.previousContainer === event.container) {
@@ -62,13 +70,13 @@ export class CandidatesKanbanComponent implements OnInit {
         event.currentIndex
       );
     } else {
-      if (this.warning()) {
-        transferArrayItem(
-          event.previousContainer.data,
-          event.container.data,
-          event.previousIndex,
-          event.currentIndex
-        );
+      if (this.openDialog(event)) {
+        // transferArrayItem(
+        //   event.previousContainer.data,
+        //   event.container.data,
+        //   event.previousIndex,
+        //   event.currentIndex
+        // );
         this.changeStatusAndStage(
           event.container.id,
           event.container.data[event.currentIndex].id
@@ -76,11 +84,29 @@ export class CandidatesKanbanComponent implements OnInit {
       }
     }
   }
+  openDialog(event: any) {
+    const dialogRef = this.dialog.open(WarningComponent);
+    return dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+      // return result;
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    });
+  }
+
   async changeStatusAndStage(
     newColumn: string,
     candidateID: number
   ): Promise<void> {
-    if (newColumn == ('NEW' || 'HIRED' || 'DROPPED_OUT')) {
+    if (
+      newColumn == 'NEW' ||
+      newColumn == 'HIRED' ||
+      newColumn == 'DROPPED_OUT'
+    ) {
       // console.log(`setting Status to, ${newColumn},  stage to ' '.`);
       await this.service.setStatusAndStage(candidateID, newColumn, '');
     } else {
@@ -91,14 +117,10 @@ export class CandidatesKanbanComponent implements OnInit {
         newColumn
       );
     }
-    this.service.getAllCandidates();
-  }
-  warning(): boolean {
-    //   //some kind of modal should display here
-    // if true
-    // changeStatusAndStage(newStatus, newStage)
-    //alert('changing status');
-    return true;
-    // else return false;
+    await this.service.getAllCandidates();
+    /* 
+    This doesn't solve the problem of optimistic-behaviour. Changes are local, but back-end error is not accounted for.
+    await this.service.allCandidates.subscribe((result) => this.sortCandidates(result)); 
+    */
   }
 }

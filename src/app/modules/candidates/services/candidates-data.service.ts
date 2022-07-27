@@ -140,7 +140,7 @@ export class CandidatesDataService {
     candidateID: number,
     newStatus: string,
     newStage: string
-  ): Promise<void> {
+  ): Promise<boolean> {
     const URL =
       'https://swh-t-praktyki2022-app.azurewebsites.net/Candidate/Edit';
     const headers = new HttpHeaders({ accept: 'application/json' });
@@ -159,10 +159,15 @@ export class CandidatesDataService {
       .then((res) => {
         if (res.statusText === 'OK') {
           console.log(res.data.value);
+          return true;
         } else {
           console.log('Error, status not OK');
+          return false;
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        return false;
+      });
   }
 }

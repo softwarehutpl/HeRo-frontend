@@ -44,6 +44,7 @@ import { InterviewDialogComponent } from './modules/homepage/components/calendar
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { HttpClientModule } from '@angular/common/http';
+import { WarningComponent } from './modules/candidates/components/warning/warning.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { HttpClientModule } from '@angular/common/http';
     CalendarItemsComponent,
     CandidatesKanbanComponent,
     InterviewDialogComponent,
+    WarningComponent,
   ],
   imports: [
     BrowserModule,
