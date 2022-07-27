@@ -5,7 +5,6 @@ import { MatSort, Sort } from '@angular/material/sort';
 // import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { CandidatesDataService } from '../../services/candidates-data.service';
-import CANDIDATES from '../../../commons/mockups/candidates.json';
 import { MatDialog } from '@angular/material/dialog';
 import { CandidatesSidenavComponent } from '../candidates-sidenav/candidates-sidenav.component';
 import { CreateInitialsService } from 'src/app/modules/commons/services/createInitials/create-initials.service';
@@ -74,17 +73,18 @@ export class CandidatesListComponent implements AfterViewInit, OnInit {
     }
   }
 
-  sidenavClicked(candiate:any){
+  sidenavClicked(candiate: any) {
     this.dialog.closeAll();
     this.dialog.open(CandidatesSidenavComponent, {
-      data: candiate,
-      height:'calc(100% - 50px)',
-      width:'400px',
+      data: { candidate: candiate, dialog: this.dialog },
+      height: 'calc(100% - 50px)',
+      width: '400px',
+      // backdropClass:"backdropClass",
       position: {
         top: '50px',
         right: '0px'
       }
     });
-    
+
   }
 }

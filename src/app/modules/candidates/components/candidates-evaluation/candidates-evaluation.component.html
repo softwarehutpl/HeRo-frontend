@@ -1,0 +1,20 @@
+<div class="content">
+    <div class="head">
+        Interview evaluation with {{candidate.name}}
+    </div>
+
+    <mat-form-field appearance="fill" class="date-picker">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker" [formControl]="date">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <textarea class="text-input" [formControl]="text" (change)="fun()" ></textarea>
+
+    <div class="ending-buttons" mat-dialog-close>
+        <button mat-button (click)="commit()">Akcept</button>
+        <button mat-button>Close</button>
+    </div>
+</div>

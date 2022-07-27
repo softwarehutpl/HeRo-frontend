@@ -2,7 +2,19 @@
     display: flex;
     flex-direction: column;
 }
-.close-button{
+.head{
     display: flex;
-    justify-content: flex-end;
+    flex-direction: row;
+    justify-content: space-between;
+
+    &__candidate{
+        display: flex;
+        flex-direction: row;
+    }
+}
+.buttons{
+    margin: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }

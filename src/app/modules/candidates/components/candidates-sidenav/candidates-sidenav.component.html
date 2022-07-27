@@ -1,7 +1,17 @@
 <div class="sidenav">
-    <div class="close-button">
-        <button mat-button >
-            <mat-icon mat-dialog-close>close</mat-icon>
+    <div class="head">
+        <div class="head__candidate">
+            {{initial}}
+            {{candidate.name}}
+        </div>
+        <button mat-button mat-dialog-close >
+            <mat-icon >close</mat-icon>
         </button>
+    </div>
+
+    <div class="buttons">
+        <button mat-flat-button color="primary" (click)="evaluationClicked()">Primary</button>
+        <a mat-flat-button color="primary" (click)="closeDialog()" routerLink="/profile/{{candidate.id}}">Primary</a>
+
     </div>
 </div>

@@ -45,6 +45,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { HttpClientModule } from '@angular/common/http';
 import { CandidatesSidenavComponent } from './modules/candidates/components/candidates-sidenav/candidates-sidenav.component';
+import { CandidatesEvaluationComponent } from './modules/candidates/components/candidates-evaluation/candidates-evaluation.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { CandidatesSidenavComponent } from './modules/candidates/components/cand
     CandidatesKanbanComponent,
     InterviewDialogComponent,
     CandidatesSidenavComponent,
+    CandidatesEvaluationComponent,
   ],
   imports: [
     BrowserModule,
