@@ -32,10 +32,7 @@ const getProjectBody = {
 };
 
 
-interface GetRecruitersItem {
-  id: number;
-  fullName: string;
-}
+
 
 interface GetRecruitersBodyResponse {
   data: GetRecruitersItem[];
