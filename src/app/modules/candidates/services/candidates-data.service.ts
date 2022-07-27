@@ -14,37 +14,13 @@ export class CandidatesDataService {
   );
   private _candidatesAll: Promise<Candidate[]> = this.getAllCandidates();
 
-  // private _newCandidates: Promise<Candidate[]> = this.getCandidatesByStatus([
-  //   'NEW',
-  // ]);
-  // private _hired: Promise<Candidate[]> = this.getCandidatesByStatus(['HIRED']);
-  // private _dropped: Promise<Candidate[]> = this.getCandidatesByStatus([
-  //   'DROPPED_OUT',
-  // ]);
-  // private _evaluation: Promise<Candidate[]> = this.getCandidatesByStatus(
-  //   [],
-  //   ['EVALUATION']
-  // );
-  // private _interview: Promise<Candidate[]> = this.getCandidatesByStatus(
-  //   [],
-  //   ['INTERVIEW']
-  // );
-  // private _phoneInterview: Promise<Candidate[]> = this.getCandidatesByStatus(
-  //   [],
-  //   ['PHONE_INTERVIEW']
-  // );
-  // private _techInterview: Promise<Candidate[]> = this.getCandidatesByStatus(
-  //   [],
-  //   ['TECH_INTERVIEW']
-  // );
-  // private _offer: Promise<Candidate[]> = this.getCandidatesByStatus(
-  //   [],
-  //   ['OFFER']
-  // );
+  // private _statuses = this.getStatuses();
+  // private _stages = this.getStages();
+  private _statuses: Promise<string[]> = this.getStatuses();
+  private _stages: Promise<string[]> = this.getStages();
 
   constructor() {
     this.getCandidatesForList();
-    // this.getAllCandidates();
   }
 
   get candidates() {
@@ -53,30 +29,15 @@ export class CandidatesDataService {
   get allCandidates() {
     return from(this._candidatesAll);
   }
-  // get newCandidates() {
-  //   return from(this._newCandidates);
-  // }
-  // get hired() {
-  //   return from(this._hired);
-  // }
-  // get dropped() {
-  //   return from(this._dropped);
-  // }
-  // get evaluation() {
-  //   return from(this._evaluation);
-  // }
-  // get interview() {
-  //   return from(this._interview);
-  // }
-  // get phoneInterview() {
-  //   return from(this._phoneInterview);
-  // }
-  // get techInterview() {
-  //   return from(this._techInterview);
-  // }
-  // get offer() {
-  //   return from(this._offer);
-  // }
+
+  get statuses() {
+    // return this._statuses;
+    return from(this._statuses);
+  }
+  get stages() {
+    // return this._stages;
+    return from(this._stages);
+  }
 
   //paginator settings:
   public pageIndex = 0;
@@ -185,6 +146,84 @@ export class CandidatesDataService {
         if (res.statusText === 'OK') {
           // console.log(res);
           return res.data.candidateInfoForListDTOs;
+        } else {
+          console.log('Error, status not OK');
+        }
+      })
+      .catch((err) => console.log(err));
+  }
+
+  public async getStatuses(): Promise<string[]> {
+    const URL =
+      'https://swh-t-praktyki2022-app.azurewebsites.net/Candidate/GetStatusList';
+    const headers = new HttpHeaders({ accept: 'application/json' });
+    const Options = {
+      header: headers,
+      withCredentials: true,
+    };
+
+    return await axios
+      .get(URL, Options)
+      .then((res) => {
+        if (res.statusText === 'OK') {
+          return res.data;
+        } else {
+          console.log('Error, status not OK');
+        }
+      })
+      .catch((err) => console.log(err));
+  }
+
+  public async getStages(): Promise<string[]> {
+    const URL =
+      'https://swh-t-praktyki2022-app.azurewebsites.net/Candidate/GetStageList';
+    const headers = new HttpHeaders({ accept: 'application/json' });
+    const Options = {
+      header: headers,
+      withCredentials: true,
+    };
+
+    return await axios
+      .get(URL, Options)
+      .then((res) => {
+        if (res.statusText === 'OK') {
+          return res.data;
+        } else {
+          console.log('Error, status not OK');
+        }
+      })
+      .catch((err) => console.log(err));
+  }
+
+  public async setStatusAndStage(
+    candidateID: number,
+    newStatus: string,
+    newStage: string
+  ): Promise<void> {
+    // console.log('Fetching All Candidates');
+    const URL =
+      'https://swh-t-praktyki2022-app.azurewebsites.net/Candidate/Edit';
+    const headers = new HttpHeaders({ accept: 'application/json' });
+    const body = {
+      candidateId: candidateID,
+      status: newStatus,
+      stage: newStage,
+      // paging: {
+      //   pageSize: 20, //max 20 elements to reduce clutter
+      //   pageNumber: 1, //API requirement
+      // },
+    };
+    const Options = {
+      header: headers,
+      withCredentials: true,
+    };
+
+    return await axios
+      .post(URL, body, Options)
+      .then((res) => {
+        if (res.statusText === 'OK') {
+          console.log(res);
+          console.log('Status and Stage changed');
         } else {
           console.log('Error, status not OK');
         }
