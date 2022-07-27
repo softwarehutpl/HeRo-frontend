@@ -87,7 +87,7 @@ export class ProjectsService implements OnInit {
   public pageSizeOptions = [5, 10, 25, 100];
   public listLength!: number;
 
-  constructor(private _activatedRoute: ActivatedRoute) {}
+  constructor(private _activatedRoute: ActivatedRoute,) {}
 
   get projects() {
     return this.projects$.asObservable();
@@ -179,12 +179,12 @@ export class ProjectsService implements OnInit {
   }
 
   public async getPublicProjectList() {
-    await this.getRecruiterList();
+    await this._getRecruiterList();
     const res = await this.getProjectList();
     return this.prepareProjectLis(res.data);
   }
 
-  public async getRecruiterList() {
+  private async _getRecruiterList() {
     if (this.recruitListIsLoaded) {
       return;
     }
@@ -241,12 +241,13 @@ export class ProjectsService implements OnInit {
     const projectListReadyForTable: Project[] = [];
 
     recruitmentList.recruitmentDTOs.map((el: RecruitmentDTO) => {
-      const recruiterData = this.recruiterList.filter(
-        (elRescruiterList) => elRescruiterList.id === el.recruiterId
-      );
+      // console.log
+      // const recruiterData = this.recruiterList.filter(
+      //   (elRescruiterList) => elRescruiterList.id === el.recruiterId
+      // );
       const readyProject: Project = {
         name: el.name,
-        creator: recruiterData[0].fullName,
+        creator: el.creator,
         from: new Date(el.beginningDate),
         to: new Date(el.endingDate),
         resume: el.candidateCount,

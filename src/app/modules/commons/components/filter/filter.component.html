@@ -1,12 +1,15 @@
 <div class="container container__column">
+    <!-- <form [formGroup]="checkboxForm"> -->
+
+   
     <ul class="container container__column list">
         <li *ngFor="let filter of filters ">
             {{filter.filterName}}
             <ul class="list" class="container container__column muiMargin">
-                <div *ngFor="let name of filter.subfilter; let i = index">
+                <div *ngFor="let checkBox of filter.subfilter; let i = index">
                     <label >
-                        <input type="checkbox" id="id{{name.color}}" checked="{{name.checked}}">
-                        {{name.name}}
+                        <input type="checkbox" id="id{{checkBox.color}}" checked="{{checkBox.checked}}" >
+                        {{checkBox.name}}
                     </label>
                 </div>
             </ul>
@@ -19,4 +22,5 @@
             <mat-option>all</mat-option>
         </mat-select>
     </mat-form-field>
+<!-- </form> -->
 </div>

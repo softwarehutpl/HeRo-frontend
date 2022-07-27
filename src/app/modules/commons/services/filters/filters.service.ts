@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Data} from '../../components/definition';
+import { Data } from '../../interfaces/filters';
+import { ProjectsService } from '../projects/projects.service';
+import { RecruitmentFiltringDTO, RecruitmentList } from '../../interfaces/recruitment';
+import { Filter } from '../../interfaces/filters';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +11,26 @@ import { Data} from '../../components/definition';
 export class FiltersService {
   public sideBarComponentName: string = Data.sidebarButton2;
   public renderedComponentName?: string;
-  constructor(private _router: Router) {}
+  public isOpenProject = true;
+  public isClosedProjects = true;
+  public checkboxFieldsData: Filter[]  = JSON.parse(JSON.stringify(Data.filtersSidebarButton3))
+
+  constructor(
+    private _router: Router,
+    private _projectsService: ProjectsService
+  ) {}
+
+  setStatusForProjects(projectListFilterData: RecruitmentList)  {
+    console.log(projectListFilterData)
+    // this.checkboxFieldsData.subfilter.map(el => {
+    //   if (el.name === 'Open') {
+    //     el.checked = projectListFilterData.showOpen
+    //   } else if (el.name === 'Closed') {
+    //     el.checked = projectListFilterData.showClosed
+    //   }
+    // })
+    // return this.isClosedProjects = projectListFilterData.showClosed;
+  }
 
   filtersForComponent(renderedComponent: string) {
     this.renderedComponentName = renderedComponent;
@@ -20,5 +42,4 @@ export class FiltersService {
       return Data.filtersSidebarButton3;
     }
   }
-
 }

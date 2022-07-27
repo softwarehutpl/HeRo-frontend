@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
 import { Router } from '@angular/router';
@@ -11,21 +11,12 @@ import { ProjectListDataSource } from './ProjectListDataSource';
   templateUrl: './projects-list.component.html',
   styleUrls: ['./projects-list.component.scss'],
 })
-export class ProjectsListComponent implements AfterViewInit, OnInit {
+export class ProjectsListComponent implements OnInit {
   public status = '';
   public pageIndex = 1;
   public pageSize = 5;
-  dataSource = new ProjectListDataSource(this.projectService.projects);
-
-  constructor(
-    private _router: Router,
-    private _liveAnnouncer: LiveAnnouncer,
-    public projectService: ProjectsService
-  ) {
-    this.projectService.getPublicProjectList();
-  }
-
-  displayedColumns: string[] = [
+  public dataSource = new ProjectListDataSource(this.projectService.projects);
+  public displayedColumns = [
     'name',
     'creator',
     'from',
@@ -35,8 +26,17 @@ export class ProjectsListComponent implements AfterViewInit, OnInit {
     'edit',
   ];
 
+
+  constructor(
+    private _router: Router,
+    private _liveAnnouncer: LiveAnnouncer,
+    public projectService: ProjectsService
+  ) {}
+
+
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+
 
   get projectsData() {
     return this.projectService.projects;
@@ -45,31 +45,14 @@ export class ProjectsListComponent implements AfterViewInit, OnInit {
   ngOnInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+    this.projectService.getPublicProjectList();
   }
-
-  ngAfterViewInit() {
-    // this.dataSource.paginator = this.paginator;
-    // this.dataSource.sort = this.sort;
-   
-  }
-  // onChangePage(pe: PageEvent) {
-  //   console.log(this.pageIndex);
-  //   console.log(this.pageSize);
-  // }
 
   public getPaginatorData(e: PageEvent) {
-
     this.projectService.pageIndex = e.pageIndex;
     this.projectService.pageSize = e.pageSize;
     this.projectService.getPublicProjectList();
   }
-
-  // public getNextPage() {
-  //   // const list = this._projectService.getProjectList(this.pageIndex);
-  //   // this.data = list;
-
-  // }
-
 
   announceSortChange(sortState: Sort) {
     if (sortState.direction) {
@@ -89,8 +72,8 @@ export class ProjectsListComponent implements AfterViewInit, OnInit {
   }
 
   moveToEditProject(projectId: number) {
-    console.log(projectId)
-    this.projectService.getProjectById(projectId)
+    console.log(projectId);
+    this.projectService.getProjectById(projectId);
     this._router.navigate(['edit'], { queryParams: { projectId: projectId } });
   }
 }
