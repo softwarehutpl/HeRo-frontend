@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Candidate } from 'src/app/modules/commons/interfaces/candidate';
 import { CandidatesService } from 'src/app/modules/commons/services/candidates/candidates.service';
+import { CreateInitialsService } from 'src/app/modules/commons/services/createInitials/create-initials.service';
 
 @Component({
   selector: 'app-profile',
@@ -12,7 +13,10 @@ export class ProfileComponent implements OnInit {
 
   res!: any;
 
-  constructor(private route: ActivatedRoute, private candidateServer: CandidatesService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private candidateServer: CandidatesService,
+    private createInitialsService: CreateInitialsService) { }
   dataLoadet: boolean = false;
   public candidate!: Candidate;
   async ngOnInit(): Promise<void> {
@@ -28,19 +32,7 @@ export class ProfileComponent implements OnInit {
   }
 
   public createInititals(name: string): string {
-    let initials = '';
-    for (let i = 0; i < name.length; i++) {
-      if (name.charAt(i) === ' ') {
-        continue;
-      }
-      if (name.charAt(i) === name.charAt(i).toUpperCase()) {
-        initials += name.charAt(i);
-        if (initials.length == 3) {
-          break;
-        }
-      }
-    }
-    return initials;
+    return this.createInitialsService.createInititals(name);
   }
 
 }
