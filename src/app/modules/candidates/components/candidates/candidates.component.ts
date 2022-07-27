@@ -1,21 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-// import { Candidate } from '../../CandidatesInterface';
-
-// export interface KanbanDisplay {
-//   name: string;
-//   project: string;
-//   position: string;
-// }
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-candidates',
   templateUrl: './candidates.component.html',
   styleUrls: ['./candidates.component.scss'],
 })
-export class CandidatesComponent implements OnInit {
+export class CandidatesComponent {
   public componentName = 'candidates';
   public isAutocomplete = false;
-  constructor() {}
-
-  ngOnInit(): void {}
 }
