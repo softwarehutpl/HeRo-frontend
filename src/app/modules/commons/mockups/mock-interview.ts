@@ -1,4 +1,5 @@
 import {Interview} from '../interfaces/interview';
+import { CalendarEvent } from 'angular-calendar';
 
 export const INTERVIEW: Interview[]=[
 {
@@ -46,3 +47,65 @@ export const INTERVIEW: Interview[]=[
     type:              "string"
 },
 ]
+
+export const COLORS: any = {
+    red: {
+      primary: '#ad2121',
+      secondary: '#FAE3E3',
+    },
+    blue: {
+      primary: '#1e90ff',
+      secondary: '#D1E8FF',
+    },
+    yellow: {
+      primary: '#e3bc08',
+      secondary: '#FDF1BA',
+    },
+  };
+
+export const CALENDAR_EVENTS: CalendarEvent[] = [
+    {
+      id: 1,
+      start: new Date("2022-07-16T03:24:00"),
+      title: 'An event',
+      draggable: true,
+      color: COLORS.red,
+
+    }, {
+      id: 2,
+      start: new Date("2022-07-15T03:24:00"),
+      title: 'An event',
+      draggable: true,
+      color: COLORS.red,
+    }, {
+      id: 3,
+      start: new Date("2022-07-15T13:44:00"),
+      title: 'An',
+      draggable: true,
+      color: COLORS.blue,
+    }, {
+      id: 4,
+      start: new Date("2022-07-16T13:44:00"),
+      title: 'An event2',
+      draggable: true,
+      color: COLORS.yellow,
+    }, {
+      id: 5,
+      start: new Date("2022-07-15T03:24:00"),
+      title: 'An event3',
+      draggable: true,
+      color: COLORS.yellow,
+    }, {
+      id: 6,
+      start: new Date("2022-07-15T03:24:00"),
+      title: 'An event4',
+      draggable: true,
+      color: COLORS.blue,
+    }, {
+      id: 7,
+      start: new Date("2022-07-15T03:24:00"),
+      title: 'An event5showmore than needed',
+      draggable: true,
+      color: COLORS.red,
+    }
+  ];

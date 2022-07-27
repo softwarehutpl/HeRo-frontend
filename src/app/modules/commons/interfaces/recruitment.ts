@@ -15,14 +15,20 @@ export interface Recruitment {
 }
 
 export interface Skill {
-    id:    number,
+    skillId:    number,
     name:       string,
     skillLevel: number,
 }
 
 export interface SkillsForProjectId {
     skillId: number;
+    name: string;
     skillLevel: number;
+  }
+
+  export interface GetRecruitersItem {
+    id: number;
+    fullName: string;
   }
 
 
@@ -46,6 +52,7 @@ export interface RecruitmentDTO {
     beginningDate:       Date;
     endingDate:          Date;
     name:                string;
+    creator: string;
     description:         string;
     recruiterId:         number;
     candidateCount:      number;
@@ -96,3 +103,40 @@ export interface GetRecruitmentListBodyRequest {
 }
 
 
+export interface RecruitmentById {
+  id: number;
+  beginningDate: Date;
+  endingDate: Date,
+  name: string;
+  description: string;
+  recruiterId: number;
+  candidateCount: number,
+  recruitmentPosition: string,
+  localization: string,
+  seniority: string,
+  hiredCount: number,
+  skills: SkillById[];
+}
+
+export interface SkillById {
+  skillId: number;
+      name: string;
+      skillLevel: number;
+}
+
+export interface SillsList {
+  id: number;
+  skillLevel: number
+}
+
+export interface ProjectColumnLabel {
+  Name: string;
+  Creator: string;
+  From: string;
+  To: string;
+  Resume: string;
+  Hired: string;
+  actions: string;
+}
+
+// type ProjectColumnLabelType = keyof typeof EProjectCOlumnLabel;

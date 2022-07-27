@@ -38,14 +38,26 @@ export class CalendarService {
   async getInterviewsList(): Promise<InterviewList> {
 
     // console.log('body', this.getListInterviewsBody, this.url)
-    return await axios.post(this.url + '/GetList', this.getListInterviewsBody, 
-    { withCredentials: true })
+    return await axios.post(this.url + '/GetList', this.getListInterviewsBody,
+      { withCredentials: true })
       .then((response) => {
         // console.log({ response });
         return response.data;
       }).catch((error) => {
-        console.log("error get intervie list: " + error);
+        console.log("error get intervie list: ",error);
       });
+  }
+
+
+  async getIntervie(id: number): Promise<InterviewDTO> {
+    return await axios.get(this.url + '/get/' + id,{ withCredentials: true })
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        console.log("error get intervie : ", id, " ", error);
+      });
+
   }
 
 }

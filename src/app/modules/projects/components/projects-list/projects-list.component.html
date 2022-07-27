@@ -64,6 +64,7 @@
       <button
         mat-icon-button
         class="button"
+        [routerLink]="['edit/{{element.id}}']"
         (click)="moveToEditProject(element.id)"
       >
         <mat-icon>edit</mat-icon>

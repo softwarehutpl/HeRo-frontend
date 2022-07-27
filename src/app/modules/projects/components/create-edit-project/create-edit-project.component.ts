@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -13,6 +13,7 @@ import {
   Recruitment,
   SkillsForProjectId,
   Skill,
+  RecruitmentById,
 } from '../../../commons/interfaces/recruitment';
 
 @Component({
@@ -33,7 +34,17 @@ export class CreateEditProjectComponent implements OnInit {
   public listOfSkills: Array<Skill> = [];
   public projectId!: number;
   public queryIdParam: string | null;
-  public queryParamNumber: number;
+  public queryParamNumber!: number;
+  public projectByIdData!: RecruitmentById;
+  public formGroupData = {
+    projectName: 'a',
+    seniority: 'a',
+    from: 'a',
+    to: 'a',
+    localion: 'a',
+    textarea: 'a',
+    isPublic: true,
+  };
 
   constructor(
     private fb: FormBuilder,
@@ -41,41 +52,67 @@ export class CreateEditProjectComponent implements OnInit {
     private _route: ActivatedRoute
   ) {
     this.queryIdParam = this._route.snapshot.queryParamMap.get('projectId');
-    console.log(this.queryIdParam);
-    this.queryParamNumber = Number(this.queryIdParam);
-    this._projectService.getProjectById(this.queryParamNumber);
+
+    this.isQuerParam();
+
     this._projectService.projectSkills$.subscribe({
       next: (data) => {
         this.listOfSkills = data;
       },
     });
     this.projectId = this._projectService.readingProjectIdFromQueryParam();
-    // console.log(
-    //   (this.projectId = this._projectService.readingProjectIdFromQueryParam())
-    // );
   }
 
   public projectForm = this.fb.group({
-    projectName: new FormControl('', [Validators.required]),
-    seniority: new FormControl('', [Validators.required]),
-    from: new FormControl('', [Validators.required]),
-    to: new FormControl('', [Validators.required]),
-    localion: new FormControl('', [Validators.required]),
-    textarea: new FormControl('', [Validators.required]),
+    projectName: new FormControl(this.formGroupData.projectName, [
+      Validators.required,
+    ]),
+    seniority: new FormControl(this.formGroupData.seniority, [
+      Validators.required,
+    ]),
+    from: new FormControl(this.formGroupData.from, [Validators.required]),
+    to: new FormControl(this.formGroupData.to, [Validators.required]),
+    localion: new FormControl(this.formGroupData.localion, [
+      Validators.required,
+    ]),
+    textarea: new FormControl(this.formGroupData.textarea, [
+      Validators.required,
+    ]),
     isPublic: new FormControl(false),
   });
 
-  ngOnInit() {
+  async ngOnInit() {
     for (let index = 0; index < this.totalStar; index++) {
       this.ratingArray.push(index);
-
-      // console.log(this.projectId);
     }
+
+    // this.isQuerParam();
 
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map((el) => this._filter(el))
     );
+  }
+
+  public async isQuerParam() {
+    if (this.queryIdParam) {
+      this.queryParamNumber = Number(this.queryIdParam);
+      const projectByIdPromise = await this._projectService.getProjectById(
+        this.queryParamNumber
+      );
+      this.projectByIdData = projectByIdPromise;
+      this.listOfSkillsForProject = this.projectByIdData.skills;
+
+      this.projectForm.patchValue({
+        projectName: this.projectByIdData.name,
+        seniority: this.projectByIdData.seniority,
+        from: this.projectByIdData.beginningDate,
+        to: this.projectByIdData.endingDate,
+        localion: this.projectByIdData.localization,
+        isPublic: true,
+        textarea: this.projectByIdData.description,
+      });
+    }
   }
 
   private _filter(value: string): Array<Skill> {
@@ -142,21 +179,26 @@ export class CreateEditProjectComponent implements OnInit {
       skills: skilsForProject,
     };
 
-    // const isSaved = await this._projectService.saveProject(body);
+    const paramToNumber = Number(this.queryIdParam);
+    const isSaved = await this._projectService.saveProject(body, paramToNumber);
 
-    // if (isSaved) {
-    //   alert("Project saved")
-    //   // this._router.navigate()
-    // }
+    if (isSaved) {
+      alert('Project saved');
+      // this._router.navigate()
+    } else {
+      alert('project not saved');
+    }
   }
 
   public preparingFormatSkillsForProject(): SkillsForProjectId[] {
     const skills = this.listOfSkillsForProject.map((el) => {
+      console.log(el);
       const oneSkill = {
-        skillId: el.id,
+        skillId: el.skillId,
+        name: el.name,
         skillLevel: el.skillLevel,
       };
-
+      console.log(oneSkill);
       return oneSkill;
     });
     return skills;

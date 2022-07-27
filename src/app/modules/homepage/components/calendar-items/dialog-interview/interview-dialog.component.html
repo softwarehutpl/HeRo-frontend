@@ -1,9 +1,12 @@
-<h1 mat-dialog-title>{{event.candidateName}} {{event.candidateLastName}}</h1>
-<div mat-dialog-content class="box">
-  <div>date: {{event.date.getDate()}}.{{event.date.getMonth()}}.{{event.date.getFullYear()}} {{event.date.getHours()}}:{{event.date.getMinutes()}}</div>
-  <div>candidateEmail: {{event.candidateEmail}}</div>
-  <div>workerEmail: {{event.workerEmail}}</div>
-  <div>type: {{event.type}}</div>
-  <div mat-dialog-actions>
-    <button mat-button mat-dialog-close>Close</button>
-</div>
+<div *ngIf="interview!== undefined">
+  <h1 mat-dialog-title>{{interview.candidateName}} {{interview.candidateLastName}}</h1>
+  <div mat-dialog-content class="box">
+    <div>Date: {{interview.date | date: 'dd.MM.yyyy'}}</div>
+    <div>Candidate Status: {{interview.candidateStatus}}</div>
+    <div>Candidate Email: {{interview.candidateEmail}}</div>
+    <div>Worker Email: {{interview.workerEmail}}</div>
+    <div>Type: {{interview.type}}</div>
+    <div mat-dialog-actions>
+      <button mat-button mat-dialog-close>Close</button>
+    </div>
+  </div>

@@ -8,6 +8,7 @@ import { CandidatesDataService } from '../../services/candidates-data.service';
 import { CreateInitialsService } from 'src/app/modules/commons/services/createInitials/create-initials.service';
 // import { Observable } from 'rxjs';
 
+
 @Component({
   selector: 'app-candidates-list',
   templateUrl: './candidates-list.component.html',
