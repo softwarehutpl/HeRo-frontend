@@ -132,4 +132,21 @@
       </div>
     </div>
   </div>
+
+  <mat-divider [vertical]="true"></mat-divider>
+
+  <div class="example-container">
+    <h2>Incorrectly marked</h2>
+    <div
+      id="INCORRECT"
+      cdkDropList
+      [cdkDropListData]="incorrect"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div class="example-box" *ngFor="let candidate of incorrect" cdkDrag>
+        {{ candidate.name }}
+      </div>
+    </div>
+  </div>
 </div>
