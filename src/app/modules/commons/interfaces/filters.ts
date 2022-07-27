@@ -1,8 +1,10 @@
+
 export interface Subfilter {
     name: string,
     checked: boolean,
     color: string
 }
+
 
 export interface StageStatusData {
     stage: string[],
@@ -16,6 +18,7 @@ export class Data {
     // [{name: "Evaluation", checked: true, color: "Evaluation"}, {name: "Interview", checked: true, color: "Interview"}, {name: "Phone interview", checked: true, color: "PhoneInterview"}, {name: "Tech interview", checked: true, color: "TechInterview"}, {name: "Offer", checked: true, color: "Offer"}], 
     
     static filtersSidebarButton3: Subfilter[] = [{name: "Open", checked: true, color: "status"}, {name: "Closed", checked: true, color: "status"}];
+
    
 } 
 

@@ -4,6 +4,7 @@ import { FiltersService } from '../../services/filters/filters.service';
 import { FormBuilder } from '@angular/forms';
 import { StageStatusData } from '../../interfaces/filters';
 
+
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
@@ -32,7 +33,8 @@ export class FilterComponent implements OnChanges, OnInit {
     private _fb: FormBuilder
   ) {}
 
-  ngOnChanges(): void {
+
+ ngOnChanges(): void {
     this.filters = this._filterService.filtersForComponent(
       this.whichComponentRender
     );

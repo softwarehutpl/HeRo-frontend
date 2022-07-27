@@ -5,6 +5,7 @@ import { ProjectsService } from '../projects/projects.service';
 import { RecruitmentList } from '../../interfaces/recruitment';
 import { Subfilter } from '../../interfaces/filters';
 import axios from 'axios';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -16,6 +17,7 @@ export class FiltersService {
   public checkboxFieldsData: Subfilter[]  = JSON.parse(JSON.stringify(Data.filtersSidebarButton3));
   public urlStageListForCandidates = 'https://swh-t-praktyki2022-app.azurewebsites.net/Candidate/GetStageList';
   public urlStatusListForCandidates = 'https://swh-t-praktyki2022-app.azurewebsites.net/Candidate/GetStatusList';
+
 
   constructor(
     private _router: Router,
@@ -40,6 +42,7 @@ export class FiltersService {
     const dataForCheckboxCandidates = {status: statusForCandidates.data, stage: stageForCandidates.data};
     return dataForCheckboxCandidates;
   }
+
 
   filtersForComponent(renderedComponent: string) {
     // this.renderedComponentName = renderedComponent;
