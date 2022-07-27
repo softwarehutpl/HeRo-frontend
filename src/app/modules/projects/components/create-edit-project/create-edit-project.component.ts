@@ -21,7 +21,6 @@ import {
   templateUrl: './create-edit-project.component.html',
   styleUrls: ['./create-edit-project.component.scss'],
 })
-
 export class CreateEditProjectComponent implements OnInit {
   public myControl = new FormControl('');
   public textHeader = 'Create/Edit project';
@@ -47,7 +46,6 @@ export class CreateEditProjectComponent implements OnInit {
     isPublic: true,
   };
 
-
   constructor(
     private fb: FormBuilder,
     private _projectService: ProjectsService,
@@ -55,9 +53,7 @@ export class CreateEditProjectComponent implements OnInit {
   ) {
     this.queryIdParam = this._route.snapshot.queryParamMap.get('projectId');
 
-    //console.log(this.queryIdParam);
-    //this.queryParamNumber = Number(this.queryIdParam);
-    //this._projectService.getProjectById(this.queryParamNumber);
+    this.isQuerParam();
 
     this._projectService.projectSkills$.subscribe({
       next: (data) => {
@@ -68,7 +64,9 @@ export class CreateEditProjectComponent implements OnInit {
   }
 
   public projectForm = this.fb.group({
-    projectName: new FormControl(this.formGroupData.projectName, [Validators.required]),
+    projectName: new FormControl(this.formGroupData.projectName, [
+      Validators.required,
+    ]),
     seniority: new FormControl(this.formGroupData.seniority, [
       Validators.required,
     ]),
@@ -83,21 +81,28 @@ export class CreateEditProjectComponent implements OnInit {
     isPublic: new FormControl(false),
   });
 
-
   async ngOnInit() {
     for (let index = 0; index < this.totalStar; index++) {
       this.ratingArray.push(index);
+    }
 
-      if (this.queryIdParam) {
-        this.queryParamNumber = Number(this.queryIdParam);
-        const projectByIdPromise = await this._projectService.getProjectById(
-          this.queryParamNumber
-        );
-        this.projectByIdData = projectByIdPromise;
-        this.listOfSkillsForProject = this.projectByIdData.skills
-      }
-     
-  
+    // this.isQuerParam();
+
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map((el) => this._filter(el))
+    );
+  }
+
+  public async isQuerParam() {
+    if (this.queryIdParam) {
+      this.queryParamNumber = Number(this.queryIdParam);
+      const projectByIdPromise = await this._projectService.getProjectById(
+        this.queryParamNumber
+      );
+      this.projectByIdData = projectByIdPromise;
+      this.listOfSkillsForProject = this.projectByIdData.skills;
+
       this.projectForm.patchValue({
         projectName: this.projectByIdData.name,
         seniority: this.projectByIdData.seniority,
@@ -108,11 +113,6 @@ export class CreateEditProjectComponent implements OnInit {
         textarea: this.projectByIdData.description,
       });
     }
-
-    this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith(''),
-      map((el) => this._filter(el))
-    );
   }
 
   private _filter(value: string): Array<Skill> {
@@ -164,8 +164,6 @@ export class CreateEditProjectComponent implements OnInit {
   }
 
   public async saveProject() {
-  
-
     const skilsForProject = this.preparingFormatSkillsForProject();
 
     const body: Recruitment = {
@@ -180,26 +178,27 @@ export class CreateEditProjectComponent implements OnInit {
       isPublic: this.projectForm.value.isPublic,
       skills: skilsForProject,
     };
-    
-    const paramToNumber = Number(this.queryIdParam)
+
+    const paramToNumber = Number(this.queryIdParam);
     const isSaved = await this._projectService.saveProject(body, paramToNumber);
 
-
-    // if (isSaved) {
-    //   alert("Project saved")
-    //   // this._router.navigate()
-    // }
+    if (isSaved) {
+      alert('Project saved');
+      // this._router.navigate()
+    } else {
+      alert('project not saved');
+    }
   }
 
   public preparingFormatSkillsForProject(): SkillsForProjectId[] {
     const skills = this.listOfSkillsForProject.map((el) => {
-      console.log(el)
+      console.log(el);
       const oneSkill = {
         skillId: el.skillId,
         name: el.name,
         skillLevel: el.skillLevel,
       };
-console.log(oneSkill)
+      console.log(oneSkill);
       return oneSkill;
     });
     return skills;

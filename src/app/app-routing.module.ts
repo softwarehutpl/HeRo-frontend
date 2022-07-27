@@ -36,10 +36,10 @@ const routes: Routes = [
   {
     path: 'projects',
     component: ProjectsComponent,
-    children: [
-      { path: 'new', component: CreateEditProjectComponent },
+    // children: [
+    //   { path: 'new', component: CreateEditProjectComponent },
       // { path: 'edit/:id', component: CreateEditProjectComponent },
-    ],
+    // ],
     // canActivate: [PlayerDataGuardService],
   },
   {
