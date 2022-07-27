@@ -2,6 +2,7 @@
   <div class="example-container">
     <h2>new</h2>
     <div
+      id="NEW"
       cdkDropList
       [cdkDropListData]="newCand"
       class="example-list"
@@ -12,10 +13,13 @@
       </div>
     </div>
   </div>
+
   <mat-divider [vertical]="true"></mat-divider>
+
   <div class="example-container">
     <h2>evaluation</h2>
     <div
+      id="EVALUATION"
       cdkDropList
       [cdkDropListData]="evaluation"
       class="example-list"
@@ -32,6 +36,7 @@
   <div class="example-container">
     <h2>interview</h2>
     <div
+      id="INTERVIEW"
       cdkDropList
       [cdkDropListData]="interview"
       class="example-list"
@@ -42,10 +47,13 @@
       </div>
     </div>
   </div>
+
   <mat-divider [vertical]="true"></mat-divider>
+
   <div class="example-container">
     <h2>phone Interview</h2>
     <div
+      id="PHONE_INTERVIEW"
       cdkDropList
       [cdkDropListData]="phoneInterview"
       class="example-list"
@@ -58,9 +66,11 @@
   </div>
 
   <mat-divider [vertical]="true"></mat-divider>
+
   <div class="example-container">
     <h2>tech interview</h2>
     <div
+      id="TECH_INTERVIEW"
       cdkDropList
       [cdkDropListData]="techInterview"
       class="example-list"
@@ -71,10 +81,30 @@
       </div>
     </div>
   </div>
+
   <mat-divider [vertical]="true"></mat-divider>
+
+  <div class="example-container">
+    <h2>offer</h2>
+    <div
+      id="OFFER"
+      cdkDropList
+      [cdkDropListData]="offer"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div class="example-box" *ngFor="let candidate of offer" cdkDrag>
+        {{ candidate.name }}
+      </div>
+    </div>
+  </div>
+
+  <mat-divider [vertical]="true"></mat-divider>
+
   <div class="example-container">
     <h2>hired</h2>
     <div
+      id="HIRED"
       cdkDropList
       [cdkDropListData]="hired"
       class="example-list"
@@ -85,16 +115,36 @@
       </div>
     </div>
   </div>
+
   <mat-divider [vertical]="true"></mat-divider>
+
   <div class="example-container">
     <h2>dropped out</h2>
     <div
+      id="DROPPED_OUT"
       cdkDropList
       [cdkDropListData]="dropped"
       class="example-list"
       (cdkDropListDropped)="drop($event)"
     >
       <div class="example-box" *ngFor="let candidate of dropped" cdkDrag>
+        {{ candidate.name }}
+      </div>
+    </div>
+  </div>
+
+  <mat-divider [vertical]="true"></mat-divider>
+
+  <div class="example-container">
+    <h2>Incorrectly marked</h2>
+    <div
+      id="INCORRECT"
+      cdkDropList
+      [cdkDropListData]="incorrect"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div class="example-box" *ngFor="let candidate of incorrect" cdkDrag>
         {{ candidate.name }}
       </div>
     </div>

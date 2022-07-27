@@ -22,8 +22,10 @@ export class ProjectsComponent  {
   }
 
   moveToCreateProject() {
-    this._router.navigate(['/new'], {
-      relativeTo: this._route
-    })
+    this._router.navigate(['/edit'], 
+    // {
+    //   relativeTo: this._route
+    // }
+    )
   }
 }

@@ -52,6 +52,7 @@ export interface RecruitmentDTO {
     beginningDate:       Date;
     endingDate:          Date;
     name:                string;
+    creator: string;
     description:         string;
     recruiterId:         number;
     candidateCount:      number;
@@ -127,3 +128,15 @@ export interface SillsList {
   id: number;
   skillLevel: number
 }
+
+export interface ProjectColumnLabel {
+  Name: string;
+  Creator: string;
+  From: string;
+  To: string;
+  Resume: string;
+  Hired: string;
+  actions: string;
+}
+
+// type ProjectColumnLabelType = keyof typeof EProjectCOlumnLabel;

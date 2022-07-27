@@ -32,8 +32,6 @@ const getProjectBody = {
 };
 
 
-
-
 interface GetRecruitersBodyResponse {
   data: GetRecruitersItem[];
 }
@@ -77,7 +75,7 @@ export class ProjectsService implements OnInit {
       ],
     },
   };
-  public isSaved!: boolean;
+  // public isSaved!: boolean;
   public projects$: BehaviorSubject<Project[]> = new BehaviorSubject(
     [] as Project[]
   );
@@ -90,7 +88,7 @@ export class ProjectsService implements OnInit {
   public pageSizeOptions = [5, 10, 25, 100];
   public listLength!: number;
 
-  constructor(private _activatedRoute: ActivatedRoute) {}
+  constructor(private _activatedRoute: ActivatedRoute,) {}
 
   get projects() {
     return this.projects$.asObservable();
@@ -128,7 +126,17 @@ export class ProjectsService implements OnInit {
       .get(this.urlGetSkillsList, { withCredentials: true })
       .then((response) => {
         console.log(response)
-        observer.next(response.data);
+        const dataFromServer: { 
+          id: string, 
+          name: string
+        }[] = response.data;
+        const skills: SkillById[]  = dataFromServer.map( el => {
+          return {
+          name: el.name,
+          skillId: Number(el.id),
+          skillLevel: 0
+        }});
+        observer.next(skills);
       })
       .catch((error) => {
         observer.error(error);
@@ -137,30 +145,25 @@ export class ProjectsService implements OnInit {
 
   public async saveProject(body: Recruitment, queryIdParam: number) {
 
-
     if(queryIdParam) {
-
-      const updataProject = await axios.post(this.urlSaveEditedProject, body,{ withCredentials: true});
-      console.log(updataProject)
+      const urlSaveEditedProjectWIthId = this.urlSaveEditedProject + queryIdParam;
+      const updataProject = await axios.post(urlSaveEditedProjectWIthId, body,{ withCredentials: true});
+      if (updataProject.status === 200) {
+        return true
+      } else {
+        return false
+      }
     }
+
     let isSaved = false;
-    const saveProject = await axios
-      .post(this.urlSaveProject, body, { withCredentials: true })
-      .then((res) => {
-        if (res.status === 200) {
-          return (isSaved = true);
-        } else {
-          return (isSaved = false);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        return false;
-      });
-    // if (saveProject) {
-    //   alert('project saved');
-    //   // this._router.navigate(['projects'])
-    // return saveProject;
+    const res = await axios
+      .post(this.urlSaveProject, body, { withCredentials: true });
+
+      if (res.status === 200) {
+        return (isSaved = true);
+      } else {
+        return (isSaved = false);
+      }
   }
 
 
@@ -177,12 +180,12 @@ export class ProjectsService implements OnInit {
   }
 
   public async getPublicProjectList() {
-    await this.getRecruiterList();
+    await this._getRecruiterList();
     const res = await this.getProjectList();
     return this.prepareProjectLis(res.data);
   }
 
-  public async getRecruiterList() {
+  private async _getRecruiterList() {
     if (this.recruitListIsLoaded) {
       return;
     }
@@ -239,12 +242,13 @@ export class ProjectsService implements OnInit {
     const projectListReadyForTable: Project[] = [];
 
     recruitmentList.recruitmentDTOs.map((el: RecruitmentDTO) => {
-      const recruiterData = this.recruiterList.filter(
-        (elRescruiterList) => elRescruiterList.id === el.recruiterId
-      );
+      // console.log
+      // const recruiterData = this.recruiterList.filter(
+      //   (elRescruiterList) => elRescruiterList.id === el.recruiterId
+      // );
       const readyProject: Project = {
         name: el.name,
-        creator: recruiterData[0].fullName,
+        creator: el.creator,
         from: new Date(el.beginningDate),
         to: new Date(el.endingDate),
         resume: el.candidateCount,
