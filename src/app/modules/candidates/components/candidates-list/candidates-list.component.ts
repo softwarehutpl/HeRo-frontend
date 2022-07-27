@@ -6,6 +6,8 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { CandidatesDataService } from '../../services/candidates-data.service';
 import CANDIDATES from '../../../commons/mockups/candidates.json';
+import { MatDialog } from '@angular/material/dialog';
+import { CandidatesSidenavComponent } from '../candidates-sidenav/candidates-sidenav.component';
 
 @Component({
   selector: 'app-candidates-list',
@@ -32,7 +34,8 @@ export class CandidatesListComponent implements AfterViewInit, OnInit {
 
   constructor(
     private _liveAnnouncer: LiveAnnouncer,
-    public service: CandidatesDataService
+    public service: CandidatesDataService,
+    public dialog: MatDialog
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -84,5 +87,19 @@ export class CandidatesListComponent implements AfterViewInit, OnInit {
     } else {
       this._liveAnnouncer.announce('Sorting cleared');
     }
+  }
+
+  sidenavClicked(candiate:any){
+    this.dialog.closeAll();
+    this.dialog.open(CandidatesSidenavComponent, {
+      data: candiate,
+      height:'calc(100% - 50px)',
+      width:'400px',
+      position: {
+        top: '50px',
+        right: '0px'
+      }
+    });
+    
   }
 }
