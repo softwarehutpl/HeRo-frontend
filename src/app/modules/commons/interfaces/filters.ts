@@ -4,6 +4,10 @@ export interface Subfilter {
     color: string
 }
 
+export interface StageStatusData {
+    stage: string[],
+    status: string[]
+}
 export class Data {
     static sidebarButton1 = "home";
     static sidebarButton2 = "candidates";
