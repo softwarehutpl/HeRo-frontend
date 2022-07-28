@@ -1,6 +1,6 @@
 <div class="content">
     <div class="head">
-        Interview evaluation with {{candidate.name}}
+        Interview evaluation with {{candidate.fullName}}
     </div>
 
     <mat-form-field appearance="fill" class="date-picker">
@@ -11,7 +11,36 @@
         <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
-    <textarea class="text-input" [formControl]="text" (change)="fun()" ></textarea>
+    <mat-checkbox [formControl]="checkboxCal">Add to calendar</mat-checkbox>
+
+    <div *ngIf="checkboxCal.value===true">
+        <div *ngIf="recruiters!==undefined">
+            <mat-form-field appearance="fill">
+                <mat-select [(ngModel)]="selectedIdRecruter">
+                    <mat-option *ngFor="let recruiter of recruiters" [value]="recruiter.id">
+                        {{recruiter.fullName}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div *ngIf="checkboxCal.value===true">
+            <mat-form-field appearance="fill">
+                <mat-select [(ngModel)]="selectedType">
+                    <mat-option *ngFor="let type of TYPES" [value]="type">
+                        {{type}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+    </div>
+
+    <mat-slider min="1" max="5" tickInterval="1" (change)="slider($event)"></mat-slider>
+    <div *ngIf="scoreSlider!==0" class="slider-text">
+        {{textScore}}
+    </div>
+
+    <textarea class="text-input" [formControl]="text" (change)="fun()"></textarea>
 
     <div class="ending-buttons" mat-dialog-close>
         <button mat-button (click)="commit()">Akcept</button>

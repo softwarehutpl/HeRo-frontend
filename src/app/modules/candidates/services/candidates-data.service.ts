@@ -11,13 +11,17 @@ import axios from 'axios';
 export class CandidatesDataService {
   constructor() {
     this.getCandidatesForList();
+    this.getAllCandidates();
   }
 
   //variables:
   private _candidates: BehaviorSubject<Candidate[]> = new BehaviorSubject(
     [] as Candidate[]
   );
-  private _candidatesAll: Promise<Candidate[]> = this.getAllCandidates();
+  // private _candidatesAll: Promise<Candidate[]> = this.getAllCandidates();
+  private _candidatesAll: BehaviorSubject<Candidate[]> = new BehaviorSubject(
+    [] as Candidate[]
+  );
   //paginator settings:
   public pageIndex = 0;
   public pageSize = 10;
@@ -29,7 +33,7 @@ export class CandidatesDataService {
     return this._candidates.asObservable();
   }
   get allCandidates() {
-    return from(this._candidatesAll);
+    return this._candidatesAll.asObservable();
   }
 
   //functions:
@@ -60,6 +64,7 @@ export class CandidatesDataService {
           this.pageSize = res.data.paging.pageSize;
           this.pageIndex = res.data.paging.pageNumber - 1;
           this._candidates.next(res.data.candidateInfoForListDTOs);
+          //return res.data.candidateInfoForListDTOs;
         } else {
           console.log('Error, status not OK');
         }
@@ -110,7 +115,7 @@ export class CandidatesDataService {
   }
 
   @useMocks(false, import(`@mocks/candidates.json`))
-  public async getAllCandidates(): Promise<Candidate[]> {
+  public async getAllCandidates(): Promise<void> {
     const URL =
       'https://swh-t-praktyki2022-app.azurewebsites.net/Candidate/GetList';
     const headers = new HttpHeaders({ accept: 'application/json' });
@@ -129,9 +134,11 @@ export class CandidatesDataService {
       .post(URL, body, Options)
       .then((res) => {
         if (res.statusText === 'OK') {
-          console.log('Fetched all candidates');
+          console.log('Fetched candidates for kanban');
 
-          return res.data.candidateInfoForListDTOs;
+          // return res.data.candidateInfoForListDTOs;
+
+          this._candidatesAll.next(res.data.candidateInfoForListDTOs);
         } else {
           console.log('Error, status not OK');
         }
@@ -143,15 +150,18 @@ export class CandidatesDataService {
     candidateID: number,
     newStatus: string,
     newStage: string
-  ): Promise<void> {
+  ): Promise<boolean> {
+    const formData = new FormData();
+    formData.append('candidateId', candidateID.toString());
+    formData.append('status', newStatus);
+    formData.append('stage', newStage);
+
     const URL =
       'https://swh-t-praktyki2022-app.azurewebsites.net/Candidate/Edit';
-    const headers = new HttpHeaders({ accept: 'application/json' });
-    const body = {
-      candidateId: candidateID,
-      status: newStatus,
-      stage: newStage,
-    };
+    const headers = new HttpHeaders({
+      accept: 'multipart/form-data',
+    });
+    const body = formData;
     const Options = {
       header: headers,
       withCredentials: true,
@@ -162,10 +172,15 @@ export class CandidatesDataService {
       .then((res) => {
         if (res.statusText === 'OK') {
           console.log(res.data.value);
+          return true;
         } else {
           console.log('Error, status not OK');
+          return false;
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        return false;
+      });
   }
 }
