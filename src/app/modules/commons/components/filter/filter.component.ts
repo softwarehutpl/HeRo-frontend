@@ -93,7 +93,7 @@ export class FilterComponent implements OnChanges, OnInit {
   ) {
     this.stageToSubfilter = [];
     this.statusToSubfilter = [];
-    const stageSubfilter = dataDTOCheckbox.stage.map((el) => {
+    dataDTOCheckbox.stage.map((el) => {
       const checkboxObject = {
         name: el,
         checked: true,
@@ -101,7 +101,7 @@ export class FilterComponent implements OnChanges, OnInit {
       };
       this.stageToSubfilter.push(checkboxObject);
     });
-    const statusSubfilter = dataDTOCheckbox.status.map((el) => {
+    dataDTOCheckbox.status.map((el) => {
       const checkboxObject = {
         name: el,
         checked: true,
