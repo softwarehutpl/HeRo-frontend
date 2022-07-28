@@ -36,6 +36,15 @@ export class CandidatesKanbanComponent implements OnInit {
     });
   }
   sortCandidates(data: Candidate[]) {
+    this.newCand = [];
+    this.evaluation = [];
+    this.interview = [];
+    this.phoneInterview = [];
+    this.techInterview = [];
+    this.offer = [];
+    this.hired = [];
+    this.dropped = [];
+    this.incorrect = [];
     for (let i = 0; i < data.length; i++) {
       if (data[i].status == 'NEW') {
         this.newCand.push(data[i]);
@@ -62,27 +71,25 @@ export class CandidatesKanbanComponent implements OnInit {
       }
     }
   }
-  drop(event: CdkDragDrop<Candidate[]>) {
+  async drop(event: CdkDragDrop<Candidate[]>) {
     if (event.previousContainer === event.container) {
+      //checks if container changes
       moveItemInArray(
+        //if didn't this only changes order, not pernament
         event.container.data,
         event.previousIndex,
         event.currentIndex
       );
     } else {
-      // if (
-      this.openDialog(
-        event,
-        event.container.data[event.currentIndex].name,
-        event.container.id
+      this.openDialog(event); //open confirmation window
+
+      transferArrayItem(
+        //move box to new column and await response
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
       );
-      // )         {
-      // transferArrayItem(
-      //   event.previousContainer.data,
-      //   event.container.data,
-      //   event.previousIndex,
-      //   event.currentIndex
-      // );
       // this.changeStatusAndStage(
       //   event.container.id,
       //   event.container.data[event.currentIndex].id
@@ -90,26 +97,22 @@ export class CandidatesKanbanComponent implements OnInit {
       // }
     }
   }
-  openDialog(
-    event: CdkDragDrop<Candidate[]>,
-    candName: string,
-    newStatus: string
-  ) {
+  openDialog(event: CdkDragDrop<Candidate[]>) {
     const dialogRef = this.dialog.open(WarningComponent, {
       data: {
-        name: candName,
-        status: newStatus,
+        name: event.previousContainer.data[event.previousIndex].name,
+        status: event.container.id,
       },
     });
     return dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
       if (result) {
-        transferArrayItem(
-          event.previousContainer.data,
-          event.container.data,
-          event.previousIndex,
-          event.currentIndex
-        );
+        // transferArrayItem(
+        //   event.previousContainer.data,
+        //   event.container.data,
+        //   event.previousIndex,
+        //   event.currentIndex
+        // );
         this.changeStatusAndStage(
           event.container.id,
           event.container.data[event.currentIndex].id
@@ -117,6 +120,13 @@ export class CandidatesKanbanComponent implements OnInit {
         console.log(
           event.container.id,
           event.container.data[event.currentIndex].id
+        );
+      } else {
+        transferArrayItem(
+          event.container.data,
+          event.previousContainer.data,
+          event.currentIndex,
+          event.previousIndex
         );
       }
     });
