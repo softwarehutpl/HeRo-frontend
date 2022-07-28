@@ -6,7 +6,7 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { Candidate } from '../../CandidatesInterface';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { WarningComponent } from '../warning/warning.component';
 
 @Component({
@@ -70,31 +70,55 @@ export class CandidatesKanbanComponent implements OnInit {
         event.currentIndex
       );
     } else {
-      if (this.openDialog(event)) {
-        // transferArrayItem(
-        //   event.previousContainer.data,
-        //   event.container.data,
-        //   event.previousIndex,
-        //   event.currentIndex
-        // );
+      // if (
+      this.openDialog(
+        event,
+        event.container.data[event.currentIndex].name,
+        event.container.id
+      );
+      // )         {
+      // transferArrayItem(
+      //   event.previousContainer.data,
+      //   event.container.data,
+      //   event.previousIndex,
+      //   event.currentIndex
+      // );
+      // this.changeStatusAndStage(
+      //   event.container.id,
+      //   event.container.data[event.currentIndex].id
+      // );
+      // }
+    }
+  }
+  openDialog(
+    event: CdkDragDrop<Candidate[]>,
+    candName: string,
+    newStatus: string
+  ) {
+    const dialogRef = this.dialog.open(WarningComponent, {
+      data: {
+        name: candName,
+        status: newStatus,
+      },
+    });
+    return dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+      if (result) {
+        transferArrayItem(
+          event.previousContainer.data,
+          event.container.data,
+          event.previousIndex,
+          event.currentIndex
+        );
         this.changeStatusAndStage(
           event.container.id,
           event.container.data[event.currentIndex].id
         );
+        console.log(
+          event.container.id,
+          event.container.data[event.currentIndex].id
+        );
       }
-    }
-  }
-  openDialog(event: any) {
-    const dialogRef = this.dialog.open(WarningComponent);
-    return dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
-      // return result;
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
     });
   }
 

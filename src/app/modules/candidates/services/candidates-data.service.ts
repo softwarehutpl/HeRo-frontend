@@ -141,14 +141,17 @@ export class CandidatesDataService {
     newStatus: string,
     newStage: string
   ): Promise<boolean> {
+    const formData = new FormData();
+    formData.append('candidateId', candidateID.toString());
+    formData.append('status', newStatus);
+    formData.append('stage', newStage);
+
     const URL =
       'https://swh-t-praktyki2022-app.azurewebsites.net/Candidate/Edit';
-    const headers = new HttpHeaders({ accept: 'application/json' });
-    const body = {
-      candidateId: candidateID,
-      status: newStatus,
-      stage: newStage,
-    };
+    const headers = new HttpHeaders({
+      accept: 'multipart/form-data',
+    });
+    const body = formData;
     const Options = {
       header: headers,
       withCredentials: true,
