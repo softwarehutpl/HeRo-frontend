@@ -10,6 +10,11 @@ export interface Project {
     id: number;
   }
 
+  export interface ProjectListoToAutocomplete {
+    projectName: string;
+    projectId: number;
+  }
+
 
   export interface Recruiter {
     id: number;

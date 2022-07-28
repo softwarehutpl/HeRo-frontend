@@ -21,6 +21,7 @@
     "esModuleInterop": true,
     "module": "es2020",
     "lib": ["es2020", "dom"],
+    "allowJs": true,
     "paths": {
       "@mocks/*": ["src/app/modules/commons/mockups/*"]
     }

@@ -41,17 +41,3 @@ table {
 th.mat-sort-header-sorted {
   color: $color_dark;
 }
-mat-icon.mat-card-avatar {
-  border-radius: 20%;
-  background-color: orangered;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  color: $color_light;
-  font-size: 20px;
-  line-height: 20px;
-  font-family: Arial, Helvetica, sans-serif;
-}

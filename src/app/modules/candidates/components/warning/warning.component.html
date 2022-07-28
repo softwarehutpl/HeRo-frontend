@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>Warning</h1>
+<mat-dialog-content>
+  <h2>You're about to change candidate status.</h2>
+  <p>{{ data.name }} status will be set to {{ data.status }}.</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Confirm</button>
+</mat-dialog-actions>
