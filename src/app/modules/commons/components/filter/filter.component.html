@@ -16,11 +16,22 @@
         </li>
     </ul>
    
-    <mat-form-field *ngIf="isAutocomplete">
+    <!-- <mat-form-field *ngIf="isAutocomplete">
         <mat-label>Project</mat-label>
         <mat-select [(value)]="selected">
             <mat-option>all</mat-option>
         </mat-select>
-    </mat-form-field>
+    </mat-form-field> -->
+    <mat-form-field class="example-full-width" appearance="outline" class="container container__column project" *ngIf="isAutocomplete">
+        <mat-label>Project</mat-label>
+        <input type="text" placeholder="Pick one" matInput [matAutocomplete]="auto" aria-label="Number"
+          [formControl]="autocompleteForm">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let project of projectAutocompleteOptions | async" [value]="project.projectName"
+            (click)="onSelection(project)">
+            {{project.projectName}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
 <!-- </form> -->
 </div>
