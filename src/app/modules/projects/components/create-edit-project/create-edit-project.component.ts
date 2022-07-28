@@ -37,12 +37,12 @@ export class CreateEditProjectComponent implements OnInit {
   public queryParamNumber!: number;
   public projectByIdData!: RecruitmentById;
   public formGroupData = {
-    projectName: 'a',
-    seniority: 'a',
-    from: 'a',
-    to: 'a',
-    localion: 'a',
-    textarea: 'a',
+    projectName: '',
+    seniority: '',
+    from: '',
+    to: '',
+    localion: '',
+    textarea: '',
     isPublic: true,
   };
 

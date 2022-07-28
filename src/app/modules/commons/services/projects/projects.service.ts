@@ -8,7 +8,7 @@ import {
 } from '../../interfaces/recruitment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { Project, Recruiter } from '../../mockups/mock-projects';
+import { Project, ProjectListoToAutocomplete, Recruiter } from '../../mockups/mock-projects';
 import { RecruitmentDTO, GetRecruitersItem } from '../../interfaces/recruitment';
 
 
@@ -79,6 +79,7 @@ export class ProjectsService implements OnInit {
   public projects$: BehaviorSubject<Project[]> = new BehaviorSubject(
     [] as Project[]
   );
+  public projectList$: BehaviorSubject<ProjectListoToAutocomplete[]> = new BehaviorSubject([] as ProjectListoToAutocomplete[]);
   public recruiterList: Recruiter[] = [
    { id: 1, fullName: 'admin admin' },
   ];
@@ -125,7 +126,6 @@ export class ProjectsService implements OnInit {
     axios
       .get(this.urlGetSkillsList, { withCredentials: true })
       .then((response) => {
-        console.log(response)
         const dataFromServer: { 
           id: string, 
           name: string
@@ -207,7 +207,7 @@ export class ProjectsService implements OnInit {
     const res: {
       data: RecruitmentList;
     } = await axios.post(
-      this.urlGetPublicProjecList,
+      this.urlGetProjectList,
       {
         name: '',
         description: '',
@@ -240,12 +240,18 @@ export class ProjectsService implements OnInit {
     this.pageIndex = recruitmentList.paging.pageNumber - 1;
 
     const projectListReadyForTable: Project[] = [];
+    const projectsListReadyToAutocomplete: ProjectListoToAutocomplete[] = [];
 
     recruitmentList.recruitmentDTOs.map((el: RecruitmentDTO) => {
       // console.log
       // const recruiterData = this.recruiterList.filter(
       //   (elRescruiterList) => elRescruiterList.id === el.recruiterId
       // );
+      const readyProjectListForAutocomplete: ProjectListoToAutocomplete ={
+        projectId: el.id,
+        projectName: el.name
+      };
+      projectsListReadyToAutocomplete.push(readyProjectListForAutocomplete)
       const readyProject: Project = {
         name: el.name,
         creator: el.creator,
@@ -257,6 +263,7 @@ export class ProjectsService implements OnInit {
       };
       projectListReadyForTable.push(readyProject);
     });
+    this.projectList$.next(projectsListReadyToAutocomplete)
     this.projects$.next(projectListReadyForTable);
     return projectListReadyForTable;
   }
