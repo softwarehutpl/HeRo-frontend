@@ -178,9 +178,9 @@ export class ProjectsService implements OnInit {
     return this.projectId;
   }
 
-  public async getPublicProjectList() {
+  public async getPublicProjectList(showOpen: boolean, showClosed: boolean) {
     await this._getRecruiterList();
-    const res = await this.getProjectList();
+    const res = await this.getProjectList(showOpen, showClosed );
     return this.prepareProjectLis(res.data);
   }
 
@@ -202,7 +202,7 @@ export class ProjectsService implements OnInit {
     this.recruitListIsLoaded = true;
   }
 
-  private async getProjectList() {
+  private async getProjectList(showOpen: boolean, showClosed: boolean) {
     const res: {
       data: RecruitmentList;
     } = await axios.post(
@@ -210,8 +210,8 @@ export class ProjectsService implements OnInit {
       {
         name: '',
         description: '',
-        showOpen: true,
-        showClosed: true,
+        showOpen: showOpen,
+        showClosed: showClosed,
         beginningDate: '',
         endingDate: '',
         paging: {

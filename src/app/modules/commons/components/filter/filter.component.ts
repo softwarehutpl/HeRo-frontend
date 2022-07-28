@@ -6,6 +6,7 @@ import { ProjectListoToAutocomplete } from '../../mockups/mock-projects';
 import { ProjectsService } from '../../services/projects/projects.service';
 import { Observable, startWith, map } from 'rxjs';
 import { Project } from '../../mockups/mock-projects';
+// import { ConsoleReporter } from 'jasmine';
 
 
 @Component({
@@ -17,15 +18,16 @@ export class FilterComponent implements OnChanges {
   @Input() public whichComponentRender = '';
   @Input() public isAutocomplete?: boolean;
 
+  // public check = new FormControl();
   public selected = 'all';
   public filters?: Array<Filter>;
   public sidebarButton1 = Data.sidebarButton1;
   public sidebarButton2 = Data.sidebarButton2;
   public sidebarButton3 = Data.sidebarButton3;
   public listOfProjects: ProjectListoToAutocomplete[] = [];
-  // public listOfProjects
   public autocompleteForm = new FormControl('');
-  public projectAutocompleteOptions!: Observable<ProjectListoToAutocomplete[]>
+  public projectAutocompleteOptions!: Observable<ProjectListoToAutocomplete[]>;
+  public isChecked!: boolean;
   // public checkboxForm =  this._fb.group({
 
   //     })
@@ -75,21 +77,20 @@ export class FilterComponent implements OnChanges {
     id: res.id,
   }];
   this._projetService.projects$.next(readyProject)
-
-    // if (this.listOfSkillsForProject.length !== 0) {
-    //   const nameListOfSkillProject = this.listOfSkillsForProject.map((el) => {
-    //     return el.name;
-    //   });
-    //   if (!nameListOfSkillProject.includes(choosenSkill.name)) {
-    //     this.listOfSkillsForProject.push(choosenSkill);
-    //   } else {
-    //     alert('Skill already choosen');
-    //   }
-    // } else {
-    //   this.listOfSkillsForProject.push(choosenSkill);
-    // }
   }
 
+  public checkboxOnChange(event: any, checkBoxName: string,) {
+    const checked = event.target as HTMLInputElement;
+    if(checkBoxName === "Open") {
+      this.filterService.showOpen = checked.checked
+      console.log(this.filterService.showOpen)
+    } else if (checkBoxName === 'Closed') {
+      this.filterService.showClosed = checked.checked
+    }
+   this._projetService.getPublicProjectList(this.filterService.showOpen, this.filterService.showClosed)
+    
+    
+  }
 
 
 }

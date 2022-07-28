@@ -19,8 +19,9 @@ export class FiltersService {
   public isClosedProjects = true;
   public checkboxFieldsData: Filter[]  = JSON.parse(JSON.stringify(Data.filtersSidebarButton3));
  public urlAllProjectList = 'https://swh-t-praktyki2022-app.azurewebsites.net/Recruitment/GetList';
-  // public projectsList: new BehaviorSubject<ProjectListoToAutocomplete[]>
 public projectsListToAutocomplete: ProjectListoToAutocomplete[] = [];
+public showOpen = true;
+public showClosed = true;
   constructor(
     private _router: Router,
     private _projectsService: ProjectsService,
