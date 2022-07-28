@@ -4,14 +4,16 @@
             {{initial}}
             {{candidate.name}}
         </div>
-        <button mat-button mat-dialog-close >
-            <mat-icon >close</mat-icon>
+        <button mat-button mat-dialog-close>
+            <mat-icon>close</mat-icon>
         </button>
     </div>
 
     <div class="buttons">
-        <button mat-flat-button color="primary" (click)="evaluationClicked()">Primary</button>
-        <a mat-flat-button color="primary" (click)="closeDialog()" routerLink="/profile/{{candidate.id}}">Primary</a>
+        <button mat-flat-button color="primary" (click)="evaluationClicked()">Add evaluation</button>
+        <a mat-flat-button color="primary" (click)="closeDialog()" routerLink="/profile/{{candidate.id}}">Broswe
+            profile</a>
 
     </div>
+    <p>History</p>
 </div>

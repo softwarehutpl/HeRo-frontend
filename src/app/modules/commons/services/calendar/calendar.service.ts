@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
-import { observable, Observable } from 'rxjs';
 import { InterviewList, InterviewDTO } from '../../interfaces/interview';
-
+import { CandidateCreate } from '../../interfaces/candidate';
 
 
 
@@ -12,7 +11,6 @@ import { InterviewList, InterviewDTO } from '../../interfaces/interview';
 export class CalendarService {
 
   public url = 'https://swh-t-praktyki2022-app.azurewebsites.net/Interview';
-  constructor() { }
 
   public getListInterviewsBody = {
     fromDate: '1900-01-01',
@@ -44,13 +42,13 @@ export class CalendarService {
         // console.log({ response });
         return response.data;
       }).catch((error) => {
-        console.log("error get intervie list: ",error);
+        console.log("error get intervie list: ", error);
       });
   }
 
 
-  async getIntervie(id: number): Promise<InterviewDTO> {
-    return await axios.get(this.url + '/get/' + id,{ withCredentials: true })
+  async getInterview(id: number): Promise<InterviewDTO> {
+    return await axios.get(this.url + '/Get/' + id, { withCredentials: true })
       .then((response) => {
         return response.data;
       })
@@ -58,6 +56,20 @@ export class CalendarService {
         console.log("error get intervie : ", id, " ", error);
       });
 
+  }
+
+  createInterview(interview: CandidateCreate) {
+
+    const header = {
+      accept: 'text/plain',
+      withCredentials: true,
+      'Content-Type':'application/json-patch+json'
+    }
+    console.log(interview);
+    axios.post(this.url + '/Create', { interview }, { headers: header })
+      .catch((error) => {
+        console.log("error create intervie : ", interview, " ", error);
+      });
   }
 
 }

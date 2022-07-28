@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CalendarEvent, CalendarView } from 'angular-calendar';
 import { INTERVIEW, COLORS, CALENDAR_EVENTS } from 'src/app/modules/commons/mockups/mock-interview';
 import { Interview } from 'src/app/modules/commons/interfaces/interview';
@@ -47,7 +47,7 @@ export class CalendarComponent implements OnInit {
   private async makeListOfEvents() {
 
     this.events = [];
-    for (let value of this.intervieList) {
+    for (const value of this.intervieList) {
       const x: CalendarEvent = {
         id: value.interviewId,
         start: new Date(value.date),
@@ -65,7 +65,7 @@ export class CalendarComponent implements OnInit {
         x.color = this.colors.yellow;
 
       this.events.push(x);
-    };
+    }
     this.renderDay = true;
   }
 

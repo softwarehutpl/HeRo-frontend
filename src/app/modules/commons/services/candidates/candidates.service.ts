@@ -7,7 +7,6 @@ import axios from 'axios';
   providedIn: 'root',
 })
 export class CandidatesService {
-  constructor() {}
   // allCandidates = this.getAllCandidates();
 
   @useMocks(true, import(`@mocks/candidates.json`))
@@ -32,7 +31,7 @@ export class CandidatesService {
         return response.data;
       })
       .catch((error) => {
-        console.log("error get Candiate: " + error);
+        console.log("error get Candiate: ", error);
       });
   }
 }
