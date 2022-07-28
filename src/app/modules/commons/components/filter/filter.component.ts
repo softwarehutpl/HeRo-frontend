@@ -125,6 +125,7 @@ export class FilterComponent implements OnChanges, OnInit {
   }
 
   public checkboxOnChange(event: any, checkBoxName: string,) {
+    console.log(checkBoxName, event.target.checked)
     const checked = event.target as HTMLInputElement;
     if(checkBoxName === "Open") {
       this.filterService.showOpen = checked.checked
