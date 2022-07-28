@@ -3,12 +3,11 @@ import { Router } from '@angular/router';
 import { Data } from '../../interfaces/filters';
 import { ProjectsService } from '../projects/projects.service';
 import { RecruitmentList } from '../../interfaces/recruitment';
-import { Filter, Subfilter } from '../../interfaces/filters';
+import {  Subfilter } from '../../interfaces/filters';
 import { Observable } from 'rxjs';
 import { ProjectListoToAutocomplete } from '@mocks/mock-projects';
 import axios from 'axios';
 import { RecruitmentDTO } from '../../interfaces/recruitment';
-
 
 @Injectable({
   providedIn: 'root',
@@ -18,17 +17,23 @@ export class FiltersService {
   // public renderedComponentName?: string;
   public isOpenProject = true;
   public isClosedProjects = true;
-  public checkboxFieldsData: Filter[]  = JSON.parse(JSON.stringify(Data.filtersSidebarButton3));
+  // public checkboxFieldsData: Filter[]  = JSON.parse(JSON.stringify(Data.filtersSidebarButton3));
  public urlAllProjectList = 'https://swh-t-praktyki2022-app.azurewebsites.net/Recruitment/GetList';
+ public urlStageListForCandidates = 'https://swh-t-praktyki2022-app.azurewebsites.net/Candidate/GetStageList';
+  public urlStatusListForCandidates = 'https://swh-t-praktyki2022-app.azurewebsites.net/Candidate/GetStatusList';
 public projectsListToAutocomplete: ProjectListoToAutocomplete[] = [];
 public showOpen = true;
 public showClosed = true;
+
 
   constructor(
     private _router: Router,
     private _projectsService: ProjectsService,
   ) {
   }
+
+
+ 
 
 public projectList$ = new Observable<ProjectListoToAutocomplete[]>((observer) => {
    axios.post(this.urlAllProjectList, {
@@ -80,12 +85,14 @@ public projectList$ = new Observable<ProjectListoToAutocomplete[]>((observer) =>
     // return this.isClosedProjects = projectListFilterData.showClosed;
   }
 
+ 
   public async getStageAndStatusList() {
     const stageForCandidates = await axios.get(this.urlStageListForCandidates, {withCredentials: true});
     const statusForCandidates = await axios.get(this.urlStatusListForCandidates, {withCredentials: true});
     const dataForCheckboxCandidates = {status: statusForCandidates.data, stage: stageForCandidates.data};
     return dataForCheckboxCandidates;
   }
+
 
 
   filtersForComponent(renderedComponent: string) {
@@ -99,4 +106,18 @@ public projectList$ = new Observable<ProjectListoToAutocomplete[]>((observer) =>
       return Data.filtersSidebarButton3;
     }
   }
+
+
 }
+
+
+
+
+ 
+
+
+
+
+
+ 
+

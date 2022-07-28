@@ -5,6 +5,10 @@ export interface Subfilter {
     color: string
 }
 
+export interface StageStatusData {
+    stage: string[],
+    status: string[]
+}
 
 export interface StageStatusData {
     stage: string[],

@@ -1,5 +1,5 @@
 
-import { Component, Input, OnChanges,  } from '@angular/core';
+import { Component, Input, OnChanges, OnInit  } from '@angular/core';
 import { Filter, Data, Subfilter } from '../definition';
 import { FiltersService } from '../../services/filters/filters.service';
 import { FormBuilder, FormControl } from '@angular/forms';
@@ -16,6 +16,7 @@ import { StageStatusData } from '../../interfaces/filters';
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.scss'],
 })
+
 export class FilterComponent implements OnChanges, OnInit {
   @Input() public whichComponentRender = '';
   @Input() public isAutocomplete?: boolean;
@@ -31,6 +32,10 @@ export class FilterComponent implements OnChanges, OnInit {
   public autocompleteForm = new FormControl('');
   public projectAutocompleteOptions!: Observable<ProjectListoToAutocomplete[]>;
   public isChecked!: boolean;
+  public checkboxLabels = { status: 'Status', stage: 'Stage' };
+  public stageToSubfilter!: Subfilter[];
+  public statusToSubfilter!: Subfilter[];
+  public statusColor = 'STATUS';
   // public checkboxForm =  this._fb.group({
 
   //     })
@@ -45,19 +50,55 @@ export class FilterComponent implements OnChanges, OnInit {
   }
 
 
+
+
  ngOnChanges(): void {
     this.filters = this.filterService.filtersForComponent(
       this.whichComponentRender
     );
   }
+
+
   
-  ngOnInit() {
+  async ngOnInit() {
     // this.listOfProjects.asObservable()
+    const dataForCheckboxCandidates =
+      await this.filterService.getStageAndStatusList();
+      console.log(dataForCheckboxCandidates);
+      this.convertCandidatesCacboxDTOToSubfilter(dataForCheckboxCandidates); 
+      if (this.whichComponentRender === 'projects') {
+        this.statusToSubfilter = [{name: "Open", checked: true, color: "status"}, {name: "Closed", checked: true, color: "status"}];
+            }
     this.projectAutocompleteOptions= this.autocompleteForm.valueChanges.pipe(
       startWith(''),
       map((el) => this._filter(el))
     );
   }
+
+  public convertCandidatesCacboxDTOToSubfilter(
+    dataDTOCheckbox: StageStatusData
+  ) {
+    this.stageToSubfilter = [];
+    this.statusToSubfilter = [];
+    const stageSubfilter = dataDTOCheckbox.stage.map((el) => {
+      const checkboxObject = {
+        name: el,
+        checked: true,
+        color: el,
+      };
+      this.stageToSubfilter.push(checkboxObject);
+    });
+    const statusSubfilter = dataDTOCheckbox.status.map((el) => {
+      const checkboxObject = {
+        name: el,
+        checked: true,
+        color: 'status',
+      };
+      this.statusToSubfilter.push(checkboxObject);
+    });
+  }
+
+
 
   private _filter(value: string): ProjectListoToAutocomplete[] {
     // console.log('from filter')
