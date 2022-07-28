@@ -10,24 +10,32 @@
     margin-bottom: 30px;
     margin-left: -40px;
 }
+.muiMargin span {
+    text-transform: lowercase;
+    display:inline-block;
+}
+
+.muiMargin span:first-letter{
+    text-transform: uppercase;
+}
 
 #idstatus {
     accent-color: blue
 }
 
-#idEvaluation {
+#idEVALUATION {
     accent-color: rgb(70, 245, 248);
 }
-#idInterview {
+#idINTERVIEW {
     accent-color: orange
 }
-#idPhoneInterview {
+#idPHONE_INTERVIEW {
     accent-color: rgb(241, 54, 54);
 }
-#idTechInterview {
+#idTECH_INTERVIEW {
     accent-color: rgb(156, 9, 156);
 }
-#idOffer {
+#idOFFER {
     accent-color: rgb(84, 189, 234);
 }
 #id5 {

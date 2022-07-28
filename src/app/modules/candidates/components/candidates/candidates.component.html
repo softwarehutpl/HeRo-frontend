@@ -3,6 +3,7 @@
   <div class="container container__row">
     <app-sidebar></app-sidebar>
     <mat-divider [vertical]="true"></mat-divider>
+
     <div *ngIf="router.url != '/candidates/kanban'">
       <div class="container container__column filterComponet">
         <app-filter
@@ -10,6 +11,7 @@
           [isAutocomplete]="isAutocomplete"
         ></app-filter>
         <!-- Filters column -->
+
 
         <!-- <button style="width: 150px; height: 180px">Filters1</button>
       <button style="width: 150px; height: 230px">Filters2</button> -->

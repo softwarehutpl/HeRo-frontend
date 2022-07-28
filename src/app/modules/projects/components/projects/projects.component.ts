@@ -13,6 +13,7 @@ export class ProjectsComponent  {
   public componentName = "projects";
   public isEditCreateProject = false;
   public isAutocomplete = true;
+  public isStage = false;
 
   constructor(private _router: Router, private _projectService: ProjectsService, private _route: ActivatedRoute) {}
 

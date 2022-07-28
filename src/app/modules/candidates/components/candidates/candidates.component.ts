@@ -10,6 +10,6 @@ export class CandidatesComponent {
   public componentName = 'candidates';
   public isAutocomplete = false;
   // public location = this.router.url;
-
+  public isStage = true;
   constructor(public router: Router) {}
 }

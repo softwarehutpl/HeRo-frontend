@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { ProjectsService } from 'src/app/modules/commons/services/projects/projects.service';
 import { ProjectListDataSource } from './ProjectListDataSource';
+import { FiltersService } from 'src/app/modules/commons/services/filters/filters.service';
 
 @Component({
   selector: 'app-projects-list',
@@ -30,7 +31,8 @@ export class ProjectsListComponent implements OnInit {
   constructor(
     private _router: Router,
     private _liveAnnouncer: LiveAnnouncer,
-    public projectService: ProjectsService
+    public projectService: ProjectsService,
+    public filterService: FiltersService
   ) {}
 
 
@@ -45,13 +47,13 @@ export class ProjectsListComponent implements OnInit {
   ngOnInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-    this.projectService.getPublicProjectList();
+    this.projectService.getPublicProjectList(this.filterService.showOpen, this.filterService.showClosed);
   }
 
   public getPaginatorData(e: PageEvent) {
     this.projectService.pageIndex = e.pageIndex;
     this.projectService.pageSize = e.pageSize;
-    this.projectService.getPublicProjectList();
+    this.projectService.getPublicProjectList(this.filterService.showOpen, this.filterService.showClosed);
   }
 
   announceSortChange(sortState: Sort) {
