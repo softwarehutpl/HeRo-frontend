@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Candidate } from '../CandidatesInterface';
 import { useMocks } from '../../commons/mockups/useMocks';
 import { HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, from, } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import axios from 'axios';
 
 @Injectable({
