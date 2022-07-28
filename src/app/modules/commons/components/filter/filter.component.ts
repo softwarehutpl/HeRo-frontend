@@ -1,12 +1,14 @@
+
 import { Component, Input, OnChanges,  } from '@angular/core';
-import { Filter, Data } from '../definition';
+import { Filter, Data, Subfilter } from '../definition';
 import { FiltersService } from '../../services/filters/filters.service';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { ProjectListoToAutocomplete } from '../../mockups/mock-projects';
 import { ProjectsService } from '../../services/projects/projects.service';
 import { Observable, startWith, map } from 'rxjs';
 import { Project } from '../../mockups/mock-projects';
-// import { ConsoleReporter } from 'jasmine';
+import { StageStatusData } from '../../interfaces/filters';
+
 
 
 @Component({
@@ -14,13 +16,14 @@ import { Project } from '../../mockups/mock-projects';
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.scss'],
 })
-export class FilterComponent implements OnChanges {
+export class FilterComponent implements OnChanges, OnInit {
   @Input() public whichComponentRender = '';
   @Input() public isAutocomplete?: boolean;
+  @Input() public isStage?: boolean;
 
   // public check = new FormControl();
   public selected = 'all';
-  public filters?: Array<Filter>;
+  public filters?: Subfilter[];
   public sidebarButton1 = Data.sidebarButton1;
   public sidebarButton2 = Data.sidebarButton2;
   public sidebarButton3 = Data.sidebarButton3;
@@ -40,6 +43,7 @@ export class FilterComponent implements OnChanges {
       }
     })
   }
+
 
  ngOnChanges(): void {
     this.filters = this.filterService.filtersForComponent(
@@ -88,10 +92,6 @@ export class FilterComponent implements OnChanges {
       this.filterService.showClosed = checked.checked
     }
    this._projetService.getPublicProjectList(this.filterService.showOpen, this.filterService.showClosed)
-    
-    
   }
-
-
 }
 
