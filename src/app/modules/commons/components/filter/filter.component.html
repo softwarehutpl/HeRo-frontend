@@ -1,31 +1,34 @@
 <div class="container container__column">
+    <form [formGroup]="statusForm">
     <ul class="container container__column list">
-        <li >
+        <li>
             {{checkboxLabels.status}}
             <ul class="list" class="container container__column muiMargin">
                 <div *ngFor="let checkBox of statusToSubfilter let i = index">
                     <label>
-                   
-                        <!-- <input type="checkbox" id="id{{checkBox.color}}" [checked]="checkBox.checked" (change)="checkboxOnChange(checkBox.name, $event)"> -->
-                        <!-- <input type="checkbox" id="id{{checkBox.color}}"  [formControl]="check" (change)="checkboxOnChange($event, checkBox.name)"> -->
-                        <!-- <input type="checkbox" id="id{{checkBox.color}}" checked="checkbox.name" (change)="checkboxOnChange($event, checkBox.name)"> -->
-                        <!-- {{checkBox.name}} -->
-                        <input type="checkbox" id="id{{checkBox.color}}" checked="{{checkBox.checked}}" (change)="checkboxOnChange($event, checkBox.name)">
+                        <input type="checkbox" id="id{{checkBox.color}}" checked="{{checkBox.checked}}"
+                            (change)="checkboxOnChange()" formControlName="id{{checkBox.name}}">
                         <span> {{checkBox.name}} </span>
                     </label>
                 </div>
             </ul>
         </li>
-        <li *ngIf="isStage" >
+    </ul>
+    </form >
+    <form [formGroup]="stageForm">
+    <ul class="container container__column list">
+        <li *ngIf="isStage">
             {{checkboxLabels.stage}}
             <ul class="list" class="container container__column muiMargin">
                 <div *ngFor="let checkBox of stageToSubfilter; let i = index">
                     <label>
-                        <input type="checkbox" id="id{{checkBox.color}}" checked="{{checkBox.checked}}" ><span>{{checkBox.name}}</span></label>
+                        <input type="checkbox" id="id{{checkBox.color}}" (change)="checkboxOnChange()"
+                            checked="{{checkBox.checked}}" formControlName="id{{checkBox.name}}"><span>{{checkBox.name}}</span></label>
                 </div>
             </ul>
         </li>
     </ul>
+</form>
     <mat-form-field class="example-full-width" appearance="outline" class="container container__column project"
         *ngIf="isAutocomplete">
         <mat-label>Project</mat-label>
@@ -39,4 +42,3 @@
         </mat-autocomplete>
     </mat-form-field>
 </div>
-

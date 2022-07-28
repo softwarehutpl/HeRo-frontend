@@ -1,22 +1,19 @@
-
-import { Component, Input, OnChanges, OnInit  } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Filter, Data, Subfilter } from '../definition';
 import { FiltersService } from '../../services/filters/filters.service';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl } from '@angular/forms';
 import { ProjectListoToAutocomplete } from '../../mockups/mock-projects';
 import { ProjectsService } from '../../services/projects/projects.service';
-import { Observable, startWith, map } from 'rxjs';
+import { Observable, startWith, map, debounce } from 'rxjs';
 import { Project } from '../../mockups/mock-projects';
 import { StageStatusData } from '../../interfaces/filters';
-
-
+import { CandidatesDataService } from 'src/app/modules/candidates/services/candidates-data.service';
 
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.scss'],
 })
-
 export class FilterComponent implements OnChanges, OnInit {
   @Input() public whichComponentRender = '';
   @Input() public isAutocomplete?: boolean;
@@ -36,40 +33,60 @@ export class FilterComponent implements OnChanges, OnInit {
   public stageToSubfilter!: Subfilter[];
   public statusToSubfilter!: Subfilter[];
   public statusColor = 'STATUS';
-  // public checkboxForm =  this._fb.group({
+  public statusCompoenntCHeckbox: string[] = [];
+  public statusForm = this._fb.group({
+    idNEW: new FormControl(true),
+    idIN_PROCESSING: new FormControl(true),
+    idDROPPED_OUT: new FormControl(true),
+    idHIRED: new FormControl(true),
+    idOpen: new FormControl(true),
+    idClosed: new FormControl(true),
+  });
+  public stageForm = this._fb.group({
+    idEVALUATION: new FormControl(true),
+    idINTERVIEW: new FormControl(true),
+    idPHONE_INTERVIEW: new FormControl(true),
+    idTECH_INTERVIEW: new FormControl(true),
+    idOFFER: new FormControl(true)
+  })
 
-  //     })
-  constructor(public filterService: FiltersService, private _fb: FormBuilder, private _projetService: ProjectsService) {
+
+  constructor(
+    public filterService: FiltersService,
+    private _fb: FormBuilder,
+    private _projetService: ProjectsService,
+    private _candidateService: CandidatesDataService
+  ) {
     this.filterService.projectList$.subscribe({
       next: (data) => {
-        console.log(data)
+        console.log(data);
         this.listOfProjects = data;
-        console.log(this.listOfProjects)
-      }
-    })
+        console.log(this.listOfProjects);
+      },
+    });
+    const a = this.statusForm.get('idIN_PROCESSING');
+    console.log(a);
   }
 
-
-
-
- ngOnChanges(): void {
+  ngOnChanges(): void {
     this.filters = this.filterService.filtersForComponent(
       this.whichComponentRender
     );
   }
 
-
-  
   async ngOnInit() {
     // this.listOfProjects.asObservable()
     const dataForCheckboxCandidates =
       await this.filterService.getStageAndStatusList();
-      console.log(dataForCheckboxCandidates);
-      this.convertCandidatesCacboxDTOToSubfilter(dataForCheckboxCandidates); 
-      if (this.whichComponentRender === 'projects') {
-        this.statusToSubfilter = [{name: "Open", checked: true, color: "status"}, {name: "Closed", checked: true, color: "status"}];
-            }
-    this.projectAutocompleteOptions= this.autocompleteForm.valueChanges.pipe(
+    console.log(dataForCheckboxCandidates);
+    this.convertCandidatesCacboxDTOToSubfilter(dataForCheckboxCandidates);
+    if (this.whichComponentRender === 'projects') {
+      this.statusToSubfilter = [
+        { name: 'Open', checked: true, color: 'status' },
+        { name: 'Closed', checked: true, color: 'status' },
+      ];
+    }
+    this.projectAutocompleteOptions = this.autocompleteForm.valueChanges.pipe(
       startWith(''),
       map((el) => this._filter(el))
     );
@@ -98,42 +115,59 @@ export class FilterComponent implements OnChanges, OnInit {
     });
   }
 
-
-
   private _filter(value: string): ProjectListoToAutocomplete[] {
-    // console.log('from filter')
     const filterValue = value.toLowerCase();
     return this.filterService.projectsListToAutocomplete.filter((option) =>
       option.projectName.toLowerCase().includes(filterValue)
     );
   }
 
- public async onSelection(project: ProjectListoToAutocomplete) {
+  public async onSelection(project: ProjectListoToAutocomplete) {
+    const res = await this._projetService.getProjectById(project.projectId);
 
-  const res = await this._projetService.getProjectById(project.projectId);
-
-  const readyProject: Project[] =[ {
-    name: res.name,
-    creator: res.creator,
-    from: new Date(res.beginningDate),
-    to: new Date(res.endingDate),
-    resume: res.candidateCount,
-    hired: res.hiredCount,
-    id: res.id,
-  }];
-  this._projetService.projects$.next(readyProject)
+    const readyProject: Project[] = [
+      {
+        name: res.name,
+        creator: res.creator,
+        from: new Date(res.beginningDate),
+        to: new Date(res.endingDate),
+        resume: res.candidateCount,
+        hired: res.hiredCount,
+        id: res.id,
+      },
+    ];
+    this._projetService.projects$.next(readyProject);
   }
 
-  public checkboxOnChange(event: any, checkBoxName: string,) {
-    console.log(checkBoxName, event.target.checked)
-    const checked = event.target as HTMLInputElement;
-    if(checkBoxName === "Open") {
-      this.filterService.showOpen = checked.checked
-      console.log(this.filterService.showOpen)
-    } else if (checkBoxName === 'Closed') {
-      this.filterService.showClosed = checked.checked
+  public checkboxOnChange() {
+    if (this.whichComponentRender === 'candidates') {
+      const statusCandidates = [];
+      const stageCandidates = [];
+
+      const checkboxesStatus = this.statusForm.value;
+      const checkboxesStage = this.stageForm.value;
+
+
+      for (const key in checkboxesStatus) {
+        if (checkboxesStatus[key] === true) {
+          const removingInFromName = key.slice(2);
+          statusCandidates.push(removingInFromName);
+        }
+      }
+      for (const key in checkboxesStage) {
+        if(checkboxesStage[key] === true) {
+          const removingInFromName = key.slice(2);
+          stageCandidates.push(removingInFromName);
+        }
+      }
+     
+      this._candidateService.getCandidatesForList(statusCandidates, stageCandidates);
+      return;
     }
-   this._projetService.getPublicProjectList(this.filterService.showOpen, this.filterService.showClosed)
+    
+    const showOpen = this.statusForm.value.idOpen;
+    const showClosed = this.statusForm.value.idClosed;
+
+    this._projetService.getPublicProjectList(showOpen, showClosed)
   }
 }
-
