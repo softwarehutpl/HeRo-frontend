@@ -3,14 +3,23 @@
 
    
     <ul class="container container__column list">
-        <li *ngFor="let filter of filters ">
-            {{filter.filterName}}
+        <li >
+            {{checkboxLabels.status}}
             <ul class="list" class="container container__column muiMargin">
-                <div *ngFor="let checkBox of filter.subfilter; let i = index">
+                <div *ngFor="let checkBox of statusToSubfilter let i = index">
                     <label >
                         <input type="checkbox" id="id{{checkBox.color}}" checked="{{checkBox.checked}}" >
-                        {{checkBox.name}}
+                    <span> {{checkBox.name}} </span>
                     </label>
+                </div>
+            </ul>
+        </li>
+        <li *ngIf="isStage" >
+            {{checkboxLabels.stage}}
+            <ul class="list" class="container container__column muiMargin">
+                <div *ngFor="let checkBox of stageToSubfilter; let i = index">
+                    <label>
+                        <input type="checkbox" id="id{{checkBox.color}}" checked="{{checkBox.checked}}" ><span>{{checkBox.name}}</span></label>
                 </div>
             </ul>
         </li>

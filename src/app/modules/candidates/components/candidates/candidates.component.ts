@@ -8,4 +8,10 @@ import { Component } from '@angular/core';
 export class CandidatesComponent {
   public componentName = 'candidates';
   public isAutocomplete = false;
+
+  public isStage = true;
+  constructor() {}
+
+  ngOnInit(): void {}
+
 }
