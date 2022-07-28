@@ -27,6 +27,7 @@ export class CandidatesDataService {
   public pageSize = 10;
   public pageSizeOptions: Array<number> = [5, 10, 15, 20, 25];
   public listLength!: number;
+  public checkboxStage: string[] = [];
 
   //getters:
   get candidates() {
@@ -43,6 +44,9 @@ export class CandidatesDataService {
       'https://swh-t-praktyki2022-app.azurewebsites.net/Candidate/GetList';
     const headers = new HttpHeaders({ accept: 'application/json' });
     const body = {
+      status: 
+        this.checkboxStage
+      ,
       paging: {
         pageSize: this.pageSize,
         pageNumber: this.pageIndex + 1,
@@ -57,7 +61,7 @@ export class CandidatesDataService {
       .post(URL, body, Options)
       .then((res) => {
         if (res.statusText === 'OK') {
-          console.log('Fetched candidates for list');
+          this.checkboxStage = [];
           this.listLength = res.data.totalCount;
           this.pageSize = res.data.paging.pageSize;
           this.pageIndex = res.data.paging.pageNumber - 1;
