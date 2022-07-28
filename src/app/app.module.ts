@@ -44,8 +44,12 @@ import { InterviewDialogComponent } from './modules/homepage/components/calendar
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { HttpClientModule } from '@angular/common/http';
+import { WarningComponent } from './modules/candidates/components/warning/warning.component';
 import { CandidatesSidenavComponent } from './modules/candidates/components/candidates-sidenav/candidates-sidenav.component';
 import { CandidatesEvaluationComponent } from './modules/candidates/components/candidates-evaluation/candidates-evaluation.component';
+import { MatSliderModule } from '@angular/material/slider';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -67,8 +71,10 @@ import { CandidatesEvaluationComponent } from './modules/candidates/components/c
     CalendarItemsComponent,
     CandidatesKanbanComponent,
     InterviewDialogComponent,
+    WarningComponent,
     CandidatesSidenavComponent,
     CandidatesEvaluationComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -101,6 +107,8 @@ import { CandidatesEvaluationComponent } from './modules/candidates/components/c
     MatDatepickerModule,
     MatNativeDateModule,
     HttpClientModule,
+    MatSliderModule,
+    FormsModule
   ],
   exports: [MatButtonModule],
   providers: [],

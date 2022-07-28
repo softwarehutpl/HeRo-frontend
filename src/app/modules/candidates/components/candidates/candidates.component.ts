@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-candidates',
@@ -8,10 +9,7 @@ import { Component } from '@angular/core';
 export class CandidatesComponent {
   public componentName = 'candidates';
   public isAutocomplete = false;
-
+  // public location = this.router.url;
   public isStage = true;
-  constructor() {}
-
-  ngOnInit(): void {}
-
+  constructor(public router: Router) {}
 }

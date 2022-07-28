@@ -21,7 +21,7 @@ export class InterviewDialogComponent implements OnInit {
 
   async loadData() {
     console.log(this.interview)
-    this.interview = await this.service.getIntervie(this.id);
+    this.interview = await this.service.getInterview(this.id);
     console.log(this.interview)
   }
 
