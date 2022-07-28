@@ -46,6 +46,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { HttpClientModule } from '@angular/common/http';
 import { CandidatesSidenavComponent } from './modules/candidates/components/candidates-sidenav/candidates-sidenav.component';
 import { CandidatesEvaluationComponent } from './modules/candidates/components/candidates-evaluation/candidates-evaluation.component';
+import { MatSliderModule } from '@angular/material/slider';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -101,6 +103,8 @@ import { CandidatesEvaluationComponent } from './modules/candidates/components/c
     MatDatepickerModule,
     MatNativeDateModule,
     HttpClientModule,
+    MatSliderModule,
+    FormsModule
   ],
   exports: [MatButtonModule],
   providers: [],

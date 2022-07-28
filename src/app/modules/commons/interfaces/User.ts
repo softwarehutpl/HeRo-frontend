@@ -31,3 +31,12 @@ export interface Sort {
     key:   string;
     value: string;
 }
+
+export interface Recruiters {
+    recruters: Recruiter[];
+}
+
+export interface Recruiter {
+    id:       number;
+    fullName: string;
+}
