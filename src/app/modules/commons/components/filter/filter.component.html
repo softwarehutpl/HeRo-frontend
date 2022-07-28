@@ -29,6 +29,11 @@
         </li>
     </ul>
 </form>
+
+    <button mat-icon-button class="button" (click)="cleanAutocompleteSearch()" *ngIf="projetService.cleanAutocompleteButton && isAutocomplete">
+        <mat-icon>delete</mat-icon>
+    </button>
+
     <mat-form-field class="example-full-width" appearance="outline" class="container container__column project"
         *ngIf="isAutocomplete">
         <mat-label>Project</mat-label>

@@ -1,13 +1,14 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { Filter, Data, Subfilter } from '../definition';
+import { Data, Subfilter } from '../definition';
 import { FiltersService } from '../../services/filters/filters.service';
-import { FormArray, FormBuilder, FormControl } from '@angular/forms';
+import { FormBuilder, FormControl } from '@angular/forms';
 import { ProjectListoToAutocomplete } from '../../mockups/mock-projects';
 import { ProjectsService } from '../../services/projects/projects.service';
-import { Observable, startWith, map, debounce } from 'rxjs';
+import { Observable, startWith, map } from 'rxjs';
 import { Project } from '../../mockups/mock-projects';
 import { StageStatusData } from '../../interfaces/filters';
 import { CandidatesDataService } from 'src/app/modules/candidates/services/candidates-data.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-filter',
@@ -33,7 +34,7 @@ export class FilterComponent implements OnChanges, OnInit {
   public stageToSubfilter!: Subfilter[];
   public statusToSubfilter!: Subfilter[];
   public statusColor = 'STATUS';
-  public statusCompoenntCHeckbox: string[] = [];
+  public cleanAutocomplete = this.projetService.cleanAutocompleteButton;
   public statusForm = this._fb.group({
     idNEW: new FormControl(true),
     idIN_PROCESSING: new FormControl(true),
@@ -47,14 +48,13 @@ export class FilterComponent implements OnChanges, OnInit {
     idINTERVIEW: new FormControl(true),
     idPHONE_INTERVIEW: new FormControl(true),
     idTECH_INTERVIEW: new FormControl(true),
-    idOFFER: new FormControl(true)
-  })
-
+    idOFFER: new FormControl(true),
+  });
 
   constructor(
     public filterService: FiltersService,
     private _fb: FormBuilder,
-    private _projetService: ProjectsService,
+    public projetService: ProjectsService,
     private _candidateService: CandidatesDataService
   ) {
     this.filterService.projectList$.subscribe({
@@ -64,8 +64,6 @@ export class FilterComponent implements OnChanges, OnInit {
         console.log(this.listOfProjects);
       },
     });
-    const a = this.statusForm.get('idIN_PROCESSING');
-    console.log(a);
   }
 
   ngOnChanges(): void {
@@ -75,10 +73,8 @@ export class FilterComponent implements OnChanges, OnInit {
   }
 
   async ngOnInit() {
-    // this.listOfProjects.asObservable()
     const dataForCheckboxCandidates =
       await this.filterService.getStageAndStatusList();
-    console.log(dataForCheckboxCandidates);
     this.convertCandidatesCacboxDTOToSubfilter(dataForCheckboxCandidates);
     if (this.whichComponentRender === 'projects') {
       this.statusToSubfilter = [
@@ -123,7 +119,8 @@ export class FilterComponent implements OnChanges, OnInit {
   }
 
   public async onSelection(project: ProjectListoToAutocomplete) {
-    const res = await this._projetService.getProjectById(project.projectId);
+    this.projetService.cleanAutocompleteButton = true;
+    const res = await this.projetService.getProjectById(project.projectId);
 
     const readyProject: Project[] = [
       {
@@ -136,7 +133,7 @@ export class FilterComponent implements OnChanges, OnInit {
         id: res.id,
       },
     ];
-    this._projetService.projects$.next(readyProject);
+    this.projetService.projects$.next(readyProject);
   }
 
   public checkboxOnChange() {
@@ -147,7 +144,6 @@ export class FilterComponent implements OnChanges, OnInit {
       const checkboxesStatus = this.statusForm.value;
       const checkboxesStage = this.stageForm.value;
 
-
       for (const key in checkboxesStatus) {
         if (checkboxesStatus[key] === true) {
           const removingInFromName = key.slice(2);
@@ -155,19 +151,29 @@ export class FilterComponent implements OnChanges, OnInit {
         }
       }
       for (const key in checkboxesStage) {
-        if(checkboxesStage[key] === true) {
+        if (checkboxesStage[key] === true) {
           const removingInFromName = key.slice(2);
           stageCandidates.push(removingInFromName);
         }
       }
-     
-      this._candidateService.getCandidatesForList(statusCandidates, stageCandidates);
+
+      this._candidateService.getCandidatesForList(
+        statusCandidates,
+        stageCandidates
+      );
       return;
     }
-    
+
     const showOpen = this.statusForm.value.idOpen;
     const showClosed = this.statusForm.value.idClosed;
 
-    this._projetService.getPublicProjectList(showOpen, showClosed)
+    this.projetService.getPublicProjectList(showOpen, showClosed);
+  }
+
+  public async cleanAutocompleteSearch() {
+    const showOpen = this.statusForm.value.idOpen;
+    const showClosed = this.statusForm.value.idClosed;
+    await this.projetService.getPublicProjectList(showOpen, showClosed);
+    this.projetService.cleanAutocompleteButton = false;
   }
 }
