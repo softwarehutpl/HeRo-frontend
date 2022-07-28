@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Candidate } from '../CandidatesInterface';
 import { useMocks } from '../../commons/mockups/useMocks';
 import { HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, from } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import axios from 'axios';
 
 @Injectable({
@@ -11,13 +11,17 @@ import axios from 'axios';
 export class CandidatesDataService {
   constructor() {
     this.getCandidatesForList();
+    this.getAllCandidates();
   }
 
   //variables:
   private _candidates: BehaviorSubject<Candidate[]> = new BehaviorSubject(
     [] as Candidate[]
   );
-  private _candidatesAll: Promise<Candidate[]> = this.getAllCandidates();
+  // private _candidatesAll: Promise<Candidate[]> = this.getAllCandidates();
+  private _candidatesAll: BehaviorSubject<Candidate[]> = new BehaviorSubject(
+    [] as Candidate[]
+  );
   //paginator settings:
   public pageIndex = 0;
   public pageSize = 10;
@@ -29,7 +33,7 @@ export class CandidatesDataService {
     return this._candidates.asObservable();
   }
   get allCandidates() {
-    return from(this._candidatesAll);
+    return this._candidatesAll.asObservable();
   }
 
   //functions:
@@ -53,10 +57,12 @@ export class CandidatesDataService {
       .post(URL, body, Options)
       .then((res) => {
         if (res.statusText === 'OK') {
+          console.log('Fetched candidates for list');
           this.listLength = res.data.totalCount;
           this.pageSize = res.data.paging.pageSize;
           this.pageIndex = res.data.paging.pageNumber - 1;
           this._candidates.next(res.data.candidateInfoForListDTOs);
+          //return res.data.candidateInfoForListDTOs;
         } else {
           console.log('Error, status not OK');
         }
@@ -107,7 +113,7 @@ export class CandidatesDataService {
   }
 
   @useMocks(false, import(`@mocks/candidates.json`))
-  public async getAllCandidates(): Promise<Candidate[]> {
+  public async getAllCandidates(): Promise<void> {
     const URL =
       'https://swh-t-praktyki2022-app.azurewebsites.net/Candidate/GetList';
     const headers = new HttpHeaders({ accept: 'application/json' });
@@ -126,9 +132,11 @@ export class CandidatesDataService {
       .post(URL, body, Options)
       .then((res) => {
         if (res.statusText === 'OK') {
-          console.log('Fetched all candidates');
+          console.log('Fetched candidates for kanban');
 
-          return res.data.candidateInfoForListDTOs;
+          // return res.data.candidateInfoForListDTOs;
+
+          this._candidatesAll.next(res.data.candidateInfoForListDTOs);
         } else {
           console.log('Error, status not OK');
         }

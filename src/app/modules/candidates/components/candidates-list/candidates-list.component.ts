@@ -2,12 +2,9 @@ import { AfterViewInit, Component, ViewChild, OnInit } from '@angular/core';
 // import { Candidate } from '../../CandidatesInterface';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
-// import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { CandidatesDataService } from '../../services/candidates-data.service';
 import { CreateInitialsService } from 'src/app/modules/commons/services/createInitials/create-initials.service';
-// import { Observable } from 'rxjs';
-
 
 @Component({
   selector: 'app-candidates-list',
@@ -29,12 +26,7 @@ export class CandidatesListComponent implements AfterViewInit, OnInit {
     'profile',
   ];
   //variables:
-  // private candidates!: Array<Candidate>;
   public dataSource!: any;
-
-  createInititals(name: string) {
-    return this.initials.createInititals(name);
-  }
 
   constructor(
     private _liveAnnouncer: LiveAnnouncer,
@@ -44,12 +36,13 @@ export class CandidatesListComponent implements AfterViewInit, OnInit {
 
   async ngOnInit(): Promise<void> {
     this.dataSource = this.service.candidates;
-    // this.dataSource = new MatTableDataSource(DATA);
-
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }
 
+  createInititals(name: string) {
+    return this.initials.createInititals(name);
+  }
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 

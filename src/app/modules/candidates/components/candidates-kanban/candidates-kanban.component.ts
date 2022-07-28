@@ -8,6 +8,7 @@ import {
 import { Candidate } from '../../CandidatesInterface';
 import { MatDialog } from '@angular/material/dialog';
 import { WarningComponent } from '../warning/warning.component';
+import { CreateInitialsService } from 'src/app/modules/commons/services/createInitials/create-initials.service';
 
 @Component({
   selector: 'app-candidates-kanban',
@@ -28,14 +29,20 @@ export class CandidatesKanbanComponent implements OnInit {
 
   constructor(
     private service: CandidatesDataService,
+    private initials: CreateInitialsService,
     public dialog: MatDialog
   ) {}
+
+  //functions:
   async ngOnInit() {
     this.service.allCandidates.subscribe((result) => {
       this.sortCandidates(result);
     });
   }
-  sortCandidates(data: Candidate[]) {
+  createInititals(name: string) {
+    return this.initials.createInititals(name);
+  }
+  sortCandidates(data: any) {
     this.newCand = [];
     this.evaluation = [];
     this.interview = [];
@@ -71,6 +78,7 @@ export class CandidatesKanbanComponent implements OnInit {
       }
     }
   }
+
   async drop(event: CdkDragDrop<Candidate[]>) {
     if (event.previousContainer === event.container) {
       //checks if container changes
@@ -82,7 +90,6 @@ export class CandidatesKanbanComponent implements OnInit {
       );
     } else {
       this.openDialog(event); //open confirmation window
-
       transferArrayItem(
         //move box to new column and await response
         event.previousContainer.data,
@@ -90,11 +97,6 @@ export class CandidatesKanbanComponent implements OnInit {
         event.previousIndex,
         event.currentIndex
       );
-      // this.changeStatusAndStage(
-      //   event.container.id,
-      //   event.container.data[event.currentIndex].id
-      // );
-      // }
     }
   }
   openDialog(event: CdkDragDrop<Candidate[]>) {
@@ -107,21 +109,14 @@ export class CandidatesKanbanComponent implements OnInit {
     return dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
       if (result) {
-        // transferArrayItem(
-        //   event.previousContainer.data,
-        //   event.container.data,
-        //   event.previousIndex,
-        //   event.currentIndex
-        // );
+        //if user confirmed send API request
         this.changeStatusAndStage(
           event.container.id,
           event.container.data[event.currentIndex].id
-        );
-        console.log(
-          event.container.id,
-          event.container.data[event.currentIndex].id
-        );
+        ); // Possible feature: If API call fails, revert changes by calling else block
+        this.service.getAllCandidates(); //refresh list
       } else {
+        //if user declined move box back to original column
         transferArrayItem(
           event.container.data,
           event.previousContainer.data,
@@ -151,10 +146,5 @@ export class CandidatesKanbanComponent implements OnInit {
         newColumn
       );
     }
-    await this.service.getAllCandidates();
-    /* 
-    This doesn't solve the problem of optimistic-behaviour. Changes are local, but back-end error is not accounted for.
-    await this.service.allCandidates.subscribe((result) => this.sortCandidates(result)); 
-    */
   }
 }

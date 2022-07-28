@@ -3,14 +3,19 @@
   <div class="container container__row">
     <app-sidebar></app-sidebar>
     <mat-divider [vertical]="true"></mat-divider>
-    <div class="container container__column filterComponet">
-      <app-filter [whichComponentRender]="componentName" [isAutocomplete]="isAutocomplete"></app-filter>
-      <!-- Filters column -->
+    <div *ngIf="router.url != '/candidates/kanban'">
+      <div class="container container__column filterComponet">
+        <app-filter
+          [whichComponentRender]="componentName"
+          [isAutocomplete]="isAutocomplete"
+        ></app-filter>
+        <!-- Filters column -->
 
-      <!-- <button style="width: 150px; height: 180px">Filters1</button>
+        <!-- <button style="width: 150px; height: 180px">Filters1</button>
       <button style="width: 150px; height: 230px">Filters2</button> -->
+      </div>
+      <mat-divider [vertical]="true"></mat-divider>
     </div>
-    <mat-divider [vertical]="true"></mat-divider>
 
     <!-- Main candidates container -->
     <div class="container container__column">
