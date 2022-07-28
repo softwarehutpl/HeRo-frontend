@@ -5,7 +5,7 @@ import { FormBuilder, FormControl } from '@angular/forms';
 import { ProjectListoToAutocomplete } from '../../mockups/mock-projects';
 import { ProjectsService } from '../../services/projects/projects.service';
 import { Observable, startWith, map } from 'rxjs';
-
+import { Project } from '../../mockups/mock-projects';
 
 
 @Component({
@@ -54,16 +54,28 @@ export class FilterComponent implements OnChanges {
   }
 
   private _filter(value: string): ProjectListoToAutocomplete[] {
-    console.log('from filter')
+    // console.log('from filter')
     const filterValue = value.toLowerCase();
     return this.filterService.projectsListToAutocomplete.filter((option) =>
       option.projectName.toLowerCase().includes(filterValue)
     );
   }
 
-  onSelection(project: ProjectListoToAutocomplete) {
+ public async onSelection(project: ProjectListoToAutocomplete) {
 
-    console.log(project)
+  const res = await this._projetService.getProjectById(project.projectId);
+
+  const readyProject: Project[] =[ {
+    name: res.name,
+    creator: res.creator,
+    from: new Date(res.beginningDate),
+    to: new Date(res.endingDate),
+    resume: res.candidateCount,
+    hired: res.hiredCount,
+    id: res.id,
+  }];
+  this._projetService.projects$.next(readyProject)
+
     // if (this.listOfSkillsForProject.length !== 0) {
     //   const nameListOfSkillProject = this.listOfSkillsForProject.map((el) => {
     //     return el.name;

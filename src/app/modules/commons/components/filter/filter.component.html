@@ -1,37 +1,27 @@
 <div class="container container__column">
-    <!-- <form [formGroup]="checkboxForm"> -->
-
-   
     <ul class="container container__column list">
         <li *ngFor="let filter of filters ">
             {{filter.filterName}}
             <ul class="list" class="container container__column muiMargin">
                 <div *ngFor="let checkBox of filter.subfilter; let i = index">
-                    <label >
-                        <input type="checkbox" id="id{{checkBox.color}}" checked="{{checkBox.checked}}" >
+                    <label>
+                        <input type="checkbox" id="id{{checkBox.color}}" checked="{{checkBox.checked}}">
                         {{checkBox.name}}
                     </label>
                 </div>
             </ul>
         </li>
     </ul>
-   
-    <!-- <mat-form-field *ngIf="isAutocomplete">
-        <mat-label>Project</mat-label>
-        <mat-select [(value)]="selected">
-            <mat-option>all</mat-option>
-        </mat-select>
-    </mat-form-field> -->
-    <mat-form-field class="example-full-width" appearance="outline" class="container container__column project" *ngIf="isAutocomplete">
+    <mat-form-field class="example-full-width" appearance="outline" class="container container__column project"
+        *ngIf="isAutocomplete">
         <mat-label>Project</mat-label>
         <input type="text" placeholder="Pick one" matInput [matAutocomplete]="auto" aria-label="Number"
-          [formControl]="autocompleteForm">
+            [formControl]="autocompleteForm">
         <mat-autocomplete #auto="matAutocomplete">
-          <mat-option *ngFor="let project of projectAutocompleteOptions | async" [value]="project.projectName"
-            (click)="onSelection(project)">
-            {{project.projectName}}
-          </mat-option>
+            <mat-option *ngFor="let project of projectAutocompleteOptions | async" [value]="project.projectName"
+                (click)="onSelection(project)">
+                {{project.projectName}}
+            </mat-option>
         </mat-autocomplete>
-      </mat-form-field>
-<!-- </form> -->
+    </mat-form-field>
 </div>

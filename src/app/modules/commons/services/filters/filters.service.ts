@@ -50,15 +50,15 @@ public projectList$ = new Observable<ProjectListoToAutocomplete[]>((observer) =>
   },
   { withCredentials: true })
   .then( (res) => {
-    console.log(res)
-    
+    // console.log(res)
+    this.projectsListToAutocomplete = [];
     res.data.recruitmentDTOs.map((el: RecruitmentDTO) =>  {
       const projectListElement: ProjectListoToAutocomplete = {
         projectName: el.name,
         projectId: el.id
       }
       this.projectsListToAutocomplete.push(projectListElement)
-      console.log(this.projectsListToAutocomplete)
+      // console.log(this.projectsListToAutocomplete)
     })
   })
   .catch( error => console.log(error))

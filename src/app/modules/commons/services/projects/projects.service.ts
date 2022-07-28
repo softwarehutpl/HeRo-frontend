@@ -168,7 +168,6 @@ export class ProjectsService implements OnInit {
 
 
   public async getProjectById(proejctId: number) {
-
     const urlGetProjectIdWithIdis = this.urlGetProjectId + proejctId;
     const projectById = await axios.get(urlGetProjectIdWithIdis , 
       {withCredentials: true});
