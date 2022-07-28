@@ -3,8 +3,12 @@ import { Router } from '@angular/router';
 import { Data } from '../../interfaces/filters';
 import { ProjectsService } from '../projects/projects.service';
 import { RecruitmentList } from '../../interfaces/recruitment';
-import { Subfilter } from '../../interfaces/filters';
+import { Filter, Subfilter } from '../../interfaces/filters';
+import { Observable } from 'rxjs';
+import { ProjectListoToAutocomplete } from '@mocks/mock-projects';
 import axios from 'axios';
+import { RecruitmentDTO } from '../../interfaces/recruitment';
+
 
 @Injectable({
   providedIn: 'root',
@@ -14,15 +18,55 @@ export class FiltersService {
   // public renderedComponentName?: string;
   public isOpenProject = true;
   public isClosedProjects = true;
-  public checkboxFieldsData: Subfilter[]  = JSON.parse(JSON.stringify(Data.filtersSidebarButton3));
-  public urlStageListForCandidates = 'https://swh-t-praktyki2022-app.azurewebsites.net/Candidate/GetStageList';
-  public urlStatusListForCandidates = 'https://swh-t-praktyki2022-app.azurewebsites.net/Candidate/GetStatusList';
-
+  public checkboxFieldsData: Filter[]  = JSON.parse(JSON.stringify(Data.filtersSidebarButton3));
+ public urlAllProjectList = 'https://swh-t-praktyki2022-app.azurewebsites.net/Recruitment/GetList';
+public projectsListToAutocomplete: ProjectListoToAutocomplete[] = [];
+public showOpen = true;
+public showClosed = true;
 
   constructor(
     private _router: Router,
-    private _projectsService: ProjectsService
-  ) {}
+    private _projectsService: ProjectsService,
+  ) {
+  }
+
+public projectList$ = new Observable<ProjectListoToAutocomplete[]>((observer) => {
+   axios.post(this.urlAllProjectList, {
+    name: '',
+    description: '',
+    showOpen: true,
+    showClosed: true,
+    beginningDate: '',
+    endingDate: '',
+    paging: {
+      pageSize: 100,
+      pageNumber: 1,
+    },
+    sortOrder: {
+      sort: [
+        {
+          key: "'",
+          value: '',
+        },
+      ],
+    },
+  },
+  { withCredentials: true })
+  .then( (res) => {
+    // console.log(res)
+    this.projectsListToAutocomplete = [];
+    res.data.recruitmentDTOs.map((el: RecruitmentDTO) =>  {
+      const projectListElement: ProjectListoToAutocomplete = {
+        projectName: el.name,
+        projectId: el.id
+      }
+      this.projectsListToAutocomplete.push(projectListElement)
+      // console.log(this.projectsListToAutocomplete)
+    })
+  })
+  .catch( error => console.log(error))
+
+})
 
   setStatusForProjects(projectListFilterData: RecruitmentList)  {
     console.log(projectListFilterData)
