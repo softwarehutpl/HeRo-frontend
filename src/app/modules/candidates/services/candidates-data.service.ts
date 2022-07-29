@@ -27,6 +27,7 @@ export class CandidatesDataService {
   public pageSize = 10;
   public pageSizeOptions: Array<number> = [5, 10, 15, 20, 25];
   public listLength!: number;
+  public checkboxStage: string[] = [];
 
   //getters:
   get candidates() {
