@@ -61,6 +61,11 @@ export const COLORS: any = {
       primary: '#e3bc08',
       secondary: '#FDF1BA',
     },
+    grey:{
+      primary: 'rgb(110 100 110)',
+      secondary: 'grey',
+
+    }
   };
 
 export const CALENDAR_EVENTS: CalendarEvent[] = [

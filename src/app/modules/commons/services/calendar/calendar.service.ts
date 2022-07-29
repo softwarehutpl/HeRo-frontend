@@ -65,8 +65,10 @@ export class CalendarService {
       withCredentials: true,
       'Content-Type':'application/json-patch+json'
     }
-    console.log(interview);
-    axios.post(this.url + '/Create', { interview }, { headers: header })
+
+    console.log('intervie:',interview);
+    axios.post(this.url + '/Create', interview , { withCredentials: true, })
+
       .catch((error) => {
         console.log("error create intervie : ", interview, " ", error);
       });
