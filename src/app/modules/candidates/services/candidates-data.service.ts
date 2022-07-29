@@ -70,10 +70,9 @@ export class CandidatesDataService {
         }
       }
     } else {
-      // console.log("para")
-      // this.filterService.idNEW = true;
-      // this.filterService.idIN_PROCESSING = true;
-      // this.filterService.idDROPPED_OUT = true;
+      this.filterService.idNEW = true;
+      this.filterService.idIN_PROCESSING = true;
+      this.filterService.idDROPPED_OUT = true;
     }
     console.log(status)
     const URL =
