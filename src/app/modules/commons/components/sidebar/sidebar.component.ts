@@ -2,6 +2,7 @@ import { _fixedSizeVirtualScrollStrategyFactory } from '@angular/cdk/scrolling';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CandidatesDataService } from 'src/app/modules/candidates/services/candidates-data.service';
+import { FiltersService } from '../../services/filters/filters.service';
 import { Data } from '../definition';
 
 
@@ -18,7 +19,7 @@ public sidebarButton3: string = Data.sidebarButton3;
 
   clicedButton!:string ;
 
-  constructor(private activatedRoute: ActivatedRoute, private _candidateService: CandidatesDataService, private _router: Router) {
+  constructor(private activatedRoute: ActivatedRoute, private _candidateService: CandidatesDataService, private _router: Router, public filterService: FiltersService) {
     
     const path =this.activatedRoute.snapshot.url[0].path;
     if(path !== 'home' && path !== 'projects' && path !== 'candidates'){
@@ -28,7 +29,6 @@ public sidebarButton3: string = Data.sidebarButton3;
       this.clicedButton = path;
     }
   }
-
 
   ngOnInit(): void {}
 

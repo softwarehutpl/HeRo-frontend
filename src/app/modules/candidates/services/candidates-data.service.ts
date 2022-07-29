@@ -1,16 +1,20 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ɵbypassSanitizationTrustUrl } from '@angular/core';
 import { Candidate } from '../CandidatesInterface';
 import { useMocks } from '../../commons/mockups/useMocks';
 import { HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import axios from 'axios';
 import { ActivatedRoute } from '@angular/router';
+import { FiltersService } from '../../commons/services/filters/filters.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CandidatesDataService {
-  constructor(private _route: ActivatedRoute) {
+  constructor(
+    private _route: ActivatedRoute,
+    public filterService: FiltersService
+  ) {
     this.getCandidatesForList();
     this.getAllCandidates();
   }
@@ -53,17 +57,24 @@ export class CandidatesDataService {
       this.queryParamProjectId = '';
     }
 
-    console.log(this.queryParamHired);
-    console.log(this.queryParamProjectId);
-
     if (this.queryParamHired) {
+      this.filterService.idNEW = false;
+      this.filterService.idIN_PROCESSING = false;
+      this.filterService.idDROPPED_OUT = false;
       if (!status?.includes(this.queryParamHired)) {
-        if (!status) {
+        if (status) {
+          status.push(this.queryParamHired);
+        } else {
           status = [this.queryParamHired];
         }
       }
+    } else {
+      // console.log("para")
+      // this.filterService.idNEW = true;
+      // this.filterService.idIN_PROCESSING = true;
+      // this.filterService.idDROPPED_OUT = true;
     }
-
+    console.log(status)
     const URL =
       'https://swh-t-praktyki2022-app.azurewebsites.net/Candidate/GetList';
     const headers = new HttpHeaders({ accept: 'application/json' });

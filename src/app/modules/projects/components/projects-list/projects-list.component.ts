@@ -67,6 +67,13 @@ export class ProjectsListComponent implements OnInit {
   }
 
   public async moveToCandidates(projectName: string, status?: string) {
+
+    if (status) {
+      this.filterService.idNEW = false;
+      this.filterService.idIN_PROCESSING = false;
+      this.filterService.idDROPPED_OUT = false;
+    }
+ 
     await this._router.navigate(['/candidates'], {
       queryParams: {
         project: projectName,
@@ -77,7 +84,7 @@ export class ProjectsListComponent implements OnInit {
   }
 
   moveToEditProject(projectId: number) {
-    console.log(projectId);
+
     this.projectService.getProjectById(projectId);
     this._router.navigate(['edit'], { queryParams: { projectId: projectId } });
   }
