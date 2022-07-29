@@ -27,9 +27,7 @@ import { AuthService } from 'src/app/modules/commons/services/auth/auth.service'
     this._auth.isAuth(this.password, this.email);
   }
 
-  public onSubmit(form: any) {
-    console.log(form)
-  }
+  public onSubmit(form: any) {}
 
   public getNewPassword() {
     this.email = this.loginForm.value.email;
