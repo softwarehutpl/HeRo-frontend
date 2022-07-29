@@ -49,7 +49,12 @@ import { CandidatesSidenavComponent } from './modules/candidates/components/cand
 import { CandidatesEvaluationComponent } from './modules/candidates/components/candidates-evaluation/candidates-evaluation.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { FormsModule } from '@angular/forms';
+import { registerLocaleData } from '@angular/common';
+import localePL from '@angular/common/locales/pl'
+import { LOCALE_ID } from '@angular/core';
 
+
+registerLocaleData(localePL, 'pl');
 
 @NgModule({
   declarations: [
@@ -108,10 +113,11 @@ import { FormsModule } from '@angular/forms';
     MatNativeDateModule,
     HttpClientModule,
     MatSliderModule,
-    FormsModule
+    FormsModule,
+
   ],
   exports: [MatButtonModule],
-  providers: [],
+  providers: [{provide: LOCALE_ID, useValue: 'pl' }],
   bootstrap: [AppComponent],
   entryComponents: [InterviewDialogComponent],
 })

@@ -26,9 +26,9 @@
 
     </ng-template>
 
-    <div [ngSwitch]="view">
+    <div [ngSwitch]="view" >
       <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events"
-        [cellTemplate]="customCellTemplate">
+        [cellTemplate]="customCellTemplate" type="datetime-local">
       </mwl-calendar-month-view>
       <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events">
       </mwl-calendar-week-view>
