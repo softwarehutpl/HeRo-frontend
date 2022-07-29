@@ -8,7 +8,7 @@ import {
 } from '../../interfaces/recruitment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { Project, Recruiter } from '../../mockups/mock-projects';
+import { Project, ProjectListoToAutocomplete, Recruiter } from '../../mockups/mock-projects';
 import { RecruitmentDTO, GetRecruitersItem } from '../../interfaces/recruitment';
 
 
@@ -75,10 +75,11 @@ export class ProjectsService implements OnInit {
       ],
     },
   };
-  // public isSaved!: boolean;
+ 
   public projects$: BehaviorSubject<Project[]> = new BehaviorSubject(
     [] as Project[]
   );
+  public projectList$: BehaviorSubject<ProjectListoToAutocomplete[]> = new BehaviorSubject([] as ProjectListoToAutocomplete[]);
   public recruiterList: Recruiter[] = [
    { id: 1, fullName: 'admin admin' },
   ];
@@ -87,6 +88,7 @@ export class ProjectsService implements OnInit {
   public pageSize = 5;
   public pageSizeOptions = [5, 10, 25, 100];
   public listLength!: number;
+  public cleanAutocompleteButton = false;
 
   constructor(private _activatedRoute: ActivatedRoute,) {}
 
@@ -94,38 +96,13 @@ export class ProjectsService implements OnInit {
     return this.projects$.asObservable();
   }
 
-  ngOnInit() {
-    // this._activatedRoute.queryParams.subscribe((params) => {
-    //   this.projectId = params['projectId'];
-    // });
-  }
-
-  // public projectList$ = new Observable<GetRecruitmentListBodyRequest>(
-  //   (observer) => {
-  //     axios
-  //       .post(
-  //         this.urlGetProjectList,
-  //         { body: this.data },
-  //         { withCredentials: true }
-  //       )
-  //       .then((response) => {
-  //         observer.next(response.data);
-  //       })
-  //       .catch((error) => {
-  //         observer.error(error);
-  //       });
-  //   }
-  // );
-
-  // public subscription = this.projectList$.subscribe({
-  //   next: (data) => console.log(data),
-  // });
+  ngOnInit() {}
+ 
 
   public projectSkills$ = new Observable<SkillById[]>((observer) => {
     axios
       .get(this.urlGetSkillsList, { withCredentials: true })
       .then((response) => {
-        console.log(response)
         const dataFromServer: { 
           id: string, 
           name: string
@@ -168,7 +145,6 @@ export class ProjectsService implements OnInit {
 
 
   public async getProjectById(proejctId: number) {
-
     const urlGetProjectIdWithIdis = this.urlGetProjectId + proejctId;
     const projectById = await axios.get(urlGetProjectIdWithIdis , 
       {withCredentials: true});
@@ -179,9 +155,9 @@ export class ProjectsService implements OnInit {
     return this.projectId;
   }
 
-  public async getPublicProjectList() {
+  public async getPublicProjectList(showOpen: boolean, showClosed: boolean) {
     await this._getRecruiterList();
-    const res = await this.getProjectList();
+    const res = await this.getProjectList(showOpen, showClosed );
     return this.prepareProjectLis(res.data);
   }
 
@@ -203,16 +179,16 @@ export class ProjectsService implements OnInit {
     this.recruitListIsLoaded = true;
   }
 
-  private async getProjectList() {
+  private async getProjectList(showOpen: boolean, showClosed: boolean) {
     const res: {
       data: RecruitmentList;
     } = await axios.post(
-      this.urlGetPublicProjecList,
+      this.urlGetProjectList,
       {
         name: '',
         description: '',
-        showOpen: true,
-        showClosed: true,
+        showOpen: showOpen,
+        showClosed: showClosed,
         beginningDate: '',
         endingDate: '',
         paging: {
@@ -240,12 +216,18 @@ export class ProjectsService implements OnInit {
     this.pageIndex = recruitmentList.paging.pageNumber - 1;
 
     const projectListReadyForTable: Project[] = [];
+    const projectsListReadyToAutocomplete: ProjectListoToAutocomplete[] = [];
 
     recruitmentList.recruitmentDTOs.map((el: RecruitmentDTO) => {
       // console.log
       // const recruiterData = this.recruiterList.filter(
       //   (elRescruiterList) => elRescruiterList.id === el.recruiterId
       // );
+      const readyProjectListForAutocomplete: ProjectListoToAutocomplete ={
+        projectId: el.id,
+        projectName: el.name
+      };
+      projectsListReadyToAutocomplete.push(readyProjectListForAutocomplete)
       const readyProject: Project = {
         name: el.name,
         creator: el.creator,
@@ -257,6 +239,7 @@ export class ProjectsService implements OnInit {
       };
       projectListReadyForTable.push(readyProject);
     });
+    this.projectList$.next(projectsListReadyToAutocomplete)
     this.projects$.next(projectListReadyForTable);
     return projectListReadyForTable;
   }

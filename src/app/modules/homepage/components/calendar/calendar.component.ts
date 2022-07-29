@@ -56,13 +56,13 @@ export class CalendarComponent implements OnInit {
       };
 
       if (value.candidateStatus === "NEW")
-        x.color = this.colors.red;
-      else if (value.candidateStatus === "IN_PROCESSING")
         x.color = this.colors.yellow;
+      else if (value.candidateStatus === "IN_PROCESSING")
+        x.color = this.colors.blue;
       else if (value.candidateStatus === "DROPPED_OUT")
         x.color = this.colors.red;
       else
-        x.color = this.colors.yellow;
+        x.color = this.colors.grey;
 
       this.events.push(x);
     }

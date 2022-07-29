@@ -60,13 +60,15 @@ export class CalendarService {
 
   createInterview(interview: CandidateCreate) {
 
-    const header = {
-      accept: 'text/plain',
-      withCredentials: true,
-      'Content-Type':'application/json-patch+json'
-    }
-    console.log(interview);
-    axios.post(this.url + '/Create', { interview }, { headers: header })
+    // const header = {
+    //   accept: 'text/plain',
+    //   withCredentials: true,
+    //   'Content-Type':'application/json-patch+json'
+    // }
+
+    console.log('intervie:',interview);
+    axios.post(this.url + '/Create', interview , { withCredentials: true, })
+
       .catch((error) => {
         console.log("error create intervie : ", interview, " ", error);
       });

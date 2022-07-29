@@ -1,26 +1,47 @@
 <div class="container container__column">
-    <!-- <form [formGroup]="checkboxForm"> -->
-
-   
+    <form [formGroup]="statusForm">
     <ul class="container container__column list">
-        <li *ngFor="let filter of filters ">
-            {{filter.filterName}}
+        <li>
+            {{checkboxLabels.status}}
             <ul class="list" class="container container__column muiMargin">
-                <div *ngFor="let checkBox of filter.subfilter; let i = index">
-                    <label >
-                        <input type="checkbox" id="id{{checkBox.color}}" checked="{{checkBox.checked}}" >
-                        {{checkBox.name}}
+                <div *ngFor="let checkBox of statusToSubfilter let i = index">
+                    <label>
+                        <input type="checkbox" id="id{{checkBox.color}}" checked="{{checkBox.checked}}"
+                            (change)="checkboxOnChange()" formControlName="id{{checkBox.name}}">
+                        <span> {{checkBox.name}} </span>
                     </label>
                 </div>
             </ul>
         </li>
     </ul>
-   
-    <mat-form-field *ngIf="isAutocomplete">
+    </form >
+    <form [formGroup]="stageForm">
+    <ul class="container container__column list">
+        <li *ngIf="isStage">
+            {{checkboxLabels.stage}}
+            <ul class="list" class="container container__column muiMargin">
+                <div *ngFor="let checkBox of stageToSubfilter; let i = index">
+                    <label>
+                        <input type="checkbox" id="id{{checkBox.color}}" (change)="checkboxOnChange()"
+                            checked="{{checkBox.checked}}" formControlName="id{{checkBox.name}}"><span>{{checkBox.name}}</span></label>
+                </div>
+            </ul>
+        </li>
+    </ul>
+</form>
+    <button mat-icon-button class="button" (click)="cleanAutocompleteSearch()" *ngIf="projetService.cleanAutocompleteButton && isAutocomplete">
+        <mat-icon>delete</mat-icon>
+    </button>
+    <mat-form-field class="example-full-width" appearance="outline" class="container container__column project"
+        *ngIf="isAutocomplete">
         <mat-label>Project</mat-label>
-        <mat-select [(value)]="selected">
-            <mat-option>all</mat-option>
-        </mat-select>
+        <input type="text" placeholder="Pick one" matInput [matAutocomplete]="auto" aria-label="Number"
+            [formControl]="autocompleteForm">
+        <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let project of projectAutocompleteOptions | async" [value]="project.projectName"
+                (click)="onSelection(project)">
+                {{project.projectName}}
+            </mat-option>
+        </mat-autocomplete>
     </mat-form-field>
-<!-- </form> -->
 </div>

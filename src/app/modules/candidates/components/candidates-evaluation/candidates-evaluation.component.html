@@ -16,7 +16,9 @@
     <div *ngIf="checkboxCal.value===true">
         <div *ngIf="recruiters!==undefined">
             <mat-form-field appearance="fill">
-                <mat-select [(ngModel)]="selectedIdRecruter">
+
+                <mat-select [(ngModel)]="selectedIdRecruter" placeholder="Choose Recruiter">
+
                     <mat-option *ngFor="let recruiter of recruiters" [value]="recruiter.id">
                         {{recruiter.fullName}}
                     </mat-option>
@@ -27,13 +29,18 @@
 
     <div *ngIf="checkboxCal.value===true">
             <mat-form-field appearance="fill">
-                <mat-select [(ngModel)]="selectedType">
+
+                <mat-select [(ngModel)]="selectedType" placeholder="Choose Type">
+
                     <mat-option *ngFor="let type of TYPES" [value]="type">
                         {{type}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
     </div>
+
+
+    <p class="marg">Opinion:</p>
 
     <mat-slider min="1" max="5" tickInterval="1" (change)="slider($event)"></mat-slider>
     <div *ngIf="scoreSlider!==0" class="slider-text">

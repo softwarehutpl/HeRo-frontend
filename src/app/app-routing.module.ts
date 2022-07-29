@@ -38,7 +38,7 @@ const routes: Routes = [
     component: ProjectsComponent,
     // children: [
     //   { path: 'new', component: CreateEditProjectComponent },
-      // { path: 'edit/:id', component: CreateEditProjectComponent },
+    // { path: 'edit/:id', component: CreateEditProjectComponent },
     // ],
     // canActivate: [PlayerDataGuardService],
   },
@@ -59,7 +59,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    component: HomepageComponent, //as default this will be login page
+    component: LoginPageComponent, //as default this will be login page
     //component: LoginPageComponent,
     // canActivate: [PlayerDataGuardService],
   },
