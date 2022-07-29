@@ -74,7 +74,7 @@ export class CandidatesDataService {
       this.filterService.idIN_PROCESSING = true;
       this.filterService.idDROPPED_OUT = true;
     }
-    console.log(status)
+
     const URL =
       'https://swh-t-praktyki2022-app.azurewebsites.net/Candidate/GetList';
     const headers = new HttpHeaders({ accept: 'application/json' });
