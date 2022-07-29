@@ -75,7 +75,7 @@ export class ProjectsService implements OnInit {
       ],
     },
   };
-  // public isSaved!: boolean;
+ 
   public projects$: BehaviorSubject<Project[]> = new BehaviorSubject(
     [] as Project[]
   );
@@ -88,6 +88,7 @@ export class ProjectsService implements OnInit {
   public pageSize = 5;
   public pageSizeOptions = [5, 10, 25, 100];
   public listLength!: number;
+  public cleanAutocompleteButton = false;
 
   constructor(private _activatedRoute: ActivatedRoute,) {}
 
@@ -95,32 +96,8 @@ export class ProjectsService implements OnInit {
     return this.projects$.asObservable();
   }
 
-  ngOnInit() {
-    // this._activatedRoute.queryParams.subscribe((params) => {
-    //   this.projectId = params['projectId'];
-    // });
-  }
-
-  // public projectList$ = new Observable<GetRecruitmentListBodyRequest>(
-  //   (observer) => {
-  //     axios
-  //       .post(
-  //         this.urlGetProjectList,
-  //         { body: this.data },
-  //         { withCredentials: true }
-  //       )
-  //       .then((response) => {
-  //         observer.next(response.data);
-  //       })
-  //       .catch((error) => {
-  //         observer.error(error);
-  //       });
-  //   }
-  // );
-
-  // public subscription = this.projectList$.subscribe({
-  //   next: (data) => console.log(data),
-  // });
+  ngOnInit() {}
+ 
 
   public projectSkills$ = new Observable<SkillById[]>((observer) => {
     axios
