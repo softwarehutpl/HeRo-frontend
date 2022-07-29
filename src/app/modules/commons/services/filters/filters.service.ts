@@ -24,16 +24,20 @@ export class FiltersService {
 public projectsListToAutocomplete: ProjectListoToAutocomplete[] = [];
 public showOpen = true;
 public showClosed = true;
+public idNEW = true;
+public idIN_PROCESSING = true;
+public idDROPPED_OUT = true; 
+public idHIRED= true;
+public idOpen = true;
+public idClosed = true;
 
 
   constructor(
     private _router: Router,
     private _projectsService: ProjectsService,
   ) {
+    console.log("ffulter servoce")
   }
-
-
- 
 
 public projectList$ = new Observable<ProjectListoToAutocomplete[]>((observer) => {
    axios.post(this.urlAllProjectList, {
@@ -70,7 +74,6 @@ public projectList$ = new Observable<ProjectListoToAutocomplete[]>((observer) =>
     })
   })
   .catch( error => console.log(error))
-
 })
 
   setStatusForProjects(projectListFilterData: RecruitmentList)  {
@@ -93,8 +96,6 @@ public projectList$ = new Observable<ProjectListoToAutocomplete[]>((observer) =>
     return dataForCheckboxCandidates;
   }
 
-
-
   filtersForComponent(renderedComponent: string) {
     // this.renderedComponentName = renderedComponent;
     if ("candiates" === renderedComponent) {
@@ -106,8 +107,6 @@ public projectList$ = new Observable<ProjectListoToAutocomplete[]>((observer) =>
       return Data.filtersSidebarButton3;
     }
   }
-
-
 }
 
 
