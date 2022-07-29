@@ -156,13 +156,13 @@ export class FilterComponent implements OnInit {
       const checkboxesStage = this.stageForm.value;
 
       for (const key in checkboxesStatus) {
-        if (checkboxesStatus[key] === true) {
+        if (checkboxesStatus[key] === false) {
           const removingInFromName = key.slice(2);
           statusCandidates.push(removingInFromName);
         }
       }
       for (const key in checkboxesStage) {
-        if (checkboxesStage[key] === true) {
+        if (checkboxesStage[key] === false) {
           const removingInFromName = key.slice(2);
           stageCandidates.push(removingInFromName);
         }

@@ -219,10 +219,7 @@ export class ProjectsService implements OnInit {
     const projectsListReadyToAutocomplete: ProjectListoToAutocomplete[] = [];
 
     recruitmentList.recruitmentDTOs.map((el: RecruitmentDTO) => {
-      // console.log
-      // const recruiterData = this.recruiterList.filter(
-      //   (elRescruiterList) => elRescruiterList.id === el.recruiterId
-      // );
+    
       const readyProjectListForAutocomplete: ProjectListoToAutocomplete ={
         projectId: el.id,
         projectName: el.name
