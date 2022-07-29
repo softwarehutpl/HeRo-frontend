@@ -75,9 +75,8 @@ export class CandidatesListComponent implements AfterViewInit, OnInit {
       // backdropClass:"backdropClass",
       position: {
         top: '50px',
-        right: '0px'
-      }
+        right: '0px',
+      },
     });
-
   }
 }

@@ -50,6 +50,7 @@ export class CandidatesDataService {
     status?: string[],
     stage?: string[]
   ): Promise<void> {
+
     this.queryParamHired = this._route.snapshot.queryParamMap.get('status');
     this.queryParamProjectId =
       this._route.snapshot.queryParamMap.get('project');
