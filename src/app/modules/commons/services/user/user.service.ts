@@ -17,4 +17,14 @@ export class UserService {
         console.log("error get Recruiters: ", error);
       });
   }
+
+  async getTech(): Promise<Recruiter[]> {
+    return await axios.post(this.url + 'GetTechnicians',{ fullName:''}, { withCredentials: true })
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        console.log("error get Recruiters: ", error);
+      });
+  }
 }

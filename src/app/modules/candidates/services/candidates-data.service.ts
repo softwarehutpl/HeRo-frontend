@@ -1,15 +1,20 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ɵbypassSanitizationTrustUrl } from '@angular/core';
 import { Candidate } from '../CandidatesInterface';
 import { useMocks } from '../../commons/mockups/useMocks';
 import { HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import axios from 'axios';
+import { ActivatedRoute } from '@angular/router';
+import { FiltersService } from '../../commons/services/filters/filters.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CandidatesDataService {
-  constructor() {
+  constructor(
+    private _route: ActivatedRoute,
+    public filterService: FiltersService
+  ) {
     this.getCandidatesForList();
     this.getAllCandidates();
   }
@@ -22,6 +27,8 @@ export class CandidatesDataService {
   private _candidatesAll: BehaviorSubject<Candidate[]> = new BehaviorSubject(
     [] as Candidate[]
   );
+  public queryParamHired!: string | null;
+  public queryParamProjectId!: string | null;
   //paginator settings:
   public pageIndex = 0;
   public pageSize = 10;
@@ -39,14 +46,42 @@ export class CandidatesDataService {
 
   //functions:
   @useMocks(false, import(`@mocks/candidates.json`))
-  public async getCandidatesForList(status?: string[], stage?: string[] ): Promise<void> {
+  public async getCandidatesForList(
+    status?: string[],
+    stage?: string[]
+  ): Promise<void> {
+
+    this.queryParamHired = this._route.snapshot.queryParamMap.get('status');
+    this.queryParamProjectId =
+      this._route.snapshot.queryParamMap.get('project');
+    if (this.queryParamProjectId === null) {
+      this.queryParamProjectId = '';
+    }
+
+    if (this.queryParamHired) {
+      this.filterService.idNEW = false;
+      this.filterService.idIN_PROCESSING = false;
+      this.filterService.idDROPPED_OUT = false;
+      if (!status?.includes(this.queryParamHired)) {
+        if (status) {
+          status.push(this.queryParamHired);
+        } else {
+          status = [this.queryParamHired];
+        }
+      }
+    } else {
+      this.filterService.idNEW = true;
+      this.filterService.idIN_PROCESSING = true;
+      this.filterService.idDROPPED_OUT = true;
+    }
+
     const URL =
       'https://swh-t-praktyki2022-app.azurewebsites.net/Candidate/GetList';
     const headers = new HttpHeaders({ accept: 'application/json' });
     const body = {
+      recruitmentId: this.queryParamProjectId,
       status: status,
-      stage: stage
-      ,
+      stage: stage,
       paging: {
         pageSize: this.pageSize,
         pageNumber: this.pageIndex + 1,
@@ -60,6 +95,7 @@ export class CandidatesDataService {
     return await axios
       .post(URL, body, Options)
       .then((res) => {
+        console.log(res.data)
         if (res.statusText === 'OK') {
           this.listLength = res.data.totalCount;
           this.pageSize = res.data.paging.pageSize;

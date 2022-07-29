@@ -1,21 +1,21 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { Data, Subfilter } from '../definition';
 import { FiltersService } from '../../services/filters/filters.service';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ProjectListoToAutocomplete } from '../../mockups/mock-projects';
 import { ProjectsService } from '../../services/projects/projects.service';
 import { Observable, startWith, map } from 'rxjs';
 import { Project } from '../../mockups/mock-projects';
 import { StageStatusData } from '../../interfaces/filters';
 import { CandidatesDataService } from 'src/app/modules/candidates/services/candidates-data.service';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+
 
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.scss'],
 })
-export class FilterComponent implements OnChanges, OnInit {
+export class FilterComponent implements OnInit {
   @Input() public whichComponentRender = '';
   @Input() public isAutocomplete?: boolean;
   @Input() public isStage?: boolean;
@@ -36,12 +36,12 @@ export class FilterComponent implements OnChanges, OnInit {
   public statusColor = 'STATUS';
   public cleanAutocomplete = this.projetService.cleanAutocompleteButton;
   public statusForm = this._fb.group({
-    idNEW: new FormControl(true),
-    idIN_PROCESSING: new FormControl(true),
-    idDROPPED_OUT: new FormControl(true),
-    idHIRED: new FormControl(true),
-    idOpen: new FormControl(true),
-    idClosed: new FormControl(true),
+    idNEW: new FormControl(this.filterService.idNEW),
+    idIN_PROCESSING: new FormControl(this.filterService.idIN_PROCESSING),
+    idDROPPED_OUT: new FormControl(this.filterService.idDROPPED_OUT),
+    idHIRED: new FormControl(this.filterService.idHIRED),
+    idOpen: new FormControl(this.filterService.idOpen),
+    idClosed: new FormControl(this.filterService.idClosed),
   });
   public stageForm = this._fb.group({
     idEVALUATION: new FormControl(true),
@@ -57,6 +57,20 @@ export class FilterComponent implements OnChanges, OnInit {
     public projetService: ProjectsService,
     private _candidateService: CandidatesDataService
   ) {
+
+    // this._candidateService.candidates.subscribe((result) => {
+  
+    //   // this.statusForm = this._fb.group({
+    //   //   idNEW: new FormControl(this.filterService.idNEW),
+    //   //   idIN_PROCESSING: new FormControl(this.filterService.idIN_PROCESSING),
+    //   //   idDROPPED_OUT: new FormControl(this.filterService.idDROPPED_OUT),
+    //   //   idHIRED: new FormControl(this.filterService.idHIRED),
+    //   //   idOpen: new FormControl(this.filterService.idOpen),
+    //   //   idClosed: new FormControl(this.filterService.idClosed),
+    //   // });
+    
+    // });
+
     this.filterService.projectList$.subscribe({
       next: (data) => {
         console.log(data);
@@ -66,13 +80,10 @@ export class FilterComponent implements OnChanges, OnInit {
     });
   }
 
-  ngOnChanges(): void {
+  async ngOnInit() {
     this.filters = this.filterService.filtersForComponent(
       this.whichComponentRender
     );
-  }
-
-  async ngOnInit() {
     const dataForCheckboxCandidates =
       await this.filterService.getStageAndStatusList();
     this.convertCandidatesCacboxDTOToSubfilter(dataForCheckboxCandidates);
@@ -145,13 +156,13 @@ export class FilterComponent implements OnChanges, OnInit {
       const checkboxesStage = this.stageForm.value;
 
       for (const key in checkboxesStatus) {
-        if (checkboxesStatus[key] === true) {
+        if (checkboxesStatus[key] === false) {
           const removingInFromName = key.slice(2);
           statusCandidates.push(removingInFromName);
         }
       }
       for (const key in checkboxesStage) {
-        if (checkboxesStage[key] === true) {
+        if (checkboxesStage[key] === false) {
           const removingInFromName = key.slice(2);
           stageCandidates.push(removingInFromName);
         }

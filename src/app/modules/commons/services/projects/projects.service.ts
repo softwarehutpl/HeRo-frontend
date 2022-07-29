@@ -85,7 +85,7 @@ export class ProjectsService implements OnInit {
   ];
 
   public pageIndex = 0;
-  public pageSize = 5;
+  public pageSize = 10;
   public pageSizeOptions = [5, 10, 25, 100];
   public listLength!: number;
   public cleanAutocompleteButton = false;
@@ -219,10 +219,7 @@ export class ProjectsService implements OnInit {
     const projectsListReadyToAutocomplete: ProjectListoToAutocomplete[] = [];
 
     recruitmentList.recruitmentDTOs.map((el: RecruitmentDTO) => {
-      // console.log
-      // const recruiterData = this.recruiterList.filter(
-      //   (elRescruiterList) => elRescruiterList.id === el.recruiterId
-      // );
+    
       const readyProjectListForAutocomplete: ProjectListoToAutocomplete ={
         projectId: el.id,
         projectName: el.name

@@ -3,7 +3,8 @@
     <a mat-icon-button [ngClass]="{'clicked-button':this.clicedButton === 'home'}" (click)="this.ckicked('home')" routerLink="/{{ sidebarButton1 }}">
       <mat-icon >home</mat-icon>
     </a>
-    <a mat-icon-button [ngClass]="{'clicked-button':this.clicedButton === 'candidates'}" (click)="this.ckicked('candidates')" routerLink="/{{ sidebarButton2 }}">
+    <a mat-icon-button [ngClass]="{'clicked-button':this.clicedButton === 'candidates'}" (click)="this.ckicked('candidates')">
+    <!-- <a mat-icon-button [ngClass]="{'clicked-button':this.clicedButton === 'candidates'}" (click)="this.ckicked('candidates')" routerLink="/{{ sidebarButton2 }}"> -->
       <mat-icon>people</mat-icon>
     </a>
     <a mat-icon-button [ngClass]="{'clicked-button':this.clicedButton === 'projects'}" (click)="this.ckicked('projects')" routerLink="/{{ sidebarButton3 }}">

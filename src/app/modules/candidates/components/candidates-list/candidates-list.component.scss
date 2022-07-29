@@ -16,12 +16,30 @@ table {
   padding: 1px 5px;
 }
 
+.mat-column-id {
+  width: 5%;
+}
+.mat-column-recruiterId {
+  width: 5%;
+}
+.mat-column-status {
+  width: 10%;
+}
+.mat-column-stage {
+  width: 10%;
+}
+.mat-column-techId {
+  width: 5%;
+}
 .mat-column-profile {
   a {
     color: $color_link;
     text-decoration: none;
     cursor: pointer;
   }
+}
+.mat-column-name {
+  cursor: pointer;
 }
 
 .mat-header-cell {

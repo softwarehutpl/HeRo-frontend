@@ -137,7 +137,7 @@ export class CandidatesKanbanComponent implements OnInit {
       newColumn == 'DROPPED_OUT'
     ) {
       // console.log(`setting Status to, ${newColumn},  stage to ' '.`);
-      await this.service.setStatusAndStage(candidateID, newColumn, '');
+      await this.service.setStatusAndStage(candidateID, newColumn, '.');
     } else {
       // console.log(`setting Status to 'IN_PROCESSING', stage to ${newColumn}.`);
       await this.service.setStatusAndStage(

@@ -32,17 +32,18 @@ export const MY_DATE_FORMATS = {
 export class CandidatesEvaluationComponent implements OnInit {
 
   TYPES=[
-    'NEW',
-    'IN_PROCESSING',
-    'DROPPED_OUT',
-    'HIRED'
-  ]
+    'HR',
+    'Tech'
+  ];
+  
   scoreSlider:number|null;
   date = new FormControl();
   text = new FormControl();
   checkboxCal = new FormControl();
   textScore?:string;
   recruiters!:Recruiter[];
+  tech!:Recruiter[];
+  HRs!:Recruiter[];
   recruitersfromHttp!:Recruiters;
   selectedIdRecruter!:number;
   selectedType!:string;
@@ -55,9 +56,13 @@ export class CandidatesEvaluationComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     await this.getRecruters();
+    await this.getTech();
   }
   async getRecruters(){
-    this.recruiters = await this.userService.getCandidate();
+    this.HRs = await this.userService.getCandidate();
+  }
+  async getTech(){
+    this.tech = await this.userService.getTech();
   }
 
   commit() {
@@ -77,6 +82,7 @@ export class CandidatesEvaluationComponent implements OnInit {
     console.log(this.checkboxCal.value);
     console.log(this.selectedIdRecruter);
     console.log(this.selectedType);
+    console.log(this.date.value);
   }
   slider(ev: MatSliderChange) {
     this.scoreSlider= ev.value;
@@ -107,6 +113,12 @@ export class CandidatesEvaluationComponent implements OnInit {
     }
   }
 
- 
+  changetype(){
+    if(this.selectedType == 'HR'){
+      this.recruiters = this.HRs;
+    }
+    else
+    this.recruiters = this.tech;
+  }
 
 }
