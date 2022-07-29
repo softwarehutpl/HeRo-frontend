@@ -6,6 +6,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { ProjectsService } from 'src/app/modules/commons/services/projects/projects.service';
 import { ProjectListDataSource } from './ProjectListDataSource';
 import { FiltersService } from 'src/app/modules/commons/services/filters/filters.service';
+import { CandidatesDataService } from 'src/app/modules/candidates/services/candidates-data.service';
 
 @Component({
   selector: 'app-projects-list',
@@ -32,7 +33,8 @@ export class ProjectsListComponent implements OnInit {
     private _router: Router,
     private _liveAnnouncer: LiveAnnouncer,
     public projectService: ProjectsService,
-    public filterService: FiltersService
+    public filterService: FiltersService,
+    private _candiadteService: CandidatesDataService
   ) {}
 
 
@@ -64,17 +66,25 @@ export class ProjectsListComponent implements OnInit {
     }
   }
 
-  moveToCandidates(projectName: string, status?: string) {
-    this._router.navigate(['/candidates'], {
+  public async moveToCandidates(projectName: string, status?: string) {
+
+    if (status) {
+      this.filterService.idNEW = false;
+      this.filterService.idIN_PROCESSING = false;
+      this.filterService.idDROPPED_OUT = false;
+    }
+ 
+    await this._router.navigate(['/candidates'], {
       queryParams: {
         project: projectName,
         ...(status === undefined ? {} : { status: status }),
       },
     });
+    this._candiadteService.getCandidatesForList();
   }
 
   moveToEditProject(projectId: number) {
-    console.log(projectId);
+
     this.projectService.getProjectById(projectId);
     this._router.navigate(['edit'], { queryParams: { projectId: projectId } });
   }

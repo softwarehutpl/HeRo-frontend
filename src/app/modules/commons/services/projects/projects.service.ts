@@ -85,7 +85,7 @@ export class ProjectsService implements OnInit {
   ];
 
   public pageIndex = 0;
-  public pageSize = 5;
+  public pageSize = 10;
   public pageSizeOptions = [5, 10, 25, 100];
   public listLength!: number;
   public cleanAutocompleteButton = false;
