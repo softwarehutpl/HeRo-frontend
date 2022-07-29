@@ -39,14 +39,16 @@ export class CandidatesDataService {
 
   //functions:
   @useMocks(false, import(`@mocks/candidates.json`))
-  public async getCandidatesForList(status?: string[], stage?: string[] ): Promise<void> {
+  public async getCandidatesForList(
+    status?: string[],
+    stage?: string[]
+  ): Promise<void> {
     const URL =
       'https://swh-t-praktyki2022-app.azurewebsites.net/Candidate/GetList';
     const headers = new HttpHeaders({ accept: 'application/json' });
     const body = {
       status: status,
-      stage: stage
-      ,
+      stage: stage,
       paging: {
         pageSize: this.pageSize,
         pageNumber: this.pageIndex + 1,
